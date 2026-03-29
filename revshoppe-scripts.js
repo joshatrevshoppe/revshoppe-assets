@@ -183,7 +183,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
-  function triggerDiagnosis() {
+  window.triggerDiagnosis = function triggerDiagnosis() {
     // ── BINARY RAIN INTRO ──
     var rain = document.createElement('canvas');
     rain.style.cssText = 'position:fixed;inset:0;z-index:9998;background:#000;opacity:0;transition:opacity 0.2s ease;';
@@ -349,7 +349,7 @@ document.addEventListener('DOMContentLoaded', function() {
       if (e.key === 'Escape') { close(); document.removeEventListener('keydown', esc); }
     });
     } // end buildAndShowOverlay
-  } // end triggerDiagnosis
+  }; // end triggerDiagnosis
 
   // Track time on page for diagnosis
   window.gtmDiagnosisStart = Date.now();
