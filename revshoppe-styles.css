@@ -105,7 +105,7 @@ nav {
 .sec-desc { font-family: "Montserrat", sans-serif; font-size: 16px; font-weight: 400; color: var(--body); line-height: 1.75; letter-spacing: -0.4px; max-width: 560px; }
 
 /* ── HERO ── */
-.hero { padding: 72px 48px 80px; text-align: center; overflow: visible; }
+.hero { padding: 72px 48px 48px; text-align: center; overflow: visible; }
 .hero-sub { font-family: "Montserrat", sans-serif; font-size: 17px; font-weight: 400; color: var(--body); line-height: 1.75; letter-spacing: -0.3px; max-width: 640px; margin: 24px auto 28px; }
 .hero-btns { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; justify-content: center; }
 
@@ -282,11 +282,11 @@ nav {
 }
 .readout-quote-bar {
   background: rgba(232,99,74,0.08);
-  border-bottom: 1px solid rgba(232,99,74,0.15);
+  border-bottom: 1px solid rgba(0,0,0,0.08);
   padding: 20px 24px;
   display: flex; align-items: flex-start; gap: 16px;
 }
-.readout-quote-icon { font-family: "RocWideMedium", sans-serif; font-size: 64px; color: var(--accent); line-height: 1; margin-top: -4px; flex-shrink: 0; opacity: 0.2; }
+.readout-quote-icon { font-family: "RocWideMedium", sans-serif; font-size: 72px; color: var(--accent); line-height: 1; margin-top: -4px; flex-shrink: 0; opacity: 0.35; }
 .readout-quote-text { font-family: "RocWideLight", sans-serif; font-size: clamp(13px, 1.6vw, 16px); line-height: 1.7; letter-spacing: -0.3px; color: rgba(255,255,255,0.8); font-style: italic; }
 .readout-quote-src { font-family: "IBM Plex Mono", monospace; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.28); margin-top: 10px; }
 .readout-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border-top: 1px solid rgba(0,0,0,0.07); }
@@ -416,13 +416,12 @@ footer {
       repeating-linear-gradient(103deg, transparent 0px, transparent 3px, rgba(0,0,0,0.022) 3px, rgba(0,0,0,0.022) 4px),
       repeating-linear-gradient(197deg, transparent 0px, transparent 4px, rgba(0,0,0,0.016) 4px, rgba(0,0,0,0.016) 5px);
     border-top: 1px solid rgba(255,255,255,0.95);
-    border-bottom: 1px solid rgba(232,99,74,0.15);
+    border-bottom: 1px solid rgba(0,0,0,0.08);
     box-shadow:
       0 1px 0 0 rgba(255,255,255,0.9) inset,
-      0 -1px 0 0 rgba(232,99,74,0.06) inset,
-      0 4px 20px rgba(232,99,74,0.12),
-      0 1px 5px rgba(232,99,74,0.08),
-      0 -6px 16px rgba(232,99,74,0.10);
+      0 4px 20px rgba(0,0,0,0.12),
+      0 1px 5px rgba(0,0,0,0.08),
+      0 -6px 16px rgba(0,0,0,0.10);
     padding: 16px 0;
     overflow: hidden;
     display: flex;
