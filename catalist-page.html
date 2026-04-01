@@ -1344,16 +1344,10 @@
           <div class="ccr-form-card">
             <div class="ccr-card-label">Conversation Catalist Report (CCR)</div>
             <div class="ccr-card-title">Your industry's buying catalists. Mapped. Delivered free.</div>
-            <div id="hs-ccr-form">
-              <script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/embed/v2.js"></script>
-              <script>
-                hbspt.forms.create({
-                  portalId: "5046646",
-                  formId: "87eee4d2-6f57-4acf-a0dc-c868e9b7a972",
-                  region: "na1"
-                });
-              </script>
-            </div>
+           <div id="hs-ccr-form" 
+  data-portal-id="5046646" 
+  data-form-id="87eee4d2-6f57-4acf-a0dc-c868e9b7a972">
+</div>
           </div>
         </div>
       </div>
@@ -1362,18 +1356,35 @@
 
 
 
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      // Instant snap scroll to CCR form
-      document.querySelectorAll('a[href="#wf__generate-ccr"]').forEach(function(el) {
-        el.addEventListener('click', function(e) {
-          e.preventDefault();
-          var target = document.getElementById('wf__generate-ccr');
-          if (target) { target.scrollIntoView({ behavior: 'instant', block: 'start' }); }
-        });
-      });
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Scroll to CCR form
+  document.querySelectorAll('a[href="#wf__generate-ccr"]').forEach(function(el) {
+    el.addEventListener('click', function(e) {
+      e.preventDefault();
+      var target = document.getElementById('wf__generate-ccr');
+      if (target) { target.scrollIntoView({ behavior: 'instant', block: 'start' }); }
     });
-  </script>
+  });
+
+  // HubSpot form — load script then create form
+  var hsScript = document.createElement('script');
+  hsScript.src = '//js.hsforms.net/forms/embed/v2.js';
+  hsScript.charset = 'utf-8';
+  hsScript.onload = function() {
+    var el = document.getElementById('hs-ccr-form');
+    if (el && window.hbspt) {
+      hbspt.forms.create({
+        portalId: el.dataset.portalId,
+        formId: el.dataset.formId,
+        region: 'na1',
+        target: '#hs-ccr-form'
+      });
+    }
+  };
+  document.head.appendChild(hsScript);
+});
+</script>
 
   <!-- ═══ NEXT STEP — GTM DIAGNOSIS BRIDGE — DARK GRID ══════════ -->
   <section class="tex-light section" style="background-image:linear-gradient(rgba(0,0,0,0.022) 1px,transparent 1px),linear-gradient(90deg,rgba(0,0,0,0.022) 1px,transparent 1px);background-size:40px 40px;">
