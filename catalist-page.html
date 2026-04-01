@@ -1,0 +1,1256 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    :root {
+      --bg-light:      #FAFAF9;
+      --bg-dark:       #26242F;
+      --bg-charcoal:   #2C2A27;
+      --accent:        #E8634A;
+      --accent-hover:  #F0745C;
+      --headline:      #111111;
+      --body:          #8F95A0;
+      --border-light:  rgba(0,0,0,0.07);
+      --border-dark:   rgba(255,255,255,0.07);
+    }
+
+    body {
+      background: var(--bg-dark);
+      font-family: "Montserrat", sans-serif;
+      font-weight: 400;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    @font-face {
+      font-family: "RocWideMedium";
+      src: url("https://cdn.prod.website-files.com/61f825b46abaae2807007e90/67dea6a57df5c619dba13468_RocGroteskWide-Medium.woff2") format("woff2");
+      font-weight: 500;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: "RocWideLight";
+      src: url("https://cdn.prod.website-files.com/61f825b46abaae2807007e90/67dea6a54f0aa4e3e2f1f6e8_RocGroteskWide-Light.woff2") format("woff2");
+      font-weight: 300;
+      font-display: swap;
+    }
+
+    /* TEXTURES — exact homepage rs_css spec */
+
+    /* Dark sections: bg-dark + 40px white grid */
+    .tex-dark {
+      background-color: var(--bg-dark);
+      background-image:
+        linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+
+    /* Light sections: bg-light base */
+    .tex-light {
+      background-color: var(--bg-light);
+      border-top: 1px solid rgba(0,0,0,0.08);
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+      box-shadow:
+        0 4px 20px rgba(0,0,0,0.08),
+        0 1px 4px rgba(0,0,0,0.05),
+        0 -4px 16px rgba(0,0,0,0.06);
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Crosshatch overlay — exact homepage cml-outer pattern */
+    .hatch-light {
+      position: relative;
+      background-image:
+        repeating-linear-gradient(17deg,  transparent 0px, transparent 2px, rgba(0,0,0,0.032) 2px, rgba(0,0,0,0.032) 3px),
+        repeating-linear-gradient(103deg, transparent 0px, transparent 3px, rgba(0,0,0,0.022) 3px, rgba(0,0,0,0.022) 4px),
+        repeating-linear-gradient(197deg, transparent 0px, transparent 4px, rgba(0,0,0,0.016) 4px, rgba(0,0,0,0.016) 5px);
+    }
+    .hatch-light > * { position: relative; z-index: 1; }
+
+    /* Charcoal — matches homepage "The Solutions" section exactly */
+    .tex-charcoal {
+      background-color: var(--bg-charcoal);
+      background-image:
+        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size: 48px 48px;
+    }
+
+    /* SECTION ELEVATION — depth and movement between sections */
+    section { position: relative; z-index: 1; }
+    .tex-dark, .tex-charcoal {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      box-shadow:
+        0 8px 32px rgba(0,0,0,0.35),
+        0 2px 8px rgba(0,0,0,0.20),
+        0 -8px 32px rgba(0,0,0,0.35),
+        0 -2px 8px rgba(0,0,0,0.20);
+      z-index: 2;
+    }
+    .tex-light {
+      border-top: 1px solid rgba(255,255,255,0.95);
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+      box-shadow:
+        0 4px 20px rgba(0,0,0,0.10),
+        0 1px 4px rgba(0,0,0,0.06),
+        0 -4px 16px rgba(0,0,0,0.08);
+      z-index: 1;
+    }
+
+    /* BUTTONS */
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 32px;
+      border-radius: 3px;
+      background: var(--accent);
+      color: #fff;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: background 0.15s, box-shadow 0.15s;
+      box-shadow: 0 2px 8px rgba(232,99,74,0.35), 0 4px 20px rgba(232,99,74,0.25), 0 1px 3px rgba(0,0,0,0.2);
+    }
+    .btn-primary:hover {
+      background: var(--accent-hover);
+      box-shadow: 0 4px 16px rgba(232,99,74,0.45), 0 8px 32px rgba(232,99,74,0.3), 0 2px 6px rgba(0,0,0,0.25);
+    }
+    .btn-outline {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.25);
+      padding: 13px 26px;
+      border-radius: 3px;
+      text-decoration: none;
+      background: rgba(255,255,255,0.08);
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s, box-shadow 0.15s;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.25), 0 4px 16px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.1);
+    }
+    .btn-outline:hover {
+      border-color: rgba(255,255,255,0.5);
+      background: rgba(255,255,255,0.12);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.15);
+    }
+    .btn-white {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 36px;
+      border-radius: 3px;
+      background: #fff;
+      color: var(--accent);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: opacity 0.15s, box-shadow 0.15s;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2), 0 4px 20px rgba(0,0,0,0.15), 0 1px 3px rgba(0,0,0,0.12);
+    }
+    .btn-white:hover {
+      opacity: 0.95;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.25), 0 8px 32px rgba(0,0,0,0.2);
+    }
+    .btn-white-ghost {
+      display: inline-flex;
+      align-items: center;
+      padding: 13px 28px;
+      border-radius: 3px;
+      background: rgba(255,255,255,0.1);
+      color: rgba(255,255,255,0.85);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: 1px solid rgba(255,255,255,0.3);
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s, box-shadow 0.15s;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.25), 0 4px 16px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.1);
+    }
+    .btn-white-ghost:hover {
+      border-color: rgba(255,255,255,0.7);
+      background: rgba(255,255,255,0.15);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.25);
+    }
+
+    /* SHARED SECTION STYLES */
+    .section { padding: 96px 48px; }
+    .section-inner { max-width: 1080px; margin: 0 auto; }
+    .sec-label {
+      display: block;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 20px;
+    }
+    .sec-h2 {
+      font-family: "RocWideMedium", sans-serif;
+      font-size: clamp(28px, 3.8vw, 48px);
+      line-height: 1.08;
+      letter-spacing: -1.5px;
+      color: var(--headline);
+      margin-bottom: 20px;
+      max-width: 760px;
+    }
+    .sec-h2-white { color: #fff; }
+    .sec-sub {
+      font-family: "Montserrat", sans-serif;
+      font-size: 16px;
+      color: var(--body);
+      line-height: 1.8;
+      max-width: 600px;
+      letter-spacing: -0.3px;
+    }
+    .sec-sub-white { color: rgba(255,255,255,0.5); }
+    .sec-sub-warm { color: var(--body); }
+
+    /* HERO */
+    .hero {
+      padding: 96px 48px 80px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -120px; left: 50%; transform: translateX(-50%);
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(232,99,74,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-inner { max-width: 860px; margin: 0 auto; position: relative; z-index: 1; }
+    .eyebrow {
+      display: inline-block;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 28px;
+    }
+    .hero h1 {
+      font-family: "RocWideMedium", sans-serif;
+      font-size: clamp(36px, 4.5vw, 62px);
+      line-height: 1.06;
+      letter-spacing: -2px;
+      color: #fff;
+      margin-bottom: 28px;
+    }
+    .hero h1 em { font-style: normal; color: var(--accent); }
+    .hero-lead {
+      font-family: "Montserrat", sans-serif;
+      font-size: 17px;
+      font-weight: 400;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.75;
+      max-width: 620px;
+      margin: 0 auto 44px;
+      letter-spacing: -0.3px;
+    }
+    .hero-cta-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .contrast-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 40px;
+      padding: 8px 20px;
+      margin-top: 52px;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+    }
+    .contrast-badge span { color: var(--accent); }
+
+    /* PROBLEM 2×2 GRID */
+    .problem-2x2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 56px;
+    }
+    .problem-item-card {
+      background: #fff;
+      border: 1px solid rgba(0,0,0,0.06);
+      border-radius: 10px;
+      padding: 28px 24px;
+      display: flex;
+      gap: 18px;
+      align-items: flex-start;
+      box-shadow:
+        0 1px 2px rgba(0,0,0,0.04),
+        0 4px 12px rgba(0,0,0,0.06),
+        0 12px 28px rgba(0,0,0,0.05);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .problem-item-card:hover {
+      transform: translateY(-3px);
+      box-shadow:
+        0 2px 4px rgba(0,0,0,0.06),
+        0 8px 24px rgba(0,0,0,0.10),
+        0 20px 40px rgba(0,0,0,0.08);
+    }
+    .prob-icon {
+      width: 36px;
+      height: 36px;
+      flex-shrink: 0;
+      border-radius: 6px;
+      background: rgba(232,99,74,0.08);
+      border: 1px solid rgba(232,99,74,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 2px;
+    }
+    .prob-icon svg { width: 16px; height: 16px; }
+    .prob-copy h3 {
+      font-family: "RocWideMedium", sans-serif;
+      font-size: 15px;
+      letter-spacing: -0.4px;
+      color: var(--headline);
+      margin-bottom: 6px;
+    }
+    .prob-copy p {
+      font-family: "Montserrat", sans-serif;
+      font-size: 13px;
+      color: var(--body);
+      line-height: 1.7;
+    }
+    /* QUOTE — exact homepage styles */
+    .quote-item { display:grid; grid-template-columns:4px 1fr; gap:0; margin-top:2px; }
+    .quote-item { box-shadow: 0 2px 12px rgba(0,0,0,0.4); margin-bottom: 2px; }
+    .quote-trigger {
+      display:flex; justify-content:space-between; align-items:center;
+      padding:18px 36px; cursor:pointer; user-select:none;
+      border-bottom:0.5px solid var(--border-light); transition:background 0.2s;
+      touch-action: manipulation; -webkit-tap-highlight-color: transparent;
+    }
+    .quote-trigger:hover { background:transparent; }
+    .quote-src-label { font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:0.12em; text-transform:uppercase; color:var(--accent); }
+    .quote-chevron { font-family:'IBM Plex Mono',monospace; font-size:11px; color:rgba(0,0,0,0.25); transition:transform 0.3s; flex-shrink:0; margin-left:16px; }
+    .quote-item.open .quote-chevron { transform:rotate(180deg); }
+    .quote-body { overflow:hidden; max-height:0; transition:max-height 0.4s cubic-bezier(0.4,0,0.2,1); }
+    .quote-item.open .quote-body { max-height:200px; }
+    .quote-text { font-family:'RocWideLight',sans-serif; font-size:clamp(15px,1.8vw,20px); line-height:1.65; letter-spacing:-0.3px; color:var(--headline); padding:24px 36px 28px 56px; border-bottom:0.5px solid var(--border-light); position:relative; }
+    .quote-text::before { content:'\201C'; font-family:'RocWideMedium',sans-serif; font-size:72px; color:var(--accent); opacity:0.35; position:absolute; top:12px; left:28px; line-height:1; pointer-events:none; }
+
+    /* HOW IT WORKS */
+    .how-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+      margin-top: 64px;
+    }
+    .process-list { display: flex; flex-direction: column; }
+    .process-item {
+      display: flex;
+      gap: 28px;
+      padding: 32px 0;
+      border-bottom: 1px solid var(--border-dark);
+      align-items: flex-start;
+    }
+    .process-item:first-child { padding-top: 0; }
+    .process-item:last-child { border-bottom: none; }
+    .step-num {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      flex-shrink: 0;
+      width: 36px;
+      padding-top: 4px;
+    }
+    .step-copy h3 {
+      font-family: "RocWideMedium", sans-serif;
+      font-size: 18px;
+      letter-spacing: -0.5px;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+    .step-copy p {
+      font-family: "Montserrat", sans-serif;
+      font-size: 13px;
+      color: rgba(255,255,255,0.4);
+      line-height: 1.75;
+    }
+
+    /* SIGNAL TERMINAL — light bg, no background-image on card itself */
+    .signal-terminal {
+      background: var(--bg-light);
+      border: 1px solid rgba(0,0,0,0.08);
+      border-radius: 10px;
+      overflow: hidden;
+      position: sticky;
+      top: 88px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.45), 0 2px 8px rgba(0,0,0,0.3);
+    }
+    .terminal-bar {
+      background: rgba(0,0,0,0.85);
+      padding: 12px 16px;
+      border-bottom: 1px solid rgba(0,0,0,0.15);
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+    .tb-dot { width: 10px; height: 10px; border-radius: 50%; }
+    .tb-dot.red    { background: #FF5F57; }
+    .tb-dot.yellow { background: #FEBC2E; }
+    .tb-dot.green  { background: #28C840; }
+    .terminal-label {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 9px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      margin-left: 8px;
+    }
+    .signal-feed {
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .feed-section-label {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 8px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(0,0,0,0.4);
+      padding: 8px 2px 4px;
+      font-weight: 500;
+    }
+    .signal-item {
+      background: #fff;
+      border: 1px solid rgba(0,0,0,0.07);
+      border-radius: 6px;
+      padding: 16px 18px;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      transition: box-shadow 0.2s, transform 0.2s;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.09), 0 1px 2px rgba(0,0,0,0.05);
+    }
+    .signal-item:hover {
+      box-shadow: 0 6px 20px rgba(0,0,0,0.13), 0 2px 4px rgba(0,0,0,0.06);
+      transform: translateY(-1px);
+    }
+    .signal-item.muted {
+      background: rgba(0,0,0,0.025);
+      border: 1px solid rgba(0,0,0,0.05);
+      box-shadow: none;
+      opacity: 0.5;
+    }
+    .signal-item.muted:hover { transform: none; box-shadow: none; }
+    .signal-dot {
+      width: 9px; height: 9px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+      margin-top: 4px;
+      box-shadow: 0 0 0 3px rgba(232,99,74,0.15), 0 0 10px rgba(232,99,74,0.45);
+    }
+    .signal-dot.muted { background: rgba(0,0,0,0.18); box-shadow: none; }
+    .signal-type {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 8px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 5px;
+      font-weight: 500;
+    }
+    .signal-type.muted { color: rgba(0,0,0,0.25); }
+    .signal-text {
+      font-family: "Montserrat", sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--headline);
+      line-height: 1.45;
+      margin-bottom: 5px;
+    }
+    .signal-item.muted .signal-text { color: rgba(0,0,0,0.35); font-weight: 500; }
+    .signal-meta {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 8px;
+      color: rgba(0,0,0,0.35);
+      letter-spacing: 0.04em;
+      line-height: 1.6;
+    }
+
+    /* CATALYST CATEGORIES */
+    .cat-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 56px;
+    }
+    .cat-card {
+      background: #fff;
+      border: 1px solid rgba(0,0,0,0.06);
+      border-radius: 10px;
+      padding: 32px 28px;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      box-shadow:
+        0 1px 2px rgba(0,0,0,0.04),
+        0 4px 12px rgba(0,0,0,0.06),
+        0 12px 28px rgba(0,0,0,0.05);
+    }
+    .cat-card:hover {
+      transform: translateY(-3px);
+      box-shadow:
+        0 2px 4px rgba(0,0,0,0.06),
+        0 8px 24px rgba(0,0,0,0.10),
+        0 20px 40px rgba(0,0,0,0.08);
+    }
+    .cat-card.full-width {
+      grid-column: 1 / -1;
+      border-left: 3px solid var(--accent);
+      transform: none;
+    }
+    .cat-card.full-width:hover { transform: none; }
+    .cat-card.full-width .cat-title { font-size: 22px; }
+    .cat-card.full-width .cat-desc { max-width: 720px; }
+    .cat-num {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 9px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+    .cat-title {
+      font-family: "RocWideMedium", sans-serif;
+      font-size: 19px;
+      letter-spacing: -0.5px;
+      color: var(--headline);
+      margin-bottom: 12px;
+    }
+    .cat-desc {
+      font-family: "Montserrat", sans-serif;
+      font-size: 13px;
+      color: var(--body);
+      line-height: 1.75;
+    }
+
+    /* OUTCOMES */
+    .outcomes-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 48px;
+    }
+    .outcome-card {
+      background: var(--bg-dark);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-left: 3px solid var(--accent);
+      border-radius: 10px;
+      padding: 28px 24px;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      box-shadow:
+        0 2px 4px rgba(0,0,0,0.3),
+        0 8px 24px rgba(0,0,0,0.25),
+        inset 0 1px 0 rgba(255,255,255,0.04);
+    }
+    .outcome-card:hover {
+      transform: translateY(-4px);
+      box-shadow:
+        0 4px 8px rgba(0,0,0,0.35),
+        0 20px 48px rgba(0,0,0,0.35),
+        0 0 0 1px rgba(232,99,74,0.15),
+        inset 0 1px 0 rgba(255,255,255,0.06);
+    }
+    .outcome-stat {
+      font-family: "RocWideMedium", sans-serif;
+      font-size: 52px;
+      color: var(--accent);
+      letter-spacing: -2px;
+      line-height: 1;
+      margin-bottom: 10px;
+    }
+    .outcome-text {
+      font-family: "Montserrat", sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.7);
+      line-height: 1.55;
+      margin-bottom: 14px;
+    }
+    .outcome-tag {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 9px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.22);
+    }
+
+    /* CCR OFFER */
+    .ccr-section { padding: 96px 48px; }
+    .ccr-inner {
+      max-width: 1080px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .ccr-left h2 {
+      font-family: "RocWideMedium", sans-serif;
+      font-size: clamp(26px, 3.5vw, 44px);
+      line-height: 1.1;
+      letter-spacing: -1.5px;
+      color: var(--headline);
+      margin-bottom: 20px;
+    }
+    .ccr-left p {
+      font-family: "Montserrat", sans-serif;
+      font-size: 15px;
+      color: var(--body);
+      line-height: 1.8;
+      margin-bottom: 24px;
+      letter-spacing: -0.3px;
+    }
+    .ccr-pill-row { display: flex; gap: 8px; flex-wrap: wrap; }
+    .ccr-pill {
+      display: inline-block;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 9px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: rgba(232,99,74,0.08);
+      border: 1px solid rgba(232,99,74,0.18);
+      border-radius: 3px;
+      padding: 5px 12px;
+    }
+    .ccr-card {
+      background: var(--bg-dark);
+      background-image:
+        linear-gradient(rgba(255,255,255,0.034) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.034) 1px, transparent 1px);
+      background-size: 40px 40px;
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 12px;
+      padding: 40px 36px;
+      box-shadow: 0 24px 64px rgba(0,0,0,0.18);
+    }
+    .ccr-card-label {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 9px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+    .ccr-card-title {
+      font-family: "RocWideMedium", sans-serif;
+      font-size: 24px;
+      letter-spacing: -0.5px;
+      color: #fff;
+      margin-bottom: 12px;
+    }
+    .ccr-card-body {
+      font-family: "Montserrat", sans-serif;
+      font-size: 13px;
+      color: rgba(255,255,255,0.4);
+      line-height: 1.75;
+      margin-bottom: 28px;
+    }
+    .ccr-includes {
+      list-style: none;
+      margin-bottom: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .ccr-includes li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-family: "Montserrat", sans-serif;
+      font-size: 13px;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.5;
+    }
+    .ccr-includes li::before {
+      content: '→';
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 11px;
+      color: var(--accent);
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .ccr-free-note {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 9px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.2);
+      margin-top: 16px;
+      text-align: center;
+    }
+
+    /* CTA SECTION */
+    .cta-section {
+      padding: 104px 48px;
+      background: var(--accent);
+      background-image:
+        linear-gradient(rgba(255,255,255,0.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.07) 1px, transparent 1px);
+      background-size: 48px 48px;
+      text-align: center;
+    }
+    .cta-inner { max-width: 680px; margin: 0 auto; }
+    .cta-eyebrow {
+      display: block;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 24px;
+    }
+    .cta-h2 {
+      font-family: "RocWideMedium", sans-serif;
+      font-size: clamp(28px, 4vw, 50px);
+      line-height: 1.06;
+      letter-spacing: -1.5px;
+      color: #fff;
+      margin-bottom: 20px;
+    }
+    .cta-body {
+      font-family: "Montserrat", sans-serif;
+      font-size: 16px;
+      color: rgba(255,255,255,0.8);
+      line-height: 1.75;
+      margin-bottom: 40px;
+      letter-spacing: -0.3px;
+    }
+    .cta-btn-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    /* CCR FORM SECTION */
+    .ccr-form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .ccr-includes-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-top: 32px;
+      margin-bottom: 32px;
+    }
+    .ccr-include-item {
+      display: flex;
+      gap: 12px;
+      font-family: "Montserrat", sans-serif;
+      font-size: 14px;
+      color: var(--body);
+      line-height: 1.5;
+    }
+    .ccr-include-arrow {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 11px;
+      color: var(--accent);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .ccr-free-badge {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 9px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(0,0,0,0.3);
+    }
+    .ccr-form-card {
+      background: #1A1825;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-top: 3px solid var(--accent);
+      border-radius: 10px;
+      padding: 36px 32px;
+      box-shadow: 0 16px 48px rgba(0,0,0,0.35), 0 4px 16px rgba(0,0,0,0.25);
+    }
+    /* HubSpot form overrides */
+    .ccr-form-card .hs-form input,
+    .ccr-form-card .hs-form select,
+    .ccr-form-card .hs-form textarea {
+      background: rgba(255,255,255,0.05) !important;
+      border: 1px solid rgba(255,255,255,0.12) !important;
+      border-radius: 3px !important;
+      color: #fff !important;
+      font-family: "Montserrat", sans-serif !important;
+      font-size: 13px !important;
+      padding: 10px 14px !important;
+    }
+    .ccr-form-card .hs-form .hs-button {
+      background: var(--accent) !important;
+      border: none !important;
+      border-radius: 3px !important;
+      font-family: "IBM Plex Mono", monospace !important;
+      font-size: 11px !important;
+      letter-spacing: 0.08em !important;
+      text-transform: uppercase !important;
+      padding: 12px 28px !important;
+      width: 100% !important;
+      cursor: pointer !important;
+    }
+    .ccr-form-card .hs-form .hs-button:hover { background: var(--accent-hover) !important; }
+    .ccr-form-card .hs-form label {
+      font-family: "IBM Plex Mono", monospace !important;
+      font-size: 9px !important;
+      letter-spacing: 0.1em !important;
+      text-transform: uppercase !important;
+      color: rgba(255,255,255,0.4) !important;
+    }
+    .ccr-form-card .hs-error-msgs { color: #f87171 !important; font-size: 11px !important; }
+
+    /* GTM DIAGNOSIS BRIDGE */
+    .bridge-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .bridge-card {
+      background: #26242F;
+      border: 1px solid rgba(255,255,255,0.06);
+      border-top: 3px solid var(--accent);
+      border-radius: 4px;
+      padding: 36px 32px;
+      box-shadow:
+        0 2px 4px rgba(0,0,0,0.4),
+        0 8px 24px rgba(0,0,0,0.35),
+        0 24px 64px rgba(0,0,0,0.3),
+        inset 0 1px 0 rgba(255,255,255,0.05);
+    }
+    .bridge-card-eyebrow {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 9px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 14px;
+    }
+    .bridge-card-title {
+      font-family: "RocWideMedium", sans-serif;
+      font-size: 18px;
+      letter-spacing: -0.5px;
+      color: #fff;
+      line-height: 1.3;
+      margin-bottom: 28px;
+    }
+    .bridge-stats {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin-bottom: 28px;
+      border-top: 1px solid var(--border-dark);
+    }
+    .bridge-stat {
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--border-dark);
+    }
+    .bridge-stat-num {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 22px;
+      font-weight: 500;
+      color: var(--accent);
+      flex-shrink: 0;
+      letter-spacing: -0.5px;
+    }
+    .bridge-stat-label {
+      font-family: "Montserrat", sans-serif;
+      font-size: 12px;
+      color: rgba(255,255,255,0.4);
+      line-height: 1.5;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .hero { padding: 72px 24px 64px; }
+      .section { padding: 72px 24px; }
+      .ccr-section { padding: 72px 24px; }
+      .cta-section { padding: 80px 24px; }
+      .problem-2x2, .how-grid, .ccr-inner, .bridge-grid, .ccr-form-grid { grid-template-columns: 1fr; gap: 14px; }
+      .callout-block { padding: 32px 24px; }
+      .callout-block blockquote { font-size: 18px; }
+      .cat-grid { grid-template-columns: 1fr; }
+      .cat-card.full-width { grid-column: 1; }
+      .outcomes-grid { grid-template-columns: 1fr; }
+    }
+</style>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+<!-- ═══ HERO — DARK ════════════════════════════════════════ -->
+  <section class="tex-dark hero">
+    <div class="hero-inner">
+      <span class="eyebrow">Intelligence · Catalist Signals</span>
+      <h1>Intent signals are<br><em>commoditized.</em><br>Your competitors have<br>the same data you do.</h1>
+      <p class="hero-lead">
+        Catalist Signals surfaces the real-world events that start buying conversations before your competitors see them in an intent platform.
+      </p>
+      <div class="hero-cta-row">
+        <a href="#wf__generate-ccr" class="btn-primary">Get Your Free CCR →</a>
+        <a href="#how-it-works" class="btn-outline">See How It Works</a>
+      </div>
+      <div class="contrast-badge">
+        <span>Catalist</span> tracks what's actually changing inside a company's operating environment
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ PROBLEM — LIGHT ════════════════════════════════════ -->
+  <section class="tex-light hatch-light section">
+    <div class="section-inner">
+      <span class="sec-label">The Problem</span>
+      <h2 class="sec-h2">When everyone acts on the same signal, no one stands out.</h2>
+      <p class="sec-sub">Series A raised. Job changed. Pricing page visited. Your competitors see the same thing at the same time and send the same email. Buyers have learned to ignore it.</p>
+
+      <div class="problem-2x2">
+        <div class="problem-item-card">
+          <div class="prob-icon"><svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="#E8634A" stroke-width="1.2"/><path d="M5 8l2 2 4-4" stroke="#E8634A" stroke-width="1.2" stroke-linecap="round"/></svg></div>
+          <div class="prob-copy"><h3>Shared signal pools</h3><p>The same intent platforms serve your entire competitive set. When a buyer shows intent, every vendor in your space gets the same notification within minutes.</p></div>
+        </div>
+        <div class="problem-item-card">
+          <div class="prob-icon"><svg viewBox="0 0 16 16" fill="none"><rect x="2" y="4" width="12" height="9" rx="1" stroke="#E8634A" stroke-width="1.2"/><path d="M5 4V3a3 3 0 0 1 6 0v1" stroke="#E8634A" stroke-width="1.2"/></svg></div>
+          <div class="prob-copy"><h3>Behavioral signals, not causal events</h3><p>Intent platforms measure what buyers click and read. They tell you someone is researching, not why the decision window opened. That distinction is everything.</p></div>
+        </div>
+        <div class="problem-item-card">
+          <div class="prob-icon"><svg viewBox="0 0 16 16" fill="none"><path d="M8 2v4l3 1.5" stroke="#E8634A" stroke-width="1.2" stroke-linecap="round"/><circle cx="8" cy="8" r="6" stroke="#E8634A" stroke-width="1.2"/></svg></div>
+          <div class="prob-copy"><h3>Timing is already late</h3><p>By the time a buying signal registers in a platform, the buyer has often already shortlisted vendors. The window you're targeting opened weeks earlier.</p></div>
+        </div>
+        <div class="problem-item-card">
+          <div class="prob-icon"><svg viewBox="0 0 16 16" fill="none"><path d="M3 13l4-4 3 3 3-6" stroke="#E8634A" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="prob-copy"><h3>Reply rates collapse in the noise</h3><p>0.7% BDM email reply rate against an industry median of 2 to 3%. A message that doesn't explain why it's relevant today gets ignored, or worse, damages your brand.</p></div>
+        </div>
+      </div>
+
+      <div style="margin-top:48px;">
+        <div class="quote-item open" style="grid-template-columns:4px 1fr;background:transparent;">
+          <div style="background:var(--accent);"></div>
+          <div style="background:linear-gradient(180deg, #F5F3F0 0%, #F0EDE9 100%);">
+            <div class="quote-trigger" role="button" tabindex="0">
+              <span class="quote-src-label">VP Sales · Industrial Automation · 11,000-person org</span>
+              <span class="quote-chevron">▼</span>
+            </div>
+            <div class="quote-body" style="max-height:200px;">
+              <div class="quote-text">We were running outbound on the same signal data everyone else had. The reps knew it. The buyers knew it. The reply rate told the whole story.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ HOW IT WORKS — DARK ════════════════════════════════ -->
+  <section class="tex-dark section" id="how-it-works">
+    <div class="section-inner">
+      <span class="sec-label">How Catalist Works</span>
+      <h2 class="sec-h2 sec-h2-white">Real-world events.<br>Not digital breadcrumbs.</h2>
+      <p class="sec-sub sec-sub-white">Catalist tracks what's actually changing in a company's operating environment. The events that force decisions, create urgency, and open buying windows that no platform will show you.</p>
+
+      <div class="how-grid">
+        <div>
+          <div class="process-list">
+            <div class="process-item">
+              <div class="step-num">01</div>
+              <div class="step-copy">
+                <h3>Identify operating environment changes</h3>
+                <p>Catalist monitors facility activity, regulatory filings, permit data, supplier networks, and economic indicators. The kind of operational signals that precede budget decisions.</p>
+              </div>
+            </div>
+            <div class="process-item">
+              <div class="step-num">02</div>
+              <div class="step-copy">
+                <h3>Map catalysts to your ICP</h3>
+                <p>Not every event matters to every buyer. Catalist maps catalyst categories to your specific ICP so your team only sees signals that create genuine urgency for your solution.</p>
+              </div>
+            </div>
+            <div class="process-item">
+              <div class="step-num">03</div>
+              <div class="step-copy">
+                <h3>Surface the account and the context</h3>
+                <p>Your reps receive the account, the event, and the context they need to open a conversation that explains why now. Not a spray-and-pray sequence triggered by a content download.</p>
+              </div>
+            </div>
+            <div class="process-item">
+              <div class="step-num">04</div>
+              <div class="step-copy">
+                <h3>Integrate into your existing motion</h3>
+                <p>Catalist Signals layer on top of your existing sequences and workflows. No rip-and-replace. Your stack stays intact and your targeting gets sharper.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <!-- Signal terminal: light background, macOS traffic lights -->
+          <div class="signal-terminal">
+            <div class="terminal-bar">
+              <div class="tb-dot red"></div>
+              <div class="tb-dot yellow"></div>
+              <div class="tb-dot green"></div>
+              <span class="terminal-label">Catalist Signal Feed</span>
+            </div>
+            <div class="signal-feed">
+              <div class="feed-section-label">Traditional intent signal</div>
+              <div class="signal-item muted">
+                <div class="signal-dot muted"></div>
+                <div class="signal-content">
+                  <div class="signal-type muted">Intent · G2 Review</div>
+                  <div class="signal-text">Acme Corp viewed 3 competitor profiles in your category</div>
+                  <div class="signal-meta">Seen by 47 vendors · No contextual trigger</div>
+                </div>
+              </div>
+
+              <div class="feed-section-label" style="padding-top:8px;">Catalist signal</div>
+              <div class="signal-item">
+                <div class="signal-dot"></div>
+                <div class="signal-content">
+                  <div class="signal-type">Operational · Facility Expansion</div>
+                  <div class="signal-text">Meridian Industrial: 2 new facility permits filed in Cincinnati and Memphis</div>
+                  <div class="signal-meta">Expansion to headcount pressure to workforce systems decision · 6,200-person org</div>
+                </div>
+              </div>
+              <div class="signal-item">
+                <div class="signal-dot"></div>
+                <div class="signal-content">
+                  <div class="signal-type">Regulatory · Compliance Deadline</div>
+                  <div class="signal-text">Vector Logistics: OSHA 1910.119 audit notification filed</div>
+                  <div class="signal-meta">Regulatory pressure · 90-day compliance window · procurement urgency</div>
+                </div>
+              </div>
+              <div class="signal-item">
+                <div class="signal-dot"></div>
+                <div class="signal-content">
+                  <div class="signal-type">Economic · Incentive Program</div>
+                  <div class="signal-text">Apex Manufacturing: IRA § 48C credit application approved</div>
+                  <div class="signal-meta">$2.4M capex released · equipment modernization cycle open now</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ CATALYST CATEGORIES — LIGHT ═══ -->
+  <section class="tex-light hatch-light section">
+    <div class="section-inner">
+      <span class="sec-label">What Catalist Tracks</span>
+      <h2 class="sec-h2">Three categories of signals your competitors aren't using.</h2>
+      <p class="sec-sub">Catalist doesn't monitor digital behavior. It tracks the real-world events that change a company's operating environment and by extension their buying timeline.</p>
+
+      <div class="cat-grid">
+        <div class="cat-card">
+          <div class="cat-num">01 · Operational</div>
+          <div class="cat-title">Operational Catalysts</div>
+          <p class="cat-desc">Facility activity, expansion permits, equipment installations, supplier disruption. Events that force companies to act not because they're curious, but because something in their operating environment changed and inaction now has a cost.</p>
+        </div>
+        <div class="cat-card">
+          <div class="cat-num">02 · Regulatory</div>
+          <div class="cat-title">Regulatory Catalysts</div>
+          <p class="cat-desc">OSHA and EPA updates, compliance deadlines, code changes, audit triggers. Regulatory pressure creates urgency that no intent signal manufactures. When a company has a 90-day compliance window, the buying decision is not optional.</p>
+        </div>
+        <div class="cat-card">
+          <div class="cat-num">03 · Economic</div>
+          <div class="cat-title">Environmental and Economic Catalysts</div>
+          <p class="cat-desc">Weather events, cost spikes, incentive programs, market disruptions. External forces that change buying timelines in ways that have nothing to do with whether a buyer downloaded a whitepaper.</p>
+        </div>
+        <div class="cat-card full-width">
+          <div class="cat-num">The Difference</div>
+          <div class="cat-title">Context is the edge.</div>
+          <p class="cat-desc">When you know why a buyer is ready and what changed in their world, your outreach is timely, relevant, and credible. It doesn't read like a sequence. It reads like you were paying attention. That's why Catalist engagements produce 2.1x account engagement rates where commoditized intent data produced noise.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ OUTCOMES — DARK ════════════════════════════════════ -->
+  <section class="tex-dark section">
+    <div class="section-inner">
+      <span class="sec-label">Results</span>
+      <h2 class="sec-h2 sec-h2-white">What changes when outreach is grounded in real context.</h2>
+      <p class="sec-sub sec-sub-white">Real data from real clients.</p>
+
+      <div class="outcomes-grid">
+        <div class="outcome-card">
+          <div class="outcome-stat">2.1×</div>
+          <div class="outcome-text">Account engagement rate · Catalist-based tiering replacing commoditized intent signals</div>
+          <div class="outcome-tag">Series C fintech · 40-person org</div>
+        </div>
+        <div class="outcome-card">
+          <div class="outcome-stat">34%</div>
+          <div class="outcome-text">Net new pipeline increase · Outreach rebuilt around operational and regulatory catalyst categories</div>
+          <div class="outcome-tag">Series D cybersecurity · 65-person org</div>
+        </div>
+        <div class="outcome-card">
+          <div class="outcome-stat">61%</div>
+          <div class="outcome-text">SQL creation quarter-over-quarter · Catalist-tiered sequencing replacing generic persona-based sends</div>
+          <div class="outcome-tag">Series C HR tech · 52-person org</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ CCR FORM — WARM ════════════════════════════════════ -->
+  <section class="section" id="wf__generate-ccr" style="background-color:#F0EDE8;background-image:repeating-linear-gradient(17deg,transparent 0px,transparent 2px,rgba(0,0,0,0.032) 2px,rgba(0,0,0,0.032) 3px),repeating-linear-gradient(103deg,transparent 0px,transparent 3px,rgba(0,0,0,0.022) 3px,rgba(0,0,0,0.022) 4px),repeating-linear-gradient(197deg,transparent 0px,transparent 4px,rgba(0,0,0,0.016) 4px,rgba(0,0,0,0.016) 5px);border-top:1.5px solid rgba(0,0,0,0.12);border-bottom:1.5px solid rgba(0,0,0,0.12);position:relative;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,0.08),0 1px 4px rgba(0,0,0,0.05),0 -4px 16px rgba(0,0,0,0.06);z-index:1;">
+    <div class="section-inner">
+      <div class="ccr-form-grid">
+        <div class="ccr-form-left">
+          <span class="sec-label">Free Offer</span>
+          <h2 class="sec-h2">See your industry's top catalysts before you decide anything.</h2>
+          <p class="sec-sub sec-sub-warm">The Conversation Catalyst Report is free. It maps the specific real-world events driving buying behavior in your segment, covering operational, regulatory, and economic. No sales call required to get it.</p>
+          <div class="ccr-includes-list">
+            <div class="ccr-include-item"><span class="ccr-include-arrow">→</span><span>Top 5 to 7 operational catalysts active in your segment right now</span></div>
+            <div class="ccr-include-item"><span class="ccr-include-arrow">→</span><span>Regulatory events with active compliance timelines</span></div>
+            <div class="ccr-include-item"><span class="ccr-include-arrow">→</span><span>Economic and environmental triggers mapped to your ICP</span></div>
+            <div class="ccr-include-item"><span class="ccr-include-arrow">→</span><span>Example outreach context for each catalyst category</span></div>
+            <div class="ccr-include-item"><span class="ccr-include-arrow">→</span><span>Delivered as a formatted report in 48 hours</span></div>
+          </div>
+          <div class="ccr-free-badge">Free · No credit card · No sales call to receive it</div>
+        </div>
+        <div class="ccr-form-right">
+          <div class="ccr-form-card">
+            <div class="ccr-card-label">Conversation Catalyst Report (CCR)</div>
+            <div class="ccr-card-title">Your industry's buying catalysts. Mapped. Delivered free.</div>
+            <div id="hs-ccr-form">
+              <script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/embed/v2.js"></script>
+              <script>
+                hbspt.forms.create({
+                  portalId: "5046646",
+                  formId: "87eee4d2-6f57-4acf-a0dc-c868e9b7a972",
+                  region: "na1"
+                });
+              </script>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ HIDDEN SALES FORM ══════════════════════════════════ -->
+  <div id="hs-sales-form" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;z-index:9999;background:rgba(0,0,0,0.7);align-items:center;justify-content:center;">
+    <div style="background:#26242F;border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:48px;max-width:560px;width:90%;position:relative;max-height:90vh;overflow-y:auto;">
+      <button onclick="document.getElementById('hs-sales-form').style.display='none'" style="position:absolute;top:16px;right:20px;background:none;border:none;color:rgba(255,255,255,0.4);font-size:20px;cursor:pointer;font-family:monospace;">✕</button>
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:#E8634A;margin-bottom:16px;">Talk to RevShoppe</div>
+      <div style="font-family:'RocWideMedium',sans-serif;font-size:22px;color:#fff;letter-spacing:-0.5px;margin-bottom:24px;">Tell us where things are breaking down.</div>
+      <script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/embed/v2.js"></script>
+      <script>
+        hbspt.forms.create({
+          portalId: "5046646",
+          formId: "eeb869db-230f-4963-a0bc-564c2c8244e5",
+          region: "na1"
+        });
+      </script>
+    </div>
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('a[href="#hs-sales-form"]').forEach(function(el) {
+        el.addEventListener('click', function(e) {
+          e.preventDefault();
+          var modal = document.getElementById('hs-sales-form');
+          modal.style.display = 'flex';
+        });
+      });
+    });
+  </script>
+
+  <!-- ═══ NEXT STEP — GTM DIAGNOSIS BRIDGE — DARK GRID ══════════ -->
+  <section class="tex-light section" style="background-image:linear-gradient(rgba(0,0,0,0.022) 1px,transparent 1px),linear-gradient(90deg,rgba(0,0,0,0.022) 1px,transparent 1px);background-size:40px 40px;">
+    <div class="section-inner">
+      <div class="bridge-grid">
+        <div class="bridge-left">
+          <span class="sec-label">What Comes Next</span>
+          <h2 class="sec-h2">Catalist tells you who's ready. The GTM Diagnosis tells you if your system can act on it.</h2>
+          <p class="sec-sub">Knowing who to reach and when is only half the equation. If your sequences are generic, your CRM data is incomplete, and your reps are running on intuition, the best signal in the world doesn't close the gap. The GTM Diagnosis finds exactly where the execution breaks down.</p>
+        </div>
+        <div class="bridge-right">
+          <div class="bridge-card">
+            <div class="bridge-card-eyebrow">Solutions · GTM Diagnosis</div>
+            <div class="bridge-card-title">Four pillars. Six weeks. A complete picture of what's breaking and what it costs.</div>
+            <div class="bridge-stats">
+              <div class="bridge-stat">
+                <div class="bridge-stat-num">$0.007</div>
+                <div class="bridge-stat-label">Pipeline per activity vs. $0.70–$1.05 benchmark</div>
+              </div>
+              <div class="bridge-stat">
+                <div class="bridge-stat-num">80%</div>
+                <div class="bridge-stat-label">CRM contacts missing firmographic data</div>
+              </div>
+              <div class="bridge-stat">
+                <div class="bridge-stat-num">0.7%</div>
+                <div class="bridge-stat-label">BDM email reply rate vs. 2–3% industry median</div>
+              </div>
+            </div>
+            <a href="https://www.revshoppe.com/gtm-diagnosis" class="btn-primary" style="width:100%;justify-content:center;margin-top:8px;">See the GTM Diagnosis →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ CTA — CORAL ════════════════════════════════════════ -->
+  <section class="cta-section" style="border-top:2px solid rgba(180,50,30,0.5);box-shadow:0 -16px 48px rgba(0,0,0,0.4),0 -4px 12px rgba(0,0,0,0.3);position:relative;z-index:3;">
+    <div class="cta-inner">
+      <span class="cta-eyebrow">Catalist Signals</span>
+      <h2 class="cta-h2">Stop chasing signals. Start acting on catalysts.</h2>
+      <p class="cta-body">Signals tell you who clicked. Catalist tells you who's ready and why. The CCR is free and your industry's top catalysts are delivered in 48 hours.</p>
+      <div class="cta-btn-row">
+        <a href="#wf__generate-ccr" class="btn-white">Get Your Free CCR →</a>
+        <a href="#hs-sales-form" class="btn-white-ghost">Talk to Us</a>
+      </div>
+    </div>
+  </section>
+</body>
+</html>
