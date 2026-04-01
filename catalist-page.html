@@ -513,10 +513,10 @@
       line-height: 1.6;
     }
 
-    /* CATALYST CATEGORIES */
+    /* CATALIST CATEGORIES */
     .cat-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, 1fr);
       gap: 14px;
       margin-top: 56px;
     }
@@ -912,17 +912,183 @@
     }
 
     /* RESPONSIVE */
+    /* ═══════════════════════════════════════════
+       RESPONSIVE — All breakpoints
+       1024 | 768 | 480 | 375
+    ═══════════════════════════════════════════ */
+
+    /* ── Hamburger (hidden on desktop) ── */
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 8px;
+      background: none;
+      border: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: rgba(255,255,255,0.8);
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* ── Mobile nav drawer ── */
+    .nav-mobile {
+      display: none;
+      position: fixed;
+      top: 64px; left: 0; right: 0; bottom: 0;
+      background: var(--bg-dark);
+      z-index: 8999;
+      overflow-y: auto;
+      padding: 32px 24px 48px;
+      flex-direction: column;
+      border-top: 1px solid var(--border-dark);
+    }
+    .nav-mobile a {
+      font-family: "Montserrat", sans-serif;
+      font-size: 15px;
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      display: block;
+    }
+    .nav-mobile .nav-m-label {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 9px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+      padding: 24px 0 8px;
+      display: block;
+    }
+    .nav-mobile .nav-m-cta {
+      margin-top: 24px;
+      background: var(--accent);
+      color: #fff !important;
+      text-align: center;
+      border-radius: 3px;
+      padding: 14px 0 !important;
+      font-family: "IBM Plex Mono", monospace !important;
+      font-size: 11px !important;
+      letter-spacing: 0.08em;
+      border-bottom: none !important;
+    }
+
+    /* ══ 1024px — Small desktop / iPad landscape ══ */
+    @media (max-width: 1024px) {
+      nav { padding: 0 32px; }
+      .section { padding: 80px 32px; }
+      .hero { padding: 80px 32px 64px; }
+      .cta-section { padding: 80px 32px; }
+      .how-grid { gap: 48px; }
+      .outcomes-grid { grid-template-columns: repeat(3, 1fr); }
+      .bridge-grid { gap: 48px; }
+    }
+
+    /* ══ 900px — iPad landscape / large tablet ══ */
     @media (max-width: 900px) {
-      .hero { padding: 72px 24px 64px; }
+      .nav-center, .nav-right { display: none; }
+      .nav-hamburger { display: flex; }
+
       .section { padding: 72px 24px; }
-      .ccr-section { padding: 72px 24px; }
-      .cta-section { padding: 80px 24px; }
-      .problem-2x2, .how-grid, .ccr-inner, .bridge-grid, .ccr-form-grid { grid-template-columns: 1fr; gap: 14px; }
-      .callout-block { padding: 32px 24px; }
-      .callout-block blockquote { font-size: 18px; }
+      .hero { padding: 72px 24px 56px; }
+      .cta-section { padding: 72px 24px; }
+
+      .problem-2x2 { grid-template-columns: 1fr 1fr; gap: 12px; }
+      .how-grid { grid-template-columns: 1fr; gap: 0; }
+      .signal-terminal { position: static; margin-top: 40px; }
+      .cat-grid { grid-template-columns: 1fr 1fr; }
+      .cat-card.full-width { grid-column: 1 / -1; }
+      .outcomes-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+      .ccr-form-grid { grid-template-columns: 1fr; gap: 48px; }
+      .bridge-grid { grid-template-columns: 1fr; gap: 40px; }
+    }
+
+    /* ══ 768px — iPad portrait ══ */
+    @media (max-width: 768px) {
+      .section { padding: 64px 24px; }
+      .hero { padding: 60px 24px 48px; }
+      .hero h1 { font-size: clamp(28px, 6vw, 42px); letter-spacing: -1px; }
+      .hero-lead { font-size: 15px; }
+      .hero-cta-row { flex-direction: column; align-items: center; gap: 12px; }
+      .eyebrow { font-size: 9px; }
+
+      .sec-h2 { font-size: clamp(24px, 5vw, 36px); }
+      .sec-sub { font-size: 14px; }
+
+      .problem-2x2 { grid-template-columns: 1fr; }
       .cat-grid { grid-template-columns: 1fr; }
       .cat-card.full-width { grid-column: 1; }
       .outcomes-grid { grid-template-columns: 1fr; }
+
+      .ccr-form-grid { grid-template-columns: 1fr; gap: 40px; }
+      .ccr-form-card { padding: 28px 24px; }
+      .bridge-grid { grid-template-columns: 1fr; gap: 32px; }
+      .bridge-card { padding: 28px 24px; }
+
+      .cta-section { padding: 64px 24px; }
+      .cta-h2 { font-size: clamp(24px, 5vw, 38px); }
+    }
+
+    /* ══ 480px — Large phone ══ */
+    @media (max-width: 480px) {
+      nav { padding: 0 20px; }
+      .section { padding: 52px 20px; }
+      .hero { padding: 48px 20px 40px; }
+      .hero h1 { font-size: clamp(24px, 7vw, 32px); letter-spacing: -0.5px; }
+      .hero-lead { font-size: 14px; margin-bottom: 32px; }
+      .hero-cta-row { width: 100%; }
+      .btn-primary, .btn-outline { width: 100%; justify-content: center; }
+
+      .sec-h2 { font-size: clamp(22px, 6vw, 30px); }
+      .sec-label { font-size: 9px; }
+
+      .problem-item-card { padding: 20px 18px; }
+      .prob-icon { width: 30px; height: 30px; }
+
+      .process-item { gap: 16px; padding: 24px 0; }
+      .step-copy h3 { font-size: 15px; }
+      .signal-terminal { border-radius: 8px; }
+
+      .cat-grid { gap: 10px; }
+      .cat-card { padding: 24px 20px; }
+      .cat-card.full-width .cat-title { font-size: 18px; }
+
+      .outcome-stat { font-size: 40px; }
+      .outcomes-grid { gap: 10px; }
+
+      .ccr-includes-list { gap: 12px; }
+      .ccr-include-item { font-size: 13px; }
+      .ccr-form-card { padding: 24px 20px; }
+
+      .bridge-stats { gap: 0; }
+      .bridge-stat-num { font-size: 18px; }
+
+      .cta-section { padding: 52px 20px; }
+      .cta-h2 { font-size: clamp(22px, 6vw, 32px); letter-spacing: -0.5px; }
+      .cta-body { font-size: 14px; }
+      .cta-btn-row { flex-direction: column; align-items: center; gap: 12px; }
+      .btn-white, .btn-white-ghost { width: 100%; justify-content: center; }
+    }
+
+    /* ══ 375px — Standard phone ══ */
+    @media (max-width: 375px) {
+      .hero h1 { font-size: 21px; }
+      .sec-h2 { font-size: 20px; }
+      .hero-lead { font-size: 13px; }
+      .outcome-stat { font-size: 36px; }
+      .bridge-stat-num { font-size: 16px; }
+      .cat-card { padding: 20px 16px; }
+      .process-item { gap: 12px; }
     }
 </style>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
@@ -934,7 +1100,7 @@
       <span class="eyebrow">Intelligence · Catalist Signals</span>
       <h1>Intent signals are<br><em>commoditized.</em><br>Your competitors have<br>the same data you do.</h1>
       <p class="hero-lead">
-        Catalist Signals surfaces the real-world events that start buying conversations before your competitors see them in an intent platform.
+        Catalist Signals surface the real-world events creating buying urgency in your market before your competitors see them in an intent platform.
       </p>
       <div class="hero-cta-row">
         <a href="#wf__generate-ccr" class="btn-primary">Get Your Free CCR →</a>
@@ -1009,8 +1175,8 @@
             <div class="process-item">
               <div class="step-num">02</div>
               <div class="step-copy">
-                <h3>Map catalysts to your ICP</h3>
-                <p>Not every event matters to every buyer. Catalist maps catalyst categories to your specific ICP so your team only sees signals that create genuine urgency for your solution.</p>
+                <h3>Map catalists to your ICP</h3>
+                <p>Not every event matters to every buyer. Catalist maps catalist categories to your specific ICP so your team only sees signals that create genuine urgency for your solution.</p>
               </div>
             </div>
             <div class="process-item">
@@ -1082,33 +1248,38 @@
     </div>
   </section>
 
-  <!-- ═══ CATALYST CATEGORIES — LIGHT ═══ -->
+  <!-- ═══ CATALIST CATEGORIES — LIGHT ═══ -->
   <section class="tex-light hatch-light section">
     <div class="section-inner">
       <span class="sec-label">What Catalist Tracks</span>
-      <h2 class="sec-h2">Three categories of signals your competitors aren't using.</h2>
+      <h2 class="sec-h2">Four categories of signals your competitors aren't monitoring.</h2>
       <p class="sec-sub">Catalist doesn't monitor digital behavior. It tracks the real-world events that change a company's operating environment and by extension their buying timeline.</p>
 
       <div class="cat-grid">
         <div class="cat-card">
-          <div class="cat-num">01 · Operational</div>
-          <div class="cat-title">Operational Catalysts</div>
-          <p class="cat-desc">Facility activity, expansion permits, equipment installations, supplier disruption. Events that force companies to act not because they're curious, but because something in their operating environment changed and inaction now has a cost.</p>
+          <div class="cat-num">01 · Trigger</div>
+          <div class="cat-title">Trigger Catalists</div>
+          <p class="cat-desc">Events that force immediate decisions. Facility activity, leadership changes, expansion permits, equipment installations. High-intensity signals with a direct buyer response and a short action window.</p>
         </div>
         <div class="cat-card">
           <div class="cat-num">02 · Regulatory</div>
-          <div class="cat-title">Regulatory Catalysts</div>
+          <div class="cat-title">Regulatory Catalists</div>
           <p class="cat-desc">OSHA and EPA updates, compliance deadlines, code changes, audit triggers. Regulatory pressure creates urgency that no intent signal manufactures. When a company has a 90-day compliance window, the buying decision is not optional.</p>
         </div>
         <div class="cat-card">
-          <div class="cat-num">03 · Economic</div>
-          <div class="cat-title">Environmental and Economic Catalysts</div>
-          <p class="cat-desc">Weather events, cost spikes, incentive programs, market disruptions. External forces that change buying timelines in ways that have nothing to do with whether a buyer downloaded a whitepaper.</p>
+          <div class="cat-num">03 · Market</div>
+          <div class="cat-title">Market Catalists</div>
+          <p class="cat-desc">Cost spikes, competitive moves, incentive programs, market disruptions. External forces that shift buying timelines regardless of whether a buyer visited your pricing page.</p>
+        </div>
+        <div class="cat-card">
+          <div class="cat-num">04 · Operational</div>
+          <div class="cat-title">Operational Catalists</div>
+          <p class="cat-desc">Internal conditions that signal capacity strain, workflow gaps, or system failure. Scheduling conflicts, production bottlenecks, integration breakdowns. The events your competitors aren't monitoring because they don't show up in an intent platform.</p>
         </div>
         <div class="cat-card full-width">
           <div class="cat-num">The Difference</div>
           <div class="cat-title">Context is the edge.</div>
-          <p class="cat-desc">When you know why a buyer is ready and what changed in their world, your outreach is timely, relevant, and credible. It doesn't read like a sequence. It reads like you were paying attention. That's why Catalist engagements produce 2.1x account engagement rates where commoditized intent data produced noise.</p>
+          <p class="cat-desc">When you know a buyer's intensity level, their category, and the specific event that created urgency, your outreach isn't a sequence. It's a relevant conversation. That's why Catalist engagements produce 2.1x account engagement rates where commoditized intent data produced noise.</p>
         </div>
       </div>
     </div>
@@ -1129,7 +1300,7 @@
         </div>
         <div class="outcome-card">
           <div class="outcome-stat">34%</div>
-          <div class="outcome-text">Net new pipeline increase · Outreach rebuilt around operational and regulatory catalyst categories</div>
+          <div class="outcome-text">Net new pipeline increase · Outreach rebuilt around operational and regulatory catalist categories</div>
           <div class="outcome-tag">Series D cybersecurity · 65-person org</div>
         </div>
         <div class="outcome-card">
@@ -1147,21 +1318,21 @@
       <div class="ccr-form-grid">
         <div class="ccr-form-left">
           <span class="sec-label">Free Offer</span>
-          <h2 class="sec-h2">See your industry's top catalysts before you decide anything.</h2>
-          <p class="sec-sub sec-sub-warm">The Conversation Catalyst Report is free. It maps the specific real-world events driving buying behavior in your segment, covering operational, regulatory, and economic. No sales call required to get it.</p>
+          <h2 class="sec-h2">See your industry's top catalists before you decide anything.</h2>
+          <p class="sec-sub sec-sub-warm">The Conversation Catalist Report is free. It maps the specific real-world events creating buying urgency in your segment right now, classified by intensity, category, and buyer response. No sales call required to receive it.</p>
           <div class="ccr-includes-list">
-            <div class="ccr-include-item"><span class="ccr-include-arrow">→</span><span>Top 5 to 7 operational catalysts active in your segment right now</span></div>
-            <div class="ccr-include-item"><span class="ccr-include-arrow">→</span><span>Regulatory events with active compliance timelines</span></div>
-            <div class="ccr-include-item"><span class="ccr-include-arrow">→</span><span>Economic and environmental triggers mapped to your ICP</span></div>
-            <div class="ccr-include-item"><span class="ccr-include-arrow">→</span><span>Example outreach context for each catalyst category</span></div>
+            <div class="ccr-include-item"><span class="ccr-include-arrow">→</span><span>Five primary catalists with full analysis: intensity level, category, and buyer response for each</span></div>
+            <div class="ccr-include-item"><span class="ccr-include-arrow">→</span><span>Signal classification: primary catalists with deep-dive analysis plus supporting signals in a summary table</span></div>
+            <div class="ccr-include-item"><span class="ccr-include-arrow">→</span><span>Sample GTM workflow per catalist: automated steps mapped through to the human conversation touchpoint</span></div>
+            <div class="ccr-include-item"><span class="ccr-include-arrow">→</span><span>Detection sources for every catalist: SEC filings, job boards, press releases, earnings calls, community forums, and more</span></div>
             <div class="ccr-include-item"><span class="ccr-include-arrow">→</span><span>Delivered as a formatted report in 48 hours</span></div>
           </div>
           <div class="ccr-free-badge">Free · No credit card · No sales call to receive it</div>
         </div>
         <div class="ccr-form-right">
           <div class="ccr-form-card">
-            <div class="ccr-card-label">Conversation Catalyst Report (CCR)</div>
-            <div class="ccr-card-title">Your industry's buying catalysts. Mapped. Delivered free.</div>
+            <div class="ccr-card-label">Conversation Catalist Report (CCR)</div>
+            <div class="ccr-card-title">Your industry's buying catalists. Mapped. Delivered free.</div>
             <div id="hs-ccr-form">
               <script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/embed/v2.js"></script>
               <script>
@@ -1244,8 +1415,8 @@
   <section class="cta-section" style="border-top:2px solid rgba(180,50,30,0.5);box-shadow:0 -16px 48px rgba(0,0,0,0.4),0 -4px 12px rgba(0,0,0,0.3);position:relative;z-index:3;">
     <div class="cta-inner">
       <span class="cta-eyebrow">Catalist Signals</span>
-      <h2 class="cta-h2">Stop chasing signals. Start acting on catalysts.</h2>
-      <p class="cta-body">Signals tell you who clicked. Catalist tells you who's ready and why. The CCR is free and your industry's top catalysts are delivered in 48 hours.</p>
+      <h2 class="cta-h2">Stop chasing signals. Start acting on catalists.</h2>
+      <p class="cta-body">Signals tell you who clicked. Catalist tells you who's ready and why. The CCR is free and your industry's top catalists are delivered in 48 hours.</p>
       <div class="cta-btn-row">
         <a href="#wf__generate-ccr" class="btn-white">Get Your Free CCR →</a>
         <a href="#hs-sales-form" class="btn-white-ghost">Talk to Us</a>
