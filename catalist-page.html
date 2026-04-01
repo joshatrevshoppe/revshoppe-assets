@@ -3,7 +3,7 @@
 <head>
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: auto; }
 
     :root {
       --bg-light:      #FAFAF9;
@@ -23,7 +23,11 @@
       font-weight: 400;
       line-height: 1.6;
       overflow-x: hidden;
+      padding-top: 0 !important;
+      margin-top: 0 !important;
     }
+    /* Kill any space from Webflow injected divs above our content */
+    #rs-catalist-bg { display: none !important; }
 
     @font-face {
       font-family: "RocWideMedium";
@@ -734,6 +738,13 @@
         linear-gradient(90deg, rgba(255,255,255,0.07) 1px, transparent 1px);
       background-size: 48px 48px;
       text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      border-top: 2px solid rgba(180,50,30,0.5);
+      box-shadow: 0 -16px 48px rgba(0,0,0,0.4), 0 -4px 12px rgba(0,0,0,0.3);
+      position: relative;
+      z-index: 3;
     }
     .cta-inner { max-width: 680px; margin: 0 auto; }
     .cta-eyebrow {
@@ -1349,29 +1360,16 @@
     </div>
   </section>
 
-  <!-- ═══ HIDDEN SALES FORM ══════════════════════════════════ -->
-  <div id="hs-sales-form" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;z-index:9999;background:rgba(0,0,0,0.7);align-items:center;justify-content:center;">
-    <div style="background:#26242F;border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:48px;max-width:560px;width:90%;position:relative;max-height:90vh;overflow-y:auto;">
-      <button onclick="document.getElementById('hs-sales-form').style.display='none'" style="position:absolute;top:16px;right:20px;background:none;border:none;color:rgba(255,255,255,0.4);font-size:20px;cursor:pointer;font-family:monospace;">✕</button>
-      <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:#E8634A;margin-bottom:16px;">Talk to RevShoppe</div>
-      <div style="font-family:'RocWideMedium',sans-serif;font-size:22px;color:#fff;letter-spacing:-0.5px;margin-bottom:24px;">Tell us where things are breaking down.</div>
-      <script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/embed/v2.js"></script>
-      <script>
-        hbspt.forms.create({
-          portalId: "5046646",
-          formId: "eeb869db-230f-4963-a0bc-564c2c8244e5",
-          region: "na1"
-        });
-      </script>
-    </div>
-  </div>
+
+
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      document.querySelectorAll('a[href="#hs-sales-form"]').forEach(function(el) {
+      // Instant snap scroll to CCR form
+      document.querySelectorAll('a[href="#wf__generate-ccr"]').forEach(function(el) {
         el.addEventListener('click', function(e) {
           e.preventDefault();
-          var modal = document.getElementById('hs-sales-form');
-          modal.style.display = 'flex';
+          var target = document.getElementById('wf__generate-ccr');
+          if (target) { target.scrollIntoView({ behavior: 'instant', block: 'start' }); }
         });
       });
     });
@@ -1419,7 +1417,7 @@
       <p class="cta-body">Signals tell you who clicked. Catalist tells you who's ready and why. The CCR is free and your industry's top catalists are delivered in 48 hours.</p>
       <div class="cta-btn-row">
         <a href="#wf__generate-ccr" class="btn-white">Get Your Free CCR →</a>
-        <a href="#hs-sales-form" class="btn-white-ghost">Talk to Us</a>
+        <a href="https://www.revshoppe.com/contact" class="btn-white-ghost">Talk to Us</a>
       </div>
     </div>
   </section>
