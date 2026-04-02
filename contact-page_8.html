@@ -84,7 +84,7 @@ section { position: relative; z-index: 1; }
 .sec-h2 { font-family: "RocWideMedium", sans-serif; font-size: clamp(28px, 3.8vw, 48px); line-height: 1.08; letter-spacing: -1.5px; color: var(--headline); margin-bottom: 16px; max-width: 760px; }
 
 /* HERO */
-.hero { padding: 96px 48px 80px; text-align: center; position: relative; overflow: hidden; }
+.hero { padding: 96px 48px 80px; text-align: center; position: relative; overflow: hidden; min-height: 100vh; display: flex; align-items: center; justify-content: center; }
 .hero::before { content: ''; position: absolute; top: -120px; left: 50%; transform: translateX(-50%); width: 600px; height: 600px; background: radial-gradient(circle, rgba(232,99,74,0.08) 0%, transparent 70%); pointer-events: none; }
 .hero-inner { max-width: 860px; margin: 0 auto; position: relative; z-index: 1; }
 .eyebrow { display: inline-block; font-family: "IBM Plex Mono", monospace; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); margin-bottom: 28px; }
@@ -121,11 +121,14 @@ section { position: relative; z-index: 1; }
 .form-card-sub { font-family: "Montserrat", sans-serif; font-size: 13px; color: rgba(255,255,255,0.35); line-height: 1.6; margin-bottom: 24px; }
 
 /* HUBSPOT OVERRIDES */
+#hs-contact-form .hs-form-private input::placeholder,
+#hs-contact-form .hs-form-private textarea::placeholder,
+#hs-contact-form .hs-form-private select { color: rgba(255,255,255,0.18) !important; }
 #hs-contact-form .hs-form-private input,
 #hs-contact-form .hs-form-private select,
 #hs-contact-form .hs-form-private textarea {
   background: rgba(255,255,255,0.05) !important; border: 1px solid rgba(255,255,255,0.12) !important;
-  border-radius: 3px !important; color: #fff !important; font-family: "Montserrat", sans-serif !important;
+  border-radius: 3px !important; color: rgba(255,255,255,0.85) !important; font-family: "Montserrat", sans-serif !important;
   font-size: 13px !important; font-weight: 400 !important; padding: 10px 14px !important; width: 100% !important;
 }
 #hs-contact-form .hs-form-private label { font-family: "IBM Plex Mono", monospace !important; font-size: 9px !important; font-weight: 400 !important; letter-spacing: 0.1em !important; text-transform: uppercase !important; color: rgba(255,255,255,0.4) !important; }
@@ -135,7 +138,16 @@ section { position: relative; z-index: 1; }
 #hs-contact-form .hs-form-private fieldset { max-width: 100% !important; border: none !important; }
 #hs-contact-form .hs-form-private .hs-form-field { margin-bottom: 14px !important; }
 
-.form-note { font-family: "IBM Plex Mono", monospace; font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.18); text-align: center; margin-top: 14px; }
+/* CUSTOM FORM */
+.cf-label { font-family: "IBM Plex Mono", monospace; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.4); }
+.cf-input { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12); border-radius: 3px; color: #fff; font-family: "Montserrat", sans-serif; font-size: 13px; font-weight: 400; padding: 10px 14px; outline: none; transition: border-color 0.15s; width: 100%; }
+.cf-input:focus { border-color: rgba(232,99,74,0.5); }
+.cf-input::placeholder { color: rgba(255,255,255,0.15); }
+.cf-select { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12); border-radius: 3px; color: rgba(255,255,255,0.5); font-family: "Montserrat", sans-serif; font-size: 13px; padding: 10px 14px; outline: none; width: 100%; -webkit-appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='rgba(255,255,255,0.3)' stroke-width='1.5' fill='none'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; }
+.cf-select option { background: #1A1825; color: #fff; }
+.cf-btn { width: 100%; padding: 14px; background: var(--accent); color: #fff; border: none; border-radius: 3px; font-family: "IBM Plex Mono", monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; transition: background 0.15s; box-shadow: 0 2px 8px rgba(232,99,74,0.35), 0 4px 20px rgba(232,99,74,0.2); }
+.cf-btn:hover { background: var(--accent-hover); }
+.cf-btn:disabled { opacity: 0.6; cursor: not-allowed; }
 
 /* FAQ */
 .faq-list { display: flex; flex-direction: column; gap: 10px; margin-top: 48px; }
@@ -266,8 +278,61 @@ section { position: relative; z-index: 1; }
           <div class="form-card-label">Contact RevShoppe</div>
           <div class="form-card-title">Tell us where you're seeing it.</div>
           <div class="form-card-sub">Describe what's underperforming. We'll come to the conversation with a point of view on what it's connected to.</div>
-          <div id="hs-contact-form"></div>
-          <div class="form-note">No SDR. No automated sequence. A human reads this.</div>
+          <form id="contact-form" novalidate>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;">
+              <div style="display:flex;flex-direction:column;gap:6px;">
+                <label class="cf-label" for="cf-firstname">First Name <span style="color:var(--accent);">*</span></label>
+                <input class="cf-input" type="text" id="cf-firstname" name="firstname" placeholder="Phil" autocomplete="given-name" required>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:6px;">
+                <label class="cf-label" for="cf-lastname">Last Name <span style="color:var(--accent);">*</span></label>
+                <input class="cf-input" type="text" id="cf-lastname" name="lastname" placeholder="Funnel" autocomplete="family-name" required>
+              </div>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;">
+              <div style="display:flex;flex-direction:column;gap:6px;">
+                <label class="cf-label" for="cf-email">Work Email <span style="color:var(--accent);">*</span></label>
+                <input class="cf-input" type="email" id="cf-email" name="email" placeholder="phil.funnel@pipeline.com" autocomplete="email" required>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:6px;">
+                <label class="cf-label" for="cf-phone">Phone</label>
+                <input class="cf-input" type="tel" id="cf-phone" name="phone" placeholder="281-330-8004" autocomplete="tel">
+              </div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:14px;">
+              <label class="cf-label" for="cf-interest">What brings you here <span style="color:var(--accent);">*</span></label>
+              <select class="cf-select" id="cf-interest" name="what_brings_you_here" required>
+                <option value="" disabled selected>Select one</option>
+                <option value="GTM Diagnosis">GTM Diagnosis</option>
+                <option value="Catalist Signals / CCR">Catalist Signals / CCR</option>
+                <option value="Salesforce Architecture">Salesforce Architecture</option>
+                <option value="GTM Workflows">GTM Workflows</option>
+                <option value="Revenue Operating System">Revenue Operating System</option>
+                <option value="Managed Infrastructure">Managed Infrastructure</option>
+                <option value="General inquiry">General inquiry</option>
+              </select>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:14px;">
+              <label class="cf-label" for="cf-message">What's breaking <span style="color:var(--accent);">*</span></label>
+              <textarea class="cf-input" id="cf-message" name="message" rows="4" placeholder="Describe what's broken or underperforming and what you've already tried." style="resize:vertical;min-height:100px;" required></textarea>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:20px;">
+              <label class="cf-label" for="cf-contact-method">How should we contact you <span style="color:var(--accent);">*</span></label>
+              <select class="cf-select" id="cf-contact-method" name="preferred_contact_method" required>
+                <option value="" disabled selected>Select one</option>
+                <option value="Email">Email</option>
+                <option value="Phone">Phone</option>
+                <option value="Either">Either works</option>
+              </select>
+            </div>
+            <div id="cf-error" style="display:none;font-family:'IBM Plex Mono',monospace;font-size:10px;color:#f87171;letter-spacing:0.06em;margin-bottom:12px;"></div>
+            <button type="submit" id="cf-submit" class="cf-btn">Send Message →</button>
+          </form>
+          <div id="cf-success" style="display:none;text-align:center;padding:40px 0;">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);margin-bottom:12px;">Message received</div>
+            <div style="font-family:'RocWideMedium',sans-serif;font-size:20px;color:#fff;letter-spacing:-0.5px;margin-bottom:10px;">We'll be in touch within one business day.</div>
+            <div style="font-family:'Montserrat',sans-serif;font-size:13px;color:rgba(255,255,255,0.35);line-height:1.6;">A member of the RevShoppe team reviews every submission.</div>
+          </div>
         </div>
       </div>
 
@@ -361,21 +426,51 @@ section { position: relative; z-index: 1; }
 <script>
 document.addEventListener('DOMContentLoaded', function() {
 
-  // HubSpot form
-  var hsScript = document.createElement('script');
-  hsScript.src = '//js.hsforms.net/forms/embed/v2.js';
-  hsScript.charset = 'utf-8';
-  hsScript.onload = function() {
-    if (window.hbspt) {
-      hbspt.forms.create({
-        portalId: '5046646',
-        formId: 'fec27ad0-206b-45e2-8bcc-12c1db7e269f',
-        region: 'na1',
-        target: '#hs-contact-form'
+  // Contact form → HubSpot Forms API
+  var form = document.getElementById('contact-form');
+  var success = document.getElementById('cf-success');
+  var errorEl = document.getElementById('cf-error');
+  var btn = document.getElementById('cf-submit');
+
+  if (form) {
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      btn.disabled = true;
+      btn.textContent = 'Sending...';
+      errorEl.style.display = 'none';
+
+      var fields = [
+        { name: 'firstname',              value: document.getElementById('cf-firstname').value },
+        { name: 'lastname',               value: document.getElementById('cf-lastname').value },
+        { name: 'email',                  value: document.getElementById('cf-email').value },
+        { name: 'phone',                  value: document.getElementById('cf-phone').value },
+        { name: 'what_brings_you_here',   value: document.getElementById('cf-interest').value },
+        { name: 'message',                value: document.getElementById('cf-message').value },
+        { name: 'preferred_contact_method', value: document.getElementById('cf-contact-method').value }
+      ].filter(function(f) { return f.value; });
+
+      fetch('https://api.hsforms.com/submissions/v3/integration/submit/5046646/fec27ad0-206b-45e2-8bcc-12c1db7e269f', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          fields: fields,
+          context: { pageUri: window.location.href, pageName: document.title }
+        })
+      }).then(function(r) {
+        if (r.ok) {
+          form.style.display = 'none';
+          success.style.display = 'block';
+        } else {
+          throw new Error('Submission failed');
+        }
+      }).catch(function() {
+        btn.disabled = false;
+        btn.textContent = 'Send Message →';
+        errorEl.textContent = 'Something went wrong. Please try again or email us directly.';
+        errorEl.style.display = 'block';
       });
-    }
-  };
-  document.head.appendChild(hsScript);
+    });
+  }
 
   // FAQ accordion
   document.querySelectorAll('.faq-trigger').forEach(function(trigger) {
@@ -391,7 +486,7 @@ document.addEventListener('DOMContentLoaded', function() {
   document.querySelectorAll('a[href="#hs-contact-form"]').forEach(function(el) {
     el.addEventListener('click', function(e) {
       e.preventDefault();
-      var target = document.getElementById('hs-contact-form');
+      var target = document.getElementById('contact-form');
       if (target) target.scrollIntoView({ behavior: 'smooth', block: 'center' });
     });
   });
