@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="rs-page" content="contact">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: auto; }
+
+:root {
+  --bg-light:     #FAFAF9;
+  --bg-dark:      #26242F;
+  --bg-charcoal:  #2C2A27;
+  --accent:       #E8634A;
+  --accent-hover: #F0745C;
+  --headline:     #111111;
+  --body:         #8F95A0;
+  --border-light: rgba(0,0,0,0.07);
+  --border-dark:  rgba(255,255,255,0.07);
+}
+
+body {
+  background: var(--bg-dark);
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+  line-height: 1.6;
+  overflow-x: hidden;
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
+
+@font-face {
+  font-family: "RocWideMedium";
+  src: url("https://cdn.prod.website-files.com/61f825b46abaae2807007e90/67dea6a57df5c619dba13468_RocGroteskWide-Medium.woff2") format("woff2");
+  font-weight: 500; font-display: block;
+}
+@font-face {
+  font-family: "RocWideLight";
+  src: url("https://cdn.prod.website-files.com/61f825b46abaae2807007e90/67dea6a54f0aa4e3e2f1f6e8_RocGroteskWide-Light.woff2") format("woff2");
+  font-weight: 300; font-display: block;
+}
+
+/* TEXTURES */
+.tex-dark {
+  background-color: var(--bg-dark);
+  background-image: linear-gradient(rgba(255,255,255,0.034) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.034) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+.tex-light {
+  background-color: var(--bg-light);
+  background-image: linear-gradient(rgba(0,0,0,0.027) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.027) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+/* Linen crosshatch — matches Catalist CCR section exactly */
+.tex-linen {
+  background-color: #F0EDE8;
+  background-image:
+    repeating-linear-gradient(17deg,  transparent 0px, transparent 2px, rgba(0,0,0,0.032) 2px, rgba(0,0,0,0.032) 3px),
+    repeating-linear-gradient(103deg, transparent 0px, transparent 3px, rgba(0,0,0,0.022) 3px, rgba(0,0,0,0.022) 4px),
+    repeating-linear-gradient(197deg, transparent 0px, transparent 4px, rgba(0,0,0,0.016) 4px, rgba(0,0,0,0.016) 5px);
+}
+
+/* ELEVATION */
+section { position: relative; z-index: 1; }
+.tex-dark {
+  border-top: 1px solid rgba(255,255,255,0.08); border-bottom: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.35), 0 2px 8px rgba(0,0,0,0.20), 0 -8px 32px rgba(0,0,0,0.35), 0 -2px 8px rgba(0,0,0,0.20);
+  z-index: 2;
+}
+.tex-light {
+  border-top: 1px solid rgba(255,255,255,0.95); border-bottom: 1px solid rgba(0,0,0,0.06);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.10), 0 1px 4px rgba(0,0,0,0.06), 0 -4px 16px rgba(0,0,0,0.08);
+  z-index: 1;
+}
+.tex-linen {
+  border-top: 1.5px solid rgba(0,0,0,0.12); border-bottom: 1.5px solid rgba(0,0,0,0.12);
+  box-shadow: 0 8px 40px rgba(0,0,0,0.12), 0 2px 8px rgba(0,0,0,0.08), 0 -8px 40px rgba(0,0,0,0.10), 0 -2px 8px rgba(0,0,0,0.06);
+  z-index: 1;
+}
+
+/* SHARED */
+.section { padding: 96px 48px; }
+.section-inner { max-width: 1080px; margin: 0 auto; }
+.sec-label { display: block; font-family: "IBM Plex Mono", monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 20px; }
+.sec-h2 { font-family: "RocWideMedium", sans-serif; font-size: clamp(28px, 3.8vw, 48px); line-height: 1.08; letter-spacing: -1.5px; color: var(--headline); margin-bottom: 16px; max-width: 760px; }
+
+/* HERO */
+.hero { padding: 96px 48px 80px; text-align: center; position: relative; overflow: hidden; }
+.hero::before { content: ''; position: absolute; top: -120px; left: 50%; transform: translateX(-50%); width: 600px; height: 600px; background: radial-gradient(circle, rgba(232,99,74,0.08) 0%, transparent 70%); pointer-events: none; }
+.hero-inner { max-width: 860px; margin: 0 auto; position: relative; z-index: 1; }
+.eyebrow { display: inline-block; font-family: "IBM Plex Mono", monospace; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); margin-bottom: 28px; }
+.hero h1 { font-family: "RocWideMedium", sans-serif; font-size: clamp(36px, 4.5vw, 62px); line-height: 1.06; letter-spacing: -2px; color: #fff; margin-bottom: 28px; }
+.hero h1 em { font-style: normal; color: var(--accent); }
+.hero-lead { font-family: "Montserrat", sans-serif; font-size: 17px; color: rgba(255,255,255,0.55); line-height: 1.75; max-width: 620px; margin: 0 auto 44px; letter-spacing: -0.3px; }
+.contrast-badge { display: inline-flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 40px; padding: 8px 20px; font-family: "IBM Plex Mono", monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.35); }
+.contrast-badge span { color: var(--accent); }
+
+/* CONTACT GRID */
+.contact-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 80px; align-items: start; }
+.contact-left-title { font-family: "RocWideMedium", sans-serif; font-size: clamp(22px, 2.8vw, 34px); line-height: 1.1; letter-spacing: -1px; color: var(--headline); margin-bottom: 16px; }
+.contact-left-body { font-family: "Montserrat", sans-serif; font-size: 15px; color: var(--body); line-height: 1.8; margin-bottom: 32px; letter-spacing: -0.2px; }
+
+/* REVENUE CONSEQUENCES */
+.rc-callout { background: #FEF3F0; border: 1px solid rgba(232,99,74,0.2); border-left: 3px solid var(--accent); border-radius: 4px; padding: 20px 20px 20px 24px; margin-bottom: 36px; box-shadow: 0 1px 2px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.06); }
+.rc-label { font-family: "IBM Plex Mono", monospace; font-size: 8px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
+.rc-text { font-family: "Montserrat", sans-serif; font-size: 13px; color: var(--headline); line-height: 1.65; letter-spacing: -0.2px; }
+.rc-stats { display: flex; gap: 24px; margin-top: 14px; flex-wrap: wrap; }
+.rc-stat-num { font-family: "IBM Plex Mono", monospace; font-size: 16px; font-weight: 500; color: var(--accent); letter-spacing: -0.5px; }
+.rc-stat-label { font-family: "Montserrat", sans-serif; font-size: 11px; color: var(--body); line-height: 1.4; margin-top: 2px; }
+
+/* WHAT TO EXPECT */
+.expect-list { display: flex; flex-direction: column; border-top: 1px solid var(--border-light); }
+.expect-item { display: flex; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--border-light); }
+.expect-num { font-family: "IBM Plex Mono", monospace; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); flex-shrink: 0; width: 32px; padding-top: 3px; }
+.expect-text { font-family: "Montserrat", sans-serif; font-size: 13px; color: var(--body); line-height: 1.65; letter-spacing: -0.2px; }
+.expect-text strong { color: var(--headline); font-weight: 600; }
+
+/* FORM CARD */
+.form-card { background: #1A1825; border: 1px solid rgba(255,255,255,0.08); border-top: 3px solid var(--accent); border-radius: 10px; padding: 40px 36px; box-shadow: 0 16px 48px rgba(0,0,0,0.35), 0 4px 16px rgba(0,0,0,0.25); }
+.form-card-label { font-family: "IBM Plex Mono", monospace; font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
+.form-card-title { font-family: "RocWideMedium", sans-serif; font-size: 22px; letter-spacing: -0.5px; color: #fff; margin-bottom: 8px; }
+.form-card-sub { font-family: "Montserrat", sans-serif; font-size: 13px; color: rgba(255,255,255,0.35); line-height: 1.6; margin-bottom: 24px; }
+
+/* HUBSPOT OVERRIDES */
+#hs-contact-form .hs-form-private input,
+#hs-contact-form .hs-form-private select,
+#hs-contact-form .hs-form-private textarea {
+  background: rgba(255,255,255,0.05) !important; border: 1px solid rgba(255,255,255,0.12) !important;
+  border-radius: 3px !important; color: #fff !important; font-family: "Montserrat", sans-serif !important;
+  font-size: 13px !important; font-weight: 400 !important; padding: 10px 14px !important; width: 100% !important;
+}
+#hs-contact-form .hs-form-private label { font-family: "IBM Plex Mono", monospace !important; font-size: 9px !important; font-weight: 400 !important; letter-spacing: 0.1em !important; text-transform: uppercase !important; color: rgba(255,255,255,0.4) !important; }
+#hs-contact-form .hs-form-private .hs-button { background: var(--accent) !important; border: none !important; border-radius: 3px !important; font-family: "IBM Plex Mono", monospace !important; font-size: 11px !important; font-weight: 500 !important; letter-spacing: 0.08em !important; text-transform: uppercase !important; padding: 13px 28px !important; color: #fff !important; width: 100% !important; cursor: pointer !important; }
+#hs-contact-form .hs-form-private .hs-button:hover { background: var(--accent-hover) !important; }
+#hs-contact-form .hs-form-private .hs-error-msgs { color: #f87171 !important; font-size: 11px !important; }
+#hs-contact-form .hs-form-private fieldset { max-width: 100% !important; border: none !important; }
+#hs-contact-form .hs-form-private .hs-form-field { margin-bottom: 14px !important; }
+
+.form-note { font-family: "IBM Plex Mono", monospace; font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.18); text-align: center; margin-top: 14px; }
+
+/* FAQ */
+.faq-list { display: flex; flex-direction: column; gap: 10px; margin-top: 48px; }
+.faq-item {
+  background: #fff;
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: 10px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.06), 0 12px 28px rgba(0,0,0,0.05);
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.faq-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.06), 0 8px 24px rgba(0,0,0,0.10), 0 20px 40px rgba(0,0,0,0.08);
+}
+.faq-item.open {
+  border-color: rgba(232,99,74,0.2);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.06), 0 8px 24px rgba(0,0,0,0.10), 0 0 0 1px rgba(232,99,74,0.1);
+}
+.faq-trigger { display: flex; justify-content: space-between; align-items: center; padding: 22px 24px; cursor: pointer; user-select: none; -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
+.faq-q { font-family: "RocWideMedium", sans-serif; font-size: 15px; letter-spacing: -0.3px; color: var(--headline); flex: 1; padding-right: 24px; line-height: 1.4; transition: color 0.2s; }
+.faq-chevron { font-family: "IBM Plex Mono", monospace; font-size: 11px; color: rgba(0,0,0,0.25); transition: transform 0.3s; flex-shrink: 0; }
+.faq-item.open .faq-chevron { transform: rotate(180deg); color: var(--accent); }
+.faq-item.open .faq-q { color: var(--accent); }
+.faq-body { overflow: hidden; max-height: 0; transition: max-height 0.4s cubic-bezier(0.4,0,0.2,1); }
+.faq-item.open .faq-body { max-height: 300px; }
+.faq-a { font-family: "Montserrat", sans-serif; font-size: 14px; color: var(--body); line-height: 1.8; padding: 0 24px 22px; letter-spacing: -0.2px; border-top: 1px solid rgba(0,0,0,0.05); padding-top: 16px; }
+
+/* CTA */
+.cta-section { padding: 104px 48px; background: var(--accent); background-image: linear-gradient(rgba(255,255,255,0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.07) 1px, transparent 1px); background-size: 48px 48px; text-align: center; display: flex; flex-direction: column; align-items: center; border-top: 2px solid rgba(180,50,30,0.5); box-shadow: 0 -16px 48px rgba(0,0,0,0.4), 0 -4px 12px rgba(0,0,0,0.3); position: relative; z-index: 3; }
+.cta-inner { max-width: 680px; margin: 0 auto; }
+.cta-h2 { font-family: "RocWideMedium", sans-serif; font-size: clamp(28px, 4vw, 48px); line-height: 1.06; letter-spacing: -1.5px; color: #fff; margin-bottom: 16px; text-align: center; }
+.cta-body { font-family: "Montserrat", sans-serif; font-size: 16px; color: rgba(255,255,255,0.8); line-height: 1.75; margin-bottom: 40px; letter-spacing: -0.3px; }
+.cta-btn-row { display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap; }
+.btn-white { display: inline-flex; align-items: center; gap: 8px; padding: 14px 36px; border-radius: 3px; background: #fff; color: var(--accent); font-family: "IBM Plex Mono", monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; cursor: pointer; transition: opacity 0.15s; box-shadow: 0 2px 8px rgba(0,0,0,0.2), 0 4px 20px rgba(0,0,0,0.15); }
+.btn-white:hover { opacity: 0.92; }
+.btn-white-ghost { display: inline-flex; align-items: center; padding: 13px 28px; border-radius: 3px; background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.85); font-family: "IBM Plex Mono", monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; border: 1px solid rgba(255,255,255,0.3); cursor: pointer; transition: border-color 0.15s; }
+.btn-white-ghost:hover { border-color: rgba(255,255,255,0.6); }
+
+@media (max-width: 900px) {
+  .contact-grid { grid-template-columns: 1fr; gap: 48px; }
+  .section { padding: 72px 24px; }
+  .hero { padding: 72px 24px 56px; }
+  .cta-section { padding: 72px 24px; }
+}
+@media (max-width: 768px) {
+  .section { padding: 64px 24px; }
+  .hero h1 { font-size: clamp(28px, 6vw, 42px); }
+  .rc-stats { gap: 16px; }
+}
+@media (max-width: 480px) {
+  .section { padding: 52px 20px; }
+  .hero { padding: 48px 20px 40px; }
+  .form-card { padding: 28px 20px; }
+  .cta-section { padding: 52px 20px; }
+  .cta-btn-row { flex-direction: column; align-items: center; gap: 12px; }
+  .btn-white, .btn-white-ghost { width: 100%; justify-content: center; }
+}
+</style>
+<link rel="preload" href="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/67dea6a57df5c619dba13468_RocGroteskWide-Medium.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/67dea6a54f0aa4e3e2f1f6e8_RocGroteskWide-Light.woff2" as="font" type="font/woff2" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- HERO -->
+<section class="tex-dark hero">
+  <div class="hero-inner">
+    <span class="eyebrow">RevShoppe · Contact</span>
+    <h1>Your growth target is set.<br>Your commercial model<br>isn't <em>there yet.</em></h1>
+    <p class="hero-lead">The team is in place. The technology is in place. The operating model connecting them isn't. Tell us where it's breaking down.</p>
+    <div class="contrast-badge"><span>RevShoppe</span> responds within one business day — no SDR, no automated sequence</div>
+  </div>
+</section>
+
+<!-- CONTACT FORM -->
+<section class="tex-light section">
+  <div class="section-inner">
+    <div class="contact-grid">
+
+      <div class="contact-left">
+        <span class="sec-label">Get in Touch</span>
+        <h2 class="contact-left-title">We've seen this before. We'll come with a point of view.</h2>
+        <p class="contact-left-body">We work with revenue organizations across hundreds of engagements. The patterns repeat. When you tell us what's underperforming, we already have a hypothesis. The first conversation is about validating it against your specific situation before we ever recommend what comes next.</p>
+
+        <div class="rc-callout">
+          <div class="rc-label">Revenue Consequences</div>
+          <div class="rc-text">Execution gaps don't stay contained. They compound. Every quarter the same broken motion runs, the cost grows. Most teams don't see it until a quarter or two have already gone.</div>
+          <div class="rc-stats">
+            <div>
+              <div class="rc-stat-num">$1.1M</div>
+              <div class="rc-stat-label">estimated Q+1 cost of inaction</div>
+            </div>
+            <div>
+              <div class="rc-stat-num">$2.4M</div>
+              <div class="rc-stat-label">estimated Q+2 cost of inaction</div>
+            </div>
+            <div>
+              <div class="rc-stat-num">$4.2M</div>
+              <div class="rc-stat-label">estimated Q+3 cost of inaction</div>
+            </div>
+          </div>
+        </div>
+
+        <span class="sec-label" style="margin-bottom:16px;">What happens after you reach out</span>
+        <div class="expect-list">
+          <div class="expect-item">
+            <div class="expect-num">01</div>
+            <div class="expect-text"><strong>A human reads this.</strong> Within one business day. No auto-responder. No SDR sequence. Someone on the RevShoppe team reviews every submission.</div>
+          </div>
+          <div class="expect-item">
+            <div class="expect-num">02</div>
+            <div class="expect-text"><strong>We research before we respond.</strong> We look at your company, your stack, and your market before the first conversation. We come with a point of view, not a list of questions.</div>
+          </div>
+          <div class="expect-item">
+            <div class="expect-num">03</div>
+            <div class="expect-text"><strong>We validate against your situation.</strong> The first conversation is about deeply understanding the specifics of your problem. We've seen the patterns. We need to confirm they match what you're running.</div>
+          </div>
+          <div class="expect-item">
+            <div class="expect-num">04</div>
+            <div class="expect-text"><strong>We give you a clear next step.</strong> If a GTM Diagnosis is warranted, we'll tell you why. If it isn't, we'll tell you that too.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-right">
+        <div class="form-card">
+          <div class="form-card-label">Contact RevShoppe</div>
+          <div class="form-card-title">Tell us where you're seeing it.</div>
+          <div class="form-card-sub">Describe what's underperforming. We'll come to the conversation with a point of view on what it's connected to.</div>
+          <div id="hs-contact-form"></div>
+          <div class="form-note">No SDR. No automated sequence. A human reads this.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FAQ — LINEN CROSSHATCH -->
+<section class="tex-linen section">
+  <div class="section-inner">
+    <span class="sec-label">Common Questions</span>
+    <h2 class="sec-h2">What people ask before reaching out.</h2>
+    <div class="faq-list">
+
+      <div class="faq-item open">
+        <div class="faq-trigger">
+          <div class="faq-q">What do you need to get started?</div>
+          <span class="faq-chevron">▼</span>
+        </div>
+        <div class="faq-body">
+          <div class="faq-a">Access to your CRM, your GTM tech stack, and a few people who can speak to both how the system was designed and how it's actually being used day to day. Understanding the design intent matters as much as understanding current reality. The gap between the two is usually where the problem lives.</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-trigger">
+          <div class="faq-q">How long does a typical engagement run?</div>
+          <span class="faq-chevron">▼</span>
+        </div>
+        <div class="faq-body">
+          <div class="faq-a">The GTM Diagnosis typically runs six weeks. Larger organizations with more complex systems, more stakeholders, and more red tape take longer. We shoot for six weeks and don't rush a diagnosis to hit an arbitrary deadline.</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-trigger">
+          <div class="faq-q">How much does a typical engagement cost?</div>
+          <span class="faq-chevron">▼</span>
+        </div>
+        <div class="faq-body">
+          <div class="faq-a">RevShoppe engagements are typically six figures, and can reach seven figures for larger or more complex organizations. Every engagement starts with the GTM Diagnosis, which determines what work needs to be done and at what scope. Workflows, system builds, and operating model work are scoped from there.</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-trigger">
+          <div class="faq-q">What does RevShoppe actually deliver?</div>
+          <span class="faq-chevron">▼</span>
+        </div>
+        <div class="faq-body">
+          <div class="faq-a">We design, build, validate, scale, and manage the system until you can manage it on your own. Not a deck. Not a set of recommendations. A functioning commercial infrastructure that runs. We stay until it does.</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-trigger">
+          <div class="faq-q">What's the difference between Catalist Signals and the GTM Diagnosis?</div>
+          <span class="faq-chevron">▼</span>
+        </div>
+        <div class="faq-body">
+          <div class="faq-a">Catalist Signals tells you who's ready to buy and why, based on real-world events rather than intent clicks. The GTM Diagnosis tells you whether your system can act on that signal when it arrives. Most revenue teams need both. The free Conversation Catalist Report is a good place to start if you're early in the conversation.</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-trigger">
+          <div class="faq-q">What types of organizations do you work with?</div>
+          <span class="faq-chevron">▼</span>
+        </div>
+        <div class="faq-body">
+          <div class="faq-a">RevShoppe works with B2B organizations globally, typically Series C through publicly traded. We work across enterprise technology, financial services, manufacturing, and professional services. The GTM execution problems we solve are structural, not vertical-specific or geography-specific.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-inner">
+    <h2 class="cta-h2">The gap doesn't close on its own.</h2>
+    <p class="cta-body">Revenue consequences compound every quarter you run the same broken motion. The first step is understanding exactly where the execution is breaking down.</p>
+    <div class="cta-btn-row">
+      <a href="#hs-contact-form" class="btn-white">Send Us a Message</a>
+      <a href="https://www.revshoppe.com/catalist-signals" class="btn-white-ghost">See Catalist Signals</a>
+    </div>
+  </div>
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+
+  // HubSpot form
+  var hsScript = document.createElement('script');
+  hsScript.src = '//js.hsforms.net/forms/embed/v2.js';
+  hsScript.charset = 'utf-8';
+  hsScript.onload = function() {
+    if (window.hbspt) {
+      hbspt.forms.create({
+        portalId: '5046646',
+        formId: 'fec27ad0-206b-45e2-8bcc-12c1db7e269f',
+        region: 'na1',
+        target: '#hs-contact-form'
+      });
+    }
+  };
+  document.head.appendChild(hsScript);
+
+  // FAQ accordion
+  document.querySelectorAll('.faq-trigger').forEach(function(trigger) {
+    trigger.addEventListener('click', function() {
+      var item = this.closest('.faq-item');
+      var isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(function(i) { i.classList.remove('open'); });
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+
+  // CTA scroll
+  document.querySelectorAll('a[href="#hs-contact-form"]').forEach(function(el) {
+    el.addEventListener('click', function(e) {
+      e.preventDefault();
+      var target = document.getElementById('hs-contact-form');
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+  });
+
+});
+</script>
+
+</body>
+</html>
