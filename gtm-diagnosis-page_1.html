@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="rs-page" content="gtm-diagnosis">
+<link rel="preload" href="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/67dea6a57df5c619dba13468_RocGroteskWide-Medium.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/67dea6a54f0aa4e3e2f1f6e8_RocGroteskWide-Light.woff2" as="font" type="font/woff2" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+:root {
+  --bg-light:     #FAFAF9;
+  --bg-dark:      #26242F;
+  --bg-charcoal:  #2C2A27;
+  --accent:       #E8634A;
+  --accent-hover: #F0745C;
+  --headline:     #111111;
+  --body:         #8F95A0;
+  --border-light: rgba(0,0,0,0.07);
+  --border-dark:  rgba(255,255,255,0.07);
+}
+
+body {
+  background: var(--bg-dark);
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+  line-height: 1.6;
+  overflow-x: hidden;
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
+
+@font-face {
+  font-family: "RocWideMedium";
+  src: url("https://cdn.prod.website-files.com/61f825b46abaae2807007e90/67dea6a57df5c619dba13468_RocGroteskWide-Medium.woff2") format("woff2");
+  font-weight: 500; font-display: block;
+}
+@font-face {
+  font-family: "RocWideLight";
+  src: url("https://cdn.prod.website-files.com/61f825b46abaae2807007e90/67dea6a54f0aa4e3e2f1f6e8_RocGroteskWide-Light.woff2") format("woff2");
+  font-weight: 300; font-display: block;
+}
+
+/* TEXTURES */
+.tex-dark {
+  background-color: var(--bg-dark);
+  background-image: linear-gradient(rgba(255,255,255,0.034) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.034) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+.tex-light {
+  background-color: var(--bg-light);
+  background-image: linear-gradient(rgba(0,0,0,0.027) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.027) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+.tex-charcoal {
+  background-color: var(--bg-charcoal);
+  background-image: linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+/* ELEVATION */
+section { position: relative; z-index: 1; }
+.tex-dark, .tex-charcoal {
+  border-top: 1px solid rgba(255,255,255,0.08);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.35), 0 2px 8px rgba(0,0,0,0.20), 0 -8px 32px rgba(0,0,0,0.35), 0 -2px 8px rgba(0,0,0,0.20);
+  z-index: 2;
+}
+.tex-light {
+  border-top: 1px solid rgba(255,255,255,0.95);
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.10), 0 1px 4px rgba(0,0,0,0.06), 0 -4px 16px rgba(0,0,0,0.08);
+  z-index: 1;
+}
+
+/* SHARED */
+.section { padding: 96px 48px; }
+.section-inner { max-width: 1080px; margin: 0 auto; }
+.sec-label { display: block; font-family: "IBM Plex Mono", monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 20px; }
+.sec-h2 { font-family: "RocWideMedium", sans-serif; font-size: clamp(28px, 3.8vw, 48px); line-height: 1.08; letter-spacing: -1.5px; color: var(--headline); margin-bottom: 16px; }
+.sec-h2-white { color: #fff; }
+.sec-sub { font-family: "Montserrat", sans-serif; font-size: 16px; color: var(--body); line-height: 1.8; max-width: 600px; letter-spacing: -0.3px; }
+.sec-sub-white { color: rgba(255,255,255,0.45); }
+
+/* BUTTONS */
+.btn-primary { display: inline-flex; align-items: center; gap: 8px; padding: 14px 32px; border-radius: 3px; background: var(--accent); color: #fff; font-family: "IBM Plex Mono", monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; border: none; cursor: pointer; transition: background 0.15s; box-shadow: 0 2px 8px rgba(232,99,74,0.35), 0 4px 20px rgba(232,99,74,0.25); }
+.btn-primary:hover { background: var(--accent-hover); }
+.btn-outline { font-family: "IBM Plex Mono", monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.7); border: 1px solid rgba(255,255,255,0.2); padding: 13px 26px; border-radius: 3px; text-decoration: none; transition: border-color 0.15s; }
+.btn-outline:hover { border-color: rgba(255,255,255,0.5); }
+.btn-white { display: inline-flex; align-items: center; gap: 8px; padding: 14px 36px; border-radius: 3px; background: #fff; color: var(--accent); font-family: "IBM Plex Mono", monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; transition: opacity 0.15s; box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
+.btn-white:hover { opacity: 0.92; }
+.btn-white-ghost { display: inline-flex; align-items: center; padding: 13px 28px; border-radius: 3px; background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.85); font-family: "IBM Plex Mono", monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; border: 1px solid rgba(255,255,255,0.3); transition: border-color 0.15s; }
+.btn-white-ghost:hover { border-color: rgba(255,255,255,0.6); }
+
+/* HERO */
+.hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 96px 48px 80px; text-align: center; position: relative; overflow: hidden; }
+.hero::before { content: ''; position: absolute; top: -120px; left: 50%; transform: translateX(-50%); width: 800px; height: 800px; background: radial-gradient(circle, rgba(232,99,74,0.08) 0%, transparent 70%); pointer-events: none; }
+.hero-inner { max-width: 920px; margin: 0 auto; position: relative; z-index: 1; }
+.eyebrow { display: inline-block; font-family: "IBM Plex Mono", monospace; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); margin-bottom: 28px; }
+.hero h1 { font-family: "RocWideMedium", sans-serif; font-size: clamp(40px, 5.5vw, 72px); line-height: 1.04; letter-spacing: -2.5px; color: #fff; margin-bottom: 28px; }
+.hero h1 em { font-style: normal; color: var(--accent); }
+.hero-lead { font-family: "Montserrat", sans-serif; font-size: 18px; color: rgba(255,255,255,0.5); line-height: 1.75; max-width: 660px; margin: 0 auto 44px; letter-spacing: -0.3px; }
+.hero-btns { display: flex; gap: 16px; align-items: center; justify-content: center; flex-wrap: wrap; margin-bottom: 52px; }
+.contrast-badge { display: inline-flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 40px; padding: 8px 20px; font-family: "IBM Plex Mono", monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.35); }
+.contrast-badge span { color: var(--accent); }
+
+/* STAT STRIP */
+.stat-strip-inner { max-width: 1080px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid rgba(255,255,255,0.06); }
+.stat-col { padding: 40px 32px; border-right: 1px solid rgba(255,255,255,0.06); }
+.stat-col:last-child { border-right: none; }
+.stat-num { font-family: "RocWideMedium", sans-serif; font-size: clamp(32px, 3.8vw, 52px); color: var(--accent); letter-spacing: -2px; line-height: 1; margin-bottom: 10px; }
+.stat-label { font-family: "IBM Plex Mono", monospace; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.3); line-height: 1.6; margin-bottom: 6px; }
+.stat-context { font-family: "Montserrat", sans-serif; font-size: 12px; color: rgba(255,255,255,0.22); line-height: 1.55; letter-spacing: -0.1px; }
+
+/* REVENUE CONSEQUENCES */
+.rc-hero-num { font-family: "RocWideMedium", sans-serif; font-size: clamp(64px, 9vw, 120px); color: #fff; letter-spacing: -4px; line-height: 1; margin-bottom: 8px; }
+.rc-hero-label { font-family: "IBM Plex Mono", monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.25); margin-bottom: 20px; }
+.rc-benchmark { font-family: "Montserrat", sans-serif; font-size: 16px; color: rgba(255,255,255,0.6); line-height: 1.8; max-width: 640px; margin: 0 auto 12px; letter-spacing: -0.2px; }
+.rc-benchmark strong { color: var(--accent); font-weight: 600; }
+.rc-warning { font-family: "IBM Plex Mono", monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.25); margin-bottom: 64px; }
+
+.coi-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 80px; align-items: start; margin-top: 16px; }
+.coi-title { font-family: "RocWideMedium", sans-serif; font-size: clamp(32px, 4.5vw, 58px); line-height: 1.06; letter-spacing: -2px; color: #fff; margin-bottom: 24px; }
+.coi-title em { font-style: normal; color: var(--accent); }
+.coi-sub { font-family: "Montserrat", sans-serif; font-size: 14px; color: rgba(255,255,255,0.4); line-height: 1.8; margin-bottom: 24px; letter-spacing: -0.2px; }
+.coi-disclaimer { font-family: "IBM Plex Mono", monospace; font-size: 9px; letter-spacing: 0.06em; color: rgba(255,255,255,0.16); line-height: 1.7; border-top: 1px solid var(--border-dark); padding-top: 16px; }
+.coi-cards { display: flex; flex-direction: column; gap: 10px; }
+.coi-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07); border-radius: 10px; padding: 22px 24px; display: grid; grid-template-columns: 1fr auto; gap: 16px; align-items: start; transition: background 0.2s; }
+.coi-card:hover { background: rgba(255,255,255,0.06); }
+.coi-card.current { border-color: rgba(232,99,74,0.3); background: rgba(232,99,74,0.06); }
+.coi-card-title { font-family: "RocWideMedium", sans-serif; font-size: 14px; letter-spacing: -0.3px; color: #fff; margin-bottom: 6px; }
+.coi-card-desc { font-family: "Montserrat", sans-serif; font-size: 12px; color: rgba(255,255,255,0.35); line-height: 1.65; letter-spacing: -0.1px; }
+.coi-card-cost { font-family: "IBM Plex Mono", monospace; font-size: 13px; font-weight: 500; color: var(--accent); white-space: nowrap; padding-top: 2px; }
+.coi-card.current .coi-card-cost { color: rgba(255,255,255,0.35); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; }
+
+/* FOUR PILLARS */
+.pillars-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-top: 48px; }
+.pillar-card { background: #fff; border: 1px solid rgba(0,0,0,0.06); border-radius: 10px; overflow: hidden; box-shadow: 0 1px 2px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.06), 0 12px 28px rgba(0,0,0,0.05); transition: transform 0.25s ease, box-shadow 0.25s ease; }
+.pillar-card:hover { transform: translateY(-3px); box-shadow: 0 2px 4px rgba(0,0,0,0.06), 0 8px 24px rgba(0,0,0,0.10), 0 20px 40px rgba(0,0,0,0.08); }
+.pillar-header { padding: 24px 24px 20px; border-bottom: 1px solid rgba(0,0,0,0.06); display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; }
+.pillar-header-left { display: flex; gap: 12px; align-items: flex-start; }
+.pillar-num { font-family: "IBM Plex Mono", monospace; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); padding-top: 4px; flex-shrink: 0; }
+.pillar-headline-stat { font-family: "RocWideMedium", sans-serif; font-size: 36px; color: var(--accent); letter-spacing: -1.5px; line-height: 1; margin-bottom: 4px; }
+.pillar-headline-label { font-family: "IBM Plex Mono", monospace; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(0,0,0,0.28); }
+.pillar-name { font-family: "RocWideMedium", sans-serif; font-size: 18px; letter-spacing: -0.5px; color: var(--headline); text-align: right; }
+.pillar-body { padding: 20px 24px; }
+.pillar-finding { display: flex; flex-direction: column; gap: 12px; }
+.pillar-finding-row { display: flex; gap: 12px; align-items: flex-start; }
+.pillar-finding-arrow { font-family: "IBM Plex Mono", monospace; font-size: 10px; color: var(--accent); flex-shrink: 0; margin-top: 2px; }
+.pillar-finding-text { font-family: "Montserrat", sans-serif; font-size: 13px; color: var(--body); line-height: 1.65; letter-spacing: -0.2px; }
+.pillar-finding-text strong { color: var(--headline); font-weight: 600; }
+
+/* EXEC QUOTE + FINDINGS */
+.exec-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; margin-top: 56px; }
+.exec-quote-block { background: linear-gradient(180deg, #F2F0EC 0%, #EDEBE7 100%); border-left: 4px solid rgba(232,99,74,0.4); border-radius: 0 8px 8px 0; padding: 28px 28px 28px 32px; margin-bottom: 32px; }
+.exec-quote-text { font-family: "RocWideLight", sans-serif; font-size: 15px; line-height: 1.75; letter-spacing: -0.2px; color: var(--headline); font-style: italic; margin-bottom: 12px; }
+.exec-quote-src { font-family: "IBM Plex Mono", monospace; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(0,0,0,0.28); }
+.exec-body { font-family: "Montserrat", sans-serif; font-size: 14px; color: rgba(255,255,255,0.45); line-height: 1.8; letter-spacing: -0.2px; }
+
+/* FINDING CARDS */
+.finding-cards { display: flex; flex-direction: column; gap: 10px; }
+.finding-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07); border-radius: 10px; padding: 22px 24px; display: grid; grid-template-columns: 72px 1fr; gap: 16px; align-items: start; transition: background 0.2s, transform 0.25s; }
+.finding-card:hover { background: rgba(255,255,255,0.06); transform: translateY(-2px); }
+.finding-stat { font-family: "RocWideMedium", sans-serif; font-size: 32px; color: var(--accent); letter-spacing: -1.5px; line-height: 1; padding-top: 2px; }
+.finding-label { font-family: "IBM Plex Mono", monospace; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.28); margin-bottom: 5px; }
+.finding-desc { font-family: "Montserrat", sans-serif; font-size: 12px; color: rgba(255,255,255,0.45); line-height: 1.65; letter-spacing: -0.1px; }
+
+/* PROCESS + OUTCOMES */
+.process-outcomes-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; margin-top: 56px; }
+.process-steps { display: flex; flex-direction: column; }
+.process-step { display: flex; gap: 24px; padding: 24px 0; border-bottom: 1px solid var(--border-light); }
+.process-step:first-child { padding-top: 0; }
+.process-step:last-child { border-bottom: none; }
+.step-num { font-family: "IBM Plex Mono", monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); flex-shrink: 0; width: 36px; padding-top: 3px; }
+.step-timing { font-family: "IBM Plex Mono", monospace; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
+.step-title { font-family: "RocWideMedium", sans-serif; font-size: 18px; letter-spacing: -0.5px; color: var(--headline); margin-bottom: 6px; }
+.step-desc { font-family: "Montserrat", sans-serif; font-size: 13px; color: var(--body); line-height: 1.75; letter-spacing: -0.2px; }
+
+/* OUTCOME CARDS */
+.outcome-cards { display: flex; flex-direction: column; gap: 10px; }
+.outcome-card { background: #fff; border: 1px solid rgba(0,0,0,0.06); border-left: 3px solid var(--accent); border-radius: 10px; padding: 20px 22px; display: grid; grid-template-columns: 68px 1fr; gap: 14px; align-items: start; box-shadow: 0 1px 2px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.06); transition: transform 0.25s ease, box-shadow 0.25s ease; }
+.outcome-card:hover { transform: translateY(-2px); box-shadow: 0 2px 4px rgba(0,0,0,0.06), 0 8px 24px rgba(0,0,0,0.10); }
+.outcome-stat { font-family: "RocWideMedium", sans-serif; font-size: 28px; color: var(--accent); letter-spacing: -1.5px; line-height: 1; padding-top: 2px; }
+.outcome-label { font-family: "IBM Plex Mono", monospace; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(0,0,0,0.28); margin-bottom: 4px; }
+.outcome-desc { font-family: "Montserrat", sans-serif; font-size: 12px; color: var(--body); line-height: 1.6; letter-spacing: -0.1px; }
+.outcome-tag { font-family: "IBM Plex Mono", monospace; font-size: 8px; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(0,0,0,0.2); margin-top: 5px; }
+
+/* BRIDGE SECTION */
+.bridge-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+.bridge-title { font-family: "RocWideMedium", sans-serif; font-size: clamp(26px, 3.5vw, 44px); line-height: 1.08; letter-spacing: -1.5px; color: #fff; margin-bottom: 20px; }
+.bridge-title em { font-style: normal; color: var(--accent); }
+.bridge-body { font-family: "Montserrat", sans-serif; font-size: 15px; color: rgba(255,255,255,0.45); line-height: 1.8; letter-spacing: -0.2px; margin-bottom: 32px; }
+.bridge-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-top: 3px solid var(--accent); border-radius: 10px; padding: 32px 28px; }
+.bridge-card-eyebrow { font-family: "IBM Plex Mono", monospace; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
+.bridge-card-title { font-family: "RocWideMedium", sans-serif; font-size: 22px; letter-spacing: -0.5px; color: #fff; margin-bottom: 12px; }
+.bridge-card-body { font-family: "Montserrat", sans-serif; font-size: 13px; color: rgba(255,255,255,0.4); line-height: 1.75; letter-spacing: -0.1px; margin-bottom: 24px; }
+.bridge-card-items { display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 20px; }
+.bridge-card-item { display: flex; gap: 12px; align-items: flex-start; }
+.bridge-card-item-arrow { font-family: "IBM Plex Mono", monospace; font-size: 10px; color: var(--accent); flex-shrink: 0; padding-top: 2px; }
+.bridge-card-item-text { font-family: "Montserrat", sans-serif; font-size: 12px; color: rgba(255,255,255,0.5); line-height: 1.6; letter-spacing: -0.1px; }
+
+/* CTA SECTION */
+.cta-section { padding: 104px 48px; background: var(--accent); background-image: linear-gradient(rgba(255,255,255,0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.07) 1px, transparent 1px); background-size: 48px 48px; text-align: center; display: flex; flex-direction: column; align-items: center; border-top: 2px solid rgba(180,50,30,0.5); box-shadow: 0 -16px 48px rgba(0,0,0,0.4), 0 -4px 12px rgba(0,0,0,0.3); position: relative; z-index: 3; }
+.cta-inner { max-width: 680px; margin: 0 auto; }
+.cta-eyebrow { display: block; font-family: "IBM Plex Mono", monospace; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.6); margin-bottom: 24px; }
+.cta-h2 { font-family: "RocWideMedium", sans-serif; font-size: clamp(28px, 4vw, 50px); line-height: 1.06; letter-spacing: -1.5px; color: #fff; margin-bottom: 18px; }
+.cta-body { font-family: "Montserrat", sans-serif; font-size: 16px; color: rgba(255,255,255,0.8); line-height: 1.75; margin-bottom: 40px; letter-spacing: -0.3px; }
+.cta-btn-row { display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap; }
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .exec-grid, .coi-grid, .process-outcomes-grid, .bridge-inner { grid-template-columns: 1fr; gap: 48px; }
+  .pillars-grid { grid-template-columns: 1fr; }
+  .stat-strip-inner { grid-template-columns: repeat(2, 1fr); }
+  .section { padding: 72px 24px; }
+  .hero { padding: 72px 24px 56px; }
+  .cta-section { padding: 72px 24px; }
+}
+@media (max-width: 480px) {
+  .section { padding: 52px 20px; }
+  .hero-btns { flex-direction: column; align-items: center; }
+  .btn-primary, .btn-outline { width: 100%; justify-content: center; }
+  .coi-card { grid-template-columns: 1fr; }
+  .cta-btn-row { flex-direction: column; align-items: center; gap: 12px; }
+  .btn-white, .btn-white-ghost { width: 100%; justify-content: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ HERO ════════════════════════════════════════════════ -->
+<section class="tex-dark hero">
+  <div class="hero-inner">
+    <span class="eyebrow">Solutions · GTM Diagnosis</span>
+    <h1>Your system isn't<br>underperforming.<br>It <em>is the problem.</em></h1>
+    <p class="hero-lead">The GTM Diagnosis is a six-week, four-pillar assessment of your commercial system. It surfaces exactly where execution is breaking down, what it's costing you, and what it will take to close the gap.</p>
+    <div class="hero-btns">
+      <a href="/contact" class="btn-primary">Start Your Diagnosis →</a>
+      <a href="#revenue-consequences" class="btn-outline">See the Data</a>
+    </div>
+    <div class="contrast-badge"><span>RevenueOS</span> 4-Pillar · Context · Data · People · Technology</div>
+  </div>
+</section>
+
+<!-- ═══ STAT STRIP ════════════════════════════════════════════ -->
+<section class="tex-dark" style="border-top:none;box-shadow:none;padding-bottom:0;">
+  <div class="stat-strip-inner" style="padding:0 48px;">
+    <div class="stat-col">
+      <div class="stat-num">$0.007</div>
+      <div class="stat-label">Pipeline per activity</div>
+      <div class="stat-context">Benchmark is $0.70–$1.05. A 100× execution gap rooted in architecture, not talent.</div>
+    </div>
+    <div class="stat-col">
+      <div class="stat-num">0.7%</div>
+      <div class="stat-label">BDM email reply rate</div>
+      <div class="stat-context">Industry median is 2–3%. Every send is scaling a message that leadership knows doesn't work.</div>
+    </div>
+    <div class="stat-col">
+      <div class="stat-num">80%</div>
+      <div class="stat-label">CRM contacts missing firmographic data</div>
+      <div class="stat-context">Intent strategy and AI readiness are impossible on this foundation.</div>
+    </div>
+    <div class="stat-col">
+      <div class="stat-num">100%</div>
+      <div class="stat-label">Opportunities missing sequence attribution</div>
+      <div class="stat-context">Leadership cannot identify what is driving revenue. Optimization is guesswork.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ REVENUE CONSEQUENCES — DARK ══════════════════════════ -->
+<section class="tex-dark section" id="revenue-consequences">
+  <div class="section-inner" style="text-align:center;">
+    <span class="sec-label">Revenue Consequences</span>
+    <div class="rc-hero-num">$0.007</div>
+    <div class="rc-hero-label">Pipeline generated per activity · BDM</div>
+    <p class="rc-benchmark">A comparable outbound org at this headcount produces <strong>$0.70–$1.05 per activity.</strong> That is 10 to 15 times what the average BDM motion delivers today. This gap is not a people problem.</p>
+    <div class="rc-warning">⚠ This gap is recoverable — but only with system-level change</div>
+
+    <div class="coi-grid" style="text-align:left;">
+      <div>
+        <div class="coi-title">Every quarter you wait,<br>it <em>compounds.</em></div>
+        <p class="coi-sub">These are not projections from a consulting model. They are direct extrapolations from real operational data, applied against comparable industry benchmarks. The cost is not theoretical — it is accumulating right now.</p>
+        <div class="coi-disclaimer">Revenue impact figures are estimated ranges based on observed operational data, current headcount, and comparable engagement benchmarks. Actual results vary. These figures are directional, not guaranteed.</div>
+      </div>
+      <div class="coi-cards">
+        <div class="coi-card current">
+          <div>
+            <div class="coi-card-title">Current State: System Operating at ~7% of Potential</div>
+            <div class="coi-card-desc">$0.007 pipeline per activity. 0.7% email reply rate. 100% of opportunities missing attribution. The foundation is broken but recoverable.</div>
+          </div>
+          <div class="coi-card-cost">You are here</div>
+        </div>
+        <div class="coi-card">
+          <div>
+            <div class="coi-card-title">+1 Quarter: Pipeline Decay Accelerates</div>
+            <div class="coi-card-desc">Overdue task backlog grows. Top performers begin compensating by working harder, masking the system failure. Sequence library drifts further from strategy.</div>
+          </div>
+          <div class="coi-card-cost">~$1.1M Lost</div>
+        </div>
+        <div class="coi-card">
+          <div>
+            <div class="coi-card-title">+2 Quarters: AI Strategy Remains Impossible</div>
+            <div class="coi-card-desc">Any investment in AI-powered GTM tools hits the same wall: 80% missing firmographic data and zero attribution means AI has nothing to work with. The data debt now blocks your next phase of growth.</div>
+          </div>
+          <div class="coi-card-cost">~$2.4M Cumulative</div>
+        </div>
+        <div class="coi-card">
+          <div>
+            <div class="coi-card-title">+3 Quarters: Rep Attrition Risk Elevates</div>
+            <div class="coi-card-desc">Top performers in broken systems leave. When they do, institutional knowledge — currently stored in notes and personal habits — leaves with them. The system cost becomes a talent cost.</div>
+          </div>
+          <div class="coi-card-cost">~$4.2M+ Cumulative</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOUR PILLARS — LIGHT ══════════════════════════════════ -->
+<section class="tex-light section" id="pillars">
+  <div class="section-inner">
+    <span class="sec-label">The RevenueOS Assessment</span>
+    <h2 class="sec-h2">Each pillar has a headline stat.<br>Each stat has a Revenue Consequence.</h2>
+    <p class="sec-sub">None of them are isolated. They compound each other. Addressing one in isolation changes nothing.</p>
+
+    <div class="pillars-grid">
+
+      <div class="pillar-card">
+        <div class="pillar-header">
+          <div class="pillar-header-left">
+            <div class="pillar-num">01</div>
+            <div>
+              <div class="pillar-headline-stat">~2</div>
+              <div class="pillar-headline-label">Avg touches before abandonment</div>
+            </div>
+          </div>
+          <div class="pillar-name">People</div>
+        </div>
+        <div class="pillar-body">
+          <div class="pillar-finding">
+            <div class="pillar-finding-row">
+              <div class="pillar-finding-arrow">→</div>
+              <div class="pillar-finding-text"><strong>1,500+ accounts per BDM, zero prioritization signal.</strong> Reps default to intuition. Intuition selects for comfort, not conversion. Paralysis by choice.</div>
+            </div>
+            <div class="pillar-finding-row">
+              <div class="pillar-finding-arrow">→</div>
+              <div class="pillar-finding-text"><strong>100% of handoffs in notes and docs.</strong> Every BDM-to-AE handoff is informal. When a rep leaves, pipeline intelligence leaves with them.</div>
+            </div>
+            <div class="pillar-finding-row">
+              <div class="pillar-finding-arrow">→</div>
+              <div class="pillar-finding-text"><strong>11,707 overdue tasks across the org.</strong> No enforcement mechanism. Sequences stall. Active prospects go cold. Leadership has no visibility into where it breaks.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pillar-card">
+        <div class="pillar-header">
+          <div class="pillar-header-left">
+            <div class="pillar-num">02</div>
+            <div>
+              <div class="pillar-headline-stat">10K</div>
+              <div class="pillar-headline-label">Sync errors in 3 days</div>
+            </div>
+          </div>
+          <div class="pillar-name">Technology</div>
+        </div>
+        <div class="pillar-body">
+          <div class="pillar-finding">
+            <div class="pillar-finding-row">
+              <div class="pillar-finding-arrow">→</div>
+              <div class="pillar-finding-text"><strong>47% duplicate tasks from email opens.</strong> Capacity planning, forecasting, and rep performance data are all corrupted. Every dashboard is wrong.</div>
+            </div>
+            <div class="pillar-finding-row">
+              <div class="pillar-finding-arrow">→</div>
+              <div class="pillar-finding-text"><strong>5 years of intent platform investment, no strategy.</strong> Running on default settings. Subject matter experts can't access it to configure it. IT blocks the people who know the business.</div>
+            </div>
+            <div class="pillar-finding-row">
+              <div class="pillar-finding-arrow">→</div>
+              <div class="pillar-finding-text"><strong>43–54% of mailboxes and calendars disabled.</strong> Nearly half the sales org's activity is invisible in Salesforce. Coaching is impossible. Forecasting is guesswork.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pillar-card">
+        <div class="pillar-header">
+          <div class="pillar-header-left">
+            <div class="pillar-num">03</div>
+            <div>
+              <div class="pillar-headline-stat">0.7%</div>
+              <div class="pillar-headline-label">BDM outbound email reply rate</div>
+            </div>
+          </div>
+          <div class="pillar-name">Context</div>
+        </div>
+        <div class="pillar-body">
+          <div class="pillar-finding">
+            <div class="pillar-finding-row">
+              <div class="pillar-finding-arrow">→</div>
+              <div class="pillar-finding-text"><strong>9/10 top sequences are generic.</strong> The most-used sequences are the worst ones. Volume is scaling a message leadership acknowledges doesn't work. More activity means more damage.</div>
+            </div>
+            <div class="pillar-finding-row">
+              <div class="pillar-finding-arrow">→</div>
+              <div class="pillar-finding-text"><strong>100% of opportunities missing sequence attribution.</strong> You cannot identify which sequences drive revenue. Without attribution, you cannot optimize, justify spend, or replicate wins.</div>
+            </div>
+            <div class="pillar-finding-row">
+              <div class="pillar-finding-arrow">→</div>
+              <div class="pillar-finding-text"><strong>Zero governance process in place.</strong> Stale sequences are never retired. Messaging drifts from strategy. The library grows and quality declines.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pillar-card">
+        <div class="pillar-header">
+          <div class="pillar-header-left">
+            <div class="pillar-num">04</div>
+            <div>
+              <div class="pillar-headline-stat">64%</div>
+              <div class="pillar-headline-label">Opportunity contacts with unknown identity</div>
+            </div>
+          </div>
+          <div class="pillar-name">Data</div>
+        </div>
+        <div class="pillar-body">
+          <div class="pillar-finding">
+            <div class="pillar-finding-row">
+              <div class="pillar-finding-arrow">→</div>
+              <div class="pillar-finding-text"><strong>~80% of job function and level fields are blank.</strong> You cannot segment by buyer, personalize messaging, run intent scoring, or build AI workflows on this data. Persona blindness.</div>
+            </div>
+            <div class="pillar-finding-row">
+              <div class="pillar-finding-arrow">→</div>
+              <div class="pillar-finding-text"><strong>14% prospect-to-connection rate.</strong> BDMs are working 38,000+ prospects to generate 5,634 conversations. Without intent targeting, reps are calling cold lists.</div>
+            </div>
+            <div class="pillar-finding-row">
+              <div class="pillar-finding-arrow">→</div>
+              <div class="pillar-finding-text"><strong>230K records with no lead source.</strong> Marketing investment ROI is unknown. Channel strategy is guesswork. Attribution doesn't exist.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ EXEC FINDINGS — DARK ══════════════════════════════════ -->
+<section class="tex-dark section">
+  <div class="section-inner">
+    <span class="sec-label">Executive Summary</span>
+    <h2 class="sec-h2 sec-h2-white">Four pillars. One consistent finding.</h2>
+    <p class="sec-sub sec-sub-white">Across People, Technology, Context, and Data, the same underlying pattern surfaces: a GTM motion running on rep intuition, manual process, and incomplete data. Difficult to measure, difficult to replicate, and difficult to scale.</p>
+
+    <div class="exec-grid">
+      <div>
+        <div class="exec-quote-block">
+          <div class="exec-quote-text">"The data shows the org generating less than $0.007 in pipeline per activity. A comparable org at this headcount typically produces 10–15× that. The gap is not a people problem — it is an architecture problem."</div>
+          <div class="exec-quote-src">GTM Diagnosis Readout · Executive Summary</div>
+        </div>
+        <p class="exec-body">Every metric above is recoverable. None of it requires new headcount. What it requires is a system designed to produce a different outcome — not inherited, not patched, but built from the diagnosis up.</p>
+      </div>
+
+      <div class="finding-cards">
+        <div class="finding-card">
+          <div class="finding-stat">0.7%</div>
+          <div>
+            <div class="finding-label">Email Reply Rate · BDM Outbound</div>
+            <div class="finding-desc">Industry median is 2–3%. You are not running outbound — you are running an extremely expensive database management exercise.</div>
+          </div>
+        </div>
+        <div class="finding-card">
+          <div class="finding-stat">80%</div>
+          <div>
+            <div class="finding-label">CRM Records Missing Firmographic Data</div>
+            <div class="finding-desc">Job function, level, and title blanked on 80%+ of contacts. Intent strategy and AI readiness are impossible on this foundation.</div>
+          </div>
+        </div>
+        <div class="finding-card">
+          <div class="finding-stat">9/10</div>
+          <div>
+            <div class="finding-label">Top Active Sequences Are Generic</div>
+            <div class="finding-desc">9 of the 10 most-used sequences are regional or automated, not persona or solution-specific. Volume is scaling a broken message.</div>
+          </div>
+        </div>
+        <div class="finding-card">
+          <div class="finding-stat">100%</div>
+          <div>
+            <div class="finding-label">Opportunities Missing Sequence Attribution</div>
+            <div class="finding-desc">Not a single opportunity has sequence attribution. Leadership cannot identify what is driving revenue. The attribution black box.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ DIAGNOSE + BLUEPRINT — LIGHT ═════════════════════════ -->
+<section class="tex-light section" id="how-it-works">
+  <div class="section-inner">
+    <span class="sec-label">The GTM Diagnosis</span>
+    <h2 class="sec-h2">Six weeks. A complete picture.</h2>
+    <p class="sec-sub">The Diagnosis runs two phases — assessment and design. Every engagement starts here. What comes after is determined by what we find.</p>
+
+    <div class="process-outcomes-grid">
+      <div class="process-steps">
+        <div class="process-step">
+          <div class="step-num">01</div>
+          <div>
+            <div class="step-timing">Weeks 1–3</div>
+            <div class="step-title">Diagnose</div>
+            <div class="step-desc">Four-pillar assessment. Stakeholder interviews. Tech stack audit. CRM and activity data analysis. We validate a specific hypothesis against your real constraint profile — not a generic checklist.</div>
+          </div>
+        </div>
+        <div class="process-step">
+          <div class="step-num">02</div>
+          <div>
+            <div class="step-timing">Weeks 3–6</div>
+            <div class="step-title">Blueprint</div>
+            <div class="step-desc">GTM operating model designed. Workflow architecture defined. Revenue Consequences quantified. Immediate impact opportunities identified, sequenced, and scoped for execution. The Diagnosis delivers a blueprint — not a deck of observations.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="outcome-cards">
+        <div class="outcome-card">
+          <div class="outcome-stat">2.1×</div>
+          <div>
+            <div class="outcome-label">Account Engagement Rate</div>
+            <div class="outcome-desc">Catalist-based tiering replacing commoditized intent signals</div>
+            <div class="outcome-tag">Series C fintech · 40-person org · Identity confidential</div>
+          </div>
+        </div>
+        <div class="outcome-card">
+          <div class="outcome-stat">34%</div>
+          <div>
+            <div class="outcome-label">Net New Pipeline Increase</div>
+            <div class="outcome-desc">Context-driven lead scoring and tiered outbound by threat profile</div>
+            <div class="outcome-tag">Series D cybersecurity · 65-person org · Identity confidential</div>
+          </div>
+        </div>
+        <div class="outcome-card">
+          <div class="outcome-stat">61%</div>
+          <div>
+            <div class="outcome-label">SQL Creation Quarter-over-Quarter</div>
+            <div class="outcome-desc">Compliance trigger signals and call-first sequencing with calendar governance</div>
+            <div class="outcome-tag">Series C HR tech · 52-person org · Identity confidential</div>
+          </div>
+        </div>
+        <div class="outcome-card">
+          <div class="outcome-stat">9 hrs</div>
+          <div>
+            <div class="outcome-label">Selling Time Recovered Per Rep Weekly</div>
+            <div class="outcome-desc">Workflow automation eliminating manual admin across the engagement</div>
+            <div class="outcome-tag">Series D cybersecurity · 65-person org · Identity confidential</div>
+          </div>
+        </div>
+        <div class="outcome-card">
+          <div class="outcome-stat">21 days</div>
+          <div>
+            <div class="outcome-label">Reduction in Average Sales Cycle</div>
+            <div class="outcome-desc">Structured talk tracks and calendar governance compressing time to first qualified meeting</div>
+            <div class="outcome-tag">Series C HR tech · 52-person org · Identity confidential</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ BRIDGE TO GTM WORKFLOWS — DARK ════════════════════════ -->
+<section class="tex-dark section">
+  <div class="section-inner">
+    <div class="bridge-inner">
+      <div>
+        <span class="sec-label">What Comes Next</span>
+        <div class="bridge-title">The Diagnosis tells you<br>what's broken.<br><em>Workflows fix it.</em></div>
+        <p class="bridge-body">The GTM Diagnosis produces a blueprint. That blueprint is a prioritized map of exactly which workflows, sequences, and system builds will close the Revenue Consequences identified in the assessment. Most clients move directly from Diagnosis to GTM Workflows. The handoff is designed — not improvised.</p>
+        <a href="/gtm-workflows" class="btn-primary">See GTM Workflows →</a>
+      </div>
+      <div class="bridge-card">
+        <div class="bridge-card-eyebrow">Solutions · GTM Workflows</div>
+        <div class="bridge-card-title">Build what the Diagnosis blueprints.</div>
+        <p class="bridge-card-body">GTM Workflows is where the blueprint becomes infrastructure. Sequences rebuilt around buyer pain. Attribution installed. Data enriched. The operating model running. Every workflow is scoped from the Diagnosis findings — no guesswork, no re-scoping from scratch.</p>
+        <div class="bridge-card-items">
+          <div class="bridge-card-item">
+            <div class="bridge-card-item-arrow">→</div>
+            <div class="bridge-card-item-text">Outbound sequences rebuilt around persona pain, not product features</div>
+          </div>
+          <div class="bridge-card-item">
+            <div class="bridge-card-item-arrow">→</div>
+            <div class="bridge-card-item-text">Salesforce sequence attribution installed across leads, contacts, and opportunities</div>
+          </div>
+          <div class="bridge-card-item">
+            <div class="bridge-card-item-arrow">→</div>
+            <div class="bridge-card-item-text">CRM data enriched, validation rules enforced, hygiene cadence automated</div>
+          </div>
+          <div class="bridge-card-item">
+            <div class="bridge-card-item-arrow">→</div>
+            <div class="bridge-card-item-text">Intent platform reconfigured with win zones, signal parameters, and admin access restored</div>
+          </div>
+        </div>
+        <a href="/gtm-workflows" class="btn-outline" style="display:inline-flex;align-items:center;gap:8px;">Explore GTM Workflows →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CTA — CORAL ════════════════════════════════════════════ -->
+<section class="cta-section">
+  <div class="cta-inner">
+    <span class="cta-eyebrow">Solutions · GTM Diagnosis</span>
+    <h2 class="cta-h2">The gap doesn't close on its own.</h2>
+    <p class="cta-body">Every quarter you run the same broken motion, the Revenue Consequences compound. The Diagnosis surfaces exactly where the money is going — and sequences the fix.</p>
+    <div class="cta-btn-row">
+      <a href="/contact" class="btn-white">Start Your Diagnosis →</a>
+      <a href="/catalist-signals" class="btn-white-ghost">See Catalist Signals</a>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
