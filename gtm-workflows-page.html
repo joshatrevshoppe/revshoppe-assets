@@ -1,567 +1,358 @@
 <style>
+:root{--bg-light:#FAFAF9;--bg-dark:#26242F;--bg-charcoal:#2C2A27;--accent:#E8634A;--accent-hover:#F0745C;--headline:#111111;--body:#8F95A0;--border-light:rgba(0,0,0,0.07);--border-dark:rgba(255,255,255,0.07);}
+.wf-tex-dark{background-color:var(--bg-dark);background-image:linear-gradient(rgba(255,255,255,0.034) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.034) 1px,transparent 1px);background-size:40px 40px;}
+.wf-tex-light{background-color:var(--bg-light);background-image:linear-gradient(rgba(0,0,0,0.027) 1px,transparent 1px),linear-gradient(90deg,rgba(0,0,0,0.027) 1px,transparent 1px);background-size:56px 56px;}
+.wf-tex-charcoal{background-color:var(--bg-charcoal);background-image:linear-gradient(rgba(255,255,255,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.025) 1px,transparent 1px);background-size:48px 48px;}
+.wf-sec{padding:88px 48px;}.wf-inner{max-width:1200px;margin:0 auto;}
+.wf-eyebrow{display:block;font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);margin-bottom:24px;}
+.wf-h2{font-family:"RocWideMedium",sans-serif;font-size:clamp(28px,4vw,48px);line-height:1.08;letter-spacing:-1.5px;color:var(--headline);margin-bottom:14px;}
+.wf-h2-w{color:#fff;}
+.wf-desc{font-family:"Montserrat",sans-serif;font-size:16px;color:var(--body);line-height:1.75;letter-spacing:-0.4px;max-width:560px;}
+.wf-desc-d{color:rgba(255,255,255,0.4);}
+.wf-btn-p{display:inline-flex;align-items:center;gap:8px;padding:14px 32px;border-radius:3px;background:var(--accent);color:#fff;font-family:"IBM Plex Mono",monospace;font-size:12px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;border:none;cursor:pointer;transition:background 0.15s;}
+.wf-btn-p:hover{background:var(--accent-hover);}
+.wf-btn-o{display:inline-flex;align-items:center;gap:8px;font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:#fff;border:1px solid rgba(255,255,255,0.2);padding:12px 26px;border-radius:3px;text-decoration:none;background:none;cursor:pointer;transition:border-color 0.15s;}
+.wf-btn-o:hover{border-color:rgba(255,255,255,0.5);}
+.wf-btn-w{display:inline-flex;align-items:center;gap:8px;padding:14px 32px;border-radius:3px;background:#fff;color:var(--accent);font-family:"IBM Plex Mono",monospace;font-size:12px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;border:none;cursor:pointer;}
 
+/* HERO */
+.wf-hero{padding:96px 48px 80px;text-align:center;}
+.wf-hero h1{font-family:"RocWideMedium",sans-serif;font-size:clamp(36px,4.8vw,64px);line-height:1.06;letter-spacing:-2px;color:#fff;max-width:820px;margin:0 auto 24px;}
+.wf-hero-lead{font-family:"Montserrat",sans-serif;font-size:17px;color:rgba(255,255,255,0.5);line-height:1.75;max-width:580px;margin:0 auto 14px;letter-spacing:-0.3px;}
+.wf-hero-diag{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(232,99,74,0.65);display:block;margin-bottom:36px;}
+.wf-hero-ctas{display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;}
 
-:root {
-  --bg-light:     #FAFAF9;
-  --bg-dark:      #26242F;
-  --bg-charcoal:  #2C2A27;
-  --accent:       #E8634A;
-  --accent-hover: #F0745C;
-  --headline:     #111111;
-  --body:         #8F95A0;
-  --border-light: rgba(0,0,0,0.07);
-  --border-dark:  rgba(255,255,255,0.07);
-}
+/* CML MARQUEE — inherits rs_css .cml-outer styles */
+.cml-outer{overflow:hidden;position:relative;}
+.cml-track{display:flex;align-items:center;width:max-content;}
+.cml-track-1{animation:cml-fwd 40s linear infinite;}
+.cml-track-2{animation:cml-rev 34s linear infinite;}
+.cml-track-3{animation:cml-fwd 46s linear infinite;}
+.cml-track-1:hover,.cml-track-2:hover,.cml-track-3:hover{animation-play-state:paused;}
+@keyframes cml-fwd{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+@keyframes cml-rev{0%{transform:translateX(-50%);}100%{transform:translateX(0);}}
+.cml-item{display:inline-flex;align-items:center;justify-content:center;height:52px;padding:0 36px;border-right:0.5px solid rgba(0,0,0,0.07);flex-shrink:0;}
+.cml-item img{height:20px!important;width:auto!important;max-height:20px!important;max-width:120px!important;object-fit:contain!important;filter:grayscale(1);opacity:0.45;display:block!important;}
 
-.tex-dark {
-  background-color: var(--bg-dark);
-  background-image: linear-gradient(rgba(255,255,255,0.034) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.034) 1px, transparent 1px);
-  background-size: 40px 40px;
-}
-.tex-light {
-  background-color: var(--bg-light);
-  background-image: linear-gradient(rgba(0,0,0,0.027) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.027) 1px, transparent 1px);
-  background-size: 56px 56px;
-}
+/* FUNNEL VIZ */
+.wf-funnel-wrap{display:grid;grid-template-columns:320px 1fr;gap:56px;margin-top:56px;align-items:start;}
+.wf-funnel-svg-wrap{position:sticky;top:24px;}
+.wf-funnel-svg-wrap svg{width:100%;display:block;}
+.wf-stage-nav{margin-top:16px;display:flex;flex-direction:column;gap:4px;}
+.wf-snav-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:8px;cursor:pointer;border:1px solid transparent;transition:all 0.15s;}
+.wf-snav-item:hover{background:rgba(255,255,255,0.04);}
+.wf-snav-item.active{background:rgba(255,255,255,0.06);border-color:rgba(255,255,255,0.08);}
+.wf-snav-pip{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.wf-snav-item.active .wf-snav-pip{box-shadow:0 0 0 3px rgba(255,255,255,0.12);}
+.wf-snav-label{font-family:"Montserrat",sans-serif;font-size:13px;font-weight:500;color:rgba(255,255,255,0.4);flex:1;transition:color 0.15s;}
+.wf-snav-item.active .wf-snav-label,.wf-snav-item:hover .wf-snav-label{color:rgba(255,255,255,0.85);}
+.wf-snav-count{font-family:"IBM Plex Mono",monospace;font-size:9px;letter-spacing:0.08em;color:rgba(255,255,255,0.2);}
+.wf-snav-item.active .wf-snav-count{color:rgba(255,255,255,0.4);}
 
-.section { padding: 88px 48px; }
-.inner   { max-width: 1200px; margin: 0 auto; }
+/* WORKFLOW PANELS */
+.wf-panel{display:none;}
+.wf-panel.active{display:block;}
+.wf-panel-hdr{margin-bottom:28px;padding-bottom:20px;border-bottom:1px solid rgba(255,255,255,0.07);}
+.wf-panel-stage{font-family:"RocWideMedium",sans-serif;font-size:26px;letter-spacing:-0.8px;margin-bottom:8px;}
+.wf-panel-desc{font-family:"Montserrat",sans-serif;font-size:14px;color:rgba(255,255,255,0.35);line-height:1.65;max-width:520px;}
+.wf-tier-grp{margin-bottom:24px;}
+.wf-tier-lbl{font-family:"IBM Plex Mono",monospace;font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.2);margin-bottom:10px;display:block;}
+.wf-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;}
+.wf-card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:8px;padding:16px 18px;transition:background 0.15s,border-color 0.15s;}
+.wf-card:hover{background:rgba(255,255,255,0.055);}
+.wf-card-code{font-family:"IBM Plex Mono",monospace;font-size:9px;letter-spacing:0.08em;color:rgba(255,255,255,0.16);margin-bottom:7px;display:block;}
+.wf-card-name{font-family:"Montserrat",sans-serif;font-size:13px;font-weight:500;color:rgba(255,255,255,0.78);line-height:1.4;}
 
-.eyebrow { display: block; font-family: "IBM Plex Mono", monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 24px; }
-.sec-title { font-family: "RocWideMedium", sans-serif; font-size: clamp(28px, 4vw, 48px); line-height: 1.08; letter-spacing: -1.5px; color: var(--headline); margin-bottom: 14px; }
-.sec-title-white { color: #fff; }
-.sec-desc { font-family: "Montserrat", sans-serif; font-size: 16px; color: var(--body); line-height: 1.75; letter-spacing: -0.4px; max-width: 560px; }
+/* PILLARS — dark stacked cards */
+.wf-pillars-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:40px;margin-top:56px;}
+.wf-pillar-stack{position:relative;transition:transform 0.3s ease;}
+.wf-pillar-stack:hover{transform:translateY(-5px) translateX(-2px);}
+.wf-pillar-stack::before{content:'';position:absolute;inset:0;border-radius:12px;border:1px solid rgba(255,255,255,0.03);background:#17151F;transform:translate(14px,18px);}
+.wf-pillar-stack::after{content:'';position:absolute;inset:0;border-radius:12px;border:1px solid rgba(255,255,255,0.05);background:#201E2B;transform:translate(7px,9px);}
+.wf-pillar-card{padding:36px 28px;background-color:#2A2838;background-image:linear-gradient(rgba(255,255,255,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.025) 1px,transparent 1px);background-size:32px 32px;border:1px solid rgba(255,255,255,0.1);border-radius:12px;position:relative;z-index:1;box-shadow:0 1px 2px rgba(0,0,0,0.3),0 4px 8px rgba(0,0,0,0.25);transition:box-shadow 0.3s ease;}
+.wf-pillar-stack:hover .wf-pillar-card{box-shadow:0 4px 8px rgba(0,0,0,0.3),0 20px 48px rgba(0,0,0,0.4),0 0 0 1px rgba(232,99,74,0.18);}
+.wf-pillar-num{font-family:"IBM Plex Mono",monospace;font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent);margin-bottom:16px;display:block;}
+.wf-pillar-name{font-family:"RocWideMedium",sans-serif;font-size:20px;letter-spacing:-0.5px;color:#fff;margin-bottom:14px;}
+.wf-pillar-desc{font-family:"Montserrat",sans-serif;font-size:13px;color:rgba(255,255,255,0.38);line-height:1.7;margin-bottom:24px;}
+.wf-pillar-examples{border-top:1px solid rgba(255,255,255,0.06);padding-top:16px;display:flex;flex-direction:column;gap:6px;}
+.wf-pillar-ex{font-family:"IBM Plex Mono",monospace;font-size:9px;letter-spacing:0.06em;color:rgba(255,255,255,0.25);line-height:1.5;}
 
-.btn-primary { display: inline-flex; align-items: center; gap: 8px; padding: 14px 32px; border-radius: 3px; background: var(--accent); color: #fff; font-family: "IBM Plex Mono", monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; border: none; cursor: pointer; transition: background 0.15s; }
-.btn-primary:hover { background: var(--accent-hover); }
-.btn-outline { display: inline-flex; align-items: center; gap: 8px; font-family: "IBM Plex Mono", monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: #fff; border: 1px solid rgba(255,255,255,0.2); padding: 12px 26px; border-radius: 3px; text-decoration: none; background: none; cursor: pointer; transition: border-color 0.15s; }
-.btn-outline:hover { border-color: rgba(255,255,255,0.5); }
-.btn-white { display: inline-flex; align-items: center; gap: 8px; padding: 14px 32px; border-radius: 3px; background: #fff; color: var(--accent); font-family: "IBM Plex Mono", monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; border: none; cursor: pointer; transition: opacity 0.15s; }
-.btn-white:hover { opacity: 0.9; }
+/* EXECUTION GAP */
+.wf-gap-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;margin-top:56px;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,0.08);box-shadow:0 8px 32px rgba(0,0,0,0.4);}
+.wf-gap-col{display:flex;flex-direction:column;}
+.wf-gap-hdr{padding:20px 32px;border-bottom:1px solid rgba(255,255,255,0.06);}
+.wf-gap-before .wf-gap-hdr{background:rgba(0,0,0,0.2);}
+.wf-gap-after .wf-gap-hdr{background:rgba(232,99,74,0.1);border-left:1px solid rgba(255,255,255,0.06);}
+.wf-gap-hdr-label{font-family:"IBM Plex Mono",monospace;font-size:9px;letter-spacing:0.14em;text-transform:uppercase;}
+.wf-gap-before .wf-gap-hdr-label{color:rgba(255,255,255,0.25);}
+.wf-gap-after .wf-gap-hdr-label{color:var(--accent);}
+.wf-gap-row{display:flex;align-items:flex-start;gap:14px;padding:24px 32px;border-bottom:1px solid rgba(255,255,255,0.04);flex:1;}
+.wf-gap-row:last-child{border-bottom:none;}
+.wf-gap-before .wf-gap-row{background:rgba(0,0,0,0.12);}
+.wf-gap-after .wf-gap-row{background:rgba(232,99,74,0.04);border-left:1px solid rgba(255,255,255,0.04);}
+.wf-gap-icon{font-family:"IBM Plex Mono",monospace;font-size:13px;flex-shrink:0;margin-top:1px;line-height:1;}
+.wf-gap-before .wf-gap-icon{color:rgba(255,255,255,0.15);}
+.wf-gap-after .wf-gap-icon{color:var(--accent);}
+.wf-gap-text{font-family:"Montserrat",sans-serif;font-size:14px;line-height:1.6;letter-spacing:-0.2px;}
+.wf-gap-before .wf-gap-text{color:rgba(255,255,255,0.32);font-style:italic;}
+.wf-gap-after .wf-gap-text{color:rgba(255,255,255,0.88);font-weight:500;}
 
-/* ── HERO ── */
-.hero { padding: 96px 48px 80px; text-align: center; }
-.hero h1 { font-family: "RocWideMedium", sans-serif; font-size: clamp(36px, 4.8vw, 64px); line-height: 1.06; letter-spacing: -2px; color: #fff; max-width: 820px; margin: 0 auto 24px; }
-.hero-lead { font-family: "Montserrat", sans-serif; font-size: 17px; color: rgba(255,255,255,0.5); line-height: 1.75; max-width: 580px; margin: 0 auto 14px; letter-spacing: -0.3px; }
-.hero-diag { font-family: "IBM Plex Mono", monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(232,99,74,0.65); display: block; margin-bottom: 36px; }
-.hero-ctas { display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap; }
+/* OUTCOMES — dark elevated cards */
+.wf-outcomes-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:48px;}
+.wf-outcome-card{background:var(--bg-dark);border:1px solid rgba(255,255,255,0.07);border-left:3px solid var(--accent);border-radius:10px;padding:28px 24px;transition:transform 0.25s ease,box-shadow 0.25s ease;box-shadow:0 2px 4px rgba(0,0,0,0.3),0 8px 24px rgba(0,0,0,0.25),inset 0 1px 0 rgba(255,255,255,0.04);}
+.wf-outcome-card:hover{transform:translateY(-4px);box-shadow:0 4px 8px rgba(0,0,0,0.35),0 20px 48px rgba(0,0,0,0.35),0 0 0 1px rgba(232,99,74,0.15),inset 0 1px 0 rgba(255,255,255,0.06);}
+.wf-outcome-stat{font-family:"RocWideMedium",sans-serif;font-size:48px;color:var(--accent);letter-spacing:-2px;line-height:1;margin-bottom:8px;}
+.wf-outcome-what{font-family:"Montserrat",sans-serif;font-size:13px;font-weight:500;color:rgba(255,255,255,0.75);line-height:1.5;margin-bottom:8px;}
+.wf-outcome-ctx{font-family:"Montserrat",sans-serif;font-size:11.5px;color:rgba(255,255,255,0.3);line-height:1.55;margin-bottom:12px;}
+.wf-outcome-tag{font-family:"IBM Plex Mono",monospace;font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.18);}
 
+/* BRIDGE */
+.wf-bridge-inner{max-width:760px;margin:0 auto;text-align:center;}
+.wf-bridge-div{display:flex;align-items:center;gap:24px;margin:44px auto;}
+.wf-bridge-line{flex:1;height:1px;background:rgba(255,255,255,0.07);}
+.wf-bridge-mid{font-family:"IBM Plex Mono",monospace;font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.18);white-space:nowrap;}
+.wf-bridge-tag{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(232,99,74,0.6);border:1px solid rgba(232,99,74,0.2);border-radius:2px;padding:4px 10px;margin-bottom:20px;}
+.wf-bridge-h2{font-family:"RocWideMedium",sans-serif;font-size:clamp(28px,4vw,48px);line-height:1.08;letter-spacing:-1.5px;color:#fff;margin-bottom:20px;}
+.wf-bridge-body{font-family:"Montserrat",sans-serif;font-size:15px;color:rgba(255,255,255,0.42);line-height:1.8;max-width:600px;margin:0 auto 36px;}
 
-/* ── CML Marquee ── */
-.cml-outer {
-  background-color: #FAFAF9;
-  background-image: linear-gradient(rgba(0,0,0,0.027) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.027) 1px, transparent 1px);
-  background-size: 56px 56px;
-  overflow: hidden;
-  position: relative;
-}
-.cml-track { display: flex; align-items: center; width: max-content; }
-.cml-track-1 { animation: cml-fwd 40s linear infinite; }
-.cml-track-2 { animation: cml-rev 34s linear infinite; }
-.cml-track-3 { animation: cml-fwd 46s linear infinite; }
-.cml-track-1:hover, .cml-track-2:hover, .cml-track-3:hover { animation-play-state: paused; }
-@keyframes cml-fwd { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-@keyframes cml-rev { 0% { transform: translateX(-50%); } 100% { transform: translateX(0); } }
-.cml-item {
-  display: inline-flex; align-items: center; justify-content: center;
-  height: 52px; padding: 0 36px;
-  border-right: 0.5px solid rgba(0,0,0,0.07); flex-shrink: 0;
-}
-.cml-item img {
-  height: 20px !important; width: auto !important;
-  max-height: 20px !important; max-width: 120px !important;
-  object-fit: contain !important; filter: grayscale(1); opacity: 0.45;
-  display: block !important;
-}
+/* CTA */
+.wf-cta-sec{padding:88px 48px;background:var(--accent);text-align:center;}
+.wf-cta-h2{font-family:"RocWideMedium",sans-serif;font-size:clamp(28px,4vw,48px);line-height:1.08;letter-spacing:-1.5px;color:#fff;margin-bottom:16px;}
+.wf-cta-body{font-family:"Montserrat",sans-serif;font-size:16px;color:rgba(255,255,255,0.8);line-height:1.7;max-width:520px;margin:0 auto 36px;}
+.wf-cta-sub{display:block;margin-top:16px;font-family:"IBM Plex Mono",monospace;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.45);}
 
-
-/* ── WORKFLOW BROWSER ── */
-.browser-layout { display: grid; grid-template-columns: 260px 1fr; gap: 48px; margin-top: 56px; align-items: start; }
-.stage-nav { position: sticky; top: 24px; }
-.snav-item { display: flex; align-items: center; gap: 12px; padding: 13px 14px; border-radius: 8px; cursor: pointer; margin-bottom: 4px; transition: background 0.15s; border: 1px solid transparent; }
-.snav-item:hover { background: rgba(255,255,255,0.04); }
-.snav-item.active { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.08); }
-.snav-pip { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; transition: box-shadow 0.2s; }
-.snav-item.active .snav-pip { box-shadow: 0 0 0 3px rgba(255,255,255,0.1); }
-.snav-label { font-family: "Montserrat", sans-serif; font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.4); transition: color 0.15s; flex: 1; }
-.snav-item.active .snav-label, .snav-item:hover .snav-label { color: rgba(255,255,255,0.85); }
-.snav-count { font-family: "IBM Plex Mono", monospace; font-size: 9px; letter-spacing: 0.08em; color: rgba(255,255,255,0.2); }
-.snav-item.active .snav-count { color: rgba(255,255,255,0.4); }
-.snav-total { margin-top: 20px; padding: 16px; border: 1px solid rgba(255,255,255,0.06); border-radius: 8px; }
-.snav-total-num { font-family: "IBM Plex Mono", monospace; font-size: 36px; font-weight: 500; color: var(--accent); letter-spacing: -1px; line-height: 1; display: block; margin-bottom: 6px; }
-.snav-total-label { font-family: "IBM Plex Mono", monospace; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.22); }
-
-.wf-panel { display: none; }
-.wf-panel.active { display: block; }
-.wf-stage-hdr { margin-bottom: 28px; padding-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.07); }
-.wf-stage-name { font-family: "RocWideMedium", sans-serif; font-size: 26px; letter-spacing: -0.8px; margin-bottom: 8px; }
-.wf-stage-desc { font-family: "Montserrat", sans-serif; font-size: 14px; color: rgba(255,255,255,0.35); line-height: 1.65; max-width: 520px; }
-.wf-tier-group { margin-bottom: 24px; }
-.wf-tier-lbl { font-family: "IBM Plex Mono", monospace; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.2); margin-bottom: 10px; display: block; }
-.wf-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
-.wf-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 8px; padding: 16px 18px; transition: background 0.15s, border-color 0.15s; }
-.wf-card:hover { background: rgba(255,255,255,0.055); }
-.wf-card-code { font-family: "IBM Plex Mono", monospace; font-size: 9px; letter-spacing: 0.08em; color: rgba(255,255,255,0.16); margin-bottom: 7px; display: block; }
-.wf-card-name { font-family: "Montserrat", sans-serif; font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.75); line-height: 1.4; margin-bottom: 10px; }
-.wf-tags { display: flex; flex-wrap: wrap; gap: 4px; }
-.wf-tag { font-family: "IBM Plex Mono", monospace; font-size: 8px; letter-spacing: 0.06em; text-transform: uppercase; padding: 2px 7px; border-radius: 2px; }
-.t-p { background: rgba(124,92,191,0.15); color: rgba(180,160,230,0.7); }
-.t-t { background: rgba(52,211,153,0.1);  color: rgba(90,200,160,0.7); }
-.t-c { background: rgba(232,99,74,0.12);  color: rgba(230,130,100,0.7); }
-.t-d { background: rgba(96,165,250,0.1);  color: rgba(120,175,245,0.7); }
-
-/* ── PILLARS (light) ── */
-.pillars-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 56px; }
-.pillar-card { background: #fff; border: 1px solid rgba(0,0,0,0.06); border-radius: 10px; padding: 32px 24px; box-shadow: 0 1px 2px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.06), 0 12px 28px rgba(0,0,0,0.05); position: relative; overflow: hidden; transition: transform 0.2s ease, box-shadow 0.2s ease; }
-.pillar-card:hover { transform: translateY(-3px); box-shadow: 0 2px 4px rgba(0,0,0,0.05), 0 8px 20px rgba(0,0,0,0.08), 0 24px 48px rgba(0,0,0,0.08); }
-.pillar-accent { position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--accent); }
-.pillar-num { font-family: "IBM Plex Mono", monospace; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; display: block; }
-.pillar-name { font-family: "RocWideMedium", sans-serif; font-size: 20px; letter-spacing: -0.5px; color: var(--headline); margin-bottom: 14px; }
-.pillar-desc { font-family: "Montserrat", sans-serif; font-size: 13px; color: var(--body); line-height: 1.7; margin-bottom: 22px; }
-.pillar-examples { border-top: 1px solid rgba(0,0,0,0.06); padding-top: 16px; display: flex; flex-direction: column; gap: 6px; }
-.pillar-ex { font-family: "IBM Plex Mono", monospace; font-size: 9px; letter-spacing: 0.06em; color: rgba(0,0,0,0.28); line-height: 1.5; }
-
-/* ── EXECUTION GAP (dark) ── */
-.gap-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; margin-top: 56px; border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,0.08); box-shadow: 0 8px 32px rgba(0,0,0,0.4), 0 2px 8px rgba(0,0,0,0.3); }
-.gap-col { display: flex; flex-direction: column; }
-.gap-col-hdr { padding: 18px 28px; border-bottom: 1px solid rgba(255,255,255,0.06); }
-.gap-before .gap-col-hdr { background: rgba(0,0,0,0.18); }
-.gap-after  .gap-col-hdr { background: rgba(232,99,74,0.1); }
-.gap-hdr-label { font-family: "IBM Plex Mono", monospace; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; }
-.gap-before .gap-hdr-label { color: rgba(255,255,255,0.25); }
-.gap-after  .gap-hdr-label { color: var(--accent); }
-.gap-sep { width: 3px; background: rgba(255,255,255,0.04); }
-.gap-row { display: flex; align-items: flex-start; gap: 14px; padding: 22px 28px; border-bottom: 1px solid rgba(255,255,255,0.04); flex: 1; }
-.gap-row:last-child { border-bottom: none; }
-.gap-before .gap-row { background: rgba(0,0,0,0.14); }
-.gap-after  .gap-row { background: rgba(232,99,74,0.04); }
-.gap-icon { font-family: "IBM Plex Mono", monospace; font-size: 13px; flex-shrink: 0; margin-top: 1px; line-height: 1; }
-.gap-before .gap-icon { color: rgba(255,255,255,0.15); }
-.gap-after  .gap-icon { color: var(--accent); }
-.gap-text { font-family: "Montserrat", sans-serif; font-size: 14px; line-height: 1.6; letter-spacing: -0.2px; }
-.gap-before .gap-text { color: rgba(255,255,255,0.32); font-style: italic; }
-.gap-after  .gap-text { color: rgba(255,255,255,0.85); font-weight: 500; }
-
-/* ── OUTCOMES (light) ── */
-.outcomes-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 48px; }
-.outcome-card { background: #fff; border: 1px solid rgba(0,0,0,0.06); border-top: 3px solid var(--accent); border-radius: 10px; padding: 28px 24px; box-shadow: 0 1px 2px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.06), 0 12px 28px rgba(0,0,0,0.05); transition: transform 0.2s ease, box-shadow 0.2s ease; }
-.outcome-card:hover { transform: translateY(-3px); box-shadow: 0 2px 4px rgba(0,0,0,0.05), 0 8px 20px rgba(0,0,0,0.08), 0 24px 48px rgba(0,0,0,0.08); }
-.outcome-stat { font-family: "RocWideMedium", sans-serif; font-size: 44px; color: var(--accent); letter-spacing: -2px; line-height: 1; margin-bottom: 10px; }
-.outcome-what { font-family: "Montserrat", sans-serif; font-size: 13px; font-weight: 600; color: var(--headline); line-height: 1.45; margin-bottom: 8px; }
-.outcome-ctx { font-family: "Montserrat", sans-serif; font-size: 11.5px; color: var(--body); line-height: 1.55; margin-bottom: 14px; }
-.outcome-tag { font-family: "IBM Plex Mono", monospace; font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(0,0,0,0.2); }
-
-/* ── BRIDGE (dark) ── */
-.bridge-wrap { max-width: 760px; margin: 0 auto; text-align: center; }
-.bridge-div { display: flex; align-items: center; gap: 24px; margin: 44px auto; }
-.bridge-line { flex: 1; height: 1px; background: rgba(255,255,255,0.07); }
-.bridge-mid { font-family: "IBM Plex Mono", monospace; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.18); white-space: nowrap; }
-.bridge-tag { display: inline-block; font-family: "IBM Plex Mono", monospace; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(232,99,74,0.6); border: 1px solid rgba(232,99,74,0.2); border-radius: 2px; padding: 4px 10px; margin-bottom: 20px; }
-.bridge-body { font-family: "Montserrat", sans-serif; font-size: 15px; color: rgba(255,255,255,0.42); line-height: 1.8; max-width: 600px; margin: 0 auto 36px; }
-
-/* ── CTA ── */
-.cta-section { padding: 88px 48px; background: var(--accent); text-align: center; }
-.cta-h2 { font-family: "RocWideMedium", sans-serif; font-size: clamp(28px, 4vw, 48px); line-height: 1.08; letter-spacing: -1.5px; color: #fff; margin-bottom: 16px; }
-.cta-body { font-family: "Montserrat", sans-serif; font-size: 16px; color: rgba(255,255,255,0.8); line-height: 1.7; max-width: 520px; margin: 0 auto 36px; }
-.cta-sub { display: block; margin-top: 16px; font-family: "IBM Plex Mono", monospace; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.45); }
-
-/* ── RESPONSIVE ── */
-@media (max-width: 1024px) {
-  .browser-layout { grid-template-columns: 200px 1fr; gap: 32px; }
-  .pillars-grid { grid-template-columns: repeat(2, 1fr); }
-  .outcomes-grid { grid-template-columns: repeat(2, 1fr); }
-}
-@media (max-width: 768px) {
-  .section { padding: 64px 24px; }
-  .hero { padding: 64px 24px 56px; }
-  .browser-layout { grid-template-columns: 1fr; }
-  .stage-nav { position: static; display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 24px; }
-  .snav-total { display: none; }
-  .wf-grid { grid-template-columns: 1fr; }
-  .gap-grid { grid-template-columns: 1fr; }
-  .gap-sep { display: none; }
-  .gap-after { border-top: 3px solid var(--accent); }
-  .pillars-grid { grid-template-columns: 1fr; }
-  .outcomes-grid { grid-template-columns: 1fr; }
-}
-
+@media(max-width:1024px){.wf-funnel-wrap{grid-template-columns:1fr;}.wf-pillars-grid{grid-template-columns:repeat(2,1fr);}.wf-outcomes-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:768px){.wf-sec{padding:64px 24px;}.wf-hero{padding:64px 24px 56px;}.wf-gap-grid{grid-template-columns:1fr;}.wf-pillars-grid{grid-template-columns:1fr;}.wf-outcomes-grid{grid-template-columns:1fr;}.wf-grid{grid-template-columns:1fr;}}
 </style>
 
-
-
 <!-- HERO -->
-<section class="tex-dark hero">
-  <div class="inner">
-    <span class="eyebrow">Solutions · GTM Workflows</span>
+<section class="wf-tex-dark wf-hero">
+  <div class="wf-inner">
+    <span class="wf-eyebrow">Solutions · GTM Workflows</span>
     <h1>Every revenue outcome has a workflow behind it.</h1>
-    <p class="hero-lead">Most GTM teams aren't underperforming — they're under-engineered. The motion exists. The tools exist. The workflow infrastructure connecting them doesn't. We build it across every stage of your commercial system.</p>
-    <span class="hero-diag">Arriving from a GTM Diagnosis? Your findings map directly to the workflows below.</span>
-    <div class="hero-ctas">
-      <a href="#workflows" class="btn-primary">Explore the Workflows →</a>
-      <a href="#outcomes" class="btn-outline">See Client Outcomes</a>
+    <p class="wf-hero-lead">Most GTM teams aren't underperforming — they're under-engineered. The motion exists. The tools exist. The workflow infrastructure connecting them doesn't. We build it across every stage of your commercial system.</p>
+    <span class="wf-hero-diag">Arriving from a GTM Diagnosis? Your findings map directly to the workflows below.</span>
+    <div class="wf-hero-ctas">
+      <a href="#wf-workflows" class="wf-btn-p">Explore the Workflows →</a>
+      <a href="#wf-outcomes" class="wf-btn-o">See Client Outcomes</a>
     </div>
   </div>
 </section>
 
-<!-- ═══ CLIENT LOGO MARQUEE ═══ -->
+<!-- MARQUEE — rs_css cml styles apply here -->
 <div class="cml-outer" style="padding:28px 0 32px;border-top:1.5px solid rgba(0,0,0,0.06);border-bottom:1.5px solid rgba(0,0,0,0.06);overflow:hidden;position:relative;">
-  <div class="cml-track cml-track-1"><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b2430c2125752b5c8f8_megaport.svg" alt="megaport" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b221d6616fdfef5e837_ibm.svg" alt="ibm" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b233005790d4961501c_twilio.svg" alt="twilio" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b24e6344110a02f8850_cofense.svg" alt="cofense" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b243c1d4ffc5a963f39_demandbase.svg" alt="demandbase" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/67deaa39c8f20e3b837fa4ad_FIS%20LOGO.svg" alt="fis-global" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c867def120f12248e3fa7d_id_6hYBRTt_1774741448119.svg" alt="uipath" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b2336307adb18a06773_wolters-kluwer.svg" alt="wolters-kluwer" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c8750e5237dcd349d24009_opentable_official_logo_icon_168922%20(1).svg" alt="opentable" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b24c338bd206d4c1e00_expedia-group.svg" alt="expedia-group" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b22681f2225d58ed71c_cisco.svg" alt="cisco" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b22c63e739bf6c830f5_netlify.svg" alt="netlify" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item" data-lg="1"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b21318ab2e6e3ce83ba_ptc.svg" alt="ptc" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b238d352c279724b3f8_segment.svg" alt="segment" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b22aa4e891e7f50ad87_lyft.svg" alt="lyft" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b21f4617dd013b75246_zilliant.svg" alt="zilliant" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b21ed940a1f3b77679e_arcserve.svg" alt="arcserve" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b24e76d1b2a2178b3c3_hewlett-packard-enterprise.svg" alt="hewlett-packard-enterprise" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b232a87beedd5af722d_siemens.svg" alt="siemens" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b2430c2125752b5c8f8_megaport.svg" alt="megaport" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b221d6616fdfef5e837_ibm.svg" alt="ibm" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b233005790d4961501c_twilio.svg" alt="twilio" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b24e6344110a02f8850_cofense.svg" alt="cofense" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b243c1d4ffc5a963f39_demandbase.svg" alt="demandbase" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/67deaa39c8f20e3b837fa4ad_FIS%20LOGO.svg" alt="fis-global" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c867def120f12248e3fa7d_id_6hYBRTt_1774741448119.svg" alt="uipath" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b2336307adb18a06773_wolters-kluwer.svg" alt="wolters-kluwer" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c8750e5237dcd349d24009_opentable_official_logo_icon_168922%20(1).svg" alt="opentable" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b24c338bd206d4c1e00_expedia-group.svg" alt="expedia-group" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b22681f2225d58ed71c_cisco.svg" alt="cisco" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b22c63e739bf6c830f5_netlify.svg" alt="netlify" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item" data-lg="1"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b21318ab2e6e3ce83ba_ptc.svg" alt="ptc" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b238d352c279724b3f8_segment.svg" alt="segment" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b22aa4e891e7f50ad87_lyft.svg" alt="lyft" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b21f4617dd013b75246_zilliant.svg" alt="zilliant" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b21ed940a1f3b77679e_arcserve.svg" alt="arcserve" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b24e76d1b2a2178b3c3_hewlett-packard-enterprise.svg" alt="hewlett-packard-enterprise" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b232a87beedd5af722d_siemens.svg" alt="siemens" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div></div>
-  <div class="cml-track cml-track-2"><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b2193dbff6a92afa344_avepoint.svg" alt="avepoint" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b24f7269c85bcec2448_lenovo.svg" alt="lenovo" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b22318ab2e6e3ce83d9_cloudinary.svg" alt="cloudinary" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b24189c8fd063ee4eec_realpage.svg" alt="realpage" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b22c26d1fcdf9f510f8_hubspot.svg" alt="hubspot" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b239e1530790274b74d_people-ai.svg" alt="people-ai" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b22c8b0c6491bff03fd_immuta.svg" alt="immuta" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b21537bcc0eb6ad53c6_adobe.svg" alt="adobe" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b222813bc5282ef15e2_intercom.svg" alt="intercom" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b2460be67670f64e3c7_soundhound.svg" alt="soundhound" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item" data-lg="1"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b22cd605cb9256819d9_edmunds.svg" alt="edmunds" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b22e91be146d4911fb9_meta.svg" alt="meta" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b233de411fe2fbc88e4_oscar-health.svg" alt="oscar-health" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b22721194f499685ab7_intricately.svg" alt="intricately" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b21c9ea575cf8972334_algolia.svg" alt="confluent" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b2303244279d3f514b2_performcb.svg" alt="performcb" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b223ea4e6bf4f22c8ce_nascar.svg" alt="nascar" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b23660d926355cb2205_patientpop.svg" alt="tebra" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item" data-cp="1"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b2476fc07bfec9c3fa0_creative-planning.svg" alt="creative-planning" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b2193dbff6a92afa344_avepoint.svg" alt="avepoint" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b24f7269c85bcec2448_lenovo.svg" alt="lenovo" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b22318ab2e6e3ce83d9_cloudinary.svg" alt="cloudinary" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b24189c8fd063ee4eec_realpage.svg" alt="realpage" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b22c26d1fcdf9f510f8_hubspot.svg" alt="hubspot" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b239e1530790274b74d_people-ai.svg" alt="people-ai" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b22c8b0c6491bff03fd_immuta.svg" alt="immuta" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b21537bcc0eb6ad53c6_adobe.svg" alt="adobe" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b222813bc5282ef15e2_intercom.svg" alt="intercom" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b2460be67670f64e3c7_soundhound.svg" alt="soundhound" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item" data-lg="1"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b22cd605cb9256819d9_edmunds.svg" alt="edmunds" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b22e91be146d4911fb9_meta.svg" alt="meta" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b233de411fe2fbc88e4_oscar-health.svg" alt="oscar-health" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b22721194f499685ab7_intricately.svg" alt="intricately" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b21c9ea575cf8972334_algolia.svg" alt="confluent" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b2303244279d3f514b2_performcb.svg" alt="performcb" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b223ea4e6bf4f22c8ce_nascar.svg" alt="nascar" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b23660d926355cb2205_patientpop.svg" alt="tebra" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item" data-cp="1"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b2476fc07bfec9c3fa0_creative-planning.svg" alt="creative-planning" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div></div>
-  <div class="cml-track cml-track-3"><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b23bd07a2cd1361608e_siemens-healthineers.svg" alt="siemens-healthineers" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b234c93321897e2d0ab_vimeo.svg" alt="vimeo" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b21c9ea575cf8972334_algolia.svg" alt="algolia" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b22b08fb596257a39f5_keysight-technologies.svg" alt="keysight-technologies" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b23660d926355cb2205_patientpop.svg" alt="patientpop" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b2183bcb1f313166a52_bitrise.svg" alt="bitrise" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b23b0657c416737eb2b_okta.svg" alt="okta" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b236d79e1e43ef57671_sailpoint.svg" alt="sailpoint" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b2236fad45c54085611_bmc-software.svg" alt="bmc-software" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b237f56af09776b7906_usertesting.svg" alt="usertesting" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b24ebac5234e51b47df_capital-one.svg" alt="capital-one" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b222e3296bbe565f5a9_datadog.svg" alt="datadog" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b22e6344110a02f8815_dell.svg" alt="dell" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/67deaa39c8f20e3b837fa4aa_DOCUSIGN%20LOGO.svg" alt="docusign" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b3382b137969168571f_sitetracker.svg" alt="sitetracker" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b217832b010e1e29aee_adp.svg" alt="adp" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item" data-lg="1"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b22001319ce0c7b5d80_buchanan-technologies.svg" alt="buchanan-technologies" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b238bce5e48779e7662_pinterest.svg" alt="pinterest" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b23bd07a2cd1361608e_siemens-healthineers.svg" alt="siemens-healthineers" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b234c93321897e2d0ab_vimeo.svg" alt="vimeo" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b21c9ea575cf8972334_algolia.svg" alt="algolia" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b22b08fb596257a39f5_keysight-technologies.svg" alt="keysight-technologies" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b23660d926355cb2205_patientpop.svg" alt="patientpop" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b2183bcb1f313166a52_bitrise.svg" alt="bitrise" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b23b0657c416737eb2b_okta.svg" alt="okta" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b236d79e1e43ef57671_sailpoint.svg" alt="sailpoint" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b2236fad45c54085611_bmc-software.svg" alt="bmc-software" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b237f56af09776b7906_usertesting.svg" alt="usertesting" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b24ebac5234e51b47df_capital-one.svg" alt="capital-one" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b222e3296bbe565f5a9_datadog.svg" alt="datadog" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b22e6344110a02f8815_dell.svg" alt="dell" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/67deaa39c8f20e3b837fa4aa_DOCUSIGN%20LOGO.svg" alt="docusign" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b3382b137969168571f_sitetracker.svg" alt="sitetracker" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b217832b010e1e29aee_adp.svg" alt="adp" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item" data-lg="1"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b22001319ce0c7b5d80_buchanan-technologies.svg" alt="buchanan-technologies" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b238bce5e48779e7662_pinterest.svg" alt="pinterest" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;" /></div></div>
+  <div class="cml-track cml-track-1"><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b2430c2125752b5c8f8_megaport.svg" alt="megaport" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b221d6616fdfef5e837_ibm.svg" alt="ibm" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b233005790d4961501c_twilio.svg" alt="twilio" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b24e6344110a02f8850_cofense.svg" alt="cofense" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b243c1d4ffc5a963f39_demandbase.svg" alt="demandbase" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/67deaa39c8f20e3b837fa4ad_FIS%20LOGO.svg" alt="fis-global" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c867def120f12248e3fa7d_id_6hYBRTt_1774741448119.svg" alt="uipath" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b2336307adb18a06773_wolters-kluwer.svg" alt="wolters-kluwer" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c8750e5237dcd349d24009_opentable_official_logo_icon_168922%20(1).svg" alt="opentable" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b24c338bd206d4c1e00_expedia-group.svg" alt="expedia-group" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b22681f2225d58ed71c_cisco.svg" alt="cisco" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b22c63e739bf6c830f5_netlify.svg" alt="netlify" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b21318ab2e6e3ce83ba_ptc.svg" alt="ptc" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b238d352c279724b3f8_segment.svg" alt="segment" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b22aa4e891e7f50ad87_lyft.svg" alt="lyft" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b21f4617dd013b75246_zilliant.svg" alt="zilliant" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b21ed940a1f3b77679e_arcserve.svg" alt="arcserve" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b24e76d1b2a2178b3c3_hewlett-packard-enterprise.svg" alt="hewlett-packard-enterprise" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b232a87beedd5af722d_siemens.svg" alt="siemens" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b2430c2125752b5c8f8_megaport.svg" alt="megaport" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b221d6616fdfef5e837_ibm.svg" alt="ibm" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b233005790d4961501c_twilio.svg" alt="twilio" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b24e6344110a02f8850_cofense.svg" alt="cofense" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b243c1d4ffc5a963f39_demandbase.svg" alt="demandbase" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/67deaa39c8f20e3b837fa4ad_FIS%20LOGO.svg" alt="fis-global" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c867def120f12248e3fa7d_id_6hYBRTt_1774741448119.svg" alt="uipath" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b2336307adb18a06773_wolters-kluwer.svg" alt="wolters-kluwer" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c8750e5237dcd349d24009_opentable_official_logo_icon_168922%20(1).svg" alt="opentable" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b24c338bd206d4c1e00_expedia-group.svg" alt="expedia-group" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b22681f2225d58ed71c_cisco.svg" alt="cisco" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b22c63e739bf6c830f5_netlify.svg" alt="netlify" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b21318ab2e6e3ce83ba_ptc.svg" alt="ptc" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b238d352c279724b3f8_segment.svg" alt="segment" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b22aa4e891e7f50ad87_lyft.svg" alt="lyft" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b21f4617dd013b75246_zilliant.svg" alt="zilliant" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b21ed940a1f3b77679e_arcserve.svg" alt="arcserve" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b24e76d1b2a2178b3c3_hewlett-packard-enterprise.svg" alt="hewlett-packard-enterprise" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b232a87beedd5af722d_siemens.svg" alt="siemens" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div></div>
+  <div class="cml-track cml-track-2"><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b2193dbff6a92afa344_avepoint.svg" alt="avepoint" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b24f7269c85bcec2448_lenovo.svg" alt="lenovo" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b22318ab2e6e3ce83d9_cloudinary.svg" alt="cloudinary" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b24189c8fd063ee4eec_realpage.svg" alt="realpage" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b22c26d1fcdf9f510f8_hubspot.svg" alt="hubspot" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b239e1530790274b74d_people-ai.svg" alt="people-ai" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b22c8b0c6491bff03fd_immuta.svg" alt="immuta" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b21537bcc0eb6ad53c6_adobe.svg" alt="adobe" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b222813bc5282ef15e2_intercom.svg" alt="intercom" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b2460be67670f64e3c7_soundhound.svg" alt="soundhound" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b22cd605cb9256819d9_edmunds.svg" alt="edmunds" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b22e91be146d4911fb9_meta.svg" alt="meta" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b233de411fe2fbc88e4_oscar-health.svg" alt="oscar-health" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b22721194f499685ab7_intricately.svg" alt="intricately" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b21c9ea575cf8972334_algolia.svg" alt="algolia" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b2303244279d3f514b2_performcb.svg" alt="performcb" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b223ea4e6bf4f22c8ce_nascar.svg" alt="nascar" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b23660d926355cb2205_patientpop.svg" alt="tebra" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b2476fc07bfec9c3fa0_creative-planning.svg" alt="creative-planning" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b2193dbff6a92afa344_avepoint.svg" alt="avepoint" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b24f7269c85bcec2448_lenovo.svg" alt="lenovo" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b22318ab2e6e3ce83d9_cloudinary.svg" alt="cloudinary" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b24189c8fd063ee4eec_realpage.svg" alt="realpage" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b22c26d1fcdf9f510f8_hubspot.svg" alt="hubspot" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b239e1530790274b74d_people-ai.svg" alt="people-ai" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b22c8b0c6491bff03fd_immuta.svg" alt="immuta" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b21537bcc0eb6ad53c6_adobe.svg" alt="adobe" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b222813bc5282ef15e2_intercom.svg" alt="intercom" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b2460be67670f64e3c7_soundhound.svg" alt="soundhound" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b22cd605cb9256819d9_edmunds.svg" alt="edmunds" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b22e91be146d4911fb9_meta.svg" alt="meta" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b233de411fe2fbc88e4_oscar-health.svg" alt="oscar-health" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b22721194f499685ab7_intricately.svg" alt="intricately" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b21c9ea575cf8972334_algolia.svg" alt="algolia" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b2303244279d3f514b2_performcb.svg" alt="performcb" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b223ea4e6bf4f22c8ce_nascar.svg" alt="nascar" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b23660d926355cb2205_patientpop.svg" alt="tebra" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b2476fc07bfec9c3fa0_creative-planning.svg" alt="creative-planning" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div></div>
+  <div class="cml-track cml-track-3"><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b23bd07a2cd1361608e_siemens-healthineers.svg" alt="siemens-healthineers" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b234c93321897e2d0ab_vimeo.svg" alt="vimeo" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b21c9ea575cf8972334_algolia.svg" alt="algolia" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b22b08fb596257a39f5_keysight-technologies.svg" alt="keysight-technologies" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b23660d926355cb2205_patientpop.svg" alt="patientpop" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b2183bcb1f313166a52_bitrise.svg" alt="bitrise" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b23b0657c416737eb2b_okta.svg" alt="okta" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b236d79e1e43ef57671_sailpoint.svg" alt="sailpoint" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b2236fad45c54085611_bmc-software.svg" alt="bmc-software" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b237f56af09776b7906_usertesting.svg" alt="usertesting" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b24ebac5234e51b47df_capital-one.svg" alt="capital-one" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b222e3296bbe565f5a9_datadog.svg" alt="datadog" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b22e6344110a02f8815_dell.svg" alt="dell" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/67deaa39c8f20e3b837fa4aa_DOCUSIGN%20LOGO.svg" alt="docusign" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b3382b137969168571f_sitetracker.svg" alt="sitetracker" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b217832b010e1e29aee_adp.svg" alt="adp" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b22001319ce0c7b5d80_buchanan-technologies.svg" alt="buchanan-technologies" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b238bce5e48779e7662_pinterest.svg" alt="pinterest" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b23bd07a2cd1361608e_siemens-healthineers.svg" alt="siemens-healthineers" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b234c93321897e2d0ab_vimeo.svg" alt="vimeo" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b21c9ea575cf8972334_algolia.svg" alt="algolia" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b22b08fb596257a39f5_keysight-technologies.svg" alt="keysight-technologies" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b23660d926355cb2205_patientpop.svg" alt="patientpop" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b2183bcb1f313166a52_bitrise.svg" alt="bitrise" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b23b0657c416737eb2b_okta.svg" alt="okta" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b236d79e1e43ef57671_sailpoint.svg" alt="sailpoint" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b2236fad45c54085611_bmc-software.svg" alt="bmc-software" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b237f56af09776b7906_usertesting.svg" alt="usertesting" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b24ebac5234e51b47df_capital-one.svg" alt="capital-one" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b222e3296bbe565f5a9_datadog.svg" alt="datadog" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b22e6344110a02f8815_dell.svg" alt="dell" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/67deaa39c8f20e3b837fa4aa_DOCUSIGN%20LOGO.svg" alt="docusign" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b3382b137969168571f_sitetracker.svg" alt="sitetracker" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b217832b010e1e29aee_adp.svg" alt="adp" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b22001319ce0c7b5d80_buchanan-technologies.svg" alt="buchanan-technologies" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b238bce5e48779e7662_pinterest.svg" alt="pinterest" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div></div>
 </div>
 
-<!-- WORKFLOW BROWSER -->
-<section class="tex-dark section" id="workflows">
-  <div class="inner">
-    <span class="eyebrow">Full-Funnel Coverage</span>
-    <h2 class="sec-title sec-title-white">39 workflows. Every stage of your commercial system.</h2>
-    <p class="sec-desc" style="color:rgba(255,255,255,0.38);">Select a stage to explore the workflows we build. Each is tagged by the pillars it activates — People, Technology, Context, or Data.</p>
-
-    <div class="browser-layout">
-      <div class="stage-nav">
-        <div class="snav-item active" onclick="switchStage('demand',this)">
-          <div class="snav-pip" style="background:#E8634A;"></div>
-          <span class="snav-label">Demand Gen</span>
-          <span class="snav-count">6</span>
-        </div>
-        <div class="snav-item" onclick="switchStage('pipeline',this)">
-          <div class="snav-pip" style="background:#7B68C8;"></div>
-          <span class="snav-label">Pipeline</span>
-          <span class="snav-count">10</span>
-        </div>
-        <div class="snav-item" onclick="switchStage('close',this)">
-          <div class="snav-pip" style="background:#2BAF82;"></div>
-          <span class="snav-label">Close</span>
-          <span class="snav-count">6</span>
-        </div>
-        <div class="snav-item" onclick="switchStage('expand',this)">
-          <div class="snav-pip" style="background:#4A8FC4;"></div>
-          <span class="snav-label">Expand</span>
-          <span class="snav-count">8</span>
-        </div>
-        <div class="snav-item" onclick="switchStage('ops',this)">
-          <div class="snav-pip" style="background:#C49A2B;"></div>
-          <span class="snav-label">Ops Foundation</span>
-          <span class="snav-count">9</span>
-        </div>
-        <div class="snav-total">
-          <span class="snav-total-num">39</span>
-          <span class="snav-total-label">Total workflows</span>
+<!-- WORKFLOW BROWSER (dark) -->
+<section class="wf-tex-dark wf-sec" id="wf-workflows">
+  <div class="wf-inner">
+    <span class="wf-eyebrow">Full-Funnel Coverage</span>
+    <h2 class="wf-h2 wf-h2-w">Every stage of your commercial system.</h2>
+    <p class="wf-desc wf-desc-d">Select a funnel stage to explore the workflows we build. Click any stage in the funnel or use the navigation below.</p>
+    <div class="wf-funnel-wrap">
+      <div class="wf-funnel-svg-wrap">
+        <svg viewBox="0 0 280 380" xmlns="http://www.w3.org/2000/svg">
+          <defs><filter id="wf-glow"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+          <!-- Demand Gen -->
+          <g class="wf-funnel-seg" data-stage="demand" onclick="wfStage('demand',this)" style="cursor:pointer;">
+            <path d="M20,20 L260,20 L240,92 L40,92 Z" fill="rgba(232,99,74,0.15)" stroke="#E8634A" stroke-width="1.5" id="wf-seg-demand" style="transition:all 0.3s;"/>
+            <text x="140" y="52" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-family="IBM Plex Mono" font-size="9" letter-spacing="1.5" text-transform="uppercase" id="wf-seg-demand-t1">01 · DEMAND GEN</text>
+            <text x="140" y="68" text-anchor="middle" fill="rgba(255,255,255,0.25)" font-family="Montserrat" font-size="9" id="wf-seg-demand-t2">6 workflows</text>
+          </g>
+          <!-- Pipeline -->
+          <g class="wf-funnel-seg" data-stage="pipeline" onclick="wfStage('pipeline',this)" style="cursor:pointer;">
+            <path d="M40,96 L240,96 L218,168 L62,168 Z" fill="rgba(123,104,200,0.15)" stroke="#7B68C8" stroke-width="1.5" id="wf-seg-pipeline" style="transition:all 0.3s;"/>
+            <text x="140" y="128" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-family="IBM Plex Mono" font-size="9" letter-spacing="1.5" id="wf-seg-pipeline-t1">02 · PIPELINE</text>
+            <text x="140" y="144" text-anchor="middle" fill="rgba(255,255,255,0.25)" font-family="Montserrat" font-size="9" id="wf-seg-pipeline-t2">10 workflows</text>
+          </g>
+          <!-- Close -->
+          <g class="wf-funnel-seg" data-stage="close" onclick="wfStage('close',this)" style="cursor:pointer;">
+            <path d="M62,172 L218,172 L200,244 L80,244 Z" fill="rgba(43,175,130,0.15)" stroke="#2BAF82" stroke-width="1.5" id="wf-seg-close" style="transition:all 0.3s;"/>
+            <text x="140" y="204" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-family="IBM Plex Mono" font-size="9" letter-spacing="1.5" id="wf-seg-close-t1">03 · CLOSE</text>
+            <text x="140" y="220" text-anchor="middle" fill="rgba(255,255,255,0.25)" font-family="Montserrat" font-size="9" id="wf-seg-close-t2">6 workflows</text>
+          </g>
+          <!-- Expand -->
+          <g class="wf-funnel-seg" data-stage="expand" onclick="wfStage('expand',this)" style="cursor:pointer;">
+            <path d="M80,248 L200,248 L182,320 L98,320 Z" fill="rgba(74,143,196,0.15)" stroke="#4A8FC4" stroke-width="1.5" id="wf-seg-expand" style="transition:all 0.3s;"/>
+            <text x="140" y="280" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-family="IBM Plex Mono" font-size="9" letter-spacing="1.5" id="wf-seg-expand-t1">04 · EXPAND</text>
+            <text x="140" y="296" text-anchor="middle" fill="rgba(255,255,255,0.25)" font-family="Montserrat" font-size="9" id="wf-seg-expand-t2">8 workflows</text>
+          </g>
+          <!-- Ops -->
+          <g class="wf-funnel-seg" data-stage="ops" onclick="wfStage('ops',this)" style="cursor:pointer;">
+            <path d="M98,324 L182,324 L165,370 L115,370 Z" fill="rgba(196,154,43,0.15)" stroke="#C49A2B" stroke-width="1.5" id="wf-seg-ops" style="transition:all 0.3s;"/>
+            <text x="140" y="348" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-family="IBM Plex Mono" font-size="9" letter-spacing="1.5" id="wf-seg-ops-t1">05 · OPS</text>
+            <text x="140" y="362" text-anchor="middle" fill="rgba(255,255,255,0.25)" font-family="Montserrat" font-size="9" id="wf-seg-ops-t2">9 workflows</text>
+          </g>
+        </svg>
+        <div class="wf-stage-nav">
+          <div class="wf-snav-item active" data-stage="demand" onclick="wfStage('demand',this)"><div class="wf-snav-pip" style="background:#E8634A;"></div><span class="wf-snav-label">Demand Gen</span><span class="wf-snav-count">6</span></div>
+          <div class="wf-snav-item" data-stage="pipeline" onclick="wfStage('pipeline',this)"><div class="wf-snav-pip" style="background:#7B68C8;"></div><span class="wf-snav-label">Pipeline</span><span class="wf-snav-count">10</span></div>
+          <div class="wf-snav-item" data-stage="close" onclick="wfStage('close',this)"><div class="wf-snav-pip" style="background:#2BAF82;"></div><span class="wf-snav-label">Close</span><span class="wf-snav-count">6</span></div>
+          <div class="wf-snav-item" data-stage="expand" onclick="wfStage('expand',this)"><div class="wf-snav-pip" style="background:#4A8FC4;"></div><span class="wf-snav-label">Expand</span><span class="wf-snav-count">8</span></div>
+          <div class="wf-snav-item" data-stage="ops" onclick="wfStage('ops',this)"><div class="wf-snav-pip" style="background:#C49A2B;"></div><span class="wf-snav-label">Ops Foundation</span><span class="wf-snav-count">9</span></div>
         </div>
       </div>
-
-      <div id="wfPanels">
-
-        <!-- DEMAND GEN -->
-        <div class="wf-panel active" id="panel-demand">
-          <div class="wf-stage-hdr">
-            <div class="wf-stage-name" style="color:#E8634A;">Demand Gen</div>
-            <p class="wf-stage-desc">Generate awareness, capture demand, and build a pipeline the rest of the funnel can actually work with. These workflows connect your market intelligence to your outreach motion.</p>
-          </div>
-          <div class="wf-tier-group">
-            <span class="wf-tier-lbl">Quick Win</span>
-            <div class="wf-grid">
-              <div class="wf-card"><span class="wf-card-code">DG-QW-001</span><div class="wf-card-name">Inbound Lead Routing, Scoring + Prioritization</div><div class="wf-tags"><span class="wf-tag t-t">Technology</span><span class="wf-tag t-d">Data</span></div></div>
-              <div class="wf-card"><span class="wf-card-code">DG-QW-002</span><div class="wf-card-name">Event Pre-Registration Workflow</div><div class="wf-tags"><span class="wf-tag t-c">Context</span><span class="wf-tag t-d">Data</span></div></div>
-              <div class="wf-card"><span class="wf-card-code">DG-QW-003</span><div class="wf-card-name">Post-Event Follow-Up</div><div class="wf-tags"><span class="wf-tag t-c">Context</span><span class="wf-tag t-p">People</span></div></div>
-            </div>
-          </div>
-          <div class="wf-tier-group">
-            <span class="wf-tier-lbl">Core</span>
-            <div class="wf-grid">
-              <div class="wf-card"><span class="wf-card-code">DG-CO-001</span><div class="wf-card-name">ABM Campaign Execution</div><div class="wf-tags"><span class="wf-tag t-c">Context</span><span class="wf-tag t-t">Technology</span><span class="wf-tag t-d">Data</span></div></div>
-            </div>
-          </div>
-          <div class="wf-tier-group">
-            <span class="wf-tier-lbl">Enterprise</span>
-            <div class="wf-grid">
-              <div class="wf-card"><span class="wf-card-code">DG-EN-001</span><div class="wf-card-name">TAM + ICP Sourcing</div><div class="wf-tags"><span class="wf-tag t-d">Data</span><span class="wf-tag t-t">Technology</span></div></div>
-              <div class="wf-card"><span class="wf-card-code">DG-EN-003</span><div class="wf-card-name">Full-Funnel Attribution Build + Monitoring</div><div class="wf-tags"><span class="wf-tag t-d">Data</span><span class="wf-tag t-t">Technology</span></div></div>
-            </div>
-          </div>
+      <div id="wf-panels">
+        <!-- DEMAND -->
+        <div class="wf-panel active" id="wf-panel-demand">
+          <div class="wf-panel-hdr"><div class="wf-panel-stage" style="color:#E8634A;">Demand Gen</div><p class="wf-panel-desc">Generate awareness, capture demand, and build a pipeline the rest of the funnel can work with.</p></div>
+          <div class="wf-tier-grp"><span class="wf-tier-lbl">Quick Win</span><div class="wf-grid"><div class="wf-card"><span class="wf-card-code">DG-QW-001</span><div class="wf-card-name">Inbound Lead Routing, Scoring + Prioritization</div></div><div class="wf-card"><span class="wf-card-code">DG-QW-002</span><div class="wf-card-name">Event Pre-Registration Workflow</div></div><div class="wf-card"><span class="wf-card-code">DG-QW-003</span><div class="wf-card-name">Post-Event Follow-Up</div></div></div></div>
+          <div class="wf-tier-grp"><span class="wf-tier-lbl">Core</span><div class="wf-grid"><div class="wf-card"><span class="wf-card-code">DG-CO-001</span><div class="wf-card-name">ABM Campaign Execution</div></div></div></div>
+          <div class="wf-tier-grp"><span class="wf-tier-lbl">Enterprise</span><div class="wf-grid"><div class="wf-card"><span class="wf-card-code">DG-EN-001</span><div class="wf-card-name">TAM + ICP Sourcing</div></div><div class="wf-card"><span class="wf-card-code">DG-EN-003</span><div class="wf-card-name">Full-Funnel Attribution Build + Monitoring</div></div></div></div>
         </div>
-
         <!-- PIPELINE -->
-        <div class="wf-panel" id="panel-pipeline">
-          <div class="wf-stage-hdr">
-            <div class="wf-stage-name" style="color:#7B68C8;">Pipeline</div>
-            <p class="wf-stage-desc">Convert interest into qualified opportunities. Reps show up to every interaction prepared — with the right context, the right message, and the right timing.</p>
-          </div>
-          <div class="wf-tier-group">
-            <span class="wf-tier-lbl">Quick Win</span>
-            <div class="wf-grid">
-              <div class="wf-card"><span class="wf-card-code">PL-QW-001</span><div class="wf-card-name">Catalist-Based Prospecting</div><div class="wf-tags"><span class="wf-tag t-c">Context</span><span class="wf-tag t-d">Data</span></div></div>
-              <div class="wf-card"><span class="wf-card-code">PL-QW-002</span><div class="wf-card-name">Multi-Channel Outbound Sequencing</div><div class="wf-tags"><span class="wf-tag t-c">Context</span><span class="wf-tag t-t">Technology</span><span class="wf-tag t-p">People</span></div></div>
-              <div class="wf-card"><span class="wf-card-code">PL-QW-003</span><div class="wf-card-name">Meeting Scheduling + Prep</div><div class="wf-tags"><span class="wf-tag t-t">Technology</span><span class="wf-tag t-p">People</span></div></div>
-              <div class="wf-card"><span class="wf-card-code">PL-QW-004</span><div class="wf-card-name">Data Enrichment + Validation</div><div class="wf-tags"><span class="wf-tag t-d">Data</span><span class="wf-tag t-t">Technology</span></div></div>
-            </div>
-          </div>
-          <div class="wf-tier-group">
-            <span class="wf-tier-lbl">Core</span>
-            <div class="wf-grid">
-              <div class="wf-card"><span class="wf-card-code">PL-CO-001</span><div class="wf-card-name">Pre-Meeting Deck Build</div><div class="wf-tags"><span class="wf-tag t-c">Context</span><span class="wf-tag t-p">People</span></div></div>
-              <div class="wf-card"><span class="wf-card-code">PL-CO-002</span><div class="wf-card-name">Competitive Battlecard Build</div><div class="wf-tags"><span class="wf-tag t-c">Context</span><span class="wf-tag t-p">People</span></div></div>
-              <div class="wf-card"><span class="wf-card-code">PL-CO-003</span><div class="wf-card-name">Call Grading + Coaching Rhythm</div><div class="wf-tags"><span class="wf-tag t-p">People</span><span class="wf-tag t-c">Context</span></div></div>
-              <div class="wf-card"><span class="wf-card-code">PL-CO-004</span><div class="wf-card-name">Internal Knowledge Base Search</div><div class="wf-tags"><span class="wf-tag t-t">Technology</span><span class="wf-tag t-c">Context</span></div></div>
-            </div>
-          </div>
-          <div class="wf-tier-group">
-            <span class="wf-tier-lbl">Enterprise</span>
-            <div class="wf-grid">
-              <div class="wf-card"><span class="wf-card-code">PL-EN-001</span><div class="wf-card-name">Conversation Catalist Detection</div><div class="wf-tags"><span class="wf-tag t-d">Data</span><span class="wf-tag t-c">Context</span><span class="wf-tag t-t">Technology</span></div></div>
-              <div class="wf-card"><span class="wf-card-code">PL-EN-003</span><div class="wf-card-name">Multi-Product Cross-Sell</div><div class="wf-tags"><span class="wf-tag t-d">Data</span><span class="wf-tag t-c">Context</span></div></div>
-            </div>
-          </div>
+        <div class="wf-panel" id="wf-panel-pipeline">
+          <div class="wf-panel-hdr"><div class="wf-panel-stage" style="color:#7B68C8;">Pipeline</div><p class="wf-panel-desc">Convert interest into qualified opportunities. Reps show up prepared — with the right context and the right message.</p></div>
+          <div class="wf-tier-grp"><span class="wf-tier-lbl">Quick Win</span><div class="wf-grid"><div class="wf-card"><span class="wf-card-code">PL-QW-001</span><div class="wf-card-name">Catalist-Based Prospecting</div></div><div class="wf-card"><span class="wf-card-code">PL-QW-002</span><div class="wf-card-name">Multi-Channel Outbound Sequencing</div></div><div class="wf-card"><span class="wf-card-code">PL-QW-003</span><div class="wf-card-name">Meeting Scheduling + Prep</div></div><div class="wf-card"><span class="wf-card-code">PL-QW-004</span><div class="wf-card-name">Data Enrichment + Validation</div></div></div></div>
+          <div class="wf-tier-grp"><span class="wf-tier-lbl">Core</span><div class="wf-grid"><div class="wf-card"><span class="wf-card-code">PL-CO-001</span><div class="wf-card-name">Pre-Meeting Deck Build</div></div><div class="wf-card"><span class="wf-card-code">PL-CO-002</span><div class="wf-card-name">Competitive Battlecard Build</div></div><div class="wf-card"><span class="wf-card-code">PL-CO-003</span><div class="wf-card-name">Call Grading + Coaching Rhythm</div></div><div class="wf-card"><span class="wf-card-code">PL-CO-004</span><div class="wf-card-name">Internal Knowledge Base Search</div></div></div></div>
+          <div class="wf-tier-grp"><span class="wf-tier-lbl">Enterprise</span><div class="wf-grid"><div class="wf-card"><span class="wf-card-code">PL-EN-001</span><div class="wf-card-name">Conversation Catalist Detection</div></div><div class="wf-card"><span class="wf-card-code">PL-EN-003</span><div class="wf-card-name">Multi-Product Cross-Sell</div></div></div></div>
         </div>
-
         <!-- CLOSE -->
-        <div class="wf-panel" id="panel-close">
-          <div class="wf-stage-hdr">
-            <div class="wf-stage-name" style="color:#2BAF82;">Close</div>
-            <p class="wf-stage-desc">Accelerate deal velocity, flag risk before it becomes loss, and build the governance structure that makes your forecast reliable.</p>
-          </div>
-          <div class="wf-tier-group">
-            <span class="wf-tier-lbl">Quick Win</span>
-            <div class="wf-grid">
-              <div class="wf-card"><span class="wf-card-code">CL-QW-001</span><div class="wf-card-name">Deal Desk Automation</div><div class="wf-tags"><span class="wf-tag t-t">Technology</span><span class="wf-tag t-p">People</span></div></div>
-              <div class="wf-card"><span class="wf-card-code">CL-QW-002</span><div class="wf-card-name">Proposal + SOW Generation</div><div class="wf-tags"><span class="wf-tag t-t">Technology</span><span class="wf-tag t-c">Context</span></div></div>
-            </div>
-          </div>
-          <div class="wf-tier-group">
-            <span class="wf-tier-lbl">Core</span>
-            <div class="wf-grid">
-              <div class="wf-card"><span class="wf-card-code">CL-CO-001</span><div class="wf-card-name">Pipeline Forecast Modeling</div><div class="wf-tags"><span class="wf-tag t-d">Data</span><span class="wf-tag t-t">Technology</span></div></div>
-              <div class="wf-card"><span class="wf-card-code">CL-CO-002</span><div class="wf-card-name">Deal Risk Scoring + Alerts</div><div class="wf-tags"><span class="wf-tag t-d">Data</span><span class="wf-tag t-t">Technology</span></div></div>
-              <div class="wf-card"><span class="wf-card-code">CL-CO-003</span><div class="wf-card-name">Mutual Close Plan Tracking</div><div class="wf-tags"><span class="wf-tag t-p">People</span><span class="wf-tag t-c">Context</span></div></div>
-              <div class="wf-card"><span class="wf-card-code">CL-CO-004</span><div class="wf-card-name">Win/Loss Analysis</div><div class="wf-tags"><span class="wf-tag t-d">Data</span><span class="wf-tag t-c">Context</span></div></div>
-            </div>
-          </div>
+        <div class="wf-panel" id="wf-panel-close">
+          <div class="wf-panel-hdr"><div class="wf-panel-stage" style="color:#2BAF82;">Close</div><p class="wf-panel-desc">Accelerate deal velocity, flag risk before it becomes loss, and build the governance structure that makes forecasts reliable.</p></div>
+          <div class="wf-tier-grp"><span class="wf-tier-lbl">Quick Win</span><div class="wf-grid"><div class="wf-card"><span class="wf-card-code">CL-QW-001</span><div class="wf-card-name">Deal Desk Automation</div></div><div class="wf-card"><span class="wf-card-code">CL-QW-002</span><div class="wf-card-name">Proposal + SOW Generation</div></div></div></div>
+          <div class="wf-tier-grp"><span class="wf-tier-lbl">Core</span><div class="wf-grid"><div class="wf-card"><span class="wf-card-code">CL-CO-001</span><div class="wf-card-name">Pipeline Forecast Modeling</div></div><div class="wf-card"><span class="wf-card-code">CL-CO-002</span><div class="wf-card-name">Deal Risk Scoring + Alerts</div></div><div class="wf-card"><span class="wf-card-code">CL-CO-003</span><div class="wf-card-name">Mutual Close Plan Tracking</div></div><div class="wf-card"><span class="wf-card-code">CL-CO-004</span><div class="wf-card-name">Win/Loss Analysis</div></div></div></div>
         </div>
-
         <!-- EXPAND -->
-        <div class="wf-panel" id="panel-expand">
-          <div class="wf-stage-hdr">
-            <div class="wf-stage-name" style="color:#4A8FC4;">Expand</div>
-            <p class="wf-stage-desc">Protect revenue, surface expansion opportunities, and build the post-sale infrastructure that turns customers into compounding assets.</p>
-          </div>
-          <div class="wf-tier-group">
-            <span class="wf-tier-lbl">Quick Win</span>
-            <div class="wf-grid">
-              <div class="wf-card"><span class="wf-card-code">EX-QW-001</span><div class="wf-card-name">Customer Health Scoring</div><div class="wf-tags"><span class="wf-tag t-d">Data</span><span class="wf-tag t-t">Technology</span></div></div>
-              <div class="wf-card"><span class="wf-card-code">EX-QW-002</span><div class="wf-card-name">Renewal Workflow Automation</div><div class="wf-tags"><span class="wf-tag t-t">Technology</span><span class="wf-tag t-p">People</span></div></div>
-              <div class="wf-card"><span class="wf-card-code">EX-QW-003</span><div class="wf-card-name">NPS + Customer Feedback Loop</div><div class="wf-tags"><span class="wf-tag t-d">Data</span><span class="wf-tag t-p">People</span></div></div>
-            </div>
-          </div>
-          <div class="wf-tier-group">
-            <span class="wf-tier-lbl">Core</span>
-            <div class="wf-grid">
-              <div class="wf-card"><span class="wf-card-code">EX-CO-001</span><div class="wf-card-name">Customer Onboarding Tracking</div><div class="wf-tags"><span class="wf-tag t-p">People</span><span class="wf-tag t-t">Technology</span></div></div>
-              <div class="wf-card"><span class="wf-card-code">EX-CO-002</span><div class="wf-card-name">Expansion Opportunity Identification</div><div class="wf-tags"><span class="wf-tag t-d">Data</span><span class="wf-tag t-c">Context</span></div></div>
-              <div class="wf-card"><span class="wf-card-code">EX-CO-003</span><div class="wf-card-name">Customer Advocacy Program</div><div class="wf-tags"><span class="wf-tag t-p">People</span><span class="wf-tag t-c">Context</span></div></div>
-            </div>
-          </div>
-          <div class="wf-tier-group">
-            <span class="wf-tier-lbl">Enterprise</span>
-            <div class="wf-grid">
-              <div class="wf-card"><span class="wf-card-code">EX-EN-001</span><div class="wf-card-name">Customer Success Dashboard</div><div class="wf-tags"><span class="wf-tag t-d">Data</span><span class="wf-tag t-t">Technology</span></div></div>
-              <div class="wf-card"><span class="wf-card-code">EX-EN-002</span><div class="wf-card-name">Strategic Account Intelligence</div><div class="wf-tags"><span class="wf-tag t-d">Data</span><span class="wf-tag t-c">Context</span></div></div>
-            </div>
-          </div>
+        <div class="wf-panel" id="wf-panel-expand">
+          <div class="wf-panel-hdr"><div class="wf-panel-stage" style="color:#4A8FC4;">Expand</div><p class="wf-panel-desc">Protect revenue, surface expansion opportunities, and build the post-sale infrastructure that turns customers into compounding assets.</p></div>
+          <div class="wf-tier-grp"><span class="wf-tier-lbl">Quick Win</span><div class="wf-grid"><div class="wf-card"><span class="wf-card-code">EX-QW-001</span><div class="wf-card-name">Customer Health Scoring</div></div><div class="wf-card"><span class="wf-card-code">EX-QW-002</span><div class="wf-card-name">Renewal Workflow Automation</div></div><div class="wf-card"><span class="wf-card-code">EX-QW-003</span><div class="wf-card-name">NPS + Customer Feedback Loop</div></div></div></div>
+          <div class="wf-tier-grp"><span class="wf-tier-lbl">Core</span><div class="wf-grid"><div class="wf-card"><span class="wf-card-code">EX-CO-001</span><div class="wf-card-name">Customer Onboarding Tracking</div></div><div class="wf-card"><span class="wf-card-code">EX-CO-002</span><div class="wf-card-name">Expansion Opportunity Identification</div></div><div class="wf-card"><span class="wf-card-code">EX-CO-003</span><div class="wf-card-name">Customer Advocacy Program</div></div></div></div>
+          <div class="wf-tier-grp"><span class="wf-tier-lbl">Enterprise</span><div class="wf-grid"><div class="wf-card"><span class="wf-card-code">EX-EN-001</span><div class="wf-card-name">Customer Success Dashboard</div></div><div class="wf-card"><span class="wf-card-code">EX-EN-002</span><div class="wf-card-name">Strategic Account Intelligence</div></div></div></div>
         </div>
-
         <!-- OPS -->
-        <div class="wf-panel" id="panel-ops">
-          <div class="wf-stage-hdr">
-            <div class="wf-stage-name" style="color:#C49A2B;">Ops Foundation</div>
-            <p class="wf-stage-desc">The infrastructure every stage above depends on. Clean data, integrated tools, reliable reporting, and visibility into what's actually happening across the commercial system.</p>
-          </div>
-          <div class="wf-tier-group">
-            <span class="wf-tier-lbl">Quick Win</span>
-            <div class="wf-grid">
-              <div class="wf-card"><span class="wf-card-code">OP-QW-001</span><div class="wf-card-name">CRM Hygiene + Data Integrity</div><div class="wf-tags"><span class="wf-tag t-d">Data</span><span class="wf-tag t-t">Technology</span></div></div>
-              <div class="wf-card"><span class="wf-card-code">OP-QW-002</span><div class="wf-card-name">Activity + Adoption Tracking</div><div class="wf-tags"><span class="wf-tag t-p">People</span><span class="wf-tag t-d">Data</span></div></div>
-              <div class="wf-card"><span class="wf-card-code">OP-QW-003</span><div class="wf-card-name">Automated Reporting + Distribution</div><div class="wf-tags"><span class="wf-tag t-t">Technology</span><span class="wf-tag t-d">Data</span></div></div>
-            </div>
-          </div>
-          <div class="wf-tier-group">
-            <span class="wf-tier-lbl">Core</span>
-            <div class="wf-grid">
-              <div class="wf-card"><span class="wf-card-code">OP-CO-001</span><div class="wf-card-name">Lead-to-Revenue Lifecycle Tracking</div><div class="wf-tags"><span class="wf-tag t-d">Data</span><span class="wf-tag t-t">Technology</span></div></div>
-              <div class="wf-card"><span class="wf-card-code">OP-CO-002</span><div class="wf-card-name">Tech Stack Integration</div><div class="wf-tags"><span class="wf-tag t-t">Technology</span><span class="wf-tag t-d">Data</span></div></div>
-              <div class="wf-card"><span class="wf-card-code">OP-CO-004</span><div class="wf-card-name">GTM Playbook Documentation</div><div class="wf-tags"><span class="wf-tag t-p">People</span><span class="wf-tag t-c">Context</span></div></div>
-            </div>
-          </div>
-          <div class="wf-tier-group">
-            <span class="wf-tier-lbl">Enterprise</span>
-            <div class="wf-grid">
-              <div class="wf-card"><span class="wf-card-code">OP-EN-001</span><div class="wf-card-name">RevOps Performance Dashboard</div><div class="wf-tags"><span class="wf-tag t-d">Data</span><span class="wf-tag t-t">Technology</span></div></div>
-              <div class="wf-card"><span class="wf-card-code">OP-EN-002</span><div class="wf-card-name">AI Workflow Monitoring + Governance</div><div class="wf-tags"><span class="wf-tag t-t">Technology</span><span class="wf-tag t-d">Data</span></div></div>
-              <div class="wf-card"><span class="wf-card-code">OP-EN-003</span><div class="wf-card-name">Change Management + Enablement</div><div class="wf-tags"><span class="wf-tag t-p">People</span><span class="wf-tag t-c">Context</span></div></div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FOUR PILLARS (light) -->
-<section class="tex-light section">
-  <div class="inner">
-    <span class="eyebrow">The Build Framework</span>
-    <h2 class="sec-title">Every workflow is built on the same four pillars.</h2>
-    <p class="sec-desc">GTM Workflows doesn't configure tools. It builds operating logic across People, Technology, Context, and Data — the same four pillars your Diagnosis assessed.</p>
-    <div class="pillars-grid">
-      <div class="pillar-card">
-        <div class="pillar-accent"></div>
-        <span class="pillar-num">01 · People</span>
-        <div class="pillar-name">People</div>
-        <p class="pillar-desc">Reps default to intuition when prioritization signals aren't built into the motion. Workflows define who contacts which accounts, when, in what order, and how managers coach and inspect to it.</p>
-        <div class="pillar-examples">
-          <span class="pillar-ex">→ Call Grading + Coaching Rhythm</span>
-          <span class="pillar-ex">→ Change Management + Enablement</span>
-          <span class="pillar-ex">→ Activity + Adoption Tracking</span>
-        </div>
-      </div>
-      <div class="pillar-card">
-        <div class="pillar-accent"></div>
-        <span class="pillar-num">02 · Technology</span>
-        <div class="pillar-name">Technology</div>
-        <p class="pillar-desc">We build on your existing stack — not ours. We map the full infrastructure, specify every configuration required, and build the integrations that make your tools compound instead of conflict.</p>
-        <div class="pillar-examples">
-          <span class="pillar-ex">→ Tech Stack Integration</span>
-          <span class="pillar-ex">→ AI Workflow Monitoring + Governance</span>
-          <span class="pillar-ex">→ Deal Desk Automation</span>
-        </div>
-      </div>
-      <div class="pillar-card">
-        <div class="pillar-accent"></div>
-        <span class="pillar-num">03 · Context</span>
-        <div class="pillar-name">Context</div>
-        <p class="pillar-desc">Generic outreach at scale is expensive noise. Every workflow that touches a buyer is built around specific context — the right message to the right person at the right moment, based on what's actually happening in their world.</p>
-        <div class="pillar-examples">
-          <span class="pillar-ex">→ Conversation Catalist Detection</span>
-          <span class="pillar-ex">→ Pre-Meeting Deck Build</span>
-          <span class="pillar-ex">→ Competitive Battlecard Build</span>
-        </div>
-      </div>
-      <div class="pillar-card">
-        <div class="pillar-accent"></div>
-        <span class="pillar-num">04 · Data</span>
-        <div class="pillar-name">Data</div>
-        <p class="pillar-desc">A workflow is only as strong as the data underneath it. We build the data layer first — enrichment, hygiene, lead source attribution, lifecycle tracking — so every workflow above it fires on accurate inputs.</p>
-        <div class="pillar-examples">
-          <span class="pillar-ex">→ Data Enrichment + Validation</span>
-          <span class="pillar-ex">→ CRM Hygiene + Data Integrity</span>
-          <span class="pillar-ex">→ Full-Funnel Attribution Build + Monitoring</span>
+        <div class="wf-panel" id="wf-panel-ops">
+          <div class="wf-panel-hdr"><div class="wf-panel-stage" style="color:#C49A2B;">Ops Foundation</div><p class="wf-panel-desc">The infrastructure every stage above depends on. Clean data, integrated tools, reliable reporting, and visibility across the commercial system.</p></div>
+          <div class="wf-tier-grp"><span class="wf-tier-lbl">Quick Win</span><div class="wf-grid"><div class="wf-card"><span class="wf-card-code">OP-QW-001</span><div class="wf-card-name">CRM Hygiene + Data Integrity</div></div><div class="wf-card"><span class="wf-card-code">OP-QW-002</span><div class="wf-card-name">Activity + Adoption Tracking</div></div><div class="wf-card"><span class="wf-card-code">OP-QW-003</span><div class="wf-card-name">Automated Reporting + Distribution</div></div></div></div>
+          <div class="wf-tier-grp"><span class="wf-tier-lbl">Core</span><div class="wf-grid"><div class="wf-card"><span class="wf-card-code">OP-CO-001</span><div class="wf-card-name">Lead-to-Revenue Lifecycle Tracking</div></div><div class="wf-card"><span class="wf-card-code">OP-CO-002</span><div class="wf-card-name">Tech Stack Integration</div></div><div class="wf-card"><span class="wf-card-code">OP-CO-004</span><div class="wf-card-name">GTM Playbook Documentation</div></div></div></div>
+          <div class="wf-tier-grp"><span class="wf-tier-lbl">Enterprise</span><div class="wf-grid"><div class="wf-card"><span class="wf-card-code">OP-EN-001</span><div class="wf-card-name">RevOps Performance Dashboard</div></div><div class="wf-card"><span class="wf-card-code">OP-EN-002</span><div class="wf-card-name">AI Workflow Monitoring + Governance</div></div><div class="wf-card"><span class="wf-card-code">OP-EN-003</span><div class="wf-card-name">Change Management + Enablement</div></div></div></div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- EXECUTION GAP (dark) -->
-<section class="tex-dark section">
-  <div class="inner">
-    <span class="eyebrow">The Execution Gap</span>
-    <h2 class="sec-title sec-title-white">Revenue consequences don't appear randomly.</h2>
-    <p class="sec-desc" style="color:rgba(255,255,255,0.38);">They're the predictable output of missing infrastructure. This is what that gap looks like — and what closes it.</p>
-    <div class="gap-grid">
-      <div class="gap-col gap-before">
-        <div class="gap-col-hdr"><span class="gap-hdr-label">✕ &nbsp;Without workflow infrastructure</span></div>
-        <div class="gap-row"><span class="gap-icon">—</span><p class="gap-text">Reps spend hours researching accounts they'll never reach. What they find is incomplete. What they send reflects it.</p></div>
-        <div class="gap-row"><span class="gap-icon">—</span><p class="gap-text">Leads route manually and slowly. Speed-to-lead collapses. The first impression goes to whoever responds first — which isn't you.</p></div>
-        <div class="gap-row"><span class="gap-icon">—</span><p class="gap-text">Deals slip without detection. No risk signal. No trigger. You find out on the forecast call when it's already too late to act.</p></div>
-        <div class="gap-row"><span class="gap-icon">—</span><p class="gap-text">Churn surprises you. Health data lives in three systems that don't talk to each other. No one owns the signal.</p></div>
-        <div class="gap-row"><span class="gap-icon">—</span><p class="gap-text">Expansion is ad hoc. Revenue from existing customers depends entirely on relationship quality and timing.</p></div>
+<!-- FOUR PILLARS (dark, stacked cards) -->
+<section class="wf-tex-dark wf-sec">
+  <div class="wf-inner">
+    <span class="wf-eyebrow">The Build Framework</span>
+    <h2 class="wf-h2 wf-h2-w">Every workflow is built on the same four pillars.</h2>
+    <p class="wf-desc wf-desc-d">GTM Workflows builds operating logic across People, Technology, Context, and Data — the same four pillars your Diagnosis assessed.</p>
+    <div class="wf-pillars-grid">
+      <div class="wf-pillar-stack"><div class="wf-pillar-card"><span class="wf-pillar-num">01 · People</span><div class="wf-pillar-name">People</div><p class="wf-pillar-desc">Reps default to intuition when prioritization signals aren't built into the motion. Workflows define who contacts which accounts, when, in what order, and how managers coach to it.</p><div class="wf-pillar-examples"><span class="wf-pillar-ex">→ Call Grading + Coaching Rhythm</span><span class="wf-pillar-ex">→ Change Management + Enablement</span><span class="wf-pillar-ex">→ Activity + Adoption Tracking</span></div></div></div>
+      <div class="wf-pillar-stack"><div class="wf-pillar-card"><span class="wf-pillar-num">02 · Technology</span><div class="wf-pillar-name">Technology</div><p class="wf-pillar-desc">We build on your existing stack — not ours. We map the full infrastructure, specify every configuration required, and build the integrations that make your tools compound instead of conflict.</p><div class="wf-pillar-examples"><span class="wf-pillar-ex">→ Tech Stack Integration</span><span class="wf-pillar-ex">→ AI Workflow Monitoring + Governance</span><span class="wf-pillar-ex">→ Deal Desk Automation</span></div></div></div>
+      <div class="wf-pillar-stack"><div class="wf-pillar-card"><span class="wf-pillar-num">03 · Context</span><div class="wf-pillar-name">Context</div><p class="wf-pillar-desc">Generic outreach at scale is expensive noise. Every workflow that touches a buyer is built around specific context — the right message to the right person based on what's actually happening in their world.</p><div class="wf-pillar-examples"><span class="wf-pillar-ex">→ Conversation Catalist Detection</span><span class="wf-pillar-ex">→ Pre-Meeting Deck Build</span><span class="wf-pillar-ex">→ Competitive Battlecard Build</span></div></div></div>
+      <div class="wf-pillar-stack"><div class="wf-pillar-card"><span class="wf-pillar-num">04 · Data</span><div class="wf-pillar-name">Data</div><p class="wf-pillar-desc">A workflow is only as strong as the data underneath it. We build the data layer first — enrichment, hygiene, lead source attribution, lifecycle tracking — so every workflow above it fires on accurate inputs.</p><div class="wf-pillar-examples"><span class="wf-pillar-ex">→ Data Enrichment + Validation</span><span class="wf-pillar-ex">→ CRM Hygiene + Data Integrity</span><span class="wf-pillar-ex">→ Full-Funnel Attribution Build + Monitoring</span></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- EXECUTION GAP (light) -->
+<section class="wf-tex-light wf-sec">
+  <div class="wf-inner">
+    <span class="wf-eyebrow">The Execution Gap</span>
+    <h2 class="wf-h2">Revenue consequences don't appear randomly.</h2>
+    <p class="wf-desc">They're the predictable output of missing infrastructure. This is what that gap looks like — and what closes it.</p>
+    <div class="wf-gap-grid">
+      <div class="wf-gap-col wf-gap-before">
+        <div class="wf-gap-hdr"><span class="wf-gap-hdr-label">✕  Without workflow infrastructure</span></div>
+        <div class="wf-gap-row"><span class="wf-gap-icon">—</span><p class="wf-gap-text">Reps spend hours researching accounts they'll never reach. What they find is incomplete. What they send reflects it.</p></div>
+        <div class="wf-gap-row"><span class="wf-gap-icon">—</span><p class="wf-gap-text">Leads route manually and slowly. Speed-to-lead collapses. The first impression goes to whoever responds first — which isn't you.</p></div>
+        <div class="wf-gap-row"><span class="wf-gap-icon">—</span><p class="wf-gap-text">Deals slip without detection. No risk signal. No trigger. You find out on the forecast call when it's already too late.</p></div>
+        <div class="wf-gap-row"><span class="wf-gap-icon">—</span><p class="wf-gap-text">Churn surprises you. Health data lives in three systems that don't talk to each other. No one owns the signal.</p></div>
+        <div class="wf-gap-row"><span class="wf-gap-icon">—</span><p class="wf-gap-text">Expansion is ad hoc. Revenue from existing customers depends entirely on relationship quality and timing.</p></div>
       </div>
-      <div class="gap-sep"></div>
-      <div class="gap-col gap-after">
-        <div class="gap-col-hdr"><span class="gap-hdr-label">✓ &nbsp;With workflow infrastructure</span></div>
-        <div class="gap-row"><span class="gap-icon">→</span><p class="gap-text">Catalist-based briefing surfaces the right account at the right moment. Reps arrive prepared — not scrambling.</p></div>
-        <div class="gap-row"><span class="gap-icon">→</span><p class="gap-text">Automated scoring and routing assigns leads in minutes. Speed-to-lead becomes a structural advantage, not a heroic effort.</p></div>
-        <div class="gap-row"><span class="gap-icon">→</span><p class="gap-text">Deal risk scoring flags at-risk opportunities before they're lost. Intervention happens while there's still time to act.</p></div>
-        <div class="gap-row"><span class="gap-icon">→</span><p class="gap-text">Health scoring aggregates every signal into a single view and triggers intervention before the conversation gets hard.</p></div>
-        <div class="gap-row"><span class="gap-icon">→</span><p class="gap-text">Expansion opportunities are identified from usage and engagement data. The motion runs whether or not the relationship is warm.</p></div>
+      <div class="wf-gap-col wf-gap-after">
+        <div class="wf-gap-hdr"><span class="wf-gap-hdr-label">✓  With workflow infrastructure</span></div>
+        <div class="wf-gap-row"><span class="wf-gap-icon">→</span><p class="wf-gap-text">Catalist-based briefing surfaces the right account at the right moment. Reps arrive prepared — not scrambling.</p></div>
+        <div class="wf-gap-row"><span class="wf-gap-icon">→</span><p class="wf-gap-text">Automated scoring and routing assigns leads in minutes. Speed-to-lead becomes a structural advantage, not a heroic effort.</p></div>
+        <div class="wf-gap-row"><span class="wf-gap-icon">→</span><p class="wf-gap-text">Deal risk scoring flags at-risk opportunities before they're lost. Intervention happens while there's still time to act.</p></div>
+        <div class="wf-gap-row"><span class="wf-gap-icon">→</span><p class="wf-gap-text">Health scoring aggregates every signal into a single view and triggers intervention before the conversation gets hard.</p></div>
+        <div class="wf-gap-row"><span class="wf-gap-icon">→</span><p class="wf-gap-text">Expansion opportunities are identified from usage and engagement data. The motion runs whether or not the relationship is warm.</p></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- CLIENT OUTCOMES (light) -->
-<section class="tex-light section" id="outcomes">
-  <div class="inner">
-    <span class="eyebrow">Client Outcomes</span>
-    <h2 class="sec-title">What workflow infrastructure actually produces.</h2>
-    <p class="sec-desc">From real engagements. All figures verified.</p>
-    <div class="outcomes-grid">
-      <div class="outcome-card">
-        <div class="outcome-stat">9 hrs</div>
-        <p class="outcome-what">Recovered per rep, per week</p>
-        <p class="outcome-ctx">Enterprise cybersecurity org · Workflow automation eliminating manual admin across the full sales motion</p>
-        <span class="outcome-tag">Identity confidential</span>
-      </div>
-      <div class="outcome-card">
-        <div class="outcome-stat">34%</div>
-        <p class="outcome-what">Net new pipeline increase</p>
-        <p class="outcome-ctx">Enterprise cybersecurity org · Catalist-based prospecting replacing commoditized intent signals</p>
-        <span class="outcome-tag">Identity confidential</span>
-      </div>
-      <div class="outcome-card">
-        <div class="outcome-stat">61%</div>
-        <p class="outcome-what">SQL creation quarter-over-quarter</p>
-        <p class="outcome-ctx">Enterprise HR technology org · Full pipeline workflow build across People, Context, and Data pillars</p>
-        <span class="outcome-tag">Identity confidential</span>
-      </div>
-      <div class="outcome-card">
-        <div class="outcome-stat">21</div>
-        <p class="outcome-what">Day reduction in sales cycle</p>
-        <p class="outcome-ctx">Enterprise HR technology org · Structured talk tracks, mutual close plan tracking, and calendar governance</p>
-        <span class="outcome-tag">Identity confidential</span>
-      </div>
+<!-- CLIENT OUTCOMES (dark) -->
+<section class="wf-tex-dark wf-sec" id="wf-outcomes">
+  <div class="wf-inner">
+    <span class="wf-eyebrow">Client Outcomes</span>
+    <h2 class="wf-h2 wf-h2-w">What workflow infrastructure actually produces.</h2>
+    <p class="wf-desc wf-desc-d">From real engagements. All figures verified.</p>
+    <div class="wf-outcomes-grid">
+      <div class="wf-outcome-card"><div class="wf-outcome-stat">9 hrs</div><p class="wf-outcome-what">Recovered per rep, per week</p><p class="wf-outcome-ctx">Enterprise cybersecurity org · Workflow automation eliminating manual admin across the full sales motion</p><span class="wf-outcome-tag">Identity confidential</span></div>
+      <div class="wf-outcome-card"><div class="wf-outcome-stat">34%</div><p class="wf-outcome-what">Net new pipeline increase</p><p class="wf-outcome-ctx">Enterprise cybersecurity org · Catalist-based prospecting replacing commoditized intent signals</p><span class="wf-outcome-tag">Identity confidential</span></div>
+      <div class="wf-outcome-card"><div class="wf-outcome-stat">61%</div><p class="wf-outcome-what">SQL creation quarter-over-quarter</p><p class="wf-outcome-ctx">Enterprise HR technology org · Full pipeline workflow build across People, Context, and Data pillars</p><span class="wf-outcome-tag">Identity confidential</span></div>
+      <div class="wf-outcome-card"><div class="wf-outcome-stat">21</div><p class="wf-outcome-what">Day reduction in sales cycle</p><p class="wf-outcome-ctx">Enterprise HR technology org · Structured talk tracks, mutual close plan tracking, and calendar governance</p><span class="wf-outcome-tag">Identity confidential</span></div>
     </div>
   </div>
 </section>
 
-<!-- BRIDGE TO REVENUEOS (dark) -->
-<section class="tex-dark section">
-  <div class="inner">
-    <div class="bridge-wrap">
-      <span class="eyebrow" style="text-align:center;">What Comes Next</span>
-      <h2 class="sec-title sec-title-white" style="text-align:center;">Workflows run your motion.<br/>RevenueOS runs the company<br/>that runs the motion.</h2>
-      <div class="bridge-div">
-        <div class="bridge-line"></div>
-        <span class="bridge-mid">the next step</span>
-        <div class="bridge-line"></div>
+<!-- BRIDGE TO REVENUEOS (light) -->
+<section class="wf-tex-light wf-sec">
+  <div class="wf-inner">
+    <div class="wf-bridge-inner">
+      <span class="wf-eyebrow" style="text-align:center;">What Comes Next</span>
+      <h2 class="wf-h2" style="text-align:center;">Workflows run your motion.<br>RevenueOS runs the company<br>that runs the motion.</h2>
+      <div class="wf-bridge-div">
+        <div class="wf-bridge-line" style="background:rgba(0,0,0,0.08);"></div>
+        <span class="wf-bridge-mid" style="color:rgba(0,0,0,0.2);">the next step</span>
+        <div class="wf-bridge-line" style="background:rgba(0,0,0,0.08);"></div>
       </div>
-      <span class="bridge-tag">Revenue Operating System</span>
-      <p class="bridge-body">GTM Workflows eliminates the execution gap. But workflows without a governing operating model drift — as people change, markets shift, and tools evolve. RevenueOS is the system that governs, measures, and evolves everything you've built here.</p>
-      <a href="/revenue-operating-system" class="btn-outline">Explore Revenue Operating System →</a>
+      <span class="wf-bridge-tag">Revenue Operating System</span>
+      <p class="wf-bridge-body" style="color:var(--body);">GTM Workflows eliminates the execution gap. But workflows without a governing operating model drift — as people change, markets shift, and tools evolve. RevenueOS is the system that governs, measures, and evolves everything you've built here.</p>
+      <a href="/revenue-operating-system" style="display:inline-flex;align-items:center;gap:8px;font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--headline);border:1px solid rgba(0,0,0,0.15);padding:12px 26px;border-radius:3px;text-decoration:none;">Explore Revenue Operating System →</a>
     </div>
   </div>
 </section>
 
-<!-- CTA -->
-<section class="cta-section">
-  <div class="inner">
-    <h2 class="cta-h2">Start with one workflow.<br/>Build the system.</h2>
-    <p class="cta-body">Most clients begin with a single focused engagement — a defined scope and a working system in weeks. Book a 30-minute call. We'll map your Diagnosis findings to the highest-impact workflow and scope it.</p>
-    <a href="/contact" class="btn-white">Book a Strategy Call →</a>
-    <span class="cta-sub">30 min · No commitment · Diagnosis findings welcome</span>
+<!-- CTA (coral) -->
+<section class="wf-cta-sec">
+  <div class="wf-inner" style="text-align:center;">
+    <h2 class="wf-cta-h2">Start with one workflow.<br>Build the system.</h2>
+    <p class="wf-cta-body">Most clients begin with a single focused engagement — a defined scope and a working system in weeks. Book a 30-minute call. We'll map your Diagnosis findings to the highest-impact workflow and scope it.</p>
+    <a href="/contact" class="wf-btn-w">Book a Strategy Call →</a>
+    <span class="wf-cta-sub">30 min · No commitment · Diagnosis findings welcome</span>
   </div>
 </section>
-
-</div>
 
 <script>
-
-function switchStage(stage, el) {
-  document.querySelectorAll('.snav-item').forEach(function(i){ i.classList.remove('active'); });
-  document.querySelectorAll('.wf-panel').forEach(function(p){ p.classList.remove('active'); });
-  el.classList.add('active');
-  var panel = document.getElementById('panel-' + stage);
-  if (panel) panel.classList.add('active');
+var WF_STAGES={demand:'#E8634A',pipeline:'#7B68C8',close:'#2BAF82',expand:'#4A8FC4',ops:'#C49A2B'};
+var wfActive='demand';
+function wfStage(stage,el){
+  if(wfActive===stage)return;
+  wfActive=stage;
+  // Reset all funnel segments
+  Object.keys(WF_STAGES).forEach(function(s){
+    var seg=document.getElementById('wf-seg-'+s);
+    var col=WF_STAGES[s];
+    if(seg){seg.style.fill='rgba('+hexToRgb(col)+',0.15)';seg.style.strokeWidth='1.5';seg.style.filter='none';}
+    var t1=document.getElementById('wf-seg-'+s+'-t1');
+    var t2=document.getElementById('wf-seg-'+s+'-t2');
+    if(t1)t1.style.fill='rgba(255,255,255,0.5)';
+    if(t2)t2.style.fill='rgba(255,255,255,0.25)';
+  });
+  // Activate selected segment
+  var activeSeg=document.getElementById('wf-seg-'+stage);
+  var activeCol=WF_STAGES[stage];
+  if(activeSeg){activeSeg.style.fill='rgba('+hexToRgb(activeCol)+',0.5)';activeSeg.style.strokeWidth='2.5';activeSeg.style.filter='url(#wf-glow)';}
+  var at1=document.getElementById('wf-seg-'+stage+'-t1');
+  var at2=document.getElementById('wf-seg-'+stage+'-t2');
+  if(at1)at1.style.fill='#fff';
+  if(at2)at2.style.fill='rgba(255,255,255,0.6)';
+  // Nav items
+  document.querySelectorAll('.wf-snav-item').forEach(function(i){i.classList.remove('active');});
+  document.querySelectorAll('.wf-snav-item[data-stage="'+stage+'"]').forEach(function(i){i.classList.add('active');});
+  // Panels
+  document.querySelectorAll('.wf-panel').forEach(function(p){p.classList.remove('active');});
+  var panel=document.getElementById('wf-panel-'+stage);
+  if(panel)panel.classList.add('active');
 }
-
+function hexToRgb(hex){var r=parseInt(hex.slice(1,3),16);var g=parseInt(hex.slice(3,5),16);var b=parseInt(hex.slice(5,7),16);return r+','+g+','+b;}
+// Init first segment as active
+(function(){var seg=document.getElementById('wf-seg-demand');if(seg){seg.style.fill='rgba(232,99,74,0.5)';seg.style.strokeWidth='2.5';}var t1=document.getElementById('wf-seg-demand-t1');var t2=document.getElementById('wf-seg-demand-t2');if(t1)t1.style.fill='#fff';if(t2)t2.style.fill='rgba(255,255,255,0.6)';}());
 </script>
