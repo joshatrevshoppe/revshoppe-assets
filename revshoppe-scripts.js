@@ -1,4 +1,3 @@
-<script>window.__cl=true;</script>
 document.addEventListener('DOMContentLoaded', function() {
     var btn = document.getElementById('nav-hamburger');
     var drawer = document.getElementById('nav-mobile');
