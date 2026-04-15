@@ -2,6 +2,7 @@
 <html>
 <head>
 <meta name="rs-page" content="salesforce-architecture">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="preload" href="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/67dea6a57df5c619dba13468_RocGroteskWide-Medium.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/67dea6a54f0aa4e3e2f1f6e8_RocGroteskWide-Light.woff2" as="font" type="font/woff2" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
@@ -261,6 +262,14 @@ section { position: relative; z-index: 1; }
 .cta-btn-row { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
 
 /* ── RESPONSIVE ── */
+/* ── RESPONSIVE — laptop 1024px ── */
+@media (max-width: 1024px) {
+  .section-inner { max-width: 900px; }
+  .service-row { grid-template-columns: 120px 1fr; gap: 32px; }
+  .scanner-grid { grid-template-columns: 280px 1fr; }
+}
+
+/* ── RESPONSIVE — tablet 900px ── */
 @media (max-width: 900px) {
   .flip-grid { grid-template-columns: 1fr; }
   .scanner-grid { grid-template-columns: 1fr; }
@@ -268,14 +277,56 @@ section { position: relative; z-index: 1; }
   .outcomes-grid { grid-template-columns: 1fr; }
   .service-row { grid-template-columns: 1fr; gap: 6px; }
   .slider-includes { grid-template-columns: 1fr; }
+  .hero-btns { flex-direction: column; align-items: center; }
+  .hero-btns a { width: 100%; max-width: 320px; justify-content: center; }
+  .cta-btn-row { flex-direction: column; align-items: center; }
+  .cta-btn-row a { width: 100%; max-width: 320px; justify-content: center; }
 }
+
+/* ── RESPONSIVE — mobile 768px ── */
 @media (max-width: 768px) {
-  .section { padding: 64px 24px; }
-  .hero { padding: 64px 24px 56px; min-height: auto; }
-  .slider-card-inner { padding: 28px 24px; }
-  .cta-section { padding: 64px 24px; }
-  .scanner-footer { flex-direction: column; align-items: flex-start; }
+  .section { padding: 64px 20px; }
+  .section-inner { max-width: 100%; }
+  .hero { padding: 80px 20px 60px; min-height: auto; }
+  .hero h1 { font-size: clamp(30px, 8vw, 48px); letter-spacing: -1.5px; }
+  .hero-lead { font-size: 16px; }
+  .sec-h2 { font-size: clamp(24px, 6vw, 36px); letter-spacing: -1px; }
+  .slider-card-inner { padding: 28px 20px; }
+  .slider-price-amount { font-size: 48px; }
+  .slider-hours-label { font-size: 18px; }
+  .cta-section { padding: 64px 20px; }
+  .scanner-footer { flex-direction: column; align-items: flex-start; gap: 16px; }
+  .scanner-footer .btn-primary { width: 100%; justify-content: center; }
+  .flip-card-wrap { min-height: 380px; }
+  .flip-front-header { flex-direction: column; align-items: flex-start; gap: 6px; }
+  .flip-front-title { text-align: left; max-width: 100%; }
+  .outcome-card { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .outcome-stat { font-size: 32px; min-width: auto; }
+  .slider-trust { gap: 12px; }
+  .faq-q-text { font-size: 15px; }
+  .service-rc { margin-left: 0; }
+}
+
+/* ── RESPONSIVE — small mobile 480px ── */
+@media (max-width: 480px) {
+  .hero { padding: 72px 16px 52px; }
+  .section { padding: 56px 16px; }
+  .hero h1 { font-size: clamp(26px, 9vw, 38px); }
+  .hero-btns a { max-width: 100%; }
   .flip-card-wrap { min-height: 420px; }
+  .flip-front-body { padding: 14px 16px; }
+  .flip-back-body { padding: 16px; }
+  .flip-front-header { padding: 16px; }
+  .flip-back-header { padding: 14px 16px; }
+  .slider-card-inner { padding: 24px 16px; }
+  .scanner-left { padding: 20px 16px; }
+  .scanner-right { padding: 20px 16px; }
+  .scanner-bar { padding: 12px 16px; }
+  .scanner-footer { padding: 16px; }
+  .cta-section { padding: 56px 16px; }
+  .cta-h2 { font-size: clamp(26px, 7vw, 36px); }
+  .outcome-card { padding: 20px 16px; }
+  .service-row { padding: 24px 0; }
 }
 </style>
 
