@@ -101,7 +101,7 @@ section { position: relative; z-index: 1; }
 .hero::before { content: ''; position: absolute; top: -120px; left: 50%; transform: translateX(-50%); width: 800px; height: 800px; background: radial-gradient(circle, rgba(232,99,74,0.08) 0%, transparent 70%); pointer-events: none; }
 .hero-inner { max-width: 960px; margin: 0 auto; position: relative; z-index: 1; }
 .eyebrow { display: inline-block; font-family: "IBM Plex Mono", monospace; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); margin-bottom: 28px; }
-.hero h1 { font-family: "RocWideMedium", sans-serif; font-size: clamp(40px, 5.5vw, 72px); line-height: 1.04; letter-spacing: -2.5px; color: #fff; margin-bottom: 28px; }
+.hero h1 { font-family: "RocWideMedium", sans-serif; font-size: clamp(36px, 4.2vw, 60px); line-height: 1.04; letter-spacing: -2px; color: #fff; margin-bottom: 28px; }
 .hero h1 em { font-style: normal; color: var(--accent); }
 .hero-lead { font-family: "Montserrat", sans-serif; font-size: 18px; color: rgba(255,255,255,0.5); line-height: 1.75; max-width: 640px; margin: 0 auto 16px; letter-spacing: -0.3px; }
 .hero-terms { display: block; font-family: "IBM Plex Mono", monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(232,99,74,0.6); margin-bottom: 40px; }
@@ -117,7 +117,7 @@ section { position: relative; z-index: 1; }
 @keyframes cml-fwd { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 @keyframes cml-rev { 0% { transform: translateX(-50%); } 100% { transform: translateX(0); } }
 .cml-item { display: inline-flex; align-items: center; justify-content: center; height: 52px; padding: 0 36px; border-right: 0.5px solid rgba(0,0,0,0.07); flex-shrink: 0; }
-.cml-item img { height: 20px !important; width: auto !important; max-height: 20px !important; max-width: 120px !important; object-fit: contain !important; filter: grayscale(1); opacity: 0.45; display: block !important; }
+.cml-item img { height: 26px !important; width: auto !important; max-height: 26px !important; max-width: 140px !important; object-fit: contain !important; filter: grayscale(1); opacity: 0.6; display: block !important; }
 
 /* ── FLIP CARDS ── */
 .flip-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-top: 48px; }
@@ -588,7 +588,7 @@ section { position: relative; z-index: 1; }
 <section class="tex-light hatch-light section">
   <div class="section-inner">
     <span class="sec-label">What Clients Achieved</span>
-    <h2 class="sec-h2">Same team. Same tools.<br>The architecture changed. So did the results.</h2>
+    <h2 class="sec-h2" style="max-width:560px;">Same team. Same tools.<br>The architecture changed. So did the results.</h2>
     <p class="sec-sub">Every outcome below came after fixing the CRM foundation. Nothing else changed. The motion was already there.</p>
     <div class="outcomes-grid">
       <div class="outcome-card">
@@ -709,12 +709,13 @@ section { position: relative; z-index: 1; }
 </script>
 
 <!-- ═══ SLIDER + STRIPE JS ════════════════════════════════════════ -->
+<script src="https://js.stripe.com/v3/"></script>
 <script>
 (function(){
   var STEPS=[{hours:10,rate:225,price:2250,zone:'standard',label:'Standard Rate · $225/hr'},{hours:20,rate:225,price:4500,zone:'standard',label:'Standard Rate · $225/hr'},{hours:30,rate:225,price:6750,zone:'standard',label:'Standard Rate · $225/hr'},{hours:40,rate:210,price:8400,zone:'growth',label:'Growth Rate · $210/hr · 7% off'},{hours:50,rate:210,price:10500,zone:'growth',label:'Growth Rate · $210/hr · 7% off'},{hours:60,rate:210,price:12600,zone:'growth',label:'Growth Rate · $210/hr · 7% off'},{hours:80,rate:195,price:15600,zone:'scale',label:'Scale Rate · $195/hr · 13% off'},{hours:100,rate:195,price:19500,zone:'scale',label:'Scale Rate · $195/hr · 13% off'},{hours:120,rate:185,price:22200,zone:'enterprise',label:'Enterprise · Talk to Us'},{hours:160,rate:185,price:29600,zone:'enterprise',label:'Enterprise · Talk to Us'}];
   var STRIPE_PK='pk_live_avgcMnPuZYt7PGdmAvDYqaoA00XcT2ut1k';
   var PRICE_ID='price_HORGbtr3mJzMsn';
-  var SUCCESS_URL='https://www.revshoppe.com/salesforce-architecture/success';
+  var SUCCESS_URL='https://www.revshoppe.com/salesforce-architecture-success';
   var CANCEL_URL=window.location.href;
   var slider=document.getElementById('sa-hours-slider');
   var priceEl=document.getElementById('sa-price-display');
@@ -722,8 +723,12 @@ section { position: relative; z-index: 1; }
   var rateEl=document.getElementById('sa-rate-display');
   var badgeEl=document.getElementById('sa-zone-badge');
   var btnEl=document.getElementById('sa-checkout-btn');
+  var currentStep=0;
+
   function fmt(n){return '$'+n.toLocaleString('en-US');}
+
   function update(idx){
+    currentStep=idx;
     var s=STEPS[idx];
     var pct=(idx/(STEPS.length-1))*100;
     priceEl.textContent=fmt(s.price);
@@ -732,19 +737,39 @@ section { position: relative; z-index: 1; }
     badgeEl.className='slider-zone-badge zone-'+s.zone;
     badgeEl.textContent=s.label;
     slider.style.background='linear-gradient(to right,var(--accent) 0%,var(--accent) '+pct+'%,rgba(0,0,0,0.12) '+pct+'%,rgba(0,0,0,0.12) 100%)';
-    if(s.zone==='enterprise'){btnEl.textContent='Talk to Us for '+s.hours+'+ hrs/mo →';btnEl.classList.add('is-enterprise');btnEl.onclick=function(){window.location.href='https://www.revshoppe.com/contact';};}
-    else{btnEl.textContent='Get Started — '+s.hours+' hrs/mo →';btnEl.classList.remove('is-enterprise');btnEl.onclick=function(){checkout(s.hours);};}
+    if(s.zone==='enterprise'){
+      btnEl.textContent='Talk to Us for '+s.hours+'+ hrs/mo →';
+      btnEl.classList.add('is-enterprise');
+      btnEl.classList.remove('loading');
+    } else {
+      btnEl.textContent='Get Started — '+s.hours+' hrs/mo →';
+      btnEl.classList.remove('is-enterprise');
+      btnEl.classList.remove('loading');
+    }
   }
-  var stripe;
-  function checkout(hours){
-    btnEl.classList.add('loading');btnEl.textContent='Redirecting...';
-    if(!stripe){stripe=Stripe(STRIPE_PK);}
-    stripe.redirectToCheckout({lineItems:[{price:PRICE_ID,quantity:hours}],mode:'subscription',successUrl:SUCCESS_URL,cancelUrl:CANCEL_URL}).then(function(r){if(r.error){btnEl.classList.remove('loading');update(parseInt(slider.value));}});
-  }
+
+  btnEl.addEventListener('click', function(){
+    var s=STEPS[currentStep];
+    if(s.zone==='enterprise'){
+      window.location.href='https://www.revshoppe.com/contact';
+      return;
+    }
+    btnEl.classList.add('loading');
+    btnEl.textContent='Redirecting...';
+    var stripeInstance=Stripe(STRIPE_PK);
+    stripeInstance.redirectToCheckout({
+      lineItems:[{price:PRICE_ID,quantity:s.hours}],
+      mode:'subscription',
+      successUrl:SUCCESS_URL,
+      cancelUrl:CANCEL_URL
+    }).then(function(r){
+      if(r.error){btnEl.classList.remove('loading');update(currentStep);}
+    });
+  });
+
   slider.addEventListener('input',function(){update(parseInt(this.value));});
   update(0);
 })();
 </script>
-<script src="https://js.stripe.com/v3/" async></script>
 </body>
 </html>
