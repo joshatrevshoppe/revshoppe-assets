@@ -786,18 +786,17 @@ document.addEventListener('click',function(e){
 <script>
 (function(){
   var STEPS = [
-    {hours:10,  rate:225, price:2250,  zone:'standard',   label:'Standard Rate · $225/hr'},
-    {hours:20,  rate:225, price:4500,  zone:'standard',   label:'Standard Rate · $225/hr'},
-    {hours:30,  rate:225, price:6750,  zone:'standard',   label:'Standard Rate · $225/hr'},
-    {hours:40,  rate:210, price:8400,  zone:'growth',     label:'Growth Rate · $210/hr · 7% off'},
-    {hours:50,  rate:210, price:10500, zone:'growth',     label:'Growth Rate · $210/hr · 7% off'},
-    {hours:60,  rate:210, price:12600, zone:'growth',     label:'Growth Rate · $210/hr · 7% off'},
-    {hours:80,  rate:195, price:15600, zone:'scale',      label:'Scale Rate · $195/hr · 13% off'},
-    {hours:100, rate:195, price:19500, zone:'scale',      label:'Scale Rate · $195/hr · 13% off'},
-    {hours:120, rate:185, price:22200, zone:'enterprise', label:'Enterprise · Talk to Us'},
-    {hours:160, rate:185, price:29600, zone:'enterprise', label:'Enterprise · Talk to Us'}
+    {hours:10,  rate:225, price:2250,  zone:'standard',   label:'Standard Rate · $225/hr',        link:'https://buy.stripe.com/cNi14ng475150q4gQZg7e01'},
+    {hours:20,  rate:225, price:4500,  zone:'standard',   label:'Standard Rate · $225/hr',        link:'https://buy.stripe.com/4gM00jbNR0KPc8M8ktg7e02'},
+    {hours:30,  rate:225, price:6750,  zone:'standard',   label:'Standard Rate · $225/hr',        link:'https://buy.stripe.com/3cI4gz8BF5155Ko9oxg7e03'},
+    {hours:40,  rate:210, price:8400,  zone:'growth',     label:'Growth Rate · $210/hr · 7% off', link:'https://buy.stripe.com/4gM28r6txalpa0EdENg7e04'},
+    {hours:50,  rate:210, price:10500, zone:'growth',     label:'Growth Rate · $210/hr · 7% off', link:'https://buy.stripe.com/9B628r8BFalp1u858hg7e05'},
+    {hours:60,  rate:210, price:12600, zone:'growth',     label:'Growth Rate · $210/hr · 7% off', link:'https://buy.stripe.com/7sYbJ1f03gJNdcQasBg7e06'},
+    {hours:80,  rate:195, price:15600, zone:'scale',      label:'Scale Rate · $195/hr · 13% off', link:'https://buy.stripe.com/cNiaEXf03alp4Gk1W5g7e07'},
+    {hours:100, rate:195, price:19500, zone:'scale',      label:'Scale Rate · $195/hr · 13% off', link:'https://buy.stripe.com/9B6dR9aJN1OT7Sw7gpg7e08'},
+    {hours:120, rate:185, price:22200, zone:'enterprise', label:'Enterprise · Talk to Us',         link:'https://www.revshoppe.com/contact'},
+    {hours:160, rate:185, price:29600, zone:'enterprise', label:'Enterprise · Talk to Us',         link:'https://www.revshoppe.com/contact'}
   ];
-  var PAYMENT_LINK = 'https://buy.stripe.com/5kQ4gzaJN79d5KodENg7e00';
   var slider  = document.getElementById('sa-hours-slider');
   var priceEl = document.getElementById('sa-price-display');
   var hoursEl = document.getElementById('sa-hours-display');
@@ -823,15 +822,11 @@ document.addEventListener('click',function(e){
       btnEl.textContent = 'Get Started · ' + s.hours + ' hrs/mo →';
       btnEl.classList.remove('is-enterprise');
     }
-    btnEl.classList.remove('loading');
   }
   btnEl.addEventListener('click', function(){
     var s = STEPS[currentStep];
-    if(s.zone === 'enterprise'){
-      window.location.href = 'https://www.revshoppe.com/contact';
-      return;
-    }
-  window.open(PAYMENT_LINK + '?prefilled_quantity=' + s.hours, '_blank');  });
+    window.open(s.link, '_blank');
+  });
   slider.addEventListener('input', function(){ update(parseInt(this.value)); });
   update(0);
 })();
