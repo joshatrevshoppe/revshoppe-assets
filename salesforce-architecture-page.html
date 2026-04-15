@@ -36,7 +36,13 @@ body {
   font-weight: 300; font-display: block;
 }
 
-/* ── BROWSER AUTOFILL OVERRIDE ── */
+/* ── SMOOTH SCROLL ── */
+html { scroll-behavior: smooth; }
+
+/* ── NAV LOGO CLICK FIX ── */
+nav a, nav a * { pointer-events: auto !important; cursor: pointer !important; }
+nav { position: relative; z-index: 100; }
+
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
@@ -130,7 +136,7 @@ section { position: relative; z-index: 1; }
 @keyframes cml-fwd{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
 @keyframes cml-rev{0%{transform:translateX(-50%);}100%{transform:translateX(0);}}
 .cml-item{display:inline-flex!important;align-items:center!important;justify-content:center!important;height:52px!important;padding:0 36px!important;border-right:0.5px solid rgba(0,0,0,0.07)!important;flex-shrink:0!important;}
-.cml-item img{height:20px!important;width:auto!important;max-height:20px!important;max-width:120px!important;object-fit:contain!important;filter:grayscale(1) brightness(0)!important;opacity:0.55!important;display:block!important;}
+.cml-item img{height:20px!important;width:auto!important;max-height:20px!important;max-width:120px!important;object-fit:contain!important;filter:grayscale(1)!important;opacity:0.45!important;display:block!important;}
 
 /* ── FLIP CARDS ── */
 .flip-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-top: 48px; }
@@ -733,6 +739,18 @@ section { position: relative; z-index: 1; }
     </div>
   </div>
 </section>
+
+<script>
+document.addEventListener('click',function(e){
+  var a=e.target.closest('a[href^="#"]');
+  if(!a)return;
+  var id=a.getAttribute('href').slice(1);
+  var target=document.getElementById(id);
+  if(!target)return;
+  e.preventDefault();
+  target.scrollIntoView({behavior:'smooth',block:'start'});
+});
+</script>
 
 <!-- ═══ SCANNER JS ════════════════════════════════════════════════ -->
 <script>
