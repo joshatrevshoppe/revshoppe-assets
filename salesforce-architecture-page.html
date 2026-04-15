@@ -130,7 +130,7 @@ section { position: relative; z-index: 1; }
 @keyframes cml-fwd{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
 @keyframes cml-rev{0%{transform:translateX(-50%);}100%{transform:translateX(0);}}
 .cml-item{display:inline-flex!important;align-items:center!important;justify-content:center!important;height:52px!important;padding:0 36px!important;border-right:0.5px solid rgba(0,0,0,0.07)!important;flex-shrink:0!important;}
-.cml-item img{height:20px!important;width:auto!important;max-height:20px!important;max-width:120px!important;object-fit:contain!important;filter:grayscale(1) brightness(0)!important;opacity:0.4!important;display:block!important;}
+.cml-item img{height:20px!important;width:auto!important;max-height:20px!important;max-width:120px!important;object-fit:contain!important;filter:grayscale(1) brightness(0)!important;opacity:0.55!important;display:block!important;}
 
 /* ── FLIP CARDS ── */
 .flip-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-top: 48px; }
@@ -337,7 +337,7 @@ section { position: relative; z-index: 1; }
   <div class="hero-inner">
     <div class="eyebrow">Solutions · Salesforce Architecture</div>
     <h1>Your Salesforce is broken.<br>Your revenue <em>shows it.</em></h1>
-    <p class="hero-lead">Reps won't log in. Data can't be trusted. Forecasts are wrong. Nobody can tell you which motion closed the deal or where the pipeline came from. That's not a people problem. It's an architecture problem that's costing you pipeline every quarter.</p>
+    <p class="hero-lead">Reps won't log in. Data can't be trusted. Forecasts are wrong. Nobody can tell you which motion closed the deal or where the pipeline came from. That's not a people problem. It's an architecture problem, and it's leaking revenue every quarter.</p>
     <span class="hero-terms">Month-to-month · Pause anytime · No long-term contracts</span>
     <div class="hero-btns">
       <a href="#sa-pricing" class="btn-primary">Get Started →</a>
@@ -380,7 +380,7 @@ section { position: relative; z-index: 1; }
             <div class="flip-back-body">
               <div>
                 <div class="flip-consequence-title">Marketing spend is funding the wrong channels every quarter.</div>
-                <div class="flip-consequence-text">Without attribution, your highest-performing outbound motions are invisible. Underperformers stay funded. Every board presentation is built on incomplete data — and your CFO already knows the numbers don't add up.</div>
+                <div class="flip-consequence-text">Without attribution, your highest-performing outbound motions are invisible. Underperformers stay funded. Every board presentation is built on incomplete data. Your CFO already knows the numbers don't add up.</div>
               </div>
               <div class="flip-stat"><div class="flip-stat-num">96%</div><div class="flip-stat-desc">Of closed-won deals with no sequence attribution. Zero visibility into which commercial motions are generating ROI.</div></div>
             </div>
@@ -396,7 +396,7 @@ section { position: relative; z-index: 1; }
             <div class="flip-front-body">
               <div class="flip-row"><div class="flip-arrow">→</div><div class="flip-text"><strong>10,432 sync errors in three days.</strong> Your marketing automation, sales engagement platform, and CRM are actively miscommunicating. Sequences enroll the wrong contacts. Records duplicate on sync.</div></div>
               <div class="flip-row"><div class="flip-arrow">→</div><div class="flip-text"><strong>11,707 overdue tasks across the org.</strong> Automations fire out of sequence. Reps build workarounds. Activity data becomes worthless for pipeline inspection.</div></div>
-              <div class="flip-row"><div class="flip-arrow">→</div><div class="flip-text"><strong>46% of mailboxes and calendars misconfigured.</strong> Sequences fail silently. Meetings never get booked. The outbound motion looks active — it isn't.</div></div>
+              <div class="flip-row"><div class="flip-arrow">→</div><div class="flip-text"><strong>46% of mailboxes and calendars misconfigured.</strong> Sequences fail silently. Meetings never get booked. The outbound motion looks active. It is not.</div></div>
             </div>
             <div class="flip-hint" style="height:36px;flex-shrink:0;"></div>
           </div>
@@ -405,7 +405,7 @@ section { position: relative; z-index: 1; }
             <div class="flip-back-body">
               <div>
                 <div class="flip-consequence-title">Reps are doing manually what the system should do. That time has a dollar value.</div>
-                <div class="flip-consequence-text">Nine hours per rep per week lost to admin work that should not exist. Across a 50-person sales org, that's 450 hours of selling capacity lost every week — before you account for the pipeline that never gets created because outbound infrastructure fails silently.</div>
+                <div class="flip-consequence-text">Nine hours per rep per week lost to admin work that should not exist. Across a 50-person sales org, that's 450 hours of selling capacity lost every week. That does not count the pipeline never created because outbound infrastructure fails silently.</div>
               </div>
               <div class="flip-stat"><div class="flip-stat-num">9 hrs</div><div class="flip-stat-desc">Per rep per week recovered once automation is correctly governed. 50 reps × 9 hrs = 450 hours of selling capacity restored monthly.</div></div>
             </div>
@@ -429,8 +429,8 @@ section { position: relative; z-index: 1; }
             <div class="flip-back-header"><div class="flip-back-label">What It Costs You</div><div class="flip-back-area">Pipeline and Forecasting</div></div>
             <div class="flip-back-body">
               <div>
-                <div class="flip-consequence-title">Every downstream decision — headcount, spend, board commitments — is built on a number that doesn't reflect reality.</div>
-                <div class="flip-consequence-text">Hiring plans. Resourcing calls. Investor updates. When the forecast is wrong, every plan built on it compounds the error. The organizations most exposed are those growing fastest — where the cost of misdirection scales with the team.</div>
+                <div class="flip-consequence-title">Every downstream decision: headcount, spend, board commitments, is built on a number that doesn't reflect reality.</div>
+                <div class="flip-consequence-text">Hiring plans. Resourcing calls. Investor updates. When the forecast is wrong, every plan built on it compounds the error. The organizations most exposed are those growing fastest, where the cost of misdirection scales with the team.</div>
               </div>
               <div class="flip-stat"><div class="flip-stat-num">30-50%</div><div class="flip-stat-desc">Forecast variance QoQ when stage definitions aren't enforced. That variance is the gap between your plan and your actual revenue.</div></div>
             </div>
@@ -444,7 +444,7 @@ section { position: relative; z-index: 1; }
           <div class="flip-front">
             <div class="flip-front-header"><div class="flip-front-area">Adoption and Governance</div><div class="flip-front-title">Your team uses spreadsheets instead</div></div>
             <div class="flip-front-body">
-              <div class="flip-row"><div class="flip-arrow">→</div><div class="flip-text"><strong>Reps don't trust the data so they stop entering data.</strong> Low adoption makes bad data worse. The system becomes less useful every quarter — not more.</div></div>
+              <div class="flip-row"><div class="flip-arrow">→</div><div class="flip-text"><strong>Reps don't trust the data so they stop entering data.</strong> Low adoption makes bad data worse. The system becomes less useful every quarter, not more.</div></div>
               <div class="flip-row"><div class="flip-arrow">→</div><div class="flip-text"><strong>No field standards. No naming conventions. No change management process.</strong> Every admin departure takes institutional knowledge with them. Every new hire inherits a different mess.</div></div>
               <div class="flip-row"><div class="flip-arrow">→</div><div class="flip-text"><strong>Six to seven figures spent on the implementation.</strong> Eighteen months later, your highest-paid reps live in spreadsheets and the CRM is a compliance checkbox.</div></div>
             </div>
@@ -454,7 +454,7 @@ section { position: relative; z-index: 1; }
             <div class="flip-back-header"><div class="flip-back-label">What It Costs You</div><div class="flip-back-area">Adoption and Governance</div></div>
             <div class="flip-back-body">
               <div>
-                <div class="flip-consequence-title">A six-figure platform investment generating zero competitive advantage — and a second six-figure remediation sitting on your roadmap.</div>
+                <div class="flip-consequence-title">A six-figure platform investment generating zero competitive advantage, with a second six-figure remediation sitting on your roadmap.</div>
                 <div class="flip-consequence-text">You're paying Salesforce every month for a system your team doesn't use. Onboarding cost per rep increases because there's no documented standard. When your top performer leaves, their pipeline context disappears. The recovery cost increases every quarter this goes unaddressed.</div>
               </div>
               <div class="flip-stat"><div class="flip-stat-num">~27%</div><div class="flip-stat-desc">Industry average Salesforce adoption without active governance. Most orgs never reach 47% without a deliberate architecture intervention.</div></div>
@@ -479,7 +479,7 @@ section { position: relative; z-index: 1; }
         <div><span class="service-num">01</span><span class="service-category">Foundation</span></div>
         <div>
           <div class="service-title">CRM Audit and Remediation</div>
-          <div class="service-desc">We access your instance and look at everything leadership is looking at — pipeline reports, stage conversion, sync error logs, automation rules, field mapping, and data quality at scale. We quantify what's broken in dollar terms before we fix a single thing. You know the cost before the end of week one.</div>
+          <div class="service-desc">We access your instance and look at everything leadership is looking at, pipeline reports, stage conversion, sync error logs, automation rules, field mapping, and data quality at scale. We quantify what's broken in dollar terms before we fix a single thing. You know the cost before the end of week one.</div>
           <div class="service-rc"><div class="service-rc-label">Financial impact addressed</div><div class="service-rc-text">Blind spots in data, attribution, and reporting that are suppressing pipeline creation and eroding board confidence in revenue forecasts</div></div>
           <div class="service-tags"><span class="service-tag">Data Audit</span><span class="service-tag">Sync Error Remediation</span><span class="service-tag">Schema Review</span><span class="service-tag">Deduplication</span><span class="service-tag">Change Management</span></div>
         </div>
@@ -488,7 +488,7 @@ section { position: relative; z-index: 1; }
         <div><span class="service-num">02</span><span class="service-category">Architecture</span></div>
         <div>
           <div class="service-title">Data Model and Governance</div>
-          <div class="service-desc">Object structure, field standards, record types, validation rules, naming conventions, and a change management process that survives headcount changes. Built around how your team actually sells, quotes, and manages accounts — not how the platform ships out of the box. Documented so the next admin doesn't start from zero.</div>
+          <div class="service-desc">Object structure, field standards, record types, validation rules, naming conventions, and a change management process that survives headcount changes. Built around how your team actually sells, quotes, and manages accounts. Not how the platform ships out of the box. Documented so the next admin doesn't start from zero.</div>
           <div class="service-rc"><div class="service-rc-label">Financial impact addressed</div><div class="service-rc-text">Institutional knowledge loss on every departure, increasing onboarding cost per rep, and a system architecture that degrades faster than it improves</div></div>
           <div class="service-tags"><span class="service-tag">Data Model</span><span class="service-tag">Validation Rules</span><span class="service-tag">Field Standards</span><span class="service-tag">Governance Framework</span><span class="service-tag">Documentation</span></div>
         </div>
@@ -497,7 +497,7 @@ section { position: relative; z-index: 1; }
         <div><span class="service-num">03</span><span class="service-category">Automation</span></div>
         <div>
           <div class="service-title">Flows, Triggers, and Integration</div>
-          <div class="service-desc">Automations that execute reliably, with no trigger conflicts and full documentation. Marketing automation, sales engagement platform, and CRM connections mapped — every error source identified, sync logic corrected, integration health monitored daily. When this works, reps recover hours they didn't know they were losing.</div>
+          <div class="service-desc">Automations that execute reliably, with no trigger conflicts and full documentation. Marketing automation, sales engagement platform, and CRM connections mapped: every error source identified, sync logic corrected, integration health monitored daily. When this works, reps recover hours they didn't know they were losing.</div>
           <div class="service-rc"><div class="service-rc-label">Financial impact addressed</div><div class="service-rc-text">Selling capacity lost to manual admin that compounds across headcount, plus pipeline never created because outbound infrastructure was quietly broken</div></div>
           <div class="service-tags"><span class="service-tag">Flow Architecture</span><span class="service-tag">Platform Sync</span><span class="service-tag">Integration Audit</span><span class="service-tag">Error Remediation</span><span class="service-tag">Trigger Governance</span></div>
         </div>
@@ -506,7 +506,7 @@ section { position: relative; z-index: 1; }
         <div><span class="service-num">04</span><span class="service-category">Intelligence</span></div>
         <div>
           <div class="service-title">Attribution, Reporting, and RevOps Strategy</div>
-          <div class="service-desc">Lead source, campaign, and sequence attribution built correctly from first touch through closed-won. Dashboards that answer the questions your CRO is being asked in board meetings. Monthly findings that surface what the data is telling us about your commercial motion — across marketing, pipeline, close, and retention — before you have to ask.</div>
+          <div class="service-desc">Lead source, campaign, and sequence attribution built correctly from first touch through closed-won. Dashboards that answer the questions your CRO is being asked in board meetings. Monthly findings that surface what the data is telling us about your commercial motion, across marketing, pipeline, close, and retention, before you have to ask.</div>
           <div class="service-rc"><div class="service-rc-label">Financial impact addressed</div><div class="service-rc-text">Marketing and sales investment decisions made without attribution data, board reporting that doesn't reflect commercial reality, and a GTM motion that can't be optimized because it can't be accurately measured</div></div>
           <div class="service-tags"><span class="service-tag">Full-Funnel Attribution</span><span class="service-tag">Executive Dashboards</span><span class="service-tag">Monthly Findings</span><span class="service-tag">Strategic Roadmap</span></div>
         </div>
@@ -598,7 +598,7 @@ section { position: relative; z-index: 1; }
             <div class="slider-feat"><span class="slider-feat-icon">✓</span><span class="slider-feat-text">Full change management and documentation</span></div>
             <div class="slider-feat"><span class="slider-feat-icon">✓</span><span class="slider-feat-text">Senior specialists do the work</span></div>
           </div>
-          <button class="slider-cta" id="sa-checkout-btn">Get Started — 10 hrs/mo →</button>
+          <button class="slider-cta" id="sa-checkout-btn">Get Started · 10 hrs/mo →</button>
         </div>
       </div>
       <div class="slider-trust">
@@ -623,7 +623,7 @@ section { position: relative; z-index: 1; }
         <div class="outcome-stat">9 hrs</div>
         <div class="outcome-content">
           <div class="outcome-label">Selling Time Recovered Per Rep Weekly</div>
-          <div class="outcome-desc">Workflow automation and governed processes eliminated manual admin once the system was built correctly. Nine hours per rep, per week — back into pipeline generation.</div>
+          <div class="outcome-desc">Workflow automation and governed processes eliminated manual admin once the system was built correctly. Nine hours per rep, per week, back into pipeline generation.</div>
           <div class="outcome-impact">50 reps × 9 hrs = 450 hrs of selling capacity restored monthly</div>
         </div>
       </div>
@@ -664,22 +664,22 @@ section { position: relative; z-index: 1; }
 
       <div class="faq-item">
         <div class="faq-q"><span class="faq-q-text">Why won't my sales team use Salesforce?</span><span class="faq-icon">+</span></div>
-        <div class="faq-a">Because the system isn't built for how they sell. When Salesforce requires more work than it saves — when data is wrong, automations misfire, and the forecast view doesn't match reality — reps build workarounds and stop logging. That's not a training problem. It's an architecture problem. We fix the system first. Adoption follows because the tool finally works the way the team does.</div>
+        <div class="faq-a">Because the system isn't built for how they sell. When Salesforce requires more work than it saves, when data is wrong, automations misfire, and the forecast view doesn't match reality, reps build workarounds and stop logging. That's not a training problem. It's an architecture problem. We fix the system first. Adoption follows because the tool finally works the way the team does.</div>
       </div>
 
       <div class="faq-item">
         <div class="faq-q"><span class="faq-q-text">Our Salesforce implementation failed. Can you fix it without starting over?</span><span class="faq-icon">+</span></div>
-        <div class="faq-a">Almost always yes. A full reimplementation is rarely necessary and almost always more disruptive than the original problem. We audit what exists, document what's salvageable, and rebuild only what's creating active financial drag. Most organizations have more working infrastructure than they think — it just needs to be cleaned, governed, and properly connected. We deliver a remediation plan before we touch anything.</div>
+        <div class="faq-a">Almost always yes. A full reimplementation is rarely necessary and almost always more disruptive than the original problem. We audit what exists, document what's salvageable, and rebuild only what's creating active financial drag. Most organizations have more working infrastructure than they think, it just needs to be cleaned, governed, and properly connected. We deliver a remediation plan before we touch anything.</div>
       </div>
 
       <div class="faq-item">
         <div class="faq-q"><span class="faq-q-text">We use Salesforce Financial Services Cloud. Is your team equipped for that?</span><span class="faq-icon">+</span></div>
-        <div class="faq-a">Yes. Financial Services Cloud introduces complexity that standard Salesforce implementations don't — household objects, relationship maps, referral tracking, compliance-driven workflows, and advisor productivity tooling that breaks when data governance fails. We work with insurance agencies, RIAs, wealth management firms, and banking operations where FSC is the commercial system of record. The architecture principles are the same. The object model and regulatory constraints require specific expertise we have.</div>
+        <div class="faq-a">Yes. Financial Services Cloud introduces complexity that standard Salesforce implementations do not: household objects, relationship maps, referral tracking, compliance-driven workflows, and advisor productivity tooling that breaks when data governance fails. We work with insurance agencies, RIAs, wealth management firms, and banking operations where FSC is the commercial system of record. The architecture principles are the same. The object model and regulatory constraints require specific expertise we have.</div>
       </div>
 
       <div class="faq-item">
         <div class="faq-q"><span class="faq-q-text">We run Salesforce Field Service. Can you help with scheduling and dispatch issues?</span><span class="faq-icon">+</span></div>
-        <div class="faq-a">Yes. Field Service Lightning creates a set of operational and data problems that compound quickly when the underlying CRM architecture isn't sound — scheduling conflicts, work order attribution failures, technician productivity gaps, and mobile app sync issues that cause data loss in the field. We address the CRM foundation first, then work through the FSL configuration layer and dispatcher workflow. If your field ops revenue is leaking because dispatch and billing don't reconcile with the CRM, that's a solvable architecture problem.</div>
+        <div class="faq-a">Yes. Field Service Lightning creates a set of operational and data problems that compound quickly when the underlying CRM architecture is not sound: scheduling conflicts, work order attribution failures, technician productivity gaps, and mobile app sync issues that cause data loss in the field. We address the CRM foundation first, then work through the FSL configuration layer and dispatcher workflow. If your field ops revenue is leaking because dispatch and billing don't reconcile with the CRM, that's a solvable architecture problem.</div>
       </div>
 
       <div class="faq-item">
@@ -694,27 +694,27 @@ section { position: relative; z-index: 1; }
 
       <div class="faq-item">
         <div class="faq-q"><span class="faq-q-text">Salesforce and our ERP aren't syncing. Finance and sales are working from different numbers.</span><span class="faq-icon">+</span></div>
-        <div class="faq-a">A Salesforce-ERP disconnect — whether it's NetSuite, SAP, Dynamics, or another platform — is one of the highest-cost integration failures in a commercial org. When closed-won in Salesforce doesn't reconcile with recognized revenue in the ERP, your CFO can't trust either system. Quota attainment, commission calculations, and revenue forecasting all break. We identify the disconnect, map the correct data flow, and build an integration architecture that keeps both systems accurate. Finance and sales working from the same numbers is not optional — it's the foundation of a functional commercial model.</div>
+        <div class="faq-a">A Salesforce-ERP disconnect: NetSuite, SAP, Dynamics, or another platform, is one of the highest-cost integration failures in a commercial org. When closed-won in Salesforce doesn't reconcile with recognized revenue in the ERP, your CFO can't trust either system. Quota attainment, commission calculations, and revenue forecasting all break. We identify the disconnect, map the correct data flow, and build an integration architecture that keeps both systems accurate. Finance and sales working from the same numbers is not optional. It is the foundation of a functional commercial model.</div>
       </div>
 
       <div class="faq-item">
         <div class="faq-q"><span class="faq-q-text">How do I fix our Salesforce forecasting and attribution?</span><span class="faq-icon">+</span></div>
-        <div class="faq-a">Forecasting breaks when stage definitions aren't standardized and required fields aren't enforced. Attribution breaks when lead source, campaign, and sequence data aren't captured at the point of entry. Both are architecture problems — not reporting problems. We rebuild the data model and validation rules first, then construct the reporting layer on data you can actually trust. Your CRO should be able to walk into a board meeting confident in the number.</div>
+        <div class="faq-a">Forecasting breaks when stage definitions aren't standardized and required fields aren't enforced. Attribution breaks when lead source, campaign, and sequence data aren't captured at the point of entry. Both are architecture problems, not reporting problems. We rebuild the data model and validation rules first, then construct the reporting layer on data you can actually trust. Your CRO should be able to walk into a board meeting confident in the number.</div>
       </div>
 
       <div class="faq-item">
         <div class="faq-q"><span class="faq-q-text">Can you identify where revenue is leaking in our go-to-market?</span><span class="faq-icon">+</span></div>
-        <div class="faq-a">Yes — and this is a core part of what we deliver. We're in your instance every day reading the same reports your leadership sees. We look across the full funnel from marketing through close through retention, and we surface where pipeline is leaking, where handoffs are breaking down, where attribution is missing, and where automation failures are creating invisible financial drag. The monthly findings report is built specifically to answer the question your CRO is asking but can't get a straight answer on.</div>
+        <div class="faq-a">Yes, and this is a core part of what we deliver. We're in your instance every day reading the same reports your leadership sees. We look across the full funnel from marketing through close through retention, and we surface where pipeline is leaking, where handoffs are breaking down, where attribution is missing, and where automation failures are creating invisible financial drag. The monthly findings report is built specifically to answer the question your CRO is asking but can't get a straight answer on.</div>
       </div>
 
       <div class="faq-item">
         <div class="faq-q"><span class="faq-q-text">How quickly can we get started?</span><span class="faq-icon">+</span></div>
-        <div class="faq-a">Fast. Sign up and we schedule an onboarding call within 24 business hours. We get access to your instance, run an initial audit, and have findings in front of you before the end of the first week — with a prioritized remediation plan and a clear view of the financial impact before we fix anything.</div>
+        <div class="faq-a">Fast. Sign up and we schedule an onboarding call within 24 business hours. We get access to your instance, run an initial audit, and have findings in front of you before the end of the first week, with a prioritized remediation plan and a clear view of the financial impact before we fix anything.</div>
       </div>
 
       <div class="faq-item">
         <div class="faq-q"><span class="faq-q-text">Do you work with companies outside of tech?</span><span class="faq-icon">+</span></div>
-        <div class="faq-a">Yes — and it's where most of our work happens. Insurance agencies, financial services firms, logistics and freight brokerages, healthcare organizations, staffing companies, manufacturing operations, associations. Industries where the commercial model is complex, the CRM is heavily customized, and the internal team doesn't have the Salesforce architecture and RevOps expertise to identify what's creating financial drag. If your team sells, quotes, forecasts, or manages accounts in Salesforce, we can help.</div>
+        <div class="faq-a">Yes, and it's where most of our work happens. Insurance agencies, financial services firms, logistics and freight brokerages, healthcare organizations, staffing companies, manufacturing operations, associations. Industries where the commercial model is complex, the CRM is heavily customized, and the internal team doesn't have the Salesforce architecture and RevOps expertise to identify what's creating financial drag. If your team sells, quotes, forecasts, or manages accounts in Salesforce, we can help.</div>
       </div>
 
     </div>
@@ -726,7 +726,7 @@ section { position: relative; z-index: 1; }
   <div class="cta-inner">
     <span class="cta-eyebrow">Solutions · Salesforce Strategy and Operations</span>
     <h2 class="cta-h2">Your CRM is either an asset or a liability.</h2>
-    <p class="cta-body">Every week it stays broken, your reps operate blind, your pipeline leaks, and the gap between what you report and what's real gets wider. Salesforce specialists and RevOps strategists who understand your full commercial funnel — and what a broken CRM is actually costing you.</p>
+    <p class="cta-body">Every week it stays broken, your reps operate blind, your pipeline leaks, and the gap between what you report and what's real gets wider. Salesforce specialists and RevOps strategists who understand your full commercial funnel and what a broken CRM is actually costing you.</p>
     <div class="cta-btn-row">
       <a href="#sa-pricing" class="btn-white">Get Started →</a>
       <a href="https://www.revshoppe.com/contact" class="btn-white-ghost">Talk to Us</a>
@@ -740,10 +740,10 @@ section { position: relative; z-index: 1; }
   var findings = [
     {area:'Data Integrity · Critical',title:'83% of contact records can\'t support real segmentation or targeting',finding:'Job function, seniority, and industry are missing on the majority of records. Scoring models are running on guesswork. Enrichment tools are configured but not writing back correctly. Every persona-based campaign and every ABM motion is operating without the data it needs.',consequence:'Every dollar allocated to intent data and targeted outbound is partially wasted. Segmentation produces activity, not qualified pipeline. The financial cost compounds with every new contact ingested under broken data standards.'},
     {area:'Attribution Coverage · Critical',title:'96% of closed deals have zero attribution to a sequence or campaign',finding:'Leadership cannot tell the board which outbound motions, campaigns, or channels generated revenue. The highest-performing sequences are invisible in reporting. The underperformers stay funded because nobody can distinguish between them.',consequence:'Marketing and sales investment is being optimized for the wrong activities every quarter. The compounding financial cost is misdirected spend plus the strategic cost of decisions made without visibility into what\'s actually working.'},
-    {area:'Automation Health · Degraded',title:'Automations exist. Most of them are misfiring.',finding:'11,707 overdue tasks across the org. Flows were built for a motion the team no longer runs. Triggers conflict. Reps built workarounds and stopped logging accurately. The system produces noise instead of signal — and sales leadership is coaching off the noise.',consequence:'Reps are doing manually what automation should handle. Nine hours per rep per week in a 50-person org is 450 hours of selling capacity lost monthly. Pipeline that never gets created because outbound infrastructure fails silently every day.'},
+    {area:'Automation Health · Degraded',title:'Automations exist. Most of them are misfiring.',finding:'11,707 overdue tasks across the org. Flows were built for a motion the team no longer runs. Triggers conflict. Reps built workarounds and stopped logging accurately. The system produces noise instead of signal, and sales leadership is coaching off the noise.',consequence:'Reps are doing manually what automation should handle. Nine hours per rep per week in a 50-person org is 450 hours of selling capacity lost monthly. Pipeline that never gets created because outbound infrastructure fails silently every day.'},
     {area:'Pipeline Accuracy · Degraded',title:'The forecast is someone\'s best guess dressed up as a number',finding:'Stage definitions vary by rep. No validation rules enforce required fields before deals advance. Weighted pipeline math is meaningless on inconsistent inputs. What the VP of Sales presents to the CFO and what\'s real diverge every quarter.',consequence:'Headcount plans, resourcing decisions, and board commitments are built on a forecast nobody trusts. The financial cost of that misdirection compounds every planning cycle. It shows up as capacity mismatches, missed targets, and eroding investor confidence.'},
-    {area:'Platform Sync · Critical',title:'10,432 sync errors in three days — and nobody was looking at the log',finding:'Marketing automation, sales engagement platform, and Salesforce are actively miscommunicating. Records duplicate on sync. Sequences enroll contacts who shouldn\'t be enrolled. Field mappings write to wrong objects. The error log grows daily.',consequence:'Every day this runs unaddressed, data quality deteriorates and deduplication cost increases. Reps lose trust in the system faster. Pipeline is inflated by duplicate records. Recovery cost scales with time — this does not self-correct.'},
-    {area:'Rep Adoption · Degraded',title:'Your team uses Salesforce to comply, not to sell',finding:'46% of mailboxes and calendars misconfigured or disabled. Reps log the minimum required to avoid being flagged. Deal intelligence lives in Slack, personal notes, and memory. When a rep leaves, the pipeline context exits with them.',consequence:'Low adoption makes bad data worse every quarter. The CRM becomes less useful over time instead of more. The financial cost is the gap between what your platform investment should return and what it actually delivers — a gap that widens with every quarter this goes unaddressed.'}
+    {area:'Platform Sync · Critical',title:'10,432 sync errors in three days, and nobody was looking at the log',finding:'Marketing automation, sales engagement platform, and Salesforce are actively miscommunicating. Records duplicate on sync. Sequences enroll contacts who shouldn\'t be enrolled. Field mappings write to wrong objects. The error log grows daily.',consequence:'Every day this runs unaddressed, data quality deteriorates and deduplication cost increases. Reps lose trust in the system faster. Pipeline is inflated by duplicate records. Recovery cost scales with time. This does not self-correct.'},
+    {area:'Rep Adoption · Degraded',title:'Your team uses Salesforce to comply, not to sell',finding:'46% of mailboxes and calendars misconfigured or disabled. Reps log the minimum required to avoid being flagged. Deal intelligence lives in Slack, personal notes, and memory. When a rep leaves, the pipeline context exits with them.',consequence:'Low adoption makes bad data worse every quarter. The CRM becomes less useful over time instead of more. The financial cost is the gap between what your platform investment should return and what it actually delivers, a gap that widens with every quarter this goes unaddressed.'}
   ];
   var checks = document.querySelectorAll('.scanner-check');
   var detail = document.getElementById('scanner-detail');
@@ -814,7 +814,7 @@ section { position: relative; z-index: 1; }
       btnEl.textContent = 'Talk to Us for ' + s.hours + '+ hrs/mo →';
       btnEl.classList.add('is-enterprise');
     } else {
-      btnEl.textContent = 'Get Started — ' + s.hours + ' hrs/mo →';
+      btnEl.textContent = 'Get Started · ' + s.hours + ' hrs/mo →';
       btnEl.classList.remove('is-enterprise');
     }
     btnEl.classList.remove('loading');
