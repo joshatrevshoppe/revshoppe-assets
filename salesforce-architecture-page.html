@@ -12,6 +12,7 @@ html { scroll-behavior: smooth; }
 :root {
   --bg-light: #FAFAF9;
   --bg-dark: #26242F;
+  --bg-charcoal: #35312A;
   --accent: #E8634A;
   --accent-hover: #F0745C;
   --headline: #111111;
@@ -35,6 +36,17 @@ body {
   font-weight: 300; font-display: block;
 }
 
+/* ── BROWSER AUTOFILL OVERRIDE ── */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 1000px var(--bg-dark) inset !important;
+  -webkit-text-fill-color: rgba(255,255,255,0.7) !important;
+  caret-color: rgba(255,255,255,0.7);
+  transition: background-color 5000s ease-in-out 0s;
+}
+
 /* ── TEXTURES ── */
 .tex-dark {
   background-color: var(--bg-dark);
@@ -42,7 +54,7 @@ body {
   background-size: 40px 40px;
 }
 .tex-charcoal {
-  background-color: #35312A;
+  background-color: var(--bg-charcoal);
   background-image: linear-gradient(rgba(255,255,255,0.028) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.028) 1px, transparent 1px);
   background-size: 48px 48px;
 }
@@ -98,7 +110,7 @@ section { position: relative; z-index: 1; }
 .btn-white-ghost:hover { border-color: rgba(255,255,255,0.6); }
 
 /* ── HERO ── */
-.hero { min-height: 92vh; display: flex; align-items: center; justify-content: center; padding: 96px 48px 80px; text-align: center; position: relative; overflow: hidden; }
+.hero { min-height: 72vh; display: flex; align-items: center; justify-content: center; padding: 80px 48px 60px; text-align: center; position: relative; overflow: hidden; }
 .hero::before { content: ''; position: absolute; top: -120px; left: 50%; transform: translateX(-50%); width: 800px; height: 800px; background: radial-gradient(circle, rgba(232,99,74,0.08) 0%, transparent 70%); pointer-events: none; }
 .hero-inner { max-width: 960px; margin: 0 auto; position: relative; z-index: 1; }
 .eyebrow { display: inline-block; font-family: "IBM Plex Mono", monospace; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); margin-bottom: 28px; }
@@ -108,17 +120,24 @@ section { position: relative; z-index: 1; }
 .hero-terms { display: block; font-family: "IBM Plex Mono", monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(232,99,74,0.6); margin-bottom: 40px; }
 .hero-btns { display: flex; gap: 16px; align-items: center; justify-content: center; flex-wrap: wrap; }
 
-/* ── MARQUEE — rs_css v20 handles all .cml- styles globally ── */
+/* ── MARQUEE ── */
+.cml-outer{overflow:hidden;position:relative;}
+.cml-track{display:flex!important;align-items:center!important;width:max-content!important;}
+.cml-track-1{animation:cml-fwd 40s linear infinite!important;}
+.cml-track-2{animation:cml-rev 34s linear infinite!important;}
+.cml-track-3{animation:cml-fwd 46s linear infinite!important;}
+.cml-track-1:hover,.cml-track-2:hover,.cml-track-3:hover{animation-play-state:paused!important;}
+@keyframes cml-fwd{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+@keyframes cml-rev{0%{transform:translateX(-50%);}100%{transform:translateX(0);}}
+.cml-item{display:inline-flex!important;align-items:center!important;justify-content:center!important;height:72px!important;padding:0 48px!important;border-right:none!important;flex-shrink:0!important;}
+.cml-item img{height:28px!important;width:auto!important;max-height:28px!important;max-width:160px!important;object-fit:contain!important;filter:grayscale(1) brightness(0)!important;opacity:0.55!important;display:block!important;}
 
 /* ── FLIP CARDS ── */
 .flip-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-top: 48px; }
-.flip-card-wrap { perspective: 1200px; min-height: 340px; cursor: pointer; }
-.flip-card-wrap:hover .flip-card-inner,
+.flip-card-wrap { perspective: 1200px; height: 380px; cursor: pointer; }
 .flip-card-wrap.flipped .flip-card-inner { transform: rotateY(180deg); }
 .flip-card-inner { position: relative; width: 100%; height: 100%; transform-style: preserve-3d; transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1); }
-.flip-front, .flip-back { position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; border-radius: 10px; display: flex; flex-direction: column; }
-
-/* FRONT — white card */
+.flip-front, .flip-back { position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; border-radius: 10px; display: flex; flex-direction: column; overflow: hidden; }
 .flip-front { background: #fff; border: 1px solid rgba(0,0,0,0.06); box-shadow: 0 1px 2px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.06), 0 12px 28px rgba(0,0,0,0.05); }
 .flip-front-header { padding: 20px 24px 16px; border-bottom: 1px solid rgba(0,0,0,0.06); display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-shrink: 0; }
 .flip-front-area { font-family: "IBM Plex Mono", monospace; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); }
@@ -128,16 +147,8 @@ section { position: relative; z-index: 1; }
 .flip-arrow { font-family: "IBM Plex Mono", monospace; font-size: 10px; color: var(--accent); flex-shrink: 0; margin-top: 2px; }
 .flip-text { font-family: "Montserrat", sans-serif; font-size: 12.5px; color: var(--body); line-height: 1.6; letter-spacing: -0.2px; }
 .flip-text strong { color: var(--headline); font-weight: 600; }
-.flip-hint { padding: 10px 24px; border-top: 1px solid rgba(0,0,0,0.05); display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
-.flip-hint-text { font-family: "IBM Plex Mono", monospace; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(0,0,0,0.22); }
-
-/* BACK — solid dark, NO grid texture bleeding through */
-.flip-back {
-  background: #1A1824;
-  border: 1px solid rgba(255,255,255,0.1);
-  transform: rotateY(180deg);
-  box-shadow: 0 8px 32px rgba(0,0,0,0.5);
-}
+.flip-hint { padding: 10px 24px; border-top: 1px solid rgba(0,0,0,0.05); display: flex; align-items: center; gap: 6px; flex-shrink: 0; height: 36px; }
+.flip-back { background: #1A1824; border: 1px solid rgba(255,255,255,0.1); transform: rotateY(180deg); box-shadow: 0 8px 32px rgba(0,0,0,0.5); }
 .flip-back-header { padding: 18px 24px 14px; border-bottom: 1px solid rgba(255,255,255,0.07); display: flex; justify-content: space-between; align-items: center; flex-shrink: 0; }
 .flip-back-label { font-family: "IBM Plex Mono", monospace; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(232,99,74,0.8); }
 .flip-back-area { font-family: "IBM Plex Mono", monospace; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.22); }
@@ -147,10 +158,9 @@ section { position: relative; z-index: 1; }
 .flip-stat { display: flex; align-items: center; gap: 14px; padding: 14px 16px; background: rgba(232,99,74,0.1); border: 1px solid rgba(232,99,74,0.22); border-left: 3px solid var(--accent); border-radius: 6px; margin-top: auto; }
 .flip-stat-num { font-family: "IBM Plex Mono", monospace; font-size: 26px; font-weight: 600; color: var(--accent); letter-spacing: -1px; line-height: 1; flex-shrink: 0; }
 .flip-stat-desc { font-family: "Montserrat", sans-serif; font-size: 12px; color: rgba(255,255,255,0.48); line-height: 1.5; }
-.flip-back-hint { padding: 10px 24px; border-top: 1px solid rgba(255,255,255,0.06); flex-shrink: 0; }
-.flip-back-hint-text { font-family: "IBM Plex Mono", monospace; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.18); }
+.flip-back-hint { padding: 10px 24px; border-top: 1px solid rgba(255,255,255,0.06); flex-shrink: 0; height: 36px; }
 
-/* ── SERVICES — dark section ── */
+/* ── SERVICES ── */
 .services-list { display: flex; flex-direction: column; margin-top: 48px; }
 .service-row { display: grid; grid-template-columns: 140px 1fr; gap: 48px; padding: 36px 0; border-bottom: 1px solid rgba(255,255,255,0.07); align-items: start; }
 .service-row:last-child { border-bottom: none; }
@@ -199,7 +209,7 @@ section { position: relative; z-index: 1; }
 .scanner-footer-text { font-family: "Montserrat", sans-serif; font-size: 13px; color: rgba(255,255,255,0.4); line-height: 1.6; }
 .scanner-footer-text strong { color: rgba(255,255,255,0.8); font-weight: 600; }
 
-/* ── PRICING SLIDER ── */
+/* ── PRICING ── */
 .slider-wrap { max-width: 700px; margin: 56px auto 0; }
 .slider-card { background: #fff; border: 1px solid rgba(0,0,0,0.07); border-radius: 14px; overflow: hidden; box-shadow: 0 1px 2px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.06), 0 12px 28px rgba(0,0,0,0.05); }
 .slider-card-inner { padding: 40px 44px; }
@@ -228,48 +238,47 @@ section { position: relative; z-index: 1; }
 .slider-feat-text { font-family: "Montserrat", sans-serif; font-size: 13px; color: var(--body); line-height: 1.5; }
 .slider-cta { display: block; width: 100%; padding: 16px; border-radius: 3px; font-family: "IBM Plex Mono", monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; text-align: center; text-decoration: none; cursor: pointer; border: none; background: var(--accent); color: #fff; box-shadow: 0 2px 8px rgba(232,99,74,0.35), 0 4px 20px rgba(232,99,74,0.2); transition: background 0.15s; box-sizing: border-box; }
 .slider-cta:hover { background: var(--accent-hover); }
-.slider-cta.loading { opacity: 0.6; cursor: not-allowed; pointer-events: none; }
 .slider-cta.is-enterprise { background: var(--bg-dark); color: rgba(255,255,255,0.65); box-shadow: none; border: 1px solid rgba(0,0,0,0.1); }
 .slider-cta.is-enterprise:hover { background: #1A1824; color: #fff; }
 .slider-trust { display: flex; align-items: center; justify-content: center; gap: 24px; margin-top: 20px; flex-wrap: wrap; }
 .slider-trust-item { font-family: "IBM Plex Mono", monospace; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.35); display: flex; align-items: center; gap: 6px; }
 .slider-trust-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--accent); opacity: 0.6; }
 
-/* ── OUTCOMES — white cards with full shadow ── */
+/* ── OUTCOMES ── */
 .outcomes-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-top: 48px; }
-.outcome-card { background: #fff; border: 1px solid rgba(0,0,0,0.06); border-radius: 10px; padding: 28px; display: flex; align-items: center; gap: 20px; box-shadow: 0 1px 2px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.06), 0 12px 28px rgba(0,0,0,0.05); transition: transform 0.2s ease, box-shadow 0.2s ease; }
+.outcome-card { background: #fff; border: 1px solid rgba(0,0,0,0.06); border-radius: 10px; padding: 28px; display: flex; align-items: flex-start; gap: 20px; box-shadow: 0 1px 2px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.06), 0 12px 28px rgba(0,0,0,0.05); transition: transform 0.2s ease, box-shadow 0.2s ease; }
 .outcome-card:hover { transform: translateY(-2px); box-shadow: 0 2px 4px rgba(0,0,0,0.06), 0 8px 24px rgba(0,0,0,0.09), 0 20px 48px rgba(0,0,0,0.08); }
-.outcome-stat { font-family: "RocWideMedium", sans-serif; font-size: 40px; color: var(--accent); letter-spacing: -2px; line-height: 1; flex-shrink: 0; min-width: 80px; }
-.outcome-label { font-family: "IBM Plex Mono", monospace; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(0,0,0,0.35); margin-bottom: 4px; }
-.outcome-desc { font-family: "Montserrat", sans-serif; font-size: 13px; color: var(--body); line-height: 1.6; letter-spacing: -0.2px; }
+.outcome-stat { font-family: "RocWideMedium", sans-serif; font-size: 40px; color: var(--accent); letter-spacing: -2px; line-height: 1; flex-shrink: 0; min-width: 90px; padding-top: 2px; }
+.outcome-content { flex: 1; }
+.outcome-label { font-family: "IBM Plex Mono", monospace; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(0,0,0,0.35); margin-bottom: 6px; }
+.outcome-desc { font-family: "Montserrat", sans-serif; font-size: 13px; color: var(--body); line-height: 1.6; letter-spacing: -0.2px; margin-bottom: 6px; }
+.outcome-impact { font-family: "IBM Plex Mono", monospace; font-size: 10px; letter-spacing: 0.06em; color: rgba(232,99,74,0.8); font-weight: 500; }
 
 /* ── FAQ ── */
 .faq-list { margin-top: 48px; display: flex; flex-direction: column; }
-.faq-item { border-bottom: 1px solid rgba(0,0,0,0.07); }
-.faq-q { display: flex; justify-content: space-between; align-items: center; padding: 24px 0; cursor: pointer; gap: 24px; }
-.faq-q-text { font-family: "RocWideMedium", sans-serif; font-size: 17px; letter-spacing: -0.4px; color: #fff; line-height: 1.3; }
-.faq-icon { font-family: "IBM Plex Mono", monospace; font-size: 20px; color: var(--accent); flex-shrink: 0; transition: transform 0.2s ease; line-height: 1; }
+.faq-item { border-bottom: 1px solid rgba(255,255,255,0.07); }
+.faq-q { display: flex; justify-content: space-between; align-items: flex-start; padding: 24px 0; cursor: pointer; gap: 24px; }
+.faq-q-text { font-family: "RocWideMedium", sans-serif; font-size: 17px; letter-spacing: -0.4px; color: #fff; line-height: 1.35; flex: 1; }
+.faq-icon { font-family: "IBM Plex Mono", monospace; font-size: 20px; color: var(--accent); flex-shrink: 0; transition: transform 0.2s ease; line-height: 1; margin-top: 2px; }
 .faq-item.open .faq-icon { transform: rotate(45deg); }
-.faq-a { font-family: "Montserrat", sans-serif; font-size: 14px; color: var(--body); line-height: 1.8; max-width: 720px; padding-bottom: 24px; display: none; }
+.faq-a { font-family: "Montserrat", sans-serif; font-size: 14px; color: rgba(255,255,255,0.45); line-height: 1.8; max-width: 720px; padding-bottom: 24px; display: none; }
 .faq-item.open .faq-a { display: block; }
 
-/* ── CTA ── */
+/* ── CTA — centered ── */
 .cta-section { background: var(--accent); padding: 96px 48px; text-align: center; }
-.cta-inner { max-width: 680px; margin: 0 auto; }
+.cta-inner { max-width: 680px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; }
 .cta-eyebrow { display: block; font-family: "IBM Plex Mono", monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.6); margin-bottom: 20px; }
-.cta-h2 { font-family: "RocWideMedium", sans-serif; font-size: clamp(32px, 4vw, 48px); line-height: 1.08; letter-spacing: -1.5px; color: #fff; margin-bottom: 16px; }
-.cta-body { font-family: "Montserrat", sans-serif; font-size: 16px; color: rgba(255,255,255,0.75); line-height: 1.8; margin-bottom: 36px; }
-.cta-btn-row { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+.cta-h2 { font-family: "RocWideMedium", sans-serif; font-size: clamp(32px, 4vw, 48px); line-height: 1.08; letter-spacing: -1.5px; color: #fff; margin-bottom: 16px; text-align: center; }
+.cta-body { font-family: "Montserrat", sans-serif; font-size: 16px; color: rgba(255,255,255,0.75); line-height: 1.8; margin-bottom: 36px; text-align: center; }
+.cta-btn-row { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; width: 100%; }
 
-/* ── RESPONSIVE ── */
-/* ── RESPONSIVE — laptop 1024px ── */
+/* ── RESPONSIVE — laptop ── */
 @media (max-width: 1024px) {
   .section-inner { max-width: 900px; }
   .service-row { grid-template-columns: 120px 1fr; gap: 32px; }
   .scanner-grid { grid-template-columns: 280px 1fr; }
 }
-
-/* ── RESPONSIVE — tablet 900px ── */
+/* ── RESPONSIVE — tablet ── */
 @media (max-width: 900px) {
   .flip-grid { grid-template-columns: 1fr; }
   .scanner-grid { grid-template-columns: 1fr; }
@@ -282,8 +291,7 @@ section { position: relative; z-index: 1; }
   .cta-btn-row { flex-direction: column; align-items: center; }
   .cta-btn-row a { width: 100%; max-width: 320px; justify-content: center; }
 }
-
-/* ── RESPONSIVE — mobile 768px ── */
+/* ── RESPONSIVE — mobile ── */
 @media (max-width: 768px) {
   .section { padding: 64px 20px; }
   .section-inner { max-width: 100%; }
@@ -297,32 +305,26 @@ section { position: relative; z-index: 1; }
   .cta-section { padding: 64px 20px; }
   .scanner-footer { flex-direction: column; align-items: flex-start; gap: 16px; }
   .scanner-footer .btn-primary { width: 100%; justify-content: center; }
-  .flip-card-wrap { min-height: 380px; }
+  .flip-card-wrap { height: 440px; }
   .flip-front-header { flex-direction: column; align-items: flex-start; gap: 6px; }
   .flip-front-title { text-align: left; max-width: 100%; }
-  .outcome-card { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .outcome-card { flex-direction: column; gap: 10px; }
   .outcome-stat { font-size: 32px; min-width: auto; }
   .slider-trust { gap: 12px; }
   .faq-q-text { font-size: 15px; }
-  .service-rc { margin-left: 0; }
 }
-
-/* ── RESPONSIVE — small mobile 480px ── */
+/* ── RESPONSIVE — small mobile ── */
 @media (max-width: 480px) {
   .hero { padding: 72px 16px 52px; }
   .section { padding: 56px 16px; }
   .hero h1 { font-size: clamp(26px, 9vw, 38px); }
   .hero-btns a { max-width: 100%; }
-  .flip-card-wrap { min-height: 420px; }
-  .flip-front-body { padding: 14px 16px; }
-  .flip-back-body { padding: 16px; }
-  .flip-front-header { padding: 16px; }
-  .flip-back-header { padding: 14px 16px; }
+  .flip-card-wrap { height: 500px; }
+  .flip-front-body, .flip-back-body { padding: 14px 16px; }
+  .flip-front-header, .flip-back-header { padding: 14px 16px; }
   .slider-card-inner { padding: 24px 16px; }
-  .scanner-left { padding: 20px 16px; }
-  .scanner-right { padding: 20px 16px; }
-  .scanner-bar { padding: 12px 16px; }
-  .scanner-footer { padding: 16px; }
+  .scanner-left, .scanner-right { padding: 20px 16px; }
+  .scanner-bar, .scanner-footer { padding: 12px 16px; }
   .cta-section { padding: 56px 16px; }
   .cta-h2 { font-size: clamp(26px, 7vw, 36px); }
   .outcome-card { padding: 20px 16px; }
@@ -330,12 +332,12 @@ section { position: relative; z-index: 1; }
 }
 </style>
 
-<!-- ═══ HERO — dark ════════════════════════════════════════════ -->
+<!-- ═══ HERO ═══════════════════════════════════════════════════════ -->
 <section class="hero tex-dark">
   <div class="hero-inner">
     <div class="eyebrow">Solutions · Salesforce Architecture</div>
     <h1>Your Salesforce is broken.<br>Your revenue <em>shows it.</em></h1>
-    <p class="hero-lead">Reps won't log in. Data can't be trusted. Forecasts don't match reality. Nobody can tell you where pipeline came from or why a deal closed. That's not a people problem. It has a Revenue Consequence.</p>
+    <p class="hero-lead">Reps won't log in. Data can't be trusted. Forecasts are wrong. Nobody can tell you which motion closed the deal or where the pipeline came from. That's not a people problem. It's an architecture problem — and it's costing you pipeline every quarter.</p>
     <span class="hero-terms">Month-to-month · Pause anytime · No long-term contracts</span>
     <div class="hero-btns">
       <a href="#sa-pricing" class="btn-primary">Get Started →</a>
@@ -344,123 +346,120 @@ section { position: relative; z-index: 1; }
   </div>
 </section>
 
-<!-- ═══ MARQUEE — three rows, light hatch, exact homepage pattern ══ -->
-<div class="tex-light hatch-light" style="padding:0;">
+<!-- ═══ MARQUEE ═══════════════════════════════════════════════════ -->
+<div style="background-color:#FAFAF9;border-top:1px solid rgba(255,255,255,0.95);border-bottom:1px solid rgba(0,0,0,0.06);">
   <div class="cml-outer" style="padding:28px 0 32px;border-top:1.5px solid rgba(0,0,0,0.06);border-bottom:1.5px solid rgba(0,0,0,0.06);">
     <div class="cml-track cml-track-1"><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b2430c2125752b5c8f8_megaport.svg" alt="Megaport" loading="lazy"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b221d6616fdfef5e837_ibm.svg" alt="IBM" loading="lazy"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b233005790d4961501c_twilio.svg" alt="Twilio" loading="lazy"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b24e6344110a02f8850_cofense.svg" alt="Cofense" loading="lazy"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b243c1d4ffc5a963f39_demandbase.svg" alt="Demandbase" loading="lazy"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/67deaa39c8f20e3b837fa4ad_FIS%20LOGO.svg" alt="FIS" loading="lazy"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c867def120f12248e3fa7d_id_6hYBRTt_1774741448119.svg" alt="UiPath" loading="lazy"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b2336307adb18a06773_wolters-kluwer.svg" alt="Wolters Kluwer" loading="lazy"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c8750e5237dcd349d24009_opentable_official_logo_icon_168922%20(1).svg" alt="OpenTable" loading="lazy"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b24c338bd206d4c1e00_expedia-group.svg" alt="Expedia" loading="lazy"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b22681f2225d58ed71c_cisco.svg" alt="Cisco" loading="lazy"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b22c63e739bf6c830f5_netlify.svg" alt="Netlify" loading="lazy"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b21318ab2e6e3ce83ba_ptc.svg" alt="PTC" loading="lazy"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b238d352c279724b3f8_segment.svg" alt="Segment" loading="lazy"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b22aa4e891e7f50ad87_lyft.svg" alt="Lyft" loading="lazy"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b21f4617dd013b75246_zilliant.svg" alt="Zilliant" loading="lazy"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b21ed940a1f3b77679e_arcserve.svg" alt="Arcserve" loading="lazy"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b24e76d1b2a2178b3c3_hewlett-packard-enterprise.svg" alt="HPE" loading="lazy"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b232a87beedd5af722d_siemens.svg" alt="Siemens" loading="lazy"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b2430c2125752b5c8f8_megaport.svg" alt="Megaport" loading="lazy"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b221d6616fdfef5e837_ibm.svg" alt="IBM" loading="lazy"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b233005790d4961501c_twilio.svg" alt="Twilio" loading="lazy"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b24e6344110a02f8850_cofense.svg" alt="Cofense" loading="lazy"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b243c1d4ffc5a963f39_demandbase.svg" alt="Demandbase" loading="lazy"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/67deaa39c8f20e3b837fa4ad_FIS%20LOGO.svg" alt="FIS" loading="lazy"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c867def120f12248e3fa7d_id_6hYBRTt_1774741448119.svg" alt="UiPath" loading="lazy"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b2336307adb18a06773_wolters-kluwer.svg" alt="Wolters Kluwer" loading="lazy"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c8750e5237dcd349d24009_opentable_official_logo_icon_168922%20(1).svg" alt="OpenTable" loading="lazy"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b24c338bd206d4c1e00_expedia-group.svg" alt="Expedia" loading="lazy"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b22681f2225d58ed71c_cisco.svg" alt="Cisco" loading="lazy"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b232a87beedd5af722d_siemens.svg" alt="Siemens" loading="lazy"/></div></div>
     <div class="cml-track cml-track-2"><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b2193dbff6a92afa344_avepoint.svg" alt="Avepoint" loading="lazy"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b24f7269c85bcec2448_lenovo.svg" alt="Lenovo" loading="lazy"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b22318ab2e6e3ce83d9_cloudinary.svg" alt="Cloudinary" loading="lazy"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b24189c8fd063ee4eec_realpage.svg" alt="RealPage" loading="lazy"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b22c26d1fcdf9f510f8_hubspot.svg" alt="HubSpot" loading="lazy"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b239e1530790274b74d_people-ai.svg" alt="People.ai" loading="lazy"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b22c8b0c6491bff03fd_immuta.svg" alt="Immuta" loading="lazy"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b21537bcc0eb6ad53c6_adobe.svg" alt="Adobe" loading="lazy"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b222813bc5282ef15e2_intercom.svg" alt="Intercom" loading="lazy"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b2460be67670f64e3c7_soundhound.svg" alt="SoundHound" loading="lazy"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b22cd605cb9256819d9_edmunds.svg" alt="Edmunds" loading="lazy"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b22e91be146d4911fb9_meta.svg" alt="Meta" loading="lazy"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b233de411fe2fbc88e4_oscar-health.svg" alt="Oscar Health" loading="lazy"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b21c9ea575cf8972334_algolia.svg" alt="Algolia" loading="lazy"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b222e3296bbe565f5a9_datadog.svg" alt="Datadog" loading="lazy"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b2193dbff6a92afa344_avepoint.svg" alt="Avepoint" loading="lazy"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b24f7269c85bcec2448_lenovo.svg" alt="Lenovo" loading="lazy"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b22318ab2e6e3ce83d9_cloudinary.svg" alt="Cloudinary" loading="lazy"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b24189c8fd063ee4eec_realpage.svg" alt="RealPage" loading="lazy"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b22c26d1fcdf9f510f8_hubspot.svg" alt="HubSpot" loading="lazy"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b239e1530790274b74d_people-ai.svg" alt="People.ai" loading="lazy"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b22c8b0c6491bff03fd_immuta.svg" alt="Immuta" loading="lazy"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b21537bcc0eb6ad53c6_adobe.svg" alt="Adobe" loading="lazy"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b222813bc5282ef15e2_intercom.svg" alt="Intercom" loading="lazy"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b22e91be146d4911fb9_meta.svg" alt="Meta" loading="lazy"/></div></div>
-    <div class="cml-track cml-track-3"><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b23bd07a2cd1361608e_siemens-healthineers.svg" alt="Siemens Healthineers" loading="lazy"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b234c93321897e2d0ab_vimeo.svg" alt="Vimeo" loading="lazy"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b21c9ea575cf8972334_algolia.svg" alt="Algolia" loading="lazy"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b22b08fb596257a39f5_keysight-technologies.svg" alt="Keysight" loading="lazy"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b2183bcb1f313166a52_bitrise.svg" alt="Bitrise" loading="lazy"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b23b0657c416737eb2b_okta.svg" alt="Okta" loading="lazy"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b236d79e1e43ef57671_sailpoint.svg" alt="SailPoint" loading="lazy"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b2236fad45c54085611_bmc-software.svg" alt="BMC Software" loading="lazy"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b237f56af09776b7906_usertesting.svg" alt="UserTesting" loading="lazy"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b24ebac5234e51b47df_capital-one.svg" alt="Capital One" loading="lazy"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b22e6344110a02f8815_dell.svg" alt="Dell" loading="lazy"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/67deaa39c8f20e3b837fa4aa_DOCUSIGN%20LOGO.svg" alt="DocuSign" loading="lazy"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b3382b137969168571f_sitetracker.svg" alt="Sitetracker" loading="lazy"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b217832b010e1e29aee_adp.svg" alt="ADP" loading="lazy"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b238bce5e48779e7662_pinterest.svg" alt="Pinterest" loading="lazy"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b23bd07a2cd1361608e_siemens-healthineers.svg" alt="Siemens Healthineers" loading="lazy"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b234c93321897e2d0ab_vimeo.svg" alt="Vimeo" loading="lazy"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b21c9ea575cf8972334_algolia.svg" alt="Algolia" loading="lazy"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b22b08fb596257a39f5_keysight-technologies.svg" alt="Keysight" loading="lazy"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b2183bcb1f313166a52_bitrise.svg" alt="Bitrise" loading="lazy"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b23b0657c416737eb2b_okta.svg" alt="Okta" loading="lazy"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b236d79e1e43ef57671_sailpoint.svg" alt="SailPoint" loading="lazy"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b237f56af09776b7906_usertesting.svg" alt="UserTesting" loading="lazy"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b24ebac5234e51b47df_capital-one.svg" alt="Capital One" loading="lazy"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b22e6344110a02f8815_dell.svg" alt="Dell" loading="lazy"/></div></div>
-  </div>
-</div>
+    <div class="cml-track cml-track-3"><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b23bd07a2cd1361608e_siemens-healthineers.svg" alt="Siemens Healthineers" loading="lazy"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b234c93321897e2d0ab_vimeo.svg" alt="Vimeo" loading="lazy"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b21c9ea575cf8972334_algolia.svg" alt="Algolia" loading="lazy"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b22b08fb596257a39f5_keysight-technologies.svg" alt="Keysight" loading="lazy"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b2183bcb1f313166a52_bitrise.svg" alt="Bitrise" loading="lazy"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b23b0657c416737eb2b_okta.svg" alt="Okta" loading="lazy"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b236d79e1e43ef57671_sailpoint.svg" alt="SailPoint" loading="lazy"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b2236fad45c54085611_bmc-software.svg" alt="BMC" loading="lazy"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b237f56af09776b7906_usertesting.svg" alt="UserTesting" loading="lazy"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b24ebac5234e51b47df_capital-one.svg" alt="Capital One" loading="lazy"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b22e6344110a02f8815_dell.svg" alt="Dell" loading="lazy"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/67deaa39c8f20e3b837fa4aa_DOCUSIGN%20LOGO.svg" alt="DocuSign" loading="lazy"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b217832b010e1e29aee_adp.svg" alt="ADP" loading="lazy"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b238bce5e48779e7662_pinterest.svg" alt="Pinterest" loading="lazy"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b23bd07a2cd1361608e_siemens-healthineers.svg" alt="Siemens Healthineers" loading="lazy"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b234c93321897e2d0ab_vimeo.svg" alt="Vimeo" loading="lazy"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b21c9ea575cf8972334_algolia.svg" alt="Algolia" loading="lazy"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b22b08fb596257a39f5_keysight-technologies.svg" alt="Keysight" loading="lazy"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b2183bcb1f313166a52_bitrise.svg" alt="Bitrise" loading="lazy"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b23b0657c416737eb2b_okta.svg" alt="Okta" loading="lazy"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b236d79e1e43ef57671_sailpoint.svg" alt="SailPoint" loading="lazy"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b237f56af09776b7906_usertesting.svg" alt="UserTesting" loading="lazy"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b24ebac5234e51b47df_capital-one.svg" alt="Capital One" loading="lazy"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b22e6344110a02f8815_dell.svg" alt="Dell" loading="lazy"/></div></div>
+    </div><!-- close cml-track-3 -->
+  </div><!-- close cml-outer -->
+</div><!-- close marquee bg -->
 
-<!-- ═══ WHAT WE'RE SEEING — dark, flip cards ═════════════════════ -->
+<!-- ═══ WHAT WE FIND — dark ════════════════════════════════════════ -->
 <section class="tex-dark section" id="sa-what-we-fix">
   <div class="section-inner">
     <span class="sec-label">What We Find</span>
     <h2 class="sec-h2 sec-h2-white">The problems are specific.<br>The cost is compounding.</h2>
-    <p class="sec-sub sec-sub-white">These are the four areas where a broken Salesforce is actively costing you pipeline, credibility, and revenue. Hover any card to see what that costs.</p>
+    <p class="sec-sub sec-sub-white">These are the four areas where a broken Salesforce is actively costing you pipeline, forecast credibility, and revenue. Click any card to see what it costs.</p>
 
     <div class="flip-grid">
-      <!-- CARD 1 -->
-      <div class="flip-card-wrap">
+      <div class="flip-card-wrap flipped">
         <div class="flip-card-inner">
           <div class="flip-front">
             <div class="flip-front-header"><div class="flip-front-area">Data and Attribution</div><div class="flip-front-title">You can't trust what you're looking at</div></div>
             <div class="flip-front-body">
-              <div class="flip-row"><div class="flip-arrow">→</div><div class="flip-text"><strong>83% of contact records missing firmographic data.</strong> Persona-based targeting is fiction. Intent tools are wasting budget on the wrong people at the wrong companies.</div></div>
-              <div class="flip-row"><div class="flip-arrow">→</div><div class="flip-text"><strong>96% of closed deals have no sequence attribution.</strong> Nobody can trace which motions generated revenue. Channel investment is guesswork at the board level.</div></div>
-              <div class="flip-row"><div class="flip-arrow">→</div><div class="flip-text"><strong>231,847 records with no lead source.</strong> You have no idea where your pipeline came from. Neither does your board. Neither does your CFO.</div></div>
+              <div class="flip-row"><div class="flip-arrow">→</div><div class="flip-text"><strong>83% of contact records missing firmographic data.</strong> Persona-based targeting is fiction. Intent tools are burning budget on the wrong accounts at the wrong companies.</div></div>
+              <div class="flip-row"><div class="flip-arrow">→</div><div class="flip-text"><strong>96% of closed deals have no sequence attribution.</strong> Your CRO cannot tell the board which motions generated revenue. Channel investment decisions have no data behind them.</div></div>
+              <div class="flip-row"><div class="flip-arrow">→</div><div class="flip-text"><strong>231,847 records with no lead source.</strong> Pipeline origin is unknown. The CFO is asking. Nobody has an answer.</div></div>
             </div>
-            <div class="flip-hint" style="height:32px;flex-shrink:0;"></div>
+            <div class="flip-hint" style="height:36px;flex-shrink:0;"></div>
           </div>
           <div class="flip-back">
             <div class="flip-back-header"><div class="flip-back-label">What It Costs You</div><div class="flip-back-area">Data and Attribution</div></div>
             <div class="flip-back-body">
               <div>
-                <div class="flip-consequence-title">Every campaign dollar is partially funding the wrong channel.</div>
-                <div class="flip-consequence-text">Without attribution, your highest-performing outbound motions are invisible and your underperformers stay funded every quarter. Strategic decisions get made on incomplete data. That compounds into missed targets, not just bad reporting.</div>
+                <div class="flip-consequence-title">Marketing spend is funding the wrong channels every quarter.</div>
+                <div class="flip-consequence-text">Without attribution, your highest-performing outbound motions are invisible. Underperformers stay funded. Every board presentation is built on incomplete data — and your CFO already knows the numbers don't add up.</div>
               </div>
-              <div class="flip-stat"><div class="flip-stat-num">96%</div><div class="flip-stat-desc">Of closed deals with no sequence attribution. Leadership cannot identify which motions generated revenue. Channel spend stays wrong every quarter.</div></div>
+              <div class="flip-stat"><div class="flip-stat-num">96%</div><div class="flip-stat-desc">Of closed-won deals with no sequence attribution. Zero visibility into which commercial motions are generating ROI.</div></div>
             </div>
-            <div class="flip-back-hint" style="height:32px;flex-shrink:0;"></div>
+            <div class="flip-back-hint" style="height:36px;flex-shrink:0;"></div>
           </div>
         </div>
       </div>
 
-      <!-- CARD 2 -->
       <div class="flip-card-wrap">
         <div class="flip-card-inner">
           <div class="flip-front">
-            <div class="flip-front-header"><div class="flip-front-area">Systems and Automation</div><div class="flip-front-title">The tools are deployed. They're not working.</div></div>
+            <div class="flip-front-header"><div class="flip-front-area">Systems and Automation</div><div class="flip-front-title">The stack is deployed. It's not working.</div></div>
             <div class="flip-front-body">
-              <div class="flip-row"><div class="flip-arrow">→</div><div class="flip-text"><strong>10,432 sync errors in three days.</strong> Your marketing automation, sales engagement platform, and CRM are actively miscommunicating. Records duplicate on sync. Sequences enroll the wrong contacts.</div></div>
-              <div class="flip-row"><div class="flip-arrow">→</div><div class="flip-text"><strong>11,707 overdue tasks across the org.</strong> Automations fire but nobody governs them. Reps build workarounds. Activity data becomes useless for coaching.</div></div>
-              <div class="flip-row"><div class="flip-arrow">→</div><div class="flip-text"><strong>46% of mailboxes and calendars misconfigured.</strong> Sequences fail silently. Meetings never get booked. Reps don't know why their numbers are off.</div></div>
+              <div class="flip-row"><div class="flip-arrow">→</div><div class="flip-text"><strong>10,432 sync errors in three days.</strong> Your marketing automation, sales engagement platform, and CRM are actively miscommunicating. Sequences enroll the wrong contacts. Records duplicate on sync.</div></div>
+              <div class="flip-row"><div class="flip-arrow">→</div><div class="flip-text"><strong>11,707 overdue tasks across the org.</strong> Automations fire out of sequence. Reps build workarounds. Activity data becomes worthless for pipeline inspection.</div></div>
+              <div class="flip-row"><div class="flip-arrow">→</div><div class="flip-text"><strong>46% of mailboxes and calendars misconfigured.</strong> Sequences fail silently. Meetings never get booked. The outbound motion looks active — it isn't.</div></div>
             </div>
-            <div class="flip-hint" style="height:32px;flex-shrink:0;"></div>
+            <div class="flip-hint" style="height:36px;flex-shrink:0;"></div>
           </div>
           <div class="flip-back">
             <div class="flip-back-header"><div class="flip-back-label">What It Costs You</div><div class="flip-back-area">Systems and Automation</div></div>
             <div class="flip-back-body">
               <div>
-                <div class="flip-consequence-title">Reps are doing manually what the system should do for them.</div>
-                <div class="flip-consequence-text">Every hour spent on manual admin is an hour not spent selling. When outbound infrastructure fails silently, pipeline never gets created. The error log keeps growing whether someone is looking at it or not.</div>
+                <div class="flip-consequence-title">Reps are doing manually what the system should do. That time has a dollar value.</div>
+                <div class="flip-consequence-text">Nine hours per rep per week lost to admin work that should not exist. Across a 50-person sales org, that's 450 hours of selling capacity lost every week — before you account for the pipeline that never gets created because outbound infrastructure fails silently.</div>
               </div>
-              <div class="flip-stat"><div class="flip-stat-num">9 hrs</div><div class="flip-stat-desc">Per rep per week recovered once automation is correctly built and governed. That's 9 hours back into pipeline generation per person.</div></div>
+              <div class="flip-stat"><div class="flip-stat-num">9 hrs</div><div class="flip-stat-desc">Per rep per week recovered once automation is correctly governed. 50 reps × 9 hrs = 450 hours of selling capacity restored monthly.</div></div>
             </div>
-            <div class="flip-back-hint" style="height:32px;flex-shrink:0;"></div>
+            <div class="flip-back-hint" style="height:36px;flex-shrink:0;"></div>
           </div>
         </div>
       </div>
 
-      <!-- CARD 3 -->
       <div class="flip-card-wrap">
         <div class="flip-card-inner">
           <div class="flip-front">
             <div class="flip-front-header"><div class="flip-front-area">Pipeline and Forecasting</div><div class="flip-front-title">Your forecast is someone's best guess</div></div>
             <div class="flip-front-body">
-              <div class="flip-row"><div class="flip-arrow">→</div><div class="flip-text"><strong>Stage definitions mean different things to different reps.</strong> Weighted pipeline math is worthless when a Stage 3 for one AE is a Stage 5 for another.</div></div>
-              <div class="flip-row"><div class="flip-arrow">→</div><div class="flip-text"><strong>Zero handoff data survives the BDR-to-AE transition.</strong> Every AE starts cold. Context lives in Slack. When someone leaves, their pipeline intelligence goes with them.</div></div>
-              <div class="flip-row"><div class="flip-arrow">→</div><div class="flip-text"><strong>What you show the board and what's real are two different numbers.</strong> Everyone in the room knows it. Nobody wants to say it out loud.</div></div>
+              <div class="flip-row"><div class="flip-arrow">→</div><div class="flip-text"><strong>Stage definitions mean different things to different reps.</strong> A Stage 3 for one AE is a Stage 5 for another. Weighted pipeline math produces a number nobody trusts.</div></div>
+              <div class="flip-row"><div class="flip-arrow">→</div><div class="flip-text"><strong>Zero structured handoff data from BDR to AE.</strong> Every rep starts cold. Context lives in Slack threads. When someone leaves, the deal intelligence walks out with them.</div></div>
+              <div class="flip-row"><div class="flip-arrow">→</div><div class="flip-text"><strong>What you present to the board and what's real diverge every quarter.</strong> Your VP of Sales knows it. Your CFO suspects it. Nobody wants to say it out loud.</div></div>
             </div>
-            <div class="flip-hint" style="height:32px;flex-shrink:0;"></div>
+            <div class="flip-hint" style="height:36px;flex-shrink:0;"></div>
           </div>
           <div class="flip-back">
             <div class="flip-back-header"><div class="flip-back-label">What It Costs You</div><div class="flip-back-area">Pipeline and Forecasting</div></div>
             <div class="flip-back-body">
               <div>
-                <div class="flip-consequence-title">Hiring, resourcing, and board commitments are built on a number nobody trusts.</div>
-                <div class="flip-consequence-text">Every planning decision downstream of the forecast is compromised. Capacity mismatches, missed commitments, and the slow erosion of executive confidence in the commercial team. The misdirection compounds every quarter it goes uncorrected.</div>
+                <div class="flip-consequence-title">Every downstream decision — headcount, spend, board commitments — is built on a number that doesn't reflect reality.</div>
+                <div class="flip-consequence-text">Hiring plans. Resourcing calls. Investor updates. When the forecast is wrong, every plan built on it compounds the error. The organizations most exposed are those growing fastest — where the cost of misdirection scales with the team.</div>
               </div>
-              <div class="flip-stat"><div class="flip-stat-num">30-50%</div><div class="flip-stat-desc">Forecast variance quarter over quarter when stage definitions aren't enforced and pipeline data isn't clean.</div></div>
+              <div class="flip-stat"><div class="flip-stat-num">30-50%</div><div class="flip-stat-desc">Forecast variance QoQ when stage definitions aren't enforced. That variance is the gap between your plan and your actual revenue.</div></div>
             </div>
-            <div class="flip-back-hint" style="height:32px;flex-shrink:0;"></div>
+            <div class="flip-back-hint" style="height:36px;flex-shrink:0;"></div>
           </div>
         </div>
       </div>
 
-      <!-- CARD 4 -->
       <div class="flip-card-wrap">
         <div class="flip-card-inner">
           <div class="flip-front">
             <div class="flip-front-header"><div class="flip-front-area">Adoption and Governance</div><div class="flip-front-title">Your team uses spreadsheets instead</div></div>
             <div class="flip-front-body">
-              <div class="flip-row"><div class="flip-arrow">→</div><div class="flip-text"><strong>Reps don't trust the data so they don't enter data.</strong> Low adoption makes bad data worse. Every quarter it compounds until the system is useless and leadership is questioning the investment.</div></div>
-              <div class="flip-row"><div class="flip-arrow">→</div><div class="flip-text"><strong>No field standards. No naming conventions. No change process.</strong> Every admin who leaves takes institutional knowledge with them. Every new hire inherits the mess.</div></div>
-              <div class="flip-row"><div class="flip-arrow">→</div><div class="flip-text"><strong>Six figures spent on the implementation.</strong> Eighteen months later, half the team lives in spreadsheets. The problem was never the tool.</div></div>
+              <div class="flip-row"><div class="flip-arrow">→</div><div class="flip-text"><strong>Reps don't trust the data so they stop entering data.</strong> Low adoption makes bad data worse. The system becomes less useful every quarter — not more.</div></div>
+              <div class="flip-row"><div class="flip-arrow">→</div><div class="flip-text"><strong>No field standards. No naming conventions. No change management process.</strong> Every admin departure takes institutional knowledge with them. Every new hire inherits a different mess.</div></div>
+              <div class="flip-row"><div class="flip-arrow">→</div><div class="flip-text"><strong>Six to seven figures spent on the implementation.</strong> Eighteen months later, your highest-paid reps live in spreadsheets and the CRM is a compliance checkbox.</div></div>
             </div>
-            <div class="flip-hint" style="height:32px;flex-shrink:0;"></div>
+            <div class="flip-hint" style="height:36px;flex-shrink:0;"></div>
           </div>
           <div class="flip-back">
             <div class="flip-back-header"><div class="flip-back-label">What It Costs You</div><div class="flip-back-area">Adoption and Governance</div></div>
             <div class="flip-back-body">
               <div>
-                <div class="flip-consequence-title">A six-figure platform investment generating zero competitive advantage.</div>
-                <div class="flip-consequence-text">You're paying Salesforce every month for a system your team doesn't use. Onboarding costs per rep increase. Institutional knowledge exits with every departure. The longer this runs, the harder the reversal and the more it costs to recover.</div>
+                <div class="flip-consequence-title">A six-figure platform investment generating zero competitive advantage — and a second six-figure remediation sitting on your roadmap.</div>
+                <div class="flip-consequence-text">You're paying Salesforce every month for a system your team doesn't use. Onboarding cost per rep increases because there's no documented standard. When your top performer leaves, their pipeline context disappears. The recovery cost increases every quarter this goes unaddressed.</div>
               </div>
-              <div class="flip-stat"><div class="flip-stat-num">~27%</div><div class="flip-stat-desc">Industry average Salesforce adoption. Most orgs never crack 47% without active governance and architecture built around how their team actually sells.</div></div>
+              <div class="flip-stat"><div class="flip-stat-num">~27%</div><div class="flip-stat-desc">Industry average Salesforce adoption without active governance. Most orgs never reach 47% without a deliberate architecture intervention.</div></div>
             </div>
-            <div class="flip-back-hint" style="height:32px;flex-shrink:0;"></div>
+            <div class="flip-back-hint" style="height:36px;flex-shrink:0;"></div>
           </div>
         </div>
       </div>
@@ -468,77 +467,65 @@ section { position: relative; z-index: 1; }
   </div>
 </section>
 
-<!-- ═══ WHAT WE DO — charcoal (warm dark, distinct from flanking dark sections) ══ -->
+<!-- ═══ WHAT WE DO — charcoal ════════════════════════════════════ -->
 <section class="tex-charcoal section">
   <div class="section-inner">
     <span class="sec-label">Salesforce Strategy and Operations</span>
     <h2 class="sec-h2 sec-h2-white">Strategy and execution.<br>Not one or the other.</h2>
-    <p class="sec-sub sec-sub-white">Every engagement is a blended team. A RevOps strategist who understands your commercial model paired with Salesforce specialists who build and maintain the system that runs it. We don't take orders. We get inside your instance, find what's creating these problems, and fix them.</p>
+    <p class="sec-sub sec-sub-white">Every engagement is a blended team. A RevOps strategist who understands your commercial model paired with certified Salesforce specialists who build, configure, and maintain the system that runs it. We don't take a ticket queue. We get inside your instance, diagnose what's creating financial drag, and fix it with documented change management every step of the way.</p>
 
     <div class="services-list">
       <div class="service-row">
-        <div>
-          <span class="service-num">01</span>
-          <span class="service-category">Foundation</span>
-        </div>
+        <div><span class="service-num">01</span><span class="service-category">Foundation</span></div>
         <div>
           <div class="service-title">CRM Audit and Remediation</div>
-          <div class="service-desc">We get access and look at everything — the reports going to leadership, pipeline stages, sync error logs, automation rules, field mapping. We surface what's broken before we fix a single thing. You know what it's costing you before the end of week one.</div>
-          <div class="service-rc"><div class="service-rc-label">Addresses</div><div class="service-rc-text">Blind spots in data, attribution, and reporting that are draining pipeline and eroding board credibility every quarter</div></div>
-          <div class="service-tags"><span class="service-tag">Data Audit</span><span class="service-tag">Sync Error Log</span><span class="service-tag">Schema Review</span><span class="service-tag">Deduplication</span></div>
+          <div class="service-desc">We access your instance and look at everything leadership is looking at — pipeline reports, stage conversion, sync error logs, automation rules, field mapping, and data quality at scale. We quantify what's broken in dollar terms before we fix a single thing. You know the cost before the end of week one.</div>
+          <div class="service-rc"><div class="service-rc-label">Financial impact addressed</div><div class="service-rc-text">Blind spots in data, attribution, and reporting that are suppressing pipeline creation and eroding board confidence in revenue forecasts</div></div>
+          <div class="service-tags"><span class="service-tag">Data Audit</span><span class="service-tag">Sync Error Remediation</span><span class="service-tag">Schema Review</span><span class="service-tag">Deduplication</span><span class="service-tag">Change Management</span></div>
         </div>
       </div>
       <div class="service-row">
-        <div>
-          <span class="service-num">02</span>
-          <span class="service-category">Architecture</span>
-        </div>
+        <div><span class="service-num">02</span><span class="service-category">Architecture</span></div>
         <div>
           <div class="service-title">Data Model and Governance</div>
-          <div class="service-desc">Object structure, field standards, record types, naming conventions, and a change management process that survives headcount changes. Built around how your team actually sells — not how the platform ships out of the box.</div>
-          <div class="service-rc"><div class="service-rc-label">Addresses</div><div class="service-rc-text">Institutional knowledge loss on every departure, onboarding drag, and a system that degrades faster than it improves</div></div>
-          <div class="service-tags"><span class="service-tag">Data Model</span><span class="service-tag">Field Standards</span><span class="service-tag">Governance</span><span class="service-tag">Documentation</span></div>
+          <div class="service-desc">Object structure, field standards, record types, validation rules, naming conventions, and a change management process that survives headcount changes. Built around how your team actually sells, quotes, and manages accounts — not how the platform ships out of the box. Documented so the next admin doesn't start from zero.</div>
+          <div class="service-rc"><div class="service-rc-label">Financial impact addressed</div><div class="service-rc-text">Institutional knowledge loss on every departure, increasing onboarding cost per rep, and a system architecture that degrades faster than it improves</div></div>
+          <div class="service-tags"><span class="service-tag">Data Model</span><span class="service-tag">Validation Rules</span><span class="service-tag">Field Standards</span><span class="service-tag">Governance Framework</span><span class="service-tag">Documentation</span></div>
         </div>
       </div>
       <div class="service-row">
-        <div>
-          <span class="service-num">03</span>
-          <span class="service-category">Automation</span>
-        </div>
+        <div><span class="service-num">03</span><span class="service-category">Automation</span></div>
         <div>
           <div class="service-title">Flows, Triggers, and Integration</div>
-          <div class="service-desc">Automations that execute reliably with no conflicts and full documentation. Marketing automation, sales engagement, and CRM connections mapped, error sources identified, sync logic corrected. When this works, reps stop doing manually what the system should do for them.</div>
-          <div class="service-rc"><div class="service-rc-label">Addresses</div><div class="service-rc-text">Hours per rep per week lost to admin work that compounds into lost pipeline capacity and selling time</div></div>
-          <div class="service-tags"><span class="service-tag">Flow Builds</span><span class="service-tag">Platform Sync</span><span class="service-tag">Integration Audit</span><span class="service-tag">Error Remediation</span></div>
+          <div class="service-desc">Automations that execute reliably, with no trigger conflicts and full documentation. Marketing automation, sales engagement platform, and CRM connections mapped — every error source identified, sync logic corrected, integration health monitored daily. When this works, reps recover hours they didn't know they were losing.</div>
+          <div class="service-rc"><div class="service-rc-label">Financial impact addressed</div><div class="service-rc-text">Selling capacity lost to manual admin that compounds across headcount, plus pipeline never created because outbound infrastructure was quietly broken</div></div>
+          <div class="service-tags"><span class="service-tag">Flow Architecture</span><span class="service-tag">Platform Sync</span><span class="service-tag">Integration Audit</span><span class="service-tag">Error Remediation</span><span class="service-tag">Trigger Governance</span></div>
         </div>
       </div>
       <div class="service-row">
-        <div>
-          <span class="service-num">04</span>
-          <span class="service-category">Intelligence</span>
-        </div>
+        <div><span class="service-num">04</span><span class="service-category">Intelligence</span></div>
         <div>
           <div class="service-title">Attribution, Reporting, and RevOps Strategy</div>
-          <div class="service-desc">Lead source, campaign, and sequence attribution built correctly. Dashboards that answer the questions your CRO and frontline managers are actually asking. Monthly findings that surface what the data is telling us about your commercial motion — across the full funnel from marketing through close through retention — before you have to ask.</div>
-          <div class="service-rc"><div class="service-rc-label">Addresses</div><div class="service-rc-text">Investment decisions made blind, board reporting built on incomplete data, and a GTM motion that can't improve because you can't measure it accurately</div></div>
-          <div class="service-tags"><span class="service-tag">Attribution</span><span class="service-tag">Dashboards</span><span class="service-tag">Monthly Findings</span><span class="service-tag">Strategic Roadmap</span></div>
+          <div class="service-desc">Lead source, campaign, and sequence attribution built correctly from first touch through closed-won. Dashboards that answer the questions your CRO is being asked in board meetings. Monthly findings that surface what the data is telling us about your commercial motion — across marketing, pipeline, close, and retention — before you have to ask.</div>
+          <div class="service-rc"><div class="service-rc-label">Financial impact addressed</div><div class="service-rc-text">Marketing and sales investment decisions made without attribution data, board reporting that doesn't reflect commercial reality, and a GTM motion that can't be optimized because it can't be accurately measured</div></div>
+          <div class="service-tags"><span class="service-tag">Full-Funnel Attribution</span><span class="service-tag">Executive Dashboards</span><span class="service-tag">Monthly Findings</span><span class="service-tag">Strategic Roadmap</span></div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══ WHAT YOUR REPORTS AREN'T TELLING YOU — light hatch ═══════ -->
+<!-- ═══ SCANNER — light hatch ════════════════════════════════════ -->
 <section class="tex-light hatch-light section">
   <div class="section-inner">
     <span class="sec-label">What Your Reports Aren't Telling You</span>
-    <h2 class="sec-h2">We are in your instance every day.<br>We see what you're missing.</h2>
-    <p class="sec-sub">We're not a one-time engagement. We run your reports daily. We read what's being presented to leadership. We find the problems before they compound into something harder to fix. Click any category.</p>
+    <h2 class="sec-h2">We are in your instance every day.<br>We see what your dashboards miss.</h2>
+    <p class="sec-sub">Your reports show what was entered. We surface what's missing, what's misfiring, and what it's costing you. Click any category to see a real finding and its financial impact.</p>
   </div>
 
   <div class="scanner-wrap" style="margin-top:48px;">
     <div class="scanner-bar">
-      <span class="scanner-bar-label">CRM Health Monitor · Live View</span>
+      <span class="scanner-bar-label">CRM Health Monitor · Daily View</span>
       <span class="scanner-live">Analyzing</span>
     </div>
     <div class="scanner-grid">
@@ -555,22 +542,22 @@ section { position: relative; z-index: 1; }
         </div>
       </div>
       <div class="scanner-right">
-        <div class="scanner-section-label">Finding and Revenue Consequence</div>
+        <div class="scanner-section-label">Finding and Financial Impact</div>
         <div class="scanner-detail" id="scanner-detail">
           <div>
             <div class="scanner-detail-area">Data Integrity · Critical</div>
-            <div class="scanner-detail-title">83% of contact records can't support real targeting</div>
-            <div class="scanner-detail-finding">Job function, seniority, and industry are missing on the majority of records. Scoring models are running on guesswork. Enrichment tools are configured but not writing back correctly. Every persona-based campaign reaches the wrong people.</div>
+            <div class="scanner-detail-title">83% of contact records can't support real segmentation or targeting</div>
+            <div class="scanner-detail-finding">Job function, seniority, and industry are missing on the majority of records. Scoring models are running on guesswork. Enrichment tools are configured but not writing back correctly. Every persona-based campaign and every account-based motion is operating without the data it needs.</div>
           </div>
           <div class="scanner-consequence">
-            <div class="scanner-consequence-label">Revenue Consequence</div>
-            <div class="scanner-consequence-text">Every dollar spent on intent data and targeting is partially wasted. Segmentation produces activity, not pipeline. The problem compounds with every new contact ingested on broken standards.</div>
+            <div class="scanner-consequence-label">Financial Impact</div>
+            <div class="scanner-consequence-text">Every dollar allocated to intent data, ABM, and targeted outbound is partially wasted. Segmentation produces activity, not qualified pipeline. The cost compounds with every new contact ingested under the same broken data standards.</div>
           </div>
         </div>
       </div>
     </div>
     <div class="scanner-footer">
-      <div class="scanner-footer-text"><strong>This is what we find every day.</strong> Most of it was there before we arrived. No one was looking at it with a commercial lens.</div>
+      <div class="scanner-footer-text"><strong>This is what we find every day.</strong> Most of it was there before we arrived. No one was measuring its financial cost.</div>
       <a href="#sa-pricing" class="btn-primary" style="white-space:nowrap;flex-shrink:0;">Start This Month →</a>
     </div>
   </div>
@@ -581,7 +568,7 @@ section { position: relative; z-index: 1; }
   <div class="section-inner">
     <span class="sec-label">Pricing</span>
     <h2 class="sec-h2 sec-h2-white">Choose your level of support.<br>Start tomorrow.</h2>
-    <p class="sec-sub sec-sub-white">No discovery call. No long-term commitment. Pick your hours and get a blended RevOps and Salesforce team in your instance. Month-to-month. Pause or cancel anytime.</p>
+    <p class="sec-sub sec-sub-white">No discovery call required. No long-term contract. Pick your hours and get a blended RevOps and Salesforce team embedded in your instance. Month-to-month. Pause or cancel anytime.</p>
 
     <div class="slider-wrap">
       <div class="slider-card">
@@ -606,10 +593,10 @@ section { position: relative; z-index: 1; }
           <div class="slider-includes">
             <div class="slider-feat"><span class="slider-feat-icon">✓</span><span class="slider-feat-text">Blended RevOps and Salesforce team</span></div>
             <div class="slider-feat"><span class="slider-feat-icon">✓</span><span class="slider-feat-text">Daily access to your instance</span></div>
-            <div class="slider-feat"><span class="slider-feat-icon">✓</span><span class="slider-feat-text">Monthly findings report</span></div>
-            <div class="slider-feat"><span class="slider-feat-icon">✓</span><span class="slider-feat-text">Dedicated point of contact</span></div>
-            <div class="slider-feat"><span class="slider-feat-icon">✓</span><span class="slider-feat-text">Senior people do the work</span></div>
-            <div class="slider-feat"><span class="slider-feat-icon">✓</span><span class="slider-feat-text">Everything documented</span></div>
+            <div class="slider-feat"><span class="slider-feat-icon">✓</span><span class="slider-feat-text">Monthly findings and financial impact report</span></div>
+            <div class="slider-feat"><span class="slider-feat-icon">✓</span><span class="slider-feat-text">Dedicated senior point of contact</span></div>
+            <div class="slider-feat"><span class="slider-feat-icon">✓</span><span class="slider-feat-text">Full change management and documentation</span></div>
+            <div class="slider-feat"><span class="slider-feat-icon">✓</span><span class="slider-feat-text">Senior specialists do the work</span></div>
           </div>
           <button class="slider-cta" id="sa-checkout-btn">Get Started — 10 hrs/mo →</button>
         </div>
@@ -629,24 +616,40 @@ section { position: relative; z-index: 1; }
 <section class="tex-light hatch-light section">
   <div class="section-inner">
     <span class="sec-label">What Clients Achieved</span>
-    <h2 class="sec-h2" style="max-width:560px;">Same team. Same tools.<br>The architecture changed. So did the results.</h2>
-    <p class="sec-sub">Every outcome below came after fixing the CRM foundation. Nothing else changed. The motion was already there.</p>
+    <h2 class="sec-h2" style="max-width:420px;">When the architecture works,<br>the numbers move.</h2>
+    <p class="sec-sub">Every outcome below came after fixing the CRM foundation. The commercial motion was already in place. The architecture was holding it back.</p>
     <div class="outcomes-grid">
       <div class="outcome-card">
         <div class="outcome-stat">9 hrs</div>
-        <div><div class="outcome-label">Selling Time Recovered Per Rep Weekly</div><div class="outcome-desc">Workflow automation eliminating manual admin once the system was configured correctly. 9 hours per rep per week back into pipeline generation.</div></div>
+        <div class="outcome-content">
+          <div class="outcome-label">Selling Time Recovered Per Rep Weekly</div>
+          <div class="outcome-desc">Workflow automation and governed processes eliminated manual admin once the system was built correctly. Nine hours per rep, per week — back into pipeline generation.</div>
+          <div class="outcome-impact">50 reps × 9 hrs = 450 hrs of selling capacity restored monthly</div>
+        </div>
       </div>
       <div class="outcome-card">
         <div class="outcome-stat">34%</div>
-        <div><div class="outcome-label">Net New Pipeline Increase</div><div class="outcome-desc">Attribution revealed which channels were actually working. Spend was reallocated. Pipeline followed within the same quarter.</div></div>
+        <div class="outcome-content">
+          <div class="outcome-label">Net New Pipeline Increase</div>
+          <div class="outcome-desc">Attribution was built correctly. Leadership could see which channels were generating qualified pipeline for the first time. Spend was reallocated within the same quarter.</div>
+          <div class="outcome-impact">Pipeline growth driven by spend reallocation, not headcount addition</div>
+        </div>
       </div>
       <div class="outcome-card">
         <div class="outcome-stat">61%</div>
-        <div><div class="outcome-label">SQL Creation Quarter-over-Quarter</div><div class="outcome-desc">Clean pipeline data enabled real-time targeting adjustments that weren't possible before. The motion didn't change. The foundation did.</div></div>
+        <div class="outcome-content">
+          <div class="outcome-label">SQL Creation Quarter-over-Quarter</div>
+          <div class="outcome-desc">Clean, trusted pipeline data enabled targeting and sequencing adjustments in real time. The same team, running the same plays, on a foundation that finally worked.</div>
+          <div class="outcome-impact">Same headcount. Same motion. Foundation change drove the result.</div>
+        </div>
       </div>
       <div class="outcome-card">
         <div class="outcome-stat">21 days</div>
-        <div><div class="outcome-label">Reduction in Average Sales Cycle</div><div class="outcome-desc">Stage definitions standardized, handoff data enforced, forecast accuracy restored. Deals moved faster because everyone was working from the same reality.</div></div>
+        <div class="outcome-content">
+          <div class="outcome-label">Reduction in Average Sales Cycle</div>
+          <div class="outcome-desc">Stage definitions standardized, validation rules enforced, BDR-to-AE handoff data preserved, forecast accuracy restored. Deals moved faster because every rep was operating from the same reality.</div>
+          <div class="outcome-impact">Shorter cycle = more deals per quarter from the same team</div>
+        </div>
       </div>
     </div>
   </div>
@@ -660,38 +663,58 @@ section { position: relative; z-index: 1; }
     <div class="faq-list">
 
       <div class="faq-item">
-        <div class="faq-q"><span class="faq-q-text">Why isn't my sales team using Salesforce?</span><span class="faq-icon">+</span></div>
-        <div class="faq-a" style="color:rgba(255,255,255,0.45);">Because the system isn't built for how they sell. When Salesforce requires more work than it saves, when data can't be trusted, when automations fire at the wrong time — reps find workarounds and stop logging. That's not a training problem. It's an architecture problem. We fix the system first. Adoption follows.</div>
+        <div class="faq-q"><span class="faq-q-text">Why won't my sales team use Salesforce?</span><span class="faq-icon">+</span></div>
+        <div class="faq-a">Because the system isn't built for how they sell. When Salesforce requires more work than it saves — when data is wrong, automations misfire, and the forecast view doesn't match reality — reps build workarounds and stop logging. That's not a training problem. It's an architecture problem. We fix the system first. Adoption follows because the tool finally works the way the team does.</div>
       </div>
 
       <div class="faq-item">
-        <div class="faq-q"><span class="faq-q-text">Can you fix a bad Salesforce implementation without starting over?</span><span class="faq-icon">+</span></div>
-        <div class="faq-a" style="color:rgba(255,255,255,0.45);">Almost always yes. A full reimplementation is rarely necessary and almost always disruptive. We audit what exists, identify what's salvageable, and rebuild only what's creating active damage. Most organizations have more working infrastructure than they think. It just needs to be cleaned, governed, and connected correctly.</div>
+        <div class="faq-q"><span class="faq-q-text">Our Salesforce implementation failed. Can you fix it without starting over?</span><span class="faq-icon">+</span></div>
+        <div class="faq-a">Almost always yes. A full reimplementation is rarely necessary and almost always more disruptive than the original problem. We audit what exists, document what's salvageable, and rebuild only what's creating active financial drag. Most organizations have more working infrastructure than they think — it just needs to be cleaned, governed, and properly connected. We deliver a remediation plan before we touch anything.</div>
       </div>
 
       <div class="faq-item">
-        <div class="faq-q"><span class="faq-q-text">How do I fix my Salesforce forecasting and attribution problems?</span><span class="faq-icon">+</span></div>
-        <div class="faq-a" style="color:rgba(255,255,255,0.45);">Forecasting breaks when stage definitions aren't standardized and required fields aren't enforced. Attribution breaks when lead source, campaign, and sequence data aren't captured correctly at the point of entry. Both are architecture problems. We fix the data model and validation rules first, then build the reporting layer on top of data you can actually trust.</div>
+        <div class="faq-q"><span class="faq-q-text">We use Salesforce Financial Services Cloud. Is your team equipped for that?</span><span class="faq-icon">+</span></div>
+        <div class="faq-a">Yes. Financial Services Cloud introduces complexity that standard Salesforce implementations don't — household objects, relationship maps, referral tracking, compliance-driven workflows, and advisor productivity tooling that breaks when data governance fails. We work with insurance agencies, RIAs, wealth management firms, and banking operations where FSC is the commercial system of record. The architecture principles are the same. The object model and regulatory constraints require specific expertise we have.</div>
       </div>
 
       <div class="faq-item">
-        <div class="faq-q"><span class="faq-q-text">Can you identify where we have revenue leaks in our go-to-market?</span><span class="faq-icon">+</span></div>
-        <div class="faq-a" style="color:rgba(255,255,255,0.45);">Yes — and that's a core part of what we do. We're in your instance every day reading the same reports your leadership sees. We look across the full funnel from marketing through close through customer success, and we surface where pipeline is leaking, where handoffs are breaking down, where attribution is missing, and where automation failures are creating invisible drag. The monthly findings report is specifically built around this.</div>
+        <div class="faq-q"><span class="faq-q-text">We run Salesforce Field Service. Can you help with scheduling and dispatch issues?</span><span class="faq-icon">+</span></div>
+        <div class="faq-a">Yes. Field Service Lightning creates a set of operational and data problems that compound quickly when the underlying CRM architecture isn't sound — scheduling conflicts, work order attribution failures, technician productivity gaps, and mobile app sync issues that cause data loss in the field. We address the CRM foundation first, then work through the FSL configuration layer and dispatcher workflow. If your field ops revenue is leaking because dispatch and billing don't reconcile with the CRM, that's a solvable architecture problem.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q"><span class="faq-q-text">Our AMS and Salesforce aren't talking to each other correctly.</span><span class="faq-icon">+</span></div>
+        <div class="faq-a">This is one of the most common disconnects we see in associations, nonprofits, and membership-based organizations. When your Association Management System and Salesforce can't sync member records, event registrations, and renewal data cleanly, both systems become partially unreliable. We map the integration, identify the sync failure points, standardize the field mapping and object relationships, and build a governance process that keeps them aligned. Your team should never have to choose which system to trust.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q"><span class="faq-q-text">Our CRM and TMS aren't connected. Salesforce doesn't reflect what's happening in the freight operation.</span><span class="faq-icon">+</span></div>
+        <div class="faq-a">In logistics and freight brokerage, a disconnected CRM and Transportation Management System means sales reps are quoting without current carrier data, account managers can't see load history, and leadership can't correlate commercial activity with operational performance. We've worked through CRM-TMS integration for brokerages where reconciling lane data, carrier relationships, and customer revenue required a complete rebuild of how the two systems communicated. The commercial model depends on it.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q"><span class="faq-q-text">Salesforce and our ERP aren't syncing. Finance and sales are working from different numbers.</span><span class="faq-icon">+</span></div>
+        <div class="faq-a">A Salesforce-ERP disconnect — whether it's NetSuite, SAP, Dynamics, or another platform — is one of the highest-cost integration failures in a commercial org. When closed-won in Salesforce doesn't reconcile with recognized revenue in the ERP, your CFO can't trust either system. Quota attainment, commission calculations, and revenue forecasting all break. We identify the disconnect, map the correct data flow, and build an integration architecture that keeps both systems accurate. Finance and sales working from the same numbers is not optional — it's the foundation of a functional commercial model.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q"><span class="faq-q-text">How do I fix our Salesforce forecasting and attribution?</span><span class="faq-icon">+</span></div>
+        <div class="faq-a">Forecasting breaks when stage definitions aren't standardized and required fields aren't enforced. Attribution breaks when lead source, campaign, and sequence data aren't captured at the point of entry. Both are architecture problems — not reporting problems. We rebuild the data model and validation rules first, then construct the reporting layer on data you can actually trust. Your CRO should be able to walk into a board meeting confident in the number.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q"><span class="faq-q-text">Can you identify where revenue is leaking in our go-to-market?</span><span class="faq-icon">+</span></div>
+        <div class="faq-a">Yes — and this is a core part of what we deliver. We're in your instance every day reading the same reports your leadership sees. We look across the full funnel from marketing through close through retention, and we surface where pipeline is leaking, where handoffs are breaking down, where attribution is missing, and where automation failures are creating invisible financial drag. The monthly findings report is built specifically to answer the question your CRO is asking but can't get a straight answer on.</div>
       </div>
 
       <div class="faq-item">
         <div class="faq-q"><span class="faq-q-text">How quickly can we get started?</span><span class="faq-icon">+</span></div>
-        <div class="faq-a" style="color:rgba(255,255,255,0.45);">Sign up and we schedule an onboarding call within 24 business hours. We get access to your instance, run an initial audit, and have findings in front of you before the end of the first week. You know what's broken and what the plan is before month one is done.</div>
-      </div>
-
-      <div class="faq-item">
-        <div class="faq-q"><span class="faq-q-text">Do you do Salesforce implementations from scratch?</span><span class="faq-icon">+</span></div>
-        <div class="faq-a" style="color:rgba(255,255,255,0.45);">No. We work with companies that already have Salesforce in place — whether it's a failed implementation, an instance nobody manages, or a system that's grown past what the internal team can handle. If you haven't purchased Salesforce yet, do that first and come back when you're ready to build it correctly.</div>
+        <div class="faq-a">Fast. Sign up and we schedule an onboarding call within 24 business hours. We get access to your instance, run an initial audit, and have findings in front of you before the end of the first week — with a prioritized remediation plan and a clear view of the financial impact before we fix anything.</div>
       </div>
 
       <div class="faq-item">
         <div class="faq-q"><span class="faq-q-text">Do you work with companies outside of tech?</span><span class="faq-icon">+</span></div>
-        <div class="faq-a" style="color:rgba(255,255,255,0.45);">Yes — and it's where we spend most of our time. Insurance agencies, financial services firms, logistics and freight brokerages, healthcare organizations, staffing companies, manufacturing operations. Industries where the commercial model is complex, the CRM is usually a mess, and the internal team doesn't have the Salesforce and RevOps expertise to fix it. If your team sells, quotes, forecasts, or manages accounts in Salesforce, we can help.</div>
+        <div class="faq-a">Yes — and it's where most of our work happens. Insurance agencies, financial services firms, logistics and freight brokerages, healthcare organizations, staffing companies, manufacturing operations, associations. Industries where the commercial model is complex, the CRM is heavily customized, and the internal team doesn't have the Salesforce architecture and RevOps expertise to identify what's creating financial drag. If your team sells, quotes, forecasts, or manages accounts in Salesforce, we can help.</div>
       </div>
 
     </div>
@@ -701,9 +724,9 @@ section { position: relative; z-index: 1; }
 <!-- ═══ CTA — coral ══════════════════════════════════════════════ -->
 <section class="cta-section">
   <div class="cta-inner">
-    <span class="cta-eyebrow">Solutions · Salesforce Architecture</span>
+    <span class="cta-eyebrow">Solutions · Salesforce Strategy and Operations</span>
     <h2 class="cta-h2">Your CRM is either an asset or a liability.</h2>
-    <p class="cta-body">There is no in-between. Every week it stays broken, your reps operate blind, your pipeline leaks, and the gap between what you report and what's real gets wider. Salesforce specialists and RevOps strategists who understand your full commercial funnel. Start this month.</p>
+    <p class="cta-body">Every week it stays broken, your reps operate blind, your pipeline leaks, and the gap between what you report and what's real gets wider. Salesforce specialists and RevOps strategists who understand your full commercial funnel — and what a broken CRM is actually costing you.</p>
     <div class="cta-btn-row">
       <a href="#sa-pricing" class="btn-white">Get Started →</a>
       <a href="https://www.revshoppe.com/contact" class="btn-white-ghost">Talk to Us</a>
@@ -715,18 +738,18 @@ section { position: relative; z-index: 1; }
 <script>
 (function(){
   var findings = [
-    {area:'Data Integrity · Critical',title:'83% of contact records can\'t support real targeting',finding:'Job function, seniority, and industry are missing on the majority of records. Scoring models are running on guesswork. Enrichment tools are configured but not writing back correctly. Every persona-based campaign reaches the wrong people at the wrong companies.',consequence:'Every dollar spent on intent data and targeting is partially wasted. Segmentation produces activity, not pipeline. The problem compounds with every new contact ingested on broken data standards.'},
-    {area:'Attribution Coverage · Critical',title:'96% of closed deals have zero sequence attribution',finding:'Leadership cannot trace which outbound motions, campaigns, or channels generated revenue. Board dashboards are built on incomplete data. The highest-performing sequences are invisible. The underperformers stay funded because nobody can see the difference.',consequence:'Marketing budget is being optimized for the wrong channels every quarter. Attribution gaps compound into strategic misdirection at the executive level. The damage shows up as miss after miss.'},
-    {area:'Automation Health · Degraded',title:'Your automations are misfiring and nobody knows',finding:'11,707 overdue tasks across the org. Flows were built for a motion you no longer run. Triggers conflict with each other. Reps built workarounds and stopped logging accurately. The system generates noise instead of signal and leadership coaches off the noise.',consequence:'Reps are doing manually what the system should do automatically. The hours lost compound into meaningful selling capacity. Pipeline is never created because outbound infrastructure fails silently every day.'},
-    {area:'Pipeline Accuracy · Degraded',title:'Your forecast is someone\'s best guess dressed up as a number',finding:'Stage definitions vary by rep. No enforcement rules on required fields before deals advance. Weighted pipeline math is meaningless on inconsistent inputs. What leadership presents to the board and what\'s real diverge every quarter — and everyone in the room knows it.',consequence:'Resourcing, hiring, and board commitments are made on a forecast nobody trusts. That misdirection has a compounding cost every planning cycle. The damage shows up in capacity mismatches and missed commitments.'},
-    {area:'Platform Sync · Critical',title:'10,432 sync errors in the last three days',finding:'Your marketing automation, sales engagement platform, and Salesforce are actively miscommunicating. Records duplicate on sync. Sequences enroll contacts who shouldn\'t be enrolled. Field mappings write to the wrong places. The error log grows every day and nobody is assigned to it.',consequence:'Every day this runs unaddressed, the data gets worse and deduplication becomes more expensive. Reps lose trust in the system faster. Pipeline is inflated by duplicates. Recovery cost increases with time.'},
-    {area:'Rep Adoption · Degraded',title:'Your team uses Salesforce to comply, not to sell',finding:'46% of mailboxes and calendars disabled or misconfigured. Reps log the minimum required to avoid being flagged. Deal intelligence lives in Slack threads, personal notes, and memory. When someone leaves, the pipeline context walks out with them.',consequence:'Low adoption makes bad data worse every quarter. The CRM becomes less useful over time, not more. The longer this runs, the harder the reversal and the more organizational trust erodes in the platform and in leadership\'s ability to fix it.'}
+    {area:'Data Integrity · Critical',title:'83% of contact records can\'t support real segmentation or targeting',finding:'Job function, seniority, and industry are missing on the majority of records. Scoring models are running on guesswork. Enrichment tools are configured but not writing back correctly. Every persona-based campaign and every ABM motion is operating without the data it needs.',consequence:'Every dollar allocated to intent data and targeted outbound is partially wasted. Segmentation produces activity, not qualified pipeline. The financial cost compounds with every new contact ingested under broken data standards.'},
+    {area:'Attribution Coverage · Critical',title:'96% of closed deals have zero attribution to a sequence or campaign',finding:'Leadership cannot tell the board which outbound motions, campaigns, or channels generated revenue. The highest-performing sequences are invisible in reporting. The underperformers stay funded because nobody can distinguish between them.',consequence:'Marketing and sales investment is being optimized for the wrong activities every quarter. The compounding financial cost is misdirected spend plus the strategic cost of decisions made without visibility into what\'s actually working.'},
+    {area:'Automation Health · Degraded',title:'Automations exist. Most of them are misfiring.',finding:'11,707 overdue tasks across the org. Flows were built for a motion the team no longer runs. Triggers conflict. Reps built workarounds and stopped logging accurately. The system produces noise instead of signal — and sales leadership is coaching off the noise.',consequence:'Reps are doing manually what automation should handle. Nine hours per rep per week in a 50-person org is 450 hours of selling capacity lost monthly. Pipeline that never gets created because outbound infrastructure fails silently every day.'},
+    {area:'Pipeline Accuracy · Degraded',title:'The forecast is someone\'s best guess dressed up as a number',finding:'Stage definitions vary by rep. No validation rules enforce required fields before deals advance. Weighted pipeline math is meaningless on inconsistent inputs. What the VP of Sales presents to the CFO and what\'s real diverge every quarter.',consequence:'Headcount plans, resourcing decisions, and board commitments are built on a forecast nobody trusts. The financial cost of that misdirection compounds every planning cycle. It shows up as capacity mismatches, missed targets, and eroding investor confidence.'},
+    {area:'Platform Sync · Critical',title:'10,432 sync errors in three days — and nobody was looking at the log',finding:'Marketing automation, sales engagement platform, and Salesforce are actively miscommunicating. Records duplicate on sync. Sequences enroll contacts who shouldn\'t be enrolled. Field mappings write to wrong objects. The error log grows daily.',consequence:'Every day this runs unaddressed, data quality deteriorates and deduplication cost increases. Reps lose trust in the system faster. Pipeline is inflated by duplicate records. Recovery cost scales with time — this does not self-correct.'},
+    {area:'Rep Adoption · Degraded',title:'Your team uses Salesforce to comply, not to sell',finding:'46% of mailboxes and calendars misconfigured or disabled. Reps log the minimum required to avoid being flagged. Deal intelligence lives in Slack, personal notes, and memory. When a rep leaves, the pipeline context exits with them.',consequence:'Low adoption makes bad data worse every quarter. The CRM becomes less useful over time instead of more. The financial cost is the gap between what your platform investment should return and what it actually delivers — a gap that widens with every quarter this goes unaddressed.'}
   ];
   var checks = document.querySelectorAll('.scanner-check');
   var detail = document.getElementById('scanner-detail');
   function renderDetail(idx) {
     var f = findings[idx];
-    detail.innerHTML = '<div><div class="scanner-detail-area">'+f.area+'</div><div class="scanner-detail-title">'+f.title+'</div><div class="scanner-detail-finding">'+f.finding+'</div></div><div class="scanner-consequence"><div class="scanner-consequence-label">Revenue Consequence</div><div class="scanner-consequence-text">'+f.consequence+'</div></div>';
+    detail.innerHTML = '<div><div class="scanner-detail-area">'+f.area+'</div><div class="scanner-detail-title">'+f.title+'</div><div class="scanner-detail-finding">'+f.finding+'</div></div><div class="scanner-consequence"><div class="scanner-consequence-label">Financial Impact</div><div class="scanner-consequence-text">'+f.consequence+'</div></div>';
   }
   checks.forEach(function(check) {
     check.addEventListener('click', function() {
@@ -745,6 +768,10 @@ section { position: relative; z-index: 1; }
   });
   document.querySelectorAll('.flip-card-wrap').forEach(function(card) {
     card.addEventListener('click', function() { this.classList.toggle('flipped'); });
+  });
+  // Add subtle flip indicator to non-pre-flipped cards
+  document.querySelectorAll('.flip-card-wrap:not(.flipped) .flip-hint').forEach(function(hint) {
+    hint.innerHTML = '<span style="font-family:\'IBM Plex Mono\',monospace;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(0,0,0,0.22);">↩ Hover to see the cost</span>';
   });
 })();
 </script>
@@ -772,9 +799,7 @@ section { position: relative; z-index: 1; }
   var badgeEl = document.getElementById('sa-zone-badge');
   var btnEl   = document.getElementById('sa-checkout-btn');
   var currentStep = 0;
-
   function fmt(n){ return '$' + n.toLocaleString('en-US'); }
-
   function update(idx){
     currentStep = idx;
     var s = STEPS[idx];
@@ -794,17 +819,14 @@ section { position: relative; z-index: 1; }
     }
     btnEl.classList.remove('loading');
   }
-
   btnEl.addEventListener('click', function(){
     var s = STEPS[currentStep];
     if(s.zone === 'enterprise'){
       window.location.href = 'https://www.revshoppe.com/contact';
       return;
     }
-    // Payment Link — quantity passed as URL param, Stripe handles the rest
     window.location.href = PAYMENT_LINK + '?quantity=' + s.hours;
   });
-
   slider.addEventListener('input', function(){ update(parseInt(this.value)); });
   update(0);
 })();
