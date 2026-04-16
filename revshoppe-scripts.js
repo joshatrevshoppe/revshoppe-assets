@@ -96,11 +96,17 @@ document.addEventListener('DOMContentLoaded', function() {
   var clickTimer = null;
 
   if (logoLink) {
-    logoLink.addEventListener('click', function(e) {
+logoLink.addEventListener('click', function(e) {
       e.preventDefault();
       clickCount++;
       clearTimeout(clickTimer);
-      clickTimer = setTimeout(function() { clickCount = 0; }, 600);
+      if (clickCount < 3) {
+        clickTimer = setTimeout(function() {
+          clickCount = 0;
+          window.location.href = logoLink.href;
+        }, 600);
+        return;
+      }
 
       if (clickCount >= 3) {
         clickCount = 0;
