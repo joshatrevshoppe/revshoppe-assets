@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RevShoppe Brand Kit — Design System Reference</title>
+<meta name="description" content="RevShoppe brand kit, design tokens, typography, components, voice, and usage rules. Source of truth for all RevShoppe visual and written work.">
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+/* ══════════════════════════════════════════════════
+   REVSHOPPE BRAND KIT — SINGLE SOURCE OF TRUTH
+   Upload this file to Claude Design during onboarding.
+   Every token, pattern, and rule is defined here.
+   ══════════════════════════════════════════════════ */
+
+:root {
+  /* ── Colors ─────────────────────────────── */
+  --accent: #E8634A;           /* Coral — only warm color. CTAs, eyebrows, highlights */
+  --accent-hover: #F0745C;     /* Coral hover */
+  --bg-dark: #26242F;          /* Primary dark — nav, hero, dark sections */
+  --bg-charcoal: #2C2A27;      /* Secondary warm dark — use sparingly */
+  --bg-light: #FAFAF9;         /* Off-white — light sections. NEVER pure #fff */
+  --headline: #111111;         /* Near-black for headlines on light */
+  --body: #8F95A0;             /* Body copy gray */
+  --border-light: rgba(0,0,0,0.07);
+  --border-dark: rgba(255,255,255,0.07);
+
+  /* ── Type ───────────────────────────────── */
+  --f-display: "RocWideMedium", "Times New Roman", Georgia, serif;
+  --f-display-italic: "RocWideLight", Georgia, serif;
+  --f-mono: "IBM Plex Mono", "Courier New", monospace;
+  --f-body: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+
+  /* ── Spacing ────────────────────────────── */
+  --section-pad: 88px 48px;
+  --hero-pad: 72px 48px 40px;
+  --gap-cards: 14px;
+  --gap-pillars: 40px;
+  --radius-tag: 3px;
+  --radius-card: 10px;
+  --radius-pillar: 12px;
+}
+
+/* NOTE: RocWideMedium is normally base64-embedded in the rs_css site script.
+   For this reference kit, we fall back to serif so rendering works anywhere. */
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--f-body);
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--headline);
+  background: var(--bg-light);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Grid texture (required on all sections) ── */
+.tex-light {
+  background-color: var(--bg-light);
+  background-image:
+    linear-gradient(rgba(0,0,0,0.027) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,0.027) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+.tex-dark {
+  background-color: var(--bg-dark);
+  background-image:
+    linear-gradient(rgba(255,255,255,0.034) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.034) 1px, transparent 1px);
+  background-size: 40px 40px;
+  color: #fff;
+}
+.tex-coral {
+  background-color: var(--accent); /* Coral CTA — NEVER textured */
+  color: #fff;
+}
+
+/* ── Typography ─────────────────────────────── */
+h1, h2, h3, h4 {
+  font-family: var(--f-display);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+  color: inherit;
+}
+h1 { font-size: clamp(42px, 5vw, 72px); }
+h2 { font-size: clamp(32px, 3.5vw, 52px); }
+h3 { font-size: clamp(22px, 2vw, 28px); }
+h4 { font-size: 18px; }
+
+p { font-size: 16px; line-height: 1.65; color: var(--body); max-width: 68ch; }
+.tex-dark p { color: rgba(255,255,255,0.7); }
+
+.eyebrow {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  display: inline-block;
+  margin-bottom: 18px;
+}
+.tex-dark .eyebrow { color: rgba(232,99,74,0.85); }
+
+.label-mono {
+  font-family: var(--f-mono);
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(0,0,0,0.5);
+}
+.tex-dark .label-mono { color: rgba(255,255,255,0.4); }
+
+/* ── Layout ─────────────────────────────────── */
+section {
+  padding: var(--section-pad);
+  position: relative;
+  overflow: hidden;
+}
+.wrap {
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+}
+.grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: var(--gap-pillars); }
+.grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: var(--gap-cards); }
+.grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--gap-cards); }
+
+/* ── Header / Page Nav (for this kit doc only) ── */
+.kit-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg-dark);
+  background-image:
+    linear-gradient(rgba(255,255,255,0.034) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.034) 1px, transparent 1px);
+  background-size: 40px 40px;
+  border-bottom: 1px solid var(--border-dark);
+  padding: 16px 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+}
+.kit-nav .logo {
+  font-family: var(--f-display);
+  font-size: 18px;
+  color: #fff;
+  letter-spacing: -0.01em;
+}
+.kit-nav .logo::before {
+  content: "⚡";
+  color: var(--accent);
+  margin-right: 6px;
+}
+.kit-nav .nav-links {
+  display: flex;
+  gap: 28px;
+}
+.kit-nav .nav-links a {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.kit-nav .nav-links a:hover { color: #fff; }
+
+/* ── Buttons ─────────────────────────────────── */
+.btn-primary {
+  display: inline-block;
+  background: var(--accent);
+  color: #fff;
+  padding: 14px 32px;
+  border-radius: var(--radius-tag);
+  font-family: var(--f-mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background 0.2s;
+  border: none;
+  cursor: pointer;
+}
+.btn-primary:hover { background: var(--accent-hover); }
+
+.btn-outline {
+  display: inline-block;
+  color: #fff;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 12px 26px;
+  border-radius: var(--radius-tag);
+  font-family: var(--f-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.btn-ghost {
+  display: inline-block;
+  font-family: var(--f-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #9CA3AF;
+  text-decoration: none;
+  border-bottom: 1px solid #D1D5DB;
+  padding-bottom: 2px;
+}
+
+.btn-white {
+  display: inline-block;
+  background: #fff;
+  color: var(--accent);
+  padding: 14px 32px;
+  border-radius: var(--radius-tag);
+  font-family: var(--f-mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+/* ── Cards ───────────────────────────────────── */
+.card-light {
+  background: #fff;
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: var(--radius-card);
+  padding: 22px 20px;
+  box-shadow:
+    0 1px 2px rgba(0,0,0,0.04),
+    0 4px 12px rgba(0,0,0,0.06),
+    0 12px 28px rgba(0,0,0,0.05);
+}
+.card-outcome-dark {
+  background: var(--bg-dark);
+  border: 1px solid var(--border-dark);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--radius-card);
+  padding: 28px 24px;
+}
+.card-pillar {
+  position: relative;
+  background: #2A2838;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--radius-pillar);
+  padding: 28px 24px;
+  min-height: 240px;
+}
+.card-pillar-num {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  color: var(--accent);
+  letter-spacing: 0.08em;
+  margin-bottom: 20px;
+  display: block;
+}
+.card-pillar h4 {
+  font-family: var(--f-display);
+  color: #fff;
+  font-size: 22px;
+  margin-bottom: 10px;
+}
+.card-pillar p {
+  font-size: 14px;
+  color: rgba(255,255,255,0.65);
+  line-height: 1.55;
+}
+
+/* ── Hero (top of kit) ─────────────────── */
+.kit-hero { padding: 120px 48px 88px; }
+.kit-hero h1 { margin-bottom: 24px; max-width: 15ch; color: #fff; }
+.kit-hero p { font-size: 18px; max-width: 56ch; color: rgba(255,255,255,0.75); margin-bottom: 36px; }
+.kit-hero .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+
+/* ── Token Blocks ─────────────────────────── */
+.token-row {
+  display: grid;
+  grid-template-columns: 140px 1fr 1fr 2fr;
+  gap: 24px;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--border-light);
+  align-items: center;
+}
+.tex-dark .token-row { border-bottom-color: var(--border-dark); }
+.token-swatch {
+  height: 56px;
+  border-radius: 6px;
+  border: 1px solid var(--border-light);
+}
+.token-name { font-family: var(--f-mono); font-size: 13px; font-weight: 500; }
+.token-hex { font-family: var(--f-mono); font-size: 12px; color: var(--body); }
+.token-note { font-size: 14px; color: var(--body); }
+
+/* ── Type Specimen ─────────────────────── */
+.specimen {
+  padding: 40px 0;
+  border-bottom: 1px solid var(--border-light);
+}
+.specimen:last-child { border-bottom: none; }
+.specimen-meta {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--body);
+  margin-bottom: 14px;
+}
+.specimen-display { font-family: var(--f-display); font-size: 72px; line-height: 1.05; letter-spacing: -0.02em; color: var(--headline); }
+.specimen-body { font-family: var(--f-body); font-size: 18px; line-height: 1.6; }
+.specimen-mono { font-family: var(--f-mono); font-size: 14px; letter-spacing: 0.04em; }
+
+/* ── Stat strip ─────────────────────────── */
+.stat-strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 14px;
+  padding: 20px 0;
+}
+.stat {
+  padding: 28px 20px;
+  border-right: 1px solid var(--border-dark);
+}
+.stat:last-child { border-right: none; }
+.stat-num {
+  font-family: var(--f-display);
+  font-size: 56px;
+  color: var(--accent);
+  line-height: 1;
+  margin-bottom: 10px;
+  letter-spacing: -0.02em;
+}
+.stat-label {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+}
+
+/* ── Do / Don't ────────────────────────── */
+.rules {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  margin-top: 32px;
+}
+.rules-col {
+  padding: 28px;
+  border-radius: var(--radius-card);
+  background: #fff;
+  border: 1px solid var(--border-light);
+}
+.rules-col h4 {
+  font-family: var(--f-mono);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.rules-col.do h4 { color: #1e7a3a; }
+.rules-col.dont h4 { color: #C24B32; }
+.rules-col ul { list-style: none; padding: 0; }
+.rules-col li {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--headline);
+  padding: 8px 0 8px 24px;
+  position: relative;
+  border-bottom: 1px solid rgba(0,0,0,0.04);
+}
+.rules-col li:last-child { border-bottom: none; }
+.rules-col.do li::before { content: "✓"; position: absolute; left: 0; color: #1e7a3a; font-weight: 600; }
+.rules-col.dont li::before { content: "✗"; position: absolute; left: 0; color: #C24B32; font-weight: 600; }
+
+@media (max-width: 700px) {
+  .rules { grid-template-columns: 1fr; }
+  .token-row { grid-template-columns: 100px 1fr; }
+  .token-row .token-hex, .token-row .token-note { grid-column: 2; }
+}
+
+/* ── Section dividers ──────────────────── */
+.section-label {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.45);
+  margin-bottom: 20px;
+  display: block;
+}
+.tex-light .section-label { color: rgba(0,0,0,0.5); }
+
+/* ── Quote block ───────────────────────── */
+.quote {
+  padding: 32px;
+  background: var(--bg-dark);
+  border: 1px solid var(--border-dark);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--radius-card);
+  margin: 40px 0;
+}
+.quote-text {
+  font-family: var(--f-display-italic), var(--f-display);
+  font-style: italic;
+  font-size: 22px;
+  line-height: 1.4;
+  color: #fff;
+  margin-bottom: 16px;
+}
+.quote-cite {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(232,99,74,0.85);
+}
+
+/* ── Badge / Tag ───────────────────────── */
+.badge {
+  display: inline-block;
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 5px 14px;
+  border-radius: 100px;
+  border: 1px solid rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.55);
+  margin-right: 6px;
+}
+.tex-light .badge { border-color: rgba(0,0,0,0.12); color: rgba(0,0,0,0.55); }
+
+/* ── Product / Service cards ─────────── */
+.svc {
+  display: block;
+  padding: 24px;
+  border-radius: var(--radius-card);
+  background: #fff;
+  border: 1px solid var(--border-light);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.06);
+  text-decoration: none;
+  color: var(--headline);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.svc:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
+.svc-tag {
+  font-family: var(--f-mono);
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  display: block;
+  margin-bottom: 12px;
+}
+.svc-title {
+  font-family: var(--f-display);
+  font-size: 22px;
+  margin-bottom: 8px;
+}
+.svc-desc {
+  font-size: 14px;
+  color: var(--body);
+  line-height: 1.55;
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════
+     1. NAV (brand-correct example)
+     ══════════════════════════════════════════════════ -->
+<nav class="kit-nav">
+  <span class="logo">RevShoppe</span>
+  <div class="nav-links">
+    <a href="#positioning">Positioning</a>
+    <a href="#colors">Colors</a>
+    <a href="#type">Typography</a>
+    <a href="#components">Components</a>
+    <a href="#voice">Voice</a>
+    <a href="#products">Products</a>
+  </div>
+  <a href="#" class="btn-primary" style="padding:10px 22px; font-size:11px;">Talk to Us →</a>
+</nav>
+
+<!-- ══════════════════════════════════════════════════
+     2. HERO — shows correct dark hero + coral CTA + outline button
+     ══════════════════════════════════════════════════ -->
+<section class="tex-dark kit-hero">
+  <div class="wrap">
+    <span class="eyebrow">Brand Kit · Design System Reference</span>
+    <h1>The RevShoppe<br/>Operating System.</h1>
+    <p>Every color, font, component, and rule used to build RevShoppe's marketing, product, and sales surfaces. This file is the source of truth. Upload it to Claude Design during onboarding.</p>
+    <div class="hero-btns">
+      <a href="#positioning" class="btn-primary">Read the system →</a>
+      <a href="#products" class="btn-outline">See products</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     3. POSITIONING
+     ══════════════════════════════════════════════════ -->
+<section id="positioning" class="tex-light">
+  <div class="wrap">
+    <span class="section-label">01 — Positioning</span>
+    <h2>What RevShoppe is.</h2>
+    <p style="margin-top:24px; max-width: 70ch;"><strong>RevShoppe designs, builds, and operationalizes commercial infrastructure for enterprise revenue organizations.</strong> We close the revenue execution gap — the space between a company's growth target and the commercial model it's actually running. Our work spans GTM strategy, engineering, and governance: we diagnose gaps across four pillars (Context, Data, People, Technology), design the operating model, build the system, and govern it over time. We don't advise and leave. We build the system and stay until it works.</p>
+
+    <div class="grid-2" style="margin-top:48px;">
+      <div>
+        <span class="eyebrow">Who We Sell To</span>
+        <p>CROs, VP Sales, RevOps leaders, and CCOs at enterprise companies (typically 500–100,000-person orgs). Data-literate. Skeptical of consulting language. Have seen a hundred bad agency decks.</p>
+      </div>
+      <div>
+        <span class="eyebrow">What Makes Us Different</span>
+        <p>Most consultancies produce slides and leave. We design, build, validate, and scale the system with the team until it runs without us. Our methodology is <strong>Design → Build → Validate → Scale (DBVS)</strong>. Discovery happens inside the Diagnosis phase.</p>
+      </div>
+    </div>
+
+    <div class="quote">
+      <div class="quote-text">"The data shows the org generating less than $0.007 in pipeline per activity. The benchmark is $0.70–$1.05."</div>
+      <div class="quote-cite">GTM Diagnosis · Executive Summary · Representative finding</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     4. COLORS
+     ══════════════════════════════════════════════════ -->
+<section id="colors" class="tex-dark">
+  <div class="wrap">
+    <span class="section-label">02 — Color System</span>
+    <h2 style="color:#fff;">Six tokens.<br/>One warm color.</h2>
+    <p style="margin-top:24px; max-width:62ch;">The entire palette is six tokens. Coral (<code style="font-family:var(--f-mono); color:var(--accent);">#E8634A</code>) is the only warm/chromatic color — everything else is neutral. Never introduce new colors. Never use pure #000 or pure #fff as backgrounds.</p>
+
+    <div style="margin-top:40px;">
+      <div class="token-row">
+        <div class="token-swatch" style="background:#E8634A;"></div>
+        <div class="token-name">--accent</div>
+        <div class="token-hex">#E8634A</div>
+        <div class="token-note">Coral. The brand's only warm color. CTAs, eyebrows, highlights, active states, accent lines.</div>
+      </div>
+      <div class="token-row">
+        <div class="token-swatch" style="background:#F0745C;"></div>
+        <div class="token-name">--accent-hover</div>
+        <div class="token-hex">#F0745C</div>
+        <div class="token-note">Coral hover state.</div>
+      </div>
+      <div class="token-row">
+        <div class="token-swatch" style="background:#26242F;"></div>
+        <div class="token-name">--bg-dark</div>
+        <div class="token-hex">#26242F</div>
+        <div class="token-note">Primary dark. Nav, hero, alternating dark sections.</div>
+      </div>
+      <div class="token-row">
+        <div class="token-swatch" style="background:#2C2A27;"></div>
+        <div class="token-name">--bg-charcoal</div>
+        <div class="token-hex">#2C2A27</div>
+        <div class="token-note">Warm dark variant. Use sparingly.</div>
+      </div>
+      <div class="token-row">
+        <div class="token-swatch" style="background:#FAFAF9; border:1px solid rgba(255,255,255,0.15);"></div>
+        <div class="token-name">--bg-light</div>
+        <div class="token-hex">#FAFAF9</div>
+        <div class="token-note">Off-white. Light section backgrounds. NOT pure white.</div>
+      </div>
+      <div class="token-row">
+        <div class="token-swatch" style="background:#111111;"></div>
+        <div class="token-name">--headline</div>
+        <div class="token-hex">#111111</div>
+        <div class="token-note">Near-black for headlines on light backgrounds.</div>
+      </div>
+      <div class="token-row">
+        <div class="token-swatch" style="background:#8F95A0;"></div>
+        <div class="token-name">--body</div>
+        <div class="token-hex">#8F95A0</div>
+        <div class="token-note">Body copy gray on light backgrounds.</div>
+      </div>
+    </div>
+
+    <div style="margin-top:48px; padding:28px; background:rgba(255,255,255,0.03); border:1px solid var(--border-dark); border-radius:var(--radius-card);">
+      <span class="section-label">Grid Texture — Required on Every Section</span>
+      <p style="color:rgba(255,255,255,0.7);">Every section has a subtle 1px grid overlay. <strong>Dark sections:</strong> <code style="font-family:var(--f-mono); color:#fff;">rgba(255,255,255,0.034)</code> at 40px. <strong>Light sections:</strong> <code style="font-family:var(--f-mono); color:#fff;">rgba(0,0,0,0.027)</code> at 56px. Coral CTA sections are the only sections with NO texture — solid coral only.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     5. TYPOGRAPHY
+     ══════════════════════════════════════════════════ -->
+<section id="type" class="tex-light">
+  <div class="wrap">
+    <span class="section-label">03 — Typography</span>
+    <h2>Four fonts.<br/>Clear roles.</h2>
+
+    <div style="margin-top:48px;">
+      <div class="specimen">
+        <div class="specimen-meta">RocWideMedium · Display / Headlines · H1, H2, pillar titles, large callouts</div>
+        <div class="specimen-display">Close the revenue execution gap.</div>
+      </div>
+      <div class="specimen">
+        <div class="specimen-meta">RocWideLight Italic · Pull quotes on dark contexts</div>
+        <div class="specimen-display" style="font-style:italic; font-weight:300;">"Signals tell you who clicked. Catalist tells you who's ready and why."</div>
+      </div>
+      <div class="specimen">
+        <div class="specimen-meta">IBM Plex Mono · Utility / UI · Eyebrows, labels, tags, buttons, stat labels</div>
+        <div class="specimen-mono" style="color:var(--accent); text-transform:uppercase; font-size:12px; letter-spacing:0.14em;">Solutions · GTM Diagnosis</div>
+        <div class="specimen-mono" style="margin-top:14px; font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:rgba(0,0,0,0.5);">Identity Confidential — NDA Applies</div>
+      </div>
+      <div class="specimen">
+        <div class="specimen-meta">Montserrat · Body · All paragraph copy, card descriptions</div>
+        <div class="specimen-body">Eighteen months later, half the team still lives in spreadsheets. The problem was never the tool. The problem is the operating model underneath it — the connective tissue between the CRM, the sequencer, and the people. We build that tissue.</div>
+      </div>
+    </div>
+
+    <div class="rules" style="margin-top:64px;">
+      <div class="rules-col do">
+        <h4>Type Do's</h4>
+        <ul>
+          <li>RocWideMedium for all display and H1/H2/H3</li>
+          <li>Montserrat for all body text</li>
+          <li>IBM Plex Mono for eyebrows, labels, buttons, stats — uppercase with 0.08–0.14em tracking</li>
+          <li>RocWideLight Italic only for pull quotes on dark backgrounds</li>
+          <li>Use clamp() for responsive display sizing</li>
+          <li>Letter-spacing -0.01em on large display text</li>
+        </ul>
+      </div>
+      <div class="rules-col dont">
+        <h4>Type Don'ts</h4>
+        <ul>
+          <li>Never use Inter, Roboto, Arial, or system fonts</li>
+          <li>Never use Space Grotesk or other generic "AI design" fonts</li>
+          <li>Never put body copy in RocWide — it's display only</li>
+          <li>Never use IBM Plex Mono for paragraphs — it's utility only</li>
+          <li>Never use RocWideLight outside of pull-quote contexts</li>
+          <li>Never mix more than these four fonts</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     6. COMPONENTS — Buttons, Cards, Stats
+     ══════════════════════════════════════════════════ -->
+<section id="components" class="tex-dark">
+  <div class="wrap">
+    <span class="section-label">04 — Components</span>
+    <h2 style="color:#fff;">Buttons, cards, stats.</h2>
+
+    <div style="margin-top:48px;">
+      <span class="section-label" style="color:rgba(255,255,255,0.7);">Buttons</span>
+      <div style="display:flex; gap:14px; flex-wrap:wrap; padding:28px 0;">
+        <a href="#" class="btn-primary">Primary → coral fill</a>
+        <a href="#" class="btn-outline">Outline → on dark</a>
+        <a href="#" class="btn-ghost">Ghost → text link</a>
+      </div>
+      <p style="color:rgba(255,255,255,0.6); font-size:13px; font-family:var(--f-mono); letter-spacing:0.04em;">
+        <strong style="color:#fff;">.btn-primary</strong> — coral fill, 14px/32px padding, 12px IBM Plex Mono, 0.08em tracking, 3px radius<br>
+        <strong style="color:#fff;">.btn-outline</strong> — transparent with rgba(255,255,255,0.2) border, 12px/26px padding, 11px mono<br>
+        <strong style="color:#fff;">.btn-ghost</strong> — text link with bottom-border, 11px, rgba gray
+      </p>
+    </div>
+
+    <div style="margin-top:64px;">
+      <span class="section-label" style="color:rgba(255,255,255,0.7);">Stat Strip — Real Engagement Data</span>
+      <div class="stat-strip">
+        <div class="stat">
+          <div class="stat-num">$0.007</div>
+          <div class="stat-label">Pipeline per activity · Baseline $0.70–$1.05</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">0.7%</div>
+          <div class="stat-label">BDM reply rate · Median 2–3%</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">80%+</div>
+          <div class="stat-label">Contacts missing firmographic data</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">11,707</div>
+          <div class="stat-label">Overdue tasks · Single engagement</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:64px;">
+      <span class="section-label" style="color:rgba(255,255,255,0.7);">Outcome Cards — Dark, left coral accent</span>
+      <div class="grid-3" style="margin-top:24px;">
+        <div class="card-outcome-dark">
+          <div style="font-family:var(--f-display); font-size:40px; color:var(--accent); margin-bottom:10px;">2.1×</div>
+          <div style="color:#fff; font-size:14px; line-height:1.5; margin-bottom:12px;">Account engagement rate</div>
+          <div style="font-family:var(--f-mono); font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:rgba(255,255,255,0.5);">Series C fintech · 40-person org · Catalist-based tiering</div>
+          <div style="font-family:var(--f-mono); font-size:9px; letter-spacing:0.1em; text-transform:uppercase; color:rgba(255,255,255,0.35); margin-top:8px;">Identity confidential</div>
+        </div>
+        <div class="card-outcome-dark">
+          <div style="font-family:var(--f-display); font-size:40px; color:var(--accent); margin-bottom:10px;">+34%</div>
+          <div style="color:#fff; font-size:14px; line-height:1.5; margin-bottom:12px;">Net-new pipeline</div>
+          <div style="font-family:var(--f-mono); font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:rgba(255,255,255,0.5);">Cybersecurity · 65-person org · Q-over-Q</div>
+          <div style="font-family:var(--f-mono); font-size:9px; letter-spacing:0.1em; text-transform:uppercase; color:rgba(255,255,255,0.35); margin-top:8px;">Identity confidential</div>
+        </div>
+        <div class="card-outcome-dark">
+          <div style="font-family:var(--f-display); font-size:40px; color:var(--accent); margin-bottom:10px;">+61%</div>
+          <div style="color:#fff; font-size:14px; line-height:1.5; margin-bottom:12px;">SQL creation quarter-over-quarter</div>
+          <div style="font-family:var(--f-mono); font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:rgba(255,255,255,0.5);">Series C HR tech · 52-person org</div>
+          <div style="font-family:var(--f-mono); font-size:9px; letter-spacing:0.1em; text-transform:uppercase; color:rgba(255,255,255,0.35); margin-top:8px;">Identity confidential</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:64px;">
+      <span class="section-label" style="color:rgba(255,255,255,0.7);">Pillar Cards — Dark, stacked effect</span>
+      <div class="grid-4" style="margin-top:24px;">
+        <div class="card-pillar">
+          <span class="card-pillar-num">01 · CONTEXT</span>
+          <h4>The buying motion</h4>
+          <p>Who is actually in-market. Why now. What triggered it.</p>
+        </div>
+        <div class="card-pillar">
+          <span class="card-pillar-num">02 · DATA</span>
+          <h4>The source of truth</h4>
+          <p>Firmographic completeness, signal quality, attribution.</p>
+        </div>
+        <div class="card-pillar">
+          <span class="card-pillar-num">03 · PEOPLE</span>
+          <h4>The execution layer</h4>
+          <p>Talk tracks, coaching, governance, performance standards.</p>
+        </div>
+        <div class="card-pillar">
+          <span class="card-pillar-num">04 · TECHNOLOGY</span>
+          <h4>The operating surface</h4>
+          <p>CRM, sequencer, AI agents — designed to work together.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     7. VOICE & COPY
+     ══════════════════════════════════════════════════ -->
+<section id="voice" class="tex-light">
+  <div class="wrap">
+    <span class="section-label">05 — Voice & Copy</span>
+    <h2>Specific, active, no hedging.</h2>
+    <p style="margin-top:24px; max-width:68ch;">Our reader is a CRO or VP Sales at an enterprise company. They have seen a hundred bad agency decks and they are skeptical of consulting language. Earn their attention in the first sentence by leading with a number, a named behavior, or a specific consequence.</p>
+
+    <div style="margin-top:48px;">
+      <span class="section-label">Headline Patterns That Work</span>
+      <div class="grid-2" style="margin-top:20px;">
+        <div class="card-light">
+          <div class="svc-tag">Problem-First</div>
+          <h4 style="font-size:22px; margin-bottom:10px;">"You are not running outbound. You are running an extremely expensive database management exercise."</h4>
+        </div>
+        <div class="card-light">
+          <div class="svc-tag">Data-First</div>
+          <h4 style="font-size:22px; margin-bottom:10px;">"$0.007 in pipeline per activity. The benchmark is $0.70–$1.05."</h4>
+        </div>
+        <div class="card-light">
+          <div class="svc-tag">Consequence-First</div>
+          <h4 style="font-size:22px; margin-bottom:10px;">"Every metric above is recoverable. None of it requires new headcount."</h4>
+        </div>
+        <div class="card-light">
+          <div class="svc-tag">Contrast</div>
+          <h4 style="font-size:22px; margin-bottom:10px;">"Signals tell you who clicked. Catalist tells you who's ready and why."</h4>
+        </div>
+      </div>
+    </div>
+
+    <div class="rules" style="margin-top:64px;">
+      <div class="rules-col do">
+        <h4>Voice Do's</h4>
+        <ul>
+          <li>Lead with stats, numbers, and named behaviors before explanations</li>
+          <li>Short sentences. Active voice. Present tense.</li>
+          <li>Every claim grounded in real data (see engagement data below)</li>
+          <li>Name the behavior, then the cost, then the fix</li>
+          <li>Anonymize clients — "Series C fintech, 40-person org"</li>
+          <li>Always close references with "Identity confidential"</li>
+        </ul>
+      </div>
+      <div class="rules-col dont">
+        <h4>Voice Don'ts — Banned Language</h4>
+        <ul>
+          <li>"drive alignment," "unlock value," "best-in-class"</li>
+          <li>"holistic approach," "synergies," "leverage"</li>
+          <li>"actionable insights," "robust," "scalable solutions"</li>
+          <li>"world-class," "next-generation," "transformative"</li>
+          <li>Hedging: "may," "could potentially," "often," "tends to"</li>
+          <li>Fabricated urgency or scarcity of any kind</li>
+          <li>Meaningless CTAs like "See if you qualify"</li>
+          <li>Bullet points for key claims — use stat cards instead</li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="margin-top:64px;">
+      <span class="section-label">Real Engagement Data — Use These, Don't Fabricate</span>
+      <div class="grid-3" style="margin-top:20px;">
+        <div class="card-light"><div class="svc-tag">Pipeline Economics</div><p style="color:var(--headline); font-size:14px;">$0.007 pipeline per activity (industry baseline $0.70–$1.05); 0.7% BDM email reply rate vs. 2–3% median.</p></div>
+        <div class="card-light"><div class="svc-tag">Data Integrity</div><p style="color:var(--headline); font-size:14px;">80%+ CRM contacts missing firmographic data; 230K records with no lead source; 10K sync errors in 3 days.</p></div>
+        <div class="card-light"><div class="svc-tag">Execution Gaps</div><p style="color:var(--headline); font-size:14px;">9 of 10 top sequences generic; 100% of opps missing sequence attribution; 11,707 overdue tasks (one engagement).</p></div>
+        <div class="card-light"><div class="svc-tag">Infrastructure</div><p style="color:var(--headline); font-size:14px;">43–54% of mailboxes and calendars disabled in the sequencer — rendering automation inert.</p></div>
+        <div class="card-light"><div class="svc-tag">Cost of Inaction</div><p style="color:var(--headline); font-size:14px;">~$1.1M Q+1, ~$2.4M Q+2, ~$4.2M Q+3 — compounding. Framing: "Revenue Consequences," not "Cost of Inaction."</p></div>
+        <div class="card-light"><div class="svc-tag">Outcomes (Anonymized)</div><p style="color:var(--headline); font-size:14px;">2.1× engagement · 34% pipeline lift · 61% SQL lift · 21-day cycle reduction · 9 hrs/rep/week recovered.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     8. PRODUCTS
+     ══════════════════════════════════════════════════ -->
+<section id="products" class="tex-dark">
+  <div class="wrap">
+    <span class="section-label">06 — Products & Services</span>
+    <h2 style="color:#fff;">Exact names.<br/>Never deviate.</h2>
+    <p style="margin-top:24px; color:rgba(255,255,255,0.7); max-width:62ch;">Spelling violations are hard errors. Check every output. <strong style="color:var(--accent);">CATALIST</strong> is always spelled this way — never "Catalyst," never "catalyst." <strong style="color:var(--accent);">RevenueOS</strong> (or <strong style="color:var(--accent);">rOS</strong>) — never "gtmOS." <strong style="color:var(--accent);">RevShoppe</strong> one word, never "Rev Shoppe."</p>
+
+    <div style="margin-top:40px;">
+      <span class="section-label" style="color:rgba(255,255,255,0.7);">Services</span>
+      <div class="grid-3" style="margin-top:20px;">
+        <a href="#" class="svc">
+          <span class="svc-tag">Diagnosis</span>
+          <div class="svc-title">GTM Diagnosis</div>
+          <div class="svc-desc">Four-pillar assessment (Context, Data, People, Technology). Entry point for enterprise engagements.</div>
+        </a>
+        <a href="#" class="svc">
+          <span class="svc-tag">Architecture</span>
+          <div class="svc-title">Salesforce Architecture</div>
+          <div class="svc-desc">CRM design, data governance, and administration.</div>
+        </a>
+        <a href="#" class="svc">
+          <span class="svc-tag">Execution</span>
+          <div class="svc-title">GTM Workflows</div>
+          <div class="svc-desc">Workflows, sequences, and automation on your stack. Follows the Diagnosis.</div>
+        </a>
+        <a href="#" class="svc">
+          <span class="svc-tag">Operating Model</span>
+          <div class="svc-title">Revenue Operating System</div>
+          <div class="svc-desc">Full operating model — context, data, people, technology. Short form: RevenueOS or rOS.</div>
+        </a>
+        <a href="#" class="svc">
+          <span class="svc-tag">Governance</span>
+          <div class="svc-title">Managed Infrastructure</div>
+          <div class="svc-desc">Ongoing optimization and performance governance.</div>
+        </a>
+      </div>
+
+      <span class="section-label" style="color:rgba(255,255,255,0.7); margin-top:48px;">Intelligence</span>
+      <div class="grid-3" style="margin-top:20px;">
+        <a href="#" class="svc">
+          <span class="svc-tag">Signals — Paid</span>
+          <div class="svc-title">Catalist Signals</div>
+          <div class="svc-desc">External triggers that start revenue conversations — real-world events, not intent data. CATALIST never Catalyst.</div>
+        </a>
+        <a href="#" class="svc">
+          <span class="svc-tag">CCR — Free Offer</span>
+          <div class="svc-title">Conversation Catalist Report</div>
+          <div class="svc-desc">Free top-of-funnel offer. Industry's top catalists, delivered. Entry point for operators not yet ready for a Diagnosis.</div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     9. GLOBAL DON'T LIST
+     ══════════════════════════════════════════════════ -->
+<section class="tex-light">
+  <div class="wrap">
+    <span class="section-label">07 — Global Don't List</span>
+    <h2>The lines we don't cross.</h2>
+    <div class="rules" style="margin-top:40px;">
+      <div class="rules-col dont">
+        <h4>Design Don'ts</h4>
+        <ul>
+          <li>No pure #000 or pure #fff as backgrounds — always use #26242F or #FAFAF9</li>
+          <li>No new colors outside the six-token palette</li>
+          <li>No sections without the grid texture (except coral CTAs)</li>
+          <li>No two same-tone sections back-to-back (dark/dark or light/light)</li>
+          <li>No fonts outside the four approved (Roc Wide, IBM Plex Mono, Montserrat)</li>
+          <li>No generic AI aesthetics — no purple gradients, no Space Grotesk, no stock Tailwind defaults</li>
+          <li>No bullet points for key claims — use stat cards, outcome cards, or numbered steps</li>
+        </ul>
+      </div>
+      <div class="rules-col dont">
+        <h4>Copy Don'ts</h4>
+        <ul>
+          <li>Never misspell CATALIST, RevShoppe, or RevenueOS</li>
+          <li>Never name clients — always anonymize as "Series X vertical · N-person org"</li>
+          <li>Never fabricate stats — use only the real engagement data above</li>
+          <li>Never use banned consulting language (see full list in voice section)</li>
+          <li>Never say "NDA applies" in Intelligence product copy</li>
+          <li>Never say "you own it completely" in product copy</li>
+          <li>Never repurpose the homepage hero positioning on service pages</li>
+          <li>Never hardcode workflow or metric counts that change</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     10. CORAL CTA — always the final section before footer
+     ══════════════════════════════════════════════════ -->
+<section class="tex-coral" style="padding:88px 48px; text-align:center;">
+  <div class="wrap">
+    <span class="section-label" style="color:rgba(255,255,255,0.75);">Final Section Pattern</span>
+    <h2 style="color:#fff; margin-bottom:20px;">Every page ends here.<br/>Coral. Solid. No texture.</h2>
+    <p style="color:rgba(255,255,255,0.9); margin:0 auto 32px; max-width:56ch;">The coral CTA section is the only section on any page with no grid texture. Single primary button. Short, direct copy. Always the last section before the footer.</p>
+    <a href="#" class="btn-white">What's Broken? →</a>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     11. FOOTER
+     ══════════════════════════════════════════════════ -->
+<footer style="background:#1C1A24; padding:48px; color:rgba(255,255,255,0.5); font-family:var(--f-mono); font-size:11px; letter-spacing:0.06em;">
+  <div class="wrap" style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:20px;">
+    <div>
+      <span style="color:var(--accent);">⚡</span>
+      <strong style="color:#fff; font-family:var(--f-display); font-size:14px; letter-spacing:-0.01em; margin-left:6px;">RevShoppe</strong>
+      <span style="margin-left:14px;">© 2026 · Austin, TX</span>
+    </div>
+    <div>
+      <a href="#" style="color:rgba(255,255,255,0.5); text-decoration:none; margin-right:20px;">Privacy</a>
+      <a href="#" style="color:rgba(255,255,255,0.5); text-decoration:none;">Terms</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
