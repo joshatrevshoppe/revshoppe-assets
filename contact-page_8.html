@@ -424,7 +424,7 @@ section { position: relative; z-index: 1; }
 </section>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
+function rsContactInit() {
 
   // Contact form → HubSpot Forms API
   var form = document.getElementById('contact-form');
@@ -491,7 +491,10 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-});
+}
+
+if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', rsContactInit); }
+else { rsContactInit(); }
 </script>
 
 </body>
