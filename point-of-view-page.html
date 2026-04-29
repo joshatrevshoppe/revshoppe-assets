@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="rs-page" content="point-of-view">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Point of View — RevShoppe</title>
+<link rel="preload" href="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/67dea6a57df5c619dba13468_RocGroteskWide-Medium.woff2" as="font" type="font/woff2" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Montserrat:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+@font-face {
+  font-family: "RocWideMedium";
+  src: url("https://cdn.prod.website-files.com/61f825b46abaae2807007e90/67dea6a57df5c619dba13468_RocGroteskWide-Medium.woff2") format("woff2");
+  font-weight: 500; font-display: block;
+}
+
+:root {
+  --bg:       #F7F5F2;
+  --ink:      #1C1A18;
+  --mid:      #6B6660;
+  --faint:    #B0ABA5;
+  --rule:     #E2DDD8;
+  --accent:   #E8634A;
+}
+
+.pov-bg {
+  background-color: var(--bg);
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 27.5px,
+    rgba(180, 170, 163, 0.18) 27.5px,
+    rgba(180, 170, 163, 0.18) 28.5px
+  );
+  background-size: 100% 28.5px;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.9;
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  letter-spacing: -0.1px;
+  width: 100%;
+}
+
+.page {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 88px 32px 160px;
+}
+
+/* ── BYLINE ── */
+.byline {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 56px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--rule);
+}
+.byline-brand {
+  font-family: "RocWideMedium", sans-serif;
+  font-size: 13px;
+  letter-spacing: -0.2px;
+  color: var(--ink);
+}
+.byline-meta {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+
+/* ── TITLE ── */
+.title {
+  font-family: "RocWideMedium", sans-serif;
+  font-size: 22px;
+  line-height: 1.2;
+  letter-spacing: -0.5px;
+  color: var(--ink);
+  margin-bottom: 8px;
+}
+.title-descriptor {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--faint);
+  display: block;
+  margin-bottom: 32px;
+}
+
+/* ── PROSE ── */
+p {
+  margin-bottom: 20px;
+  color: var(--ink);
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+a:hover { text-decoration: underline; }
+
+em {
+  font-style: italic;
+  color: var(--mid);
+}
+
+/* ── INLINE NOTE ── */
+.note {
+  font-size: 12px;
+  color: var(--faint);
+  letter-spacing: 0.01em;
+}
+.note a {
+  color: var(--mid);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+
+/* ── SECTION BREAK ── */
+.break {
+  text-align: center;
+  margin: 12px 0;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  color: var(--faint);
+  user-select: none;
+}
+
+/* ── NUMBERED BELIEFS ── */
+.beliefs {
+  margin: 0;
+}
+.belief {
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  gap: 16px;
+  margin-bottom: 20px;
+  align-items: baseline;
+}
+.belief:last-child { margin-bottom: 20px; }
+.belief-n {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 11px;
+  color: var(--accent);
+  padding-top: 1px;
+  flex-shrink: 0;
+}
+.belief-body {}
+.belief-statement {
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 6px;
+  line-height: 1.5;
+}
+.belief-prose {
+  font-size: 14px;
+  color: var(--mid);
+  line-height: 1.8;
+  margin-bottom: 0;
+}
+
+/* ── CTA ── */
+.cta-center {
+  text-align: center;
+  margin-top: 40px;
+}
+.cta-btn {
+  display: inline-block;
+  padding: 14px 36px;
+  background: var(--accent);
+  color: #fff;
+  font-family: "Montserrat", sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 2px;
+  transition: opacity 0.15s;
+}
+.cta-btn:hover { opacity: 0.85; }
+
+@media (max-width: 520px) {
+  .page { padding: 56px 20px 120px; }
+  .byline { flex-direction: column; align-items: flex-start; gap: 8px; }
+}
+</style>
+</head>
+<body>
+<div class="pov-bg">
+<div class="page">
+
+  <h1 class="title">The RevShoppe Manifesto</h1>
+  <span class="title-descriptor">Josh O'Brien &amp; Jason Vargas · RevShoppe · April 2026</span>
+
+  <p>For as long as B2B companies have existed, they've wanted what B2C companies had: the ability to truly know their buyer. To reach them with precision, at the right moment, with a message that felt like it was written for one person and not broadcast at a market. The ambition was never the problem. The access was.</p>
+
+  <p>Data was expensive and signals were proprietary, and the technology to act on them at scale cost more than most revenue organizations could justify. So the aspiration stayed an aspiration, and companies fell back on what they could control: volume, instinct, and enough headcount to compensate for what the system couldn't do.</p>
+
+  <p>That era is over. Data is commoditized, signals are commoditized, and everything that moves across the internet now leaves a trace that any GTM organization can access and act on. The barrier that separated B2B from B2C precision is gone. The organizations that understand what that means are in the middle of the most significant commercial opportunity in a generation.</p>
+
+  <div class="break">· · ·</div>
+
+  <p>We've been inside this category long enough to remember when none of this infrastructure existed. Before most organizations had a CRM, a sales engagement platform, a forecasting tool, revenue organizations ran on instinct and imitation, watching the market leader and trying to close the gap. That was rational, given what was available.</p>
+
+  <p>The CRM rewarded logging activity after the fact, so reps logged activity after the fact. Sales engagement rewarded volume, so teams sprayed and called it pipeline generation. When the revenue number came up short, nobody redesigned the system because the cost of redesigning it was higher than the cost of doing nothing. More sellers, more SDRs, more managers to manage the managers. New shingles layered over an old roof, while revenue per person kept shrinking and margins compressed every quarter.</p>
+
+  <p>That world is over. More control over what gets built, what gets automated, and what gets governed exists right now than at any point in the history of this category. The only question is whether GTM organizations are willing to use it.</p>
+
+  <p>What's happening inside most GTM organizations right now is a version of the same pattern with a new face. The AI mandate arrives from the top, tools get purchased within a quarter, and individual sellers start taking their own initiative because they sense something shifting underneath. They can identify their own targets now, read their own signals, decide when it's timely and relevant to reach out. The decentralization of the revenue organization has quietly begun.</p>
+
+  <p>The instinct is right. The problem is that it's happening without a system underneath it. Every seller prompting differently, building their own approaches, sharing nothing with the organization. No governed process, no shared context, no way to know what's working and what's producing the wrong output at scale. Agents and sellers can't function as a productive workforce without the infrastructure to make them work together. Without that foundation, what looks like progress is decentralized noise.</p>
+
+  <p>This is the same pattern that has played out every time a major technology category arrived with a promise it couldn't keep on its own. Seventy percent of technology transformations fail to meet targets. Eighty percent of digital transformations fail against expectation. Fifty-five percent of CRM implementations fail. Ten percent of technology rollouts get canceled before going live. Thirty percent of a seller's time is spent actually selling. Seventy-five percent of sellers don't consistently follow their stated sales methodology. <span class="note">(more of these shocking stats <a href="https://www.revshoppe.com/shocking">here</a>)</span></p>
+
+  <p>These are change management failures as much as they're technology failures. And every one of them believed — at some point — that the right technology would solve what the system underneath it couldn't. It doesn't. Foundational revenue architecture is non-negotiable when you're entering a transformational moment in your business.</p>
+
+  <div class="break">· · ·</div>
+
+  <p>And AI doesn't fix a broken foundation. It amplifies whatever is already there, at a speed and scale no team can manually correct. An ICP that nobody has operationalized generates outreach to the wrong buyers. A process that lives in someone's head has nothing to automate. The data inside the CRM, the ERP, the AMS is dirty, inaccurate, and degrading every quarter, and it becomes the context that AI reads. Every output downstream carries that error. At AI speed, fractured context doesn't just slow you down. It runs your errors at volume.</p>
+
+  <p>We call this the AI Execution Gap. It's the distance between what AI tools promise and what a GTM organization can actually execute on. Most organizations are wading in that gap right now without knowing it, because the revenue consequences haven't yet broken through the surface. They will. Every quarter spent there without addressing the foundation makes the cost of closing it higher.</p>
+
+  <div class="break">· · ·</div>
+
+  <p>The answer isn't more technology. It's four things, built with precision and intention: data, tools and technology, context, and people. Every sales organization that consistently delivers the best buyer experience in its category is running on all four. Most are operating on one or two and wondering why the rest doesn't work.</p>
+
+  <p>Buyer experience is the organizing principle that survives what's coming. The organizations that sell to people first, that design their entire commercial motion around how the buyer receives and experiences every interaction, will pull ahead. AI scales whatever the system was actually built around. Build around internal metrics and call it buyer-centric, and the result is very efficient production of the wrong output at scale.</p>
+
+  <p>Every governance decision in a revenue organization was made in response to a specific failure. Every policy protecting the floor also caps the ceiling. That was the rational trade when execution was all human. At AI speed, it's not the rational trade anymore. Every rule a sales organization runs on is worth one question: is this protecting the system, or is it quietly preventing the best outcome?</p>
+
+  <div class="break">· · ·</div>
+
+  <p>Four bets on how the next three years move. We're building toward all of them.</p>
+
+  <div class="beliefs">
+    <div class="belief">
+      <span class="belief-n">1.</span>
+      <div class="belief-body">
+        <p class="belief-statement">The context layer becomes as foundational as CRM.</p>
+        <p class="belief-prose">In 2005, operating without a CRM was a structural disadvantage that took years to recover from. By 2027, operating without a governed context layer will carry the same cost. The organizations building it now aren't experimenting. They're pulling ahead, and everyone else will be rebuilding from scratch in a market that has already moved.</p>
+      </div>
+    </div>
+    <div class="belief">
+      <span class="belief-n">2.</span>
+      <div class="belief-body">
+        <p class="belief-statement">Software interfaces as the industry knows them are going away.</p>
+        <p class="belief-prose">Services-as-Software takes over. The only interface is something to prompt into, and every workflow, every data source, every process runs and is connected through AI infrastructure operating in the background. The GTM organizations that start building toward this now won't be managing tools in three years. They'll be running systems that work without anyone watching.</p>
+      </div>
+    </div>
+    <div class="belief">
+      <span class="belief-n">3.</span>
+      <div class="belief-body">
+        <p class="belief-statement">The companies that win will be smaller than anyone expects.</p>
+        <p class="belief-prose">Building by subtraction has been almost impossible in industry. When sales teams grow, they add. AI changes that for the first time. The organizations that get maniacal about revenue per employee, that design their motion to produce dramatically more with dramatically fewer people, will carry a structural cost advantage that doesn't close with hiring. What they're building isn't lean. It's structurally harder to catch.</p>
+      </div>
+    </div>
+    <div class="belief">
+      <span class="belief-n">4.</span>
+      <div class="belief-body">
+        <p class="belief-statement">The AI Execution Gap becomes the defining competitive divide.</p>
+        <p class="belief-prose">Right now it's invisible. In eighteen months it'll be measurable. In thirty-six months the organizations on the wrong side of it won't close it by buying more technology. They'll need to rebuild from the foundation in a market where the organizations that built early are already too far ahead. This is what turns go-to-market into the competitive advantage that's hardest to replicate.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="break">· · ·</div>
+
+  <p>RevShoppe is a GTM strategy, engineering, and governance firm for revenue executives and operators who aspire to deliver the best buyer experience in their category. We move companies from AI aspiration to AI embedded across their commercial motion.</p>
+
+  <p>This arena is one we've been in since before most revenue organizations had a working CRM. We've watched every hype cycle arrive with the same promise and the same pattern. We've never seen one move this fast, or with this little margin on the decision.</p>
+
+  <p>We fall in love with problems, not solutions. We're not always right. But we're always chasing the right answer with conviction, and when the evidence requires us to change our minds, we do. That's how we continue to build buyer experiences that exceed targets, cost less to run, and increase revenue per employee for every organization we work with.</p>
+
+  <p>If this is your organization, you already know the answer. The only question is whether you move before the market makes the decision for you.</p>
+
+  <div class="cta-center">
+    <a href="https://www.revshoppe.com/contact" class="cta-btn">Get Started</a>
+  </div>
+
+</div>
+</div>
+</body>
+</html>
