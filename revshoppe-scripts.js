@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+(function() {
     var btn = document.getElementById('nav-hamburger');
     var drawer = document.getElementById('nav-mobile');
     if (!btn || !drawer) return;
@@ -25,9 +25,9 @@ document.addEventListener('DOMContentLoaded', function() {
         document.body.style.overflow = '';
       });
     });
-  });
+  })();
 
-document.addEventListener('DOMContentLoaded', function() {
+(function() {
       var items = document.querySelectorAll('.quote-item');
       items.forEach(function(i) { i.classList.remove('open'); });
       var randomIdx = Math.floor(Math.random() * items.length);
@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function() {
         trigger.addEventListener('click', handleQuote);
         trigger.addEventListener('touchstart', handleQuote, { passive: false });
       });
-    });
+    })();
 
 (function() {
 
@@ -253,11 +253,11 @@ logoLink.addEventListener('click', function(e) {
     } else { konamiIdx = 0; }
   });
 
-  document.addEventListener('DOMContentLoaded', function() {
+  (function() {
     var greenDot = document.getElementById('readout-fullscreen-btn');
     if (greenDot) {
       greenDot.addEventListener('click', function() { triggerDiagnosis(); });
     }
-  });
+  })();
 
 })();
