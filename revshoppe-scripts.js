@@ -95,7 +95,7 @@
   var clickCount = 0;
   var clickTimer = null;
 
-  if (logoLink) {
+  if (logoLink && window.location.pathname === '/') {
 logoLink.addEventListener('click', function(e) {
       e.preventDefault();
       clickCount++;
