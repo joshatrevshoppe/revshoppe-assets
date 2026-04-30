@@ -3,11 +3,23 @@
   var drawer = document.getElementById('nav-mobile');
   if (!btn || !drawer) return;
 
-  btn.addEventListener('click', function() {
+  /* Set inline so no CSS cascade can override it */
+  btn.style.touchAction = 'manipulation';
+  btn.style.webkitTapHighlightColor = 'transparent';
+
+  var busy = false;
+  function open(e) {
+    if (e && e.cancelable) e.preventDefault();
+    if (busy) return;
+    busy = true;
+    setTimeout(function() { busy = false; }, 400);
     var isOpen = btn.classList.toggle('open');
     drawer.style.display = isOpen ? 'flex' : 'none';
     document.body.style.overflow = isOpen ? 'hidden' : '';
-  });
+  }
+
+  btn.addEventListener('touchend', open, { passive: false });
+  btn.addEventListener('click', open);
 
   drawer.querySelectorAll('a').forEach(function(a) {
     a.addEventListener('click', function() {
