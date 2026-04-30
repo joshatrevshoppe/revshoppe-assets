@@ -816,7 +816,21 @@
       padding: 36px 32px;
       box-shadow: 0 16px 48px rgba(0,0,0,0.35), 0 4px 16px rgba(0,0,0,0.25);
     }
-    /* HubSpot form styles injected via script to guarantee document.head placement */
+    /* CCR CUSTOM FORM — matches contact page cf-* aesthetic */
+    .ccr-cf-label { font-family: "IBM Plex Mono", monospace; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.4); }
+    .ccr-cf-input { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12); border-radius: 3px; color: #fff; font-family: "Montserrat", sans-serif; font-size: 13px; font-weight: 400; padding: 10px 14px; outline: none; transition: border-color 0.15s; width: 100%; box-sizing: border-box; }
+    .ccr-cf-input:focus { border-color: rgba(232,99,74,0.5); }
+    .ccr-cf-input::placeholder { color: rgba(255,255,255,0.15); }
+    .ccr-cf-select { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12); border-radius: 3px; color: rgba(255,255,255,0.5); font-family: "Montserrat", sans-serif; font-size: 13px; padding: 10px 14px; outline: none; width: 100%; box-sizing: border-box; -webkit-appearance: none; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='rgba(255,255,255,0.3)' stroke-width='1.5' fill='none'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; }
+    .ccr-cf-select option { background: #1A1825; color: #fff; }
+    .ccr-cf-btn { width: 100%; padding: 14px; background: #E8634A; color: #fff; border: none; border-radius: 3px; font-family: "IBM Plex Mono", monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; transition: background 0.15s; box-shadow: 0 2px 8px rgba(232,99,74,0.35), 0 4px 20px rgba(232,99,74,0.2); }
+    .ccr-cf-btn:hover { background: #F0745C; }
+    .ccr-cf-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+    .ccr-cf-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+    .ccr-cf-field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
+    .ccr-cf-field:last-of-type { margin-bottom: 20px; }
+    .ccr-cf-msg { display: none; margin-top: 12px; font-family: "IBM Plex Mono", monospace; font-size: 11px; text-align: center; letter-spacing: 0.04em; }
+    @media (max-width: 480px) { .ccr-cf-row { grid-template-columns: 1fr; } }
 
     /* GTM DIAGNOSIS BRIDGE */
     .bridge-grid {
@@ -1304,10 +1318,43 @@
           <div class="ccr-form-card">
             <div class="ccr-card-label">Conversation Catalist Report (CCR)</div>
             <div class="ccr-card-title">Your industry's buying catalists. Mapped. Delivered free.</div>
-           <div id="hs-ccr-form" 
-  data-portal-id="5046646" 
-  data-form-id="eeb869db-230f-4963-a0bc-564c2c8244e5">
-</div>
+          <form id="ccr-form-custom" novalidate>
+            <div class="ccr-cf-row">
+              <div style="display:flex;flex-direction:column;gap:6px;">
+                <label class="ccr-cf-label" for="ccr-firstname">First Name <span style="color:#E8634A;">*</span></label>
+                <input class="ccr-cf-input" type="text" id="ccr-firstname" name="firstname" placeholder="Phil" autocomplete="given-name" required>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:6px;">
+                <label class="ccr-cf-label" for="ccr-lastname">Last Name <span style="color:#E8634A;">*</span></label>
+                <input class="ccr-cf-input" type="text" id="ccr-lastname" name="lastname" placeholder="Funnel" autocomplete="family-name" required>
+              </div>
+            </div>
+            <div class="ccr-cf-field">
+              <label class="ccr-cf-label" for="ccr-email">Work Email <span style="color:#E8634A;">*</span></label>
+              <input class="ccr-cf-input" type="email" id="ccr-email" name="email" placeholder="phil@company.com" autocomplete="email" required>
+            </div>
+            <div class="ccr-cf-field">
+              <label class="ccr-cf-label" for="ccr-company">Company <span style="color:#E8634A;">*</span></label>
+              <input class="ccr-cf-input" type="text" id="ccr-company" name="company" placeholder="Acme Corp" autocomplete="organization" required>
+            </div>
+            <div class="ccr-cf-field" style="margin-bottom:20px;">
+              <label class="ccr-cf-label" for="ccr-industry">Your Industry <span style="color:#E8634A;">*</span></label>
+              <select class="ccr-cf-select" id="ccr-industry" name="industry" required>
+                <option value="" disabled selected>Select your vertical</option>
+                <option value="Technology / SaaS">Technology / SaaS</option>
+                <option value="Financial Services">Financial Services</option>
+                <option value="Healthcare / Life Sciences">Healthcare / Life Sciences</option>
+                <option value="Manufacturing">Manufacturing</option>
+                <option value="Professional Services">Professional Services</option>
+                <option value="Retail / E-commerce">Retail / E-commerce</option>
+                <option value="Media / Publishing">Media / Publishing</option>
+                <option value="Real Estate">Real Estate</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+            <button type="submit" class="ccr-cf-btn" id="ccr-submit-btn">Get My Free Report →</button>
+            <div id="ccr-form-msg" class="ccr-cf-msg"></div>
+          </form>
           </div>
         </div>
       </div>
@@ -1317,55 +1364,13 @@
 
 
 <script>
-(function() {
-  var CSS = [
-    '#hs-ccr-form .hs-form-private input::placeholder,#hs-ccr-form .hs-form-private textarea::placeholder{color:rgba(255,255,255,.18)!important;}',
-    '#hs-ccr-form .hs-form-private input,#hs-ccr-form .hs-form-private select,#hs-ccr-form .hs-form-private textarea{background:rgba(255,255,255,.05)!important;border:1px solid rgba(255,255,255,.12)!important;border-radius:3px!important;color:rgba(255,255,255,.85)!important;font-family:Montserrat,sans-serif!important;font-size:13px!important;font-weight:400!important;padding:10px 14px!important;width:100%!important;box-sizing:border-box!important;}',
-    '#hs-ccr-form .hs-form-private label{font-family:"IBM Plex Mono",monospace!important;font-size:9px!important;font-weight:400!important;letter-spacing:.1em!important;text-transform:uppercase!important;color:rgba(255,255,255,.4)!important;}',
-    '#hs-ccr-form .hs-form-private fieldset{max-width:100%!important;border:none!important;}',
-    '#hs-ccr-form .hs-form-private .hs-form-field{margin-bottom:14px!important;}',
-    '#hs-ccr-form .hs-form-private .hs-error-msgs{color:#f87171!important;font-size:11px!important;list-style:none!important;}',
-    '#hs-ccr-form .hs-form-private .hs-error-msgs li label{color:#f87171!important;}',
-    '#hs-ccr-form .hs-form-private .legal-consent-container{font-size:11px!important;color:rgba(255,255,255,.25)!important;}',
-    '#hs-ccr-form .hs-form-private .legal-consent-container a{color:rgba(255,255,255,.45)!important;}',
-    '#hs-ccr-form .hs-form-private .hs-button{background:#E8634A!important;border:none!important;border-radius:3px!important;font-family:"IBM Plex Mono",monospace!important;font-size:11px!important;font-weight:500!important;letter-spacing:.08em!important;text-transform:uppercase!important;padding:13px 28px!important;color:#fff!important;width:100%!important;cursor:pointer!important;box-shadow:0 2px 8px rgba(232,99,74,.35)!important;}',
-    '#hs-ccr-form .hs-form-private .hs-button:hover{background:#F0745C!important;}'
-  ].join('');
-
-  function applyStyles() {
-    var old = document.getElementById('rs-ccr-form-styles');
-    if (old) old.parentNode.removeChild(old);
-    var st = document.createElement('style');
-    st.id = 'rs-ccr-form-styles';
-    st.textContent = CSS;
-    document.head.appendChild(st);
-  }
-
-  document.querySelectorAll('a[href="#wf__generate-ccr"]').forEach(function(el) {
-    el.addEventListener('click', function(e) {
-      e.preventDefault();
-      var target = document.getElementById('wf__generate-ccr');
-      if (target) { target.scrollIntoView({ behavior: 'instant', block: 'start' }); }
-    });
+document.querySelectorAll('a[href="#wf__generate-ccr"]').forEach(function(el){
+  el.addEventListener('click',function(e){
+    e.preventDefault();
+    var t=document.getElementById('wf__generate-ccr');
+    if(t)t.scrollIntoView({behavior:'instant',block:'start'});
   });
-
-  var hsScript = document.createElement('script');
-  hsScript.src = '//js.hsforms.net/forms/embed/v2.js';
-  hsScript.charset = 'utf-8';
-  hsScript.onload = function() {
-    var el = document.getElementById('hs-ccr-form');
-    if (el && window.hbspt) {
-      hbspt.forms.create({
-        portalId: el.dataset.portalId,
-        formId: el.dataset.formId,
-        region: 'na1',
-        target: '#hs-ccr-form',
-        onFormReady: function() { applyStyles(); }
-      });
-    }
-  };
-  document.head.appendChild(hsScript);
-})();
+});
 </script>
 
   <!-- ═══ NEXT STEP — GTM DIAGNOSIS BRIDGE — DARK GRID ══════════ -->
