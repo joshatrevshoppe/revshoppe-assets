@@ -1318,23 +1318,26 @@
 
 <script>
 (function() {
-  /* Inject HubSpot form styles into document.head — matches contact page exactly */
-  if (!document.getElementById('rs-ccr-form-styles')) {
+  var CSS = [
+    '#hs-ccr-form .hs-form-private input::placeholder,#hs-ccr-form .hs-form-private textarea::placeholder{color:rgba(255,255,255,.18)!important;}',
+    '#hs-ccr-form .hs-form-private input,#hs-ccr-form .hs-form-private select,#hs-ccr-form .hs-form-private textarea{background:rgba(255,255,255,.05)!important;border:1px solid rgba(255,255,255,.12)!important;border-radius:3px!important;color:rgba(255,255,255,.85)!important;font-family:Montserrat,sans-serif!important;font-size:13px!important;font-weight:400!important;padding:10px 14px!important;width:100%!important;box-sizing:border-box!important;}',
+    '#hs-ccr-form .hs-form-private label{font-family:"IBM Plex Mono",monospace!important;font-size:9px!important;font-weight:400!important;letter-spacing:.1em!important;text-transform:uppercase!important;color:rgba(255,255,255,.4)!important;}',
+    '#hs-ccr-form .hs-form-private fieldset{max-width:100%!important;border:none!important;}',
+    '#hs-ccr-form .hs-form-private .hs-form-field{margin-bottom:14px!important;}',
+    '#hs-ccr-form .hs-form-private .hs-error-msgs{color:#f87171!important;font-size:11px!important;list-style:none!important;}',
+    '#hs-ccr-form .hs-form-private .hs-error-msgs li label{color:#f87171!important;}',
+    '#hs-ccr-form .hs-form-private .legal-consent-container{font-size:11px!important;color:rgba(255,255,255,.25)!important;}',
+    '#hs-ccr-form .hs-form-private .legal-consent-container a{color:rgba(255,255,255,.45)!important;}',
+    '#hs-ccr-form .hs-form-private .hs-button{background:#E8634A!important;border:none!important;border-radius:3px!important;font-family:"IBM Plex Mono",monospace!important;font-size:11px!important;font-weight:500!important;letter-spacing:.08em!important;text-transform:uppercase!important;padding:13px 28px!important;color:#fff!important;width:100%!important;cursor:pointer!important;box-shadow:0 2px 8px rgba(232,99,74,.35)!important;}',
+    '#hs-ccr-form .hs-form-private .hs-button:hover{background:#F0745C!important;}'
+  ].join('');
+
+  function applyStyles() {
+    var old = document.getElementById('rs-ccr-form-styles');
+    if (old) old.parentNode.removeChild(old);
     var st = document.createElement('style');
     st.id = 'rs-ccr-form-styles';
-    st.textContent = [
-      '#hs-ccr-form .hs-form-private input::placeholder,#hs-ccr-form .hs-form-private textarea::placeholder{color:rgba(255,255,255,.18)!important;}',
-      '#hs-ccr-form .hs-form-private input,#hs-ccr-form .hs-form-private select,#hs-ccr-form .hs-form-private textarea{background:rgba(255,255,255,.05)!important;border:1px solid rgba(255,255,255,.12)!important;border-radius:3px!important;color:rgba(255,255,255,.85)!important;font-family:Montserrat,sans-serif!important;font-size:13px!important;font-weight:400!important;padding:10px 14px!important;width:100%!important;}',
-      '#hs-ccr-form .hs-form-private label{font-family:"IBM Plex Mono",monospace!important;font-size:9px!important;font-weight:400!important;letter-spacing:.1em!important;text-transform:uppercase!important;color:rgba(255,255,255,.4)!important;}',
-      '#hs-ccr-form .hs-form-private fieldset{max-width:100%!important;border:none!important;}',
-      '#hs-ccr-form .hs-form-private .hs-form-field{margin-bottom:14px!important;}',
-      '#hs-ccr-form .hs-form-private .hs-error-msgs{color:#f87171!important;font-size:11px!important;list-style:none!important;}',
-      '#hs-ccr-form .hs-form-private .hs-error-msgs li label{color:#f87171!important;}',
-      '#hs-ccr-form .hs-form-private .legal-consent-container{font-size:11px!important;color:rgba(255,255,255,.25)!important;}',
-      '#hs-ccr-form .hs-form-private .legal-consent-container a{color:rgba(255,255,255,.45)!important;}',
-      '#hs-ccr-form .hs-form-private .hs-button{background:#E8634A!important;border:none!important;border-radius:3px!important;font-family:"IBM Plex Mono",monospace!important;font-size:11px!important;font-weight:500!important;letter-spacing:.08em!important;text-transform:uppercase!important;padding:13px 28px!important;color:#fff!important;width:100%!important;cursor:pointer!important;box-shadow:0 2px 8px rgba(232,99,74,.35)!important;}',
-      '#hs-ccr-form .hs-form-private .hs-button:hover{background:#F0745C!important;}'
-    ].join('');
+    st.textContent = CSS;
     document.head.appendChild(st);
   }
 
@@ -1356,7 +1359,8 @@
         portalId: el.dataset.portalId,
         formId: el.dataset.formId,
         region: 'na1',
-        target: '#hs-ccr-form'
+        target: '#hs-ccr-form',
+        onFormReady: function() { applyStyles(); }
       });
     }
   };
