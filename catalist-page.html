@@ -1349,8 +1349,7 @@
 
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-  // Scroll to CCR form
+(function() {
   document.querySelectorAll('a[href="#wf__generate-ccr"]').forEach(function(el) {
     el.addEventListener('click', function(e) {
       e.preventDefault();
@@ -1359,7 +1358,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  // HubSpot form — load script then create form
   var hsScript = document.createElement('script');
   hsScript.src = '//js.hsforms.net/forms/embed/v2.js';
   hsScript.charset = 'utf-8';
@@ -1375,7 +1373,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   };
   document.head.appendChild(hsScript);
-});
+})();
 </script>
 
   <!-- ═══ NEXT STEP — GTM DIAGNOSIS BRIDGE — DARK GRID ══════════ -->
