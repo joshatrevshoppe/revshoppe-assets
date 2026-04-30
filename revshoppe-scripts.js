@@ -1,31 +1,22 @@
 (function() {
-    var btn = document.getElementById('nav-hamburger');
-    var drawer = document.getElementById('nav-mobile');
-    if (!btn || !drawer) return;
+  var btn = document.getElementById('nav-hamburger');
+  var drawer = document.getElementById('nav-mobile');
+  if (!btn || !drawer) return;
 
-    var menuToggling = false;
-    function toggleMenu() {
-      if (menuToggling) return;
-      menuToggling = true;
-      setTimeout(function() { menuToggling = false; }, 300);
-      var isOpen = btn.classList.toggle('open');
-      drawer.style.display = isOpen ? 'flex' : 'none';
-      document.body.style.overflow = isOpen ? 'hidden' : '';
-    }
-    btn.addEventListener('click', toggleMenu);
-    btn.addEventListener('touchend', function(e) {
-      e.preventDefault();
-      toggleMenu();
-    }, { passive: false });
+  btn.addEventListener('click', function() {
+    var isOpen = btn.classList.toggle('open');
+    drawer.style.display = isOpen ? 'flex' : 'none';
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  });
 
-    drawer.querySelectorAll('a').forEach(function(a) {
-      a.addEventListener('click', function() {
-        btn.classList.remove('open');
-        drawer.style.display = 'none';
-        document.body.style.overflow = '';
-      });
+  drawer.querySelectorAll('a').forEach(function(a) {
+    a.addEventListener('click', function() {
+      btn.classList.remove('open');
+      drawer.style.display = 'none';
+      document.body.style.overflow = '';
     });
-  })();
+  });
+})();
 
 (function() {
       var items = document.querySelectorAll('.quote-item');
