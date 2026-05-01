@@ -319,44 +319,6 @@ html { scroll-behavior: smooth; }
 }
 
 /* ── RHYTHM ── */
-.ros-rhythm-layout {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 72px;
-  align-items: center;
-}
-.ros-rhythm-copy .ros-h2-w { margin-bottom: 20px; }
-.ros-cadence-list { margin-top: 32px; display: flex; flex-direction: column; }
-.ros-cadence-row {
-  display: grid;
-  grid-template-columns: 120px 1fr;
-  gap: 24px;
-  padding: 18px 0;
-  border-bottom: 1px solid rgba(255,255,255,0.06);
-  align-items: start;
-}
-.ros-cadence-row:last-child { border-bottom: none; }
-.ros-cadence-period {
-  font-family: "IBM Plex Mono", monospace;
-  font-size: 10px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--accent);
-  padding-top: 2px;
-}
-.ros-cadence-items { display: flex; flex-wrap: wrap; gap: 6px; }
-.ros-cadence-tag {
-  font-family: "IBM Plex Mono", monospace;
-  font-size: 10px;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.55);
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.09);
-  padding: 5px 10px;
-  border-radius: 2px;
-}
-
 /* ── CTA BRIDGE ── */
 .ros-cta { background: var(--accent); padding: 96px 48px; text-align: center; }
 .ros-cta-inner { max-width: 640px; margin: 0 auto; }
@@ -560,18 +522,107 @@ html { scroll-behavior: smooth; }
 .rhyb-corner.bl { bottom: 10px; left: 10px;  border-width: 0 0 1px 1px; }
 .rhyb-corner.br { bottom: 10px; right: 10px; border-width: 0 1px 1px 0; }
 
+/* ── RHYTHM OF REVENUE EKG ── */
+.rekg-outer {
+  width: 100%;
+  position: relative;
+  padding-bottom: 63.636%;
+  overflow: hidden;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+.rekg-frame {
+  position: absolute;
+  top: 0; left: 0;
+  width: 1100px;
+  height: 700px;
+  transform-origin: top left;
+  background: var(--bg-dark);
+  background-image:
+    linear-gradient(to right, rgba(255,255,255,0.025) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,0.025) 1px, transparent 1px);
+  background-size: 22px 22px;
+  overflow: hidden;
+}
+.rekg-corner {
+  position: absolute; width: 14px; height: 14px;
+  border: 1px solid rgba(255,255,255,0.18);
+}
+.rekg-corner.tl { top: 28px; left: 28px; border-right: none; border-bottom: none; }
+.rekg-corner.tr { top: 28px; right: 28px; border-left: none; border-bottom: none; }
+.rekg-corner.bl { bottom: 28px; left: 28px; border-right: none; border-top: none; }
+.rekg-corner.br { bottom: 28px; right: 28px; border-left: none; border-top: none; }
+.rekg-meta {
+  position: absolute; left: 0; right: 0;
+  display: flex; justify-content: space-between;
+  padding: 0 56px;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 9.5px; letter-spacing: 0.22em; text-transform: uppercase;
+  color: rgba(255,255,255,0.42); z-index: 3;
+}
+.rekg-meta.top { top: 36px; }
+.rekg-heading {
+  position: absolute; left: 56px; top: 84px; width: 240px; z-index: 4;
+}
+.rekg-heading h2 {
+  font-family: "RocWideMedium", "Archivo", "Helvetica Neue", sans-serif;
+  font-weight: 500; font-size: 26px; letter-spacing: -0.005em;
+  line-height: 1.05; margin: 0; text-transform: uppercase; color: #FAFAF9;
+}
+.rekg-trace-wrap {
+  position: absolute; left: 56px; right: 56px;
+  top: 250px; height: 240px; z-index: 2;
+}
+.rekg-trace-wrap svg { width: 100%; height: 100%; display: block; overflow: visible; }
+.rekg-axis {
+  position: absolute; left: 56px; right: 56px; bottom: 60px;
+  height: 22px; z-index: 3;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 9px; letter-spacing: 0.20em; text-transform: uppercase;
+  color: rgba(255,255,255,0.45);
+  border-top: 1px solid rgba(255,255,255,0.10);
+  display: flex; justify-content: space-between; padding-top: 8px;
+}
+.rekg-axis span { position: relative; }
+.rekg-axis span::before {
+  content: ""; position: absolute; top: -8px; left: 50%; width: 1px; height: 5px;
+  background: rgba(255,255,255,0.22);
+}
+.rekg-axis span:first-child::before { left: 0; }
+.rekg-axis span:last-child::before { left: auto; right: 0; }
+.rekg-callout {
+  position: absolute;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 9.5px; letter-spacing: 0.18em; text-transform: uppercase;
+  color: rgba(250,250,249,0.82); z-index: 5; white-space: nowrap;
+  text-align: center; transform: translate(-50%, 0); line-height: 1.3;
+}
+.rekg-cat {
+  display: block; font-size: 8.5px; letter-spacing: 0.30em;
+  color: var(--accent); margin-bottom: 4px;
+}
+.rekg-leader {
+  position: absolute; left: 50%; bottom: 100%; width: 1px;
+  background: rgba(232,99,74,0.45); margin-bottom: 6px;
+}
+.rekg-gap-note {
+  position: absolute; left: 56px; top: 568px;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase;
+  color: rgba(232,99,74,0.75); z-index: 5;
+}
+.rekg-gap-note-r { left: auto; right: 56px; color: rgba(255,255,255,0.42); }
+
 /* ── RESPONSIVE ── */
 @media (max-width: 1024px) {
   .ros-inner { max-width: 880px; }
   .ros-ai-grid { grid-template-columns: 280px 1fr; gap: 48px; }
-  .ros-rhythm-layout { gap: 48px; }
   .rarch-inner { padding: 48px 40px; }
   .rarch-rail { padding-right: 32px; }
 }
 @media (max-width: 900px) {
   .ros-stats { grid-template-columns: repeat(2, 1fr); }
   .ros-ai-grid { grid-template-columns: 1fr; gap: 40px; }
-  .ros-rhythm-layout { grid-template-columns: 1fr; gap: 40px; }
   .rarch-inner { grid-template-columns: 1fr; padding: 40px 32px; }
   .rarch-rail { padding-right: 0; }
   .rhyb-hdr-grid { grid-template-columns: 1fr; gap: 24px; }
@@ -914,61 +965,162 @@ html { scroll-behavior: smooth; }
        RHYTHM OF REVENUE — operating cadence
        ════════════════════════════════════════════ -->
   <section class="ros-sec ros-tex-dark">
-    <div class="ros-inner">
-      <div class="ros-rhythm-layout">
-        <div class="ros-rhythm-copy">
-          <span class="ros-eyebrow">The Operating Cadence</span>
-          <h2 class="ros-h2 ros-h2-w">The business runs on rhythm.</h2>
-          <p class="ros-sub ros-sub-d" style="margin-bottom: 24px;">Workflows execute. Cadence compounds. A Revenue Operating System structures when the business reviews itself — not just what it runs.</p>
-          <p class="ros-body ros-body-d">Every ritual has a place in the cadence. Every cadence feeds the system. The organizations that pull away from the pack don't just run better workflows — they run a better operating calendar.</p>
-
-          <div class="ros-cadence-list">
-            <div class="ros-cadence-row">
-              <span class="ros-cadence-period">Daily</span>
-              <div class="ros-cadence-items">
-                <span class="ros-cadence-tag">Pipeline signals</span>
-                <span class="ros-cadence-tag">At-risk flags</span>
-                <span class="ros-cadence-tag">Agent output review</span>
-              </div>
-            </div>
-            <div class="ros-cadence-row">
-              <span class="ros-cadence-period">Weekly</span>
-              <div class="ros-cadence-items">
-                <span class="ros-cadence-tag">Pipeline sync</span>
-                <span class="ros-cadence-tag">Forecast review</span>
-                <span class="ros-cadence-tag">Sequence audit</span>
-                <span class="ros-cadence-tag">Coaching calibration</span>
-              </div>
-            </div>
-            <div class="ros-cadence-row">
-              <span class="ros-cadence-period">Monthly</span>
-              <div class="ros-cadence-items">
-                <span class="ros-cadence-tag">Revenue org review</span>
-                <span class="ros-cadence-tag">Attribution audit</span>
-                <span class="ros-cadence-tag">ICP calibration</span>
-              </div>
-            </div>
-            <div class="ros-cadence-row">
-              <span class="ros-cadence-period">Quarterly</span>
-              <div class="ros-cadence-items">
-                <span class="ros-cadence-tag">QBR</span>
-                <span class="ros-cadence-tag">ICP refinement</span>
-                <span class="ros-cadence-tag">Board package</span>
-                <span class="ros-cadence-tag">rOS health review</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- VISUAL PLACEHOLDER: RHYTHM CLOCK -->
-        <div class="ros-vp" style="min-height: 420px;">
-          <span class="ros-vp-label">Visual · Rhythm of Revenue Clock</span>
-          <div class="ros-vp-icon">◷</div>
-          <div class="ros-vp-title">Concentric cadence diagram</div>
-          <p class="ros-vp-note">Replace with Claude Design export · Prompt 3</p>
-        </div>
-      </div>
+    <div class="ros-inner" style="margin-bottom: 48px; text-align: center;">
+      <span class="ros-eyebrow">The Operating Cadence</span>
+      <h2 class="ros-h2 ros-h2-w">The business runs on rhythm.</h2>
+      <p class="ros-sub ros-sub-d" style="margin: 0 auto;">Workflows execute. Cadence compounds. A Revenue Operating System structures when the business reviews itself — not just what it runs.</p>
     </div>
+
+    <div class="rekg-outer" id="rekg-outer">
+      <div class="rekg-frame" id="rekg-frame">
+
+        <span class="rekg-corner tl"></span>
+        <span class="rekg-corner tr"></span>
+        <span class="rekg-corner bl"></span>
+        <span class="rekg-corner br"></span>
+
+        <div class="rekg-meta top">
+          <span id="rekg-meta-date">FY26 · Q2 · DAY 28 OF 65</span>
+          <span>REV OPS · OPERATING CADENCE</span>
+        </div>
+
+        <div class="rekg-heading">
+          <h2>Rhythm<br/>of Revenue</h2>
+        </div>
+
+        <div class="rekg-trace-wrap">
+          <svg viewBox="0 0 988 360" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="rekg-fade" x1="0" x2="1">
+                <stop offset="0" stop-color="#E8634A" stop-opacity="0"/>
+                <stop offset="0.06" stop-color="#E8634A" stop-opacity="1"/>
+                <stop offset="0.94" stop-color="#E8634A" stop-opacity="1"/>
+                <stop offset="1" stop-color="#E8634A" stop-opacity="0"/>
+              </linearGradient>
+            </defs>
+
+            <g stroke="rgba(255,255,255,0.06)" stroke-width="1" stroke-dasharray="2 4">
+              <line x1="0" y1="50"  x2="988" y2="50"/>
+              <line x1="0" y1="130" x2="988" y2="130"/>
+              <line x1="0" y1="200" x2="988" y2="200"/>
+              <line x1="0" y1="270" x2="988" y2="270"/>
+            </g>
+
+            <g font-family="IBM Plex Mono" font-size="9" fill="rgba(255,255,255,0.35)" letter-spacing="2">
+              <text x="0" y="46">QUARTERLY</text>
+              <text x="0" y="126">MONTHLY</text>
+              <text x="0" y="196">WEEKLY</text>
+              <text x="0" y="266">DAILY</text>
+            </g>
+
+            <g id="rekg-today-group">
+              <line id="rekg-today-line" x1="418" y1="20" x2="418" y2="320" stroke="rgba(250,250,249,0.32)" stroke-width="1" stroke-dasharray="3 3"/>
+              <circle id="rekg-today-dot" cx="418" cy="270" r="3" fill="#FAFAF9"/>
+              <text id="rekg-today-label" x="424" y="24" font-family="IBM Plex Mono" font-size="9" letter-spacing="2" fill="rgba(250,250,249,0.7)">TODAY</text>
+            </g>
+
+            <rect id="rekg-past-mask" x="0" y="0" width="418" height="360" fill="#26242F" opacity="0.32" pointer-events="none"/>
+
+            <polyline
+              fill="none"
+              stroke="url(#rekg-fade)"
+              stroke-width="1.6"
+              stroke-linejoin="round"
+              stroke-linecap="round"
+              points="0,270 8,270 11,266 14,270 22,270 25,274 28,270 34,270 38,30 42,270 44,270 47,266 50,270 58,270 61,274 64,270 72,270 75,266 78,270 86,270 89,274 92,270 100,270 103,266 106,270 110,270 114,210 118,270 120,270 123,266 126,270 134,270 137,274 140,270 148,270 151,266 154,270 162,270 165,274 168,270 176,270 179,266 182,270 196,270 200,90 204,270 206,270 209,266 212,270 220,270 223,274 226,270 234,270 237,266 240,270 248,270 251,274 254,270 262,270 265,266 268,270 276,270 279,274 282,270 292,270 296,210 300,270 304,270 308,110 312,270 314,270 317,266 320,270 328,270 331,274 334,270 342,270 345,266 348,270 356,270 359,274 362,270 370,270 373,266 376,270 384,270 387,274 390,270 398,270 401,266 404,270 412,270 415,274 418,270 426,270 429,266 432,270 440,270 443,274 446,270 454,270 457,266 460,270 476,270 480,75 484,270 486,270 489,266 492,270 500,270 503,274 506,270 514,270 517,266 520,270 528,270 531,274 534,270 542,270 545,266 548,270 556,270 559,274 562,270 570,270 573,266 576,270 584,270 587,274 590,270 604,270 608,145 612,270 614,270 617,266 620,270 628,270 631,274 634,270 642,270 645,266 648,270 656,270 659,274 662,270 670,270 673,266 676,270 681,270 685,90 689,270 691,270 694,266 697,270 705,270 708,274 711,270 719,270 722,266 725,270 733,270 737,215 741,270 743,270 746,266 749,270 757,270 760,274 763,270 771,270 774,266 777,270 785,270 788,274 791,270 799,270 802,266 805,270 813,270 816,274 819,270 827,270 830,266 833,270 841,270 844,274 847,270 855,270 858,266 861,270 866,270 870,160 874,270 876,270 879,266 882,270 890,270 893,274 896,270 904,270 907,266 910,270 918,270 921,274 924,270 936,270 940,50 944,270 946,270 949,266 952,270 960,270 963,274 966,270 974,270 977,266 980,270 988,270"/>
+
+            <g fill="#E8634A">
+              <rect x="35"  y="26"  width="6" height="6" transform="rotate(45 38 30)"/>
+              <rect x="111" y="206" width="6" height="6" transform="rotate(45 114 210)"/>
+              <rect x="197" y="86"  width="6" height="6" transform="rotate(45 200 90)"/>
+              <rect x="293" y="206" width="6" height="6" transform="rotate(45 296 210)"/>
+              <rect x="305" y="106" width="6" height="6" transform="rotate(45 308 110)"/>
+              <rect x="477" y="71"  width="6" height="6" transform="rotate(45 480 75)"/>
+              <rect x="605" y="141" width="6" height="6" transform="rotate(45 608 145)"/>
+              <rect x="682" y="86"  width="6" height="6" transform="rotate(45 685 90)"/>
+              <rect x="734" y="211" width="6" height="6" transform="rotate(45 737 215)"/>
+              <rect x="867" y="156" width="6" height="6" transform="rotate(45 870 160)"/>
+              <rect x="937" y="46"  width="6" height="6" transform="rotate(45 940 50)"/>
+            </g>
+          </svg>
+        </div>
+
+        <!-- QUARTERLY callouts -->
+        <div class="rekg-callout" style="left: calc(56px + 38px); top: 210px;">
+          <span class="rekg-cat">Q · 01</span>
+          QBR
+          <span class="rekg-leader" style="top: 100%; bottom: auto; height: 18px; margin-top: 6px; margin-bottom: 0;"></span>
+        </div>
+        <div class="rekg-callout" style="left: calc(56px + 200px); top: 65px;">
+          <span class="rekg-cat">Q · 02</span>
+          Territory<br/>&amp; Capacity
+          <span class="rekg-leader" style="top: 100%; bottom: auto; height: 130px; margin-top: 6px; margin-bottom: 0;"></span>
+        </div>
+        <div class="rekg-callout" style="left: calc(56px + 480px); top: 65px;">
+          <span class="rekg-cat">Q · 03</span>
+          ICP<br/>Refinement
+          <span class="rekg-leader" style="top: 100%; bottom: auto; height: 192px; margin-top: 6px; margin-bottom: 0;"></span>
+        </div>
+        <div class="rekg-callout" style="left: calc(56px + 685px); top: 65px;">
+          <span class="rekg-cat">Q · 04</span>
+          Win / Loss<br/>Readout
+          <span class="rekg-leader" style="top: 100%; bottom: auto; height: 130px; margin-top: 6px; margin-bottom: 0;"></span>
+        </div>
+        <div class="rekg-callout" style="left: calc(56px + 940px); top: 65px;">
+          <span class="rekg-cat">Q · 05</span>
+          Board<br/>Package
+          <span class="rekg-leader" style="top: 100%; bottom: auto; height: 188px; margin-top: 6px; margin-bottom: 0;"></span>
+        </div>
+
+        <!-- MONTHLY callouts -->
+        <div class="rekg-callout" style="left: calc(56px + 308px); top: 145px;">
+          <span class="rekg-cat">M · 01</span>
+          Revenue Org<br/>Review
+          <span class="rekg-leader" style="top: 100%; bottom: auto; height: 138px; margin-top: 6px; margin-bottom: 0;"></span>
+        </div>
+        <div class="rekg-callout" style="left: calc(56px + 608px); top: 145px;">
+          <span class="rekg-cat">M · 02</span>
+          Attribution<br/>Audit
+          <span class="rekg-leader" style="top: 100%; bottom: auto; height: 162px; margin-top: 6px; margin-bottom: 0;"></span>
+        </div>
+        <div class="rekg-callout" style="left: calc(56px + 870px); top: 145px;">
+          <span class="rekg-cat">M · 03</span>
+          Coaching<br/>Calibration
+          <span class="rekg-leader" style="top: 100%; bottom: auto; height: 172px; margin-top: 6px; margin-bottom: 0;"></span>
+        </div>
+
+        <!-- WEEKLY callouts -->
+        <div class="rekg-callout" style="left: calc(56px + 114px); top: 475px;">
+          <span class="rekg-leader" style="height: 85px;"></span>
+          <span class="rekg-cat">W · 01</span>
+          Pipeline<br/>Sync
+        </div>
+        <div class="rekg-callout" style="left: calc(56px + 280px); top: 475px;">
+          <span class="rekg-leader" style="height: 85px;"></span>
+          <span class="rekg-cat">W · 02</span>
+          Forecast<br/>Review
+        </div>
+        <div class="rekg-callout" style="left: calc(56px + 737px); top: 475px;">
+          <span class="rekg-leader" style="height: 82px;"></span>
+          <span class="rekg-cat">W · 03</span>
+          Sequence<br/>Audit
+        </div>
+
+        <div class="rekg-gap-note">// GAP · NO RENEWALS CADENCE TRACKED</div>
+        <div class="rekg-gap-note rekg-gap-note-r">// PROPOSED · ADD WEEKLY DEAL DESK</div>
+
+        <div class="rekg-axis">
+          <span>WK 01</span>
+          <span>WK 03</span>
+          <span>WK 05</span>
+          <span>WK 07</span>
+          <span>WK 09</span>
+          <span>WK 11</span>
+          <span>WK 13</span>
+        </div>
+
+      </div><!-- /rekg-frame -->
+    </div><!-- /rekg-outer -->
   </section>
 
 
@@ -1279,6 +1431,66 @@ html { scroll-behavior: smooth; }
     h.addEventListener('mouseleave', resetWeb);
   });
 
+})();
+
+/* ═══════════════════════════════════════════════════════════
+   EKG — RESPONSIVE SCALE + TODAY CURSOR
+   ═══════════════════════════════════════════════════════════ */
+(function () {
+  var outer = document.getElementById('rekg-outer');
+  var frame = document.getElementById('rekg-frame');
+
+  function scaleEKG() {
+    if (!outer || !frame) return;
+    var w = outer.offsetWidth;
+    frame.style.transform = 'scale(' + (w / 1100) + ')';
+  }
+  scaleEKG();
+  window.addEventListener('resize', scaleEKG);
+
+  // TODAY cursor — calendar fiscal year (Q1=Jan, Q2=Apr, Q3=Jul, Q4=Oct)
+  var now       = new Date();
+  var year      = now.getFullYear();
+  var month     = now.getMonth();
+  var qIndex    = Math.floor(month / 3);
+  var qStart    = new Date(year, qIndex * 3, 1);
+  var qEnd      = new Date(year, qIndex * 3 + 3, 1);
+
+  function bdaysBetween(a, b) {
+    var n = 0, d = new Date(a);
+    while (d < b) {
+      var dow = d.getDay();
+      if (dow !== 0 && dow !== 6) n++;
+      d.setDate(d.getDate() + 1);
+    }
+    return n;
+  }
+
+  var totalBDays = bdaysBetween(qStart, qEnd);
+  var elapsed    = bdaysBetween(qStart, now);
+  var dayNum     = Math.min(Math.max(elapsed + 1, 1), totalBDays);
+  var frac       = (dayNum - 0.5) / totalBDays;
+  var x          = Math.round(frac * 988);
+
+  var metaEl = document.getElementById('rekg-meta-date');
+  if (metaEl) metaEl.textContent = 'FY' + String(year).slice(-2) + ' · Q' + (qIndex + 1) + ' · DAY ' + dayNum + ' OF ' + totalBDays;
+
+  var line  = document.getElementById('rekg-today-line');
+  var dot   = document.getElementById('rekg-today-dot');
+  var label = document.getElementById('rekg-today-label');
+  var mask  = document.getElementById('rekg-past-mask');
+  if (line)  { line.setAttribute('x1', x); line.setAttribute('x2', x); }
+  if (dot)   { dot.setAttribute('cx', x); }
+  if (label) {
+    if (x > 0.8 * 988) {
+      label.setAttribute('x', x - 6);
+      label.setAttribute('text-anchor', 'end');
+    } else {
+      label.setAttribute('x', x + 6);
+      label.setAttribute('text-anchor', 'start');
+    }
+  }
+  if (mask) mask.setAttribute('width', x);
 })();
 </script>
 
