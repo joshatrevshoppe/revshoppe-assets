@@ -257,8 +257,8 @@ section { position: relative; z-index: 1; }
 .faq-q-text { font-family: "RocWideMedium", sans-serif; font-size: 17px; letter-spacing: -0.4px; color: #fff; line-height: 1.35; flex: 1; }
 .faq-icon { font-family: "IBM Plex Mono", monospace; font-size: 20px; color: var(--accent); flex-shrink: 0; transition: transform 0.2s ease; line-height: 1; margin-top: 2px; }
 .faq-item.open .faq-icon { transform: rotate(45deg); }
-.faq-a { font-family: "Montserrat", sans-serif; font-size: 14px; color: rgba(255,255,255,0.45); line-height: 1.8; max-width: 720px; padding-bottom: 24px; display: none; }
-.faq-item.open .faq-a { display: block; }
+.faq-a { font-family: "Montserrat", sans-serif; font-size: 14px; color: rgba(255,255,255,0.45); line-height: 1.8; max-width: 720px; max-height: 0; overflow: hidden; padding-bottom: 0; transition: max-height 0.35s ease, padding-bottom 0.35s ease; }
+.faq-item.open .faq-a { max-height: 600px; padding-bottom: 24px; }
 
 /* ── CTA — centered ── */
 .cta-section { background: var(--accent); padding: 96px 48px; text-align: center; }
@@ -561,9 +561,9 @@ section { position: relative; z-index: 1; }
 <!-- ═══ PRICING — dark ════════════════════════════════════════════ -->
 <section class="tex-dark section" id="sa-pricing">
   <div class="section-inner">
-    <span class="sec-label">Pricing</span>
-    <h2 class="sec-h2 sec-h2-white">Choose your level of support.<br>Start tomorrow.</h2>
-    <p class="sec-sub sec-sub-white">No discovery call required. No long-term contract. Pick your hours and get a blended RevOps and Salesforce team embedded in your instance. Month-to-month. Pause or cancel anytime.</p>
+    <span class="sec-label" style="text-align:center;display:block;">Pricing</span>
+    <h2 class="sec-h2 sec-h2-white" style="text-align:center;">Choose your level of support.<br>Start tomorrow.</h2>
+    <p class="sec-sub sec-sub-white" style="text-align:center;margin:0 auto;">No discovery call required. No long-term contract. Pick your hours and get a blended RevOps and Salesforce team embedded in your instance. Month-to-month. Pause or cancel anytime.</p>
 
     <div class="slider-wrap">
       <div class="slider-card">
