@@ -1,22 +1,21 @@
-(function() {
-  var btn = document.getElementById('nav-hamburger');
-  var drawer = document.getElementById('nav-mobile');
-  if (!btn || !drawer) return;
-
-  btn.addEventListener('click', function() {
+document.addEventListener('click', function(e) {
+  if (e.target.closest('#nav-hamburger')) {
+    var btn = document.getElementById('nav-hamburger');
+    var drawer = document.getElementById('nav-mobile');
+    if (!btn || !drawer) return;
     var isOpen = btn.classList.toggle('open');
     drawer.style.display = isOpen ? 'flex' : 'none';
     document.body.style.overflow = isOpen ? 'hidden' : '';
-  });
-
-  drawer.querySelectorAll('a').forEach(function(a) {
-    a.addEventListener('click', function() {
-      btn.classList.remove('open');
-      drawer.style.display = 'none';
-      document.body.style.overflow = '';
-    });
-  });
-})();
+    return;
+  }
+  if (e.target.closest('#nav-mobile a')) {
+    var btn2 = document.getElementById('nav-hamburger');
+    var drawer2 = document.getElementById('nav-mobile');
+    if (btn2) btn2.classList.remove('open');
+    if (drawer2) drawer2.style.display = 'none';
+    document.body.style.overflow = '';
+  }
+});
 
 (function() {
       var items = document.querySelectorAll('.quote-item');

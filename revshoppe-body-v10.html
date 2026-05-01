@@ -1,11 +1,11 @@
 <!-- ═══ NAV ═══ -->
 <nav>
 <style>
-#nav-hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;background:none;border:none;z-index:200;-webkit-tap-highlight-color:transparent;touch-action:manipulation;flex-shrink:0;}
-#nav-hamburger span{display:block;width:22px;height:2px;background:rgba(255,255,255,0.8);border-radius:2px;transition:all 0.3s ease;}
-#nav-hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+#nav-hamburger{display:none;flex-direction:column;gap:6px;cursor:pointer;padding:10px 12px;background:none;border:none;z-index:200;-webkit-tap-highlight-color:transparent;touch-action:manipulation;flex-shrink:0;min-width:44px;min-height:44px;align-items:center;justify-content:center;}
+#nav-hamburger span{display:block;width:26px;height:2.5px;background:#fff;border-radius:2px;transition:all 0.3s ease;}
+#nav-hamburger.open span:nth-child(1){transform:translateY(8.5px) rotate(45deg);}
 #nav-hamburger.open span:nth-child(2){opacity:0;}
-#nav-hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+#nav-hamburger.open span:nth-child(3){transform:translateY(-8.5px) rotate(-45deg);}
 #nav-mobile{display:none;position:fixed;top:64px;left:0;right:0;bottom:0;background:#26242F;z-index:8999;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:32px 24px 48px;flex-direction:column;gap:0;border-top:1px solid rgba(255,255,255,0.08);}
 #nav-mobile a,#nav-mobile span.nav-m-label{font-family:'Montserrat',sans-serif;font-size:15px;color:rgba(255,255,255,0.7);text-decoration:none;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.06);display:block;}
 #nav-mobile span.nav-m-label{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.3);padding:24px 0 8px;border-bottom:none;}
