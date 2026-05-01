@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="rs-page" content="revenue-operating-system">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preload" href="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/67dea6a57df5c619dba13468_RocGroteskWide-Medium.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/67dea6a54f0aa4e3e2f1f6e8_RocGroteskWide-Light.woff2" as="font" type="font/woff2" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+:root {
+  --bg-light:     #FAFAF9;
+  --bg-dark:      #26242F;
+  --bg-charcoal:  #2C2A27;
+  --accent:       #E8634A;
+  --accent-hover: #F0745C;
+  --headline:     #111111;
+  --body:         #8F95A0;
+}
+
+@font-face {
+  font-family: "RocWideMedium";
+  src: url("https://cdn.prod.website-files.com/61f825b46abaae2807007e90/67dea6a57df5c619dba13468_RocGroteskWide-Medium.woff2") format("woff2");
+  font-weight: 500; font-display: block;
+}
+@font-face {
+  font-family: "RocWideLight";
+  src: url("https://cdn.prod.website-files.com/61f825b46abaae2807007e90/67dea6a54f0aa4e3e2f1f6e8_RocGroteskWide-Light.woff2") format("woff2");
+  font-weight: 300; font-display: block;
+}
+
+/* ── TEXTURES ── */
+.ros-tex-dark {
+  background-color: var(--bg-dark);
+  background-image: linear-gradient(rgba(255,255,255,0.034) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.034) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+.ros-tex-charcoal {
+  background-color: var(--bg-charcoal);
+  background-image: linear-gradient(rgba(255,255,255,0.028) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.028) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+.ros-tex-light {
+  background-color: var(--bg-light);
+  background-image: linear-gradient(rgba(0,0,0,0.027) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.027) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+/* ── ELEVATION ── */
+.ros-pg section { position: relative; z-index: 1; }
+.ros-tex-dark, .ros-tex-charcoal {
+  border-top: 1px solid rgba(255,255,255,0.08);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.35), 0 2px 8px rgba(0,0,0,0.20), 0 -8px 32px rgba(0,0,0,0.35), 0 -2px 8px rgba(0,0,0,0.20);
+  z-index: 2;
+}
+.ros-tex-light {
+  border-top: 1px solid rgba(255,255,255,0.95);
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.10), 0 1px 4px rgba(0,0,0,0.06), 0 -4px 16px rgba(0,0,0,0.08);
+  z-index: 1;
+}
+
+/* ── LAYOUT ── */
+.ros-sec { padding: 96px 48px; }
+.ros-inner { max-width: 1080px; margin: 0 auto; }
+.ros-inner-wide { max-width: 1240px; margin: 0 auto; }
+
+/* ── TYPE ── */
+.ros-eyebrow { display: block; font-family: "IBM Plex Mono", monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 20px; }
+.ros-h1 { font-family: "RocWideMedium", sans-serif; font-size: clamp(34px, 4vw, 58px); line-height: 1.06; letter-spacing: -2px; color: #fff; margin-bottom: 24px; }
+.ros-h1 em { font-style: normal; color: var(--accent); }
+.ros-h2 { font-family: "RocWideMedium", sans-serif; font-size: clamp(28px, 3.8vw, 46px); line-height: 1.08; letter-spacing: -1.5px; color: var(--headline); margin-bottom: 16px; }
+.ros-h2-w { color: #fff; }
+.ros-sub { font-family: "Montserrat", sans-serif; font-size: 16px; color: var(--body); line-height: 1.8; max-width: 600px; letter-spacing: -0.3px; }
+.ros-sub-d { color: rgba(255,255,255,0.45); }
+.ros-body { font-family: "Montserrat", sans-serif; font-size: 15px; color: var(--body); line-height: 1.8; letter-spacing: -0.2px; }
+.ros-body-d { color: rgba(255,255,255,0.42); }
+
+/* ── BUTTONS ── */
+.ros-btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 32px; border-radius: 3px; background: var(--accent); color: #fff; font-family: "IBM Plex Mono", monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; border: none; cursor: pointer; transition: background 0.15s; box-shadow: 0 2px 8px rgba(232,99,74,0.35), 0 4px 20px rgba(232,99,74,0.25); }
+.ros-btn:hover { background: var(--accent-hover); }
+.ros-btn-ghost { display: inline-flex; align-items: center; gap: 8px; padding: 13px 28px; border-radius: 3px; background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.75); font-family: "IBM Plex Mono", monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; border: 1px solid rgba(255,255,255,0.18); transition: border-color 0.15s; }
+.ros-btn-ghost:hover { border-color: rgba(255,255,255,0.45); }
+.ros-btn-white { display: inline-flex; align-items: center; gap: 10px; padding: 16px 40px; border-radius: 3px; background: #fff; color: var(--accent); font-family: "IBM Plex Mono", monospace; font-size: 13px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; transition: opacity 0.15s; box-shadow: 0 2px 12px rgba(0,0,0,0.18); }
+.ros-btn-white:hover { opacity: 0.92; }
+
+/* ── HERO ── */
+.ros-hero { padding: 88px 48px 0; }
+.ros-hero-inner { max-width: 1240px; margin: 0 auto; }
+.ros-hero-text { max-width: 860px; margin: 0 auto 56px; text-align: center; }
+.ros-hero-lead { font-family: "Montserrat", sans-serif; font-size: 17px; color: rgba(255,255,255,0.48); line-height: 1.75; max-width: 620px; margin: 0 auto; letter-spacing: -0.3px; }
+
+/* ── FEDERATED WEB STAGE ── */
+.ros-web-stage {
+  border: 1px solid rgba(255,255,255,0.08);
+  background: radial-gradient(ellipse 80% 60% at 50% 50%, rgba(232,99,74,0.04) 0%, transparent 70%), #1F1D27;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.ros-web-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+}
+.ros-web-bar .ros-web-tag { color: var(--accent); }
+.ros-web-bar .ros-web-meta { display: flex; gap: 28px; }
+.ros-web-bar .ros-web-meta span b { color: #fff; font-weight: 500; margin-left: 6px; }
+.ros-web-svg-wrap { width: 100%; padding: 8px; }
+.ros-web-svg { width: 100%; height: auto; display: block; }
+.ros-web-legend {
+  display: flex;
+  gap: 28px;
+  padding: 14px 24px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.45);
+  flex-wrap: wrap;
+}
+.ros-web-legend .rli { display: flex; align-items: center; gap: 8px; }
+.ros-web-legend .rli-dot { width: 10px; height: 10px; border-radius: 50%; }
+.ros-web-legend .rli-dot-cf { background: #FAFAF9; border: 1px solid rgba(232,99,74,0.6); }
+.ros-web-legend .rli-dot-std { background: var(--accent); border: 1px solid var(--accent-hover); }
+.ros-web-legend .rli-line { width: 22px; height: 1px; background: rgba(232,99,74,0.45); }
+.ros-web-legend .rli-hub { width: 12px; height: 12px; border-radius: 50%; background: #26242F; border: 1.5px solid rgba(232,99,74,0.7); }
+
+/* ── STAT STRIP ── */
+.ros-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-top: 40px;
+  padding-bottom: 96px;
+}
+.ros-stat {
+  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.015);
+  padding: 28px 24px;
+  border-radius: 10px;
+}
+.ros-stat-num { font-family: "RocWideMedium", sans-serif; font-size: 52px; color: var(--accent); letter-spacing: -0.02em; line-height: 1; display: block; }
+.ros-stat-lbl { font-family: "IBM Plex Mono", monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.45); margin-top: 14px; display: block; }
+.ros-stat p { color: rgba(255,255,255,0.5); font-size: 13px; line-height: 1.6; margin-top: 8px; font-family: "Montserrat", sans-serif; }
+
+/* ── VISUAL PLACEHOLDER ── */
+.ros-vp {
+  border: 1px dashed rgba(232,99,74,0.3);
+  border-radius: 10px;
+  background: rgba(232,99,74,0.025);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 48px 32px;
+  position: relative;
+  min-height: 340px;
+}
+.ros-vp-label {
+  position: absolute;
+  top: 16px;
+  left: 20px;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: rgba(232,99,74,0.12);
+  border: 1px solid rgba(232,99,74,0.25);
+  padding: 4px 10px;
+  border-radius: 2px;
+}
+.ros-vp-icon {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 32px;
+  color: rgba(232,99,74,0.25);
+  margin-bottom: 16px;
+  letter-spacing: -2px;
+}
+.ros-vp-title {
+  font-family: "RocWideMedium", sans-serif;
+  font-size: 15px;
+  color: rgba(255,255,255,0.3);
+  letter-spacing: -0.3px;
+  margin-bottom: 8px;
+}
+.ros-vp-note {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.2);
+}
+/* Light bg variant */
+.ros-vp-light {
+  border-color: rgba(232,99,74,0.2);
+  background: rgba(232,99,74,0.02);
+  min-height: 280px;
+}
+.ros-vp-light .ros-vp-label { color: var(--accent); }
+.ros-vp-light .ros-vp-icon { color: rgba(232,99,74,0.2); }
+.ros-vp-light .ros-vp-title { color: rgba(0,0,0,0.25); }
+.ros-vp-light .ros-vp-note { color: rgba(0,0,0,0.2); }
+
+/* ── THREE LAYERS ── */
+.ros-layers-wrap { margin-top: 64px; }
+.ros-layer-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 48px; }
+.ros-layer-card {
+  background: rgba(255,255,255,0.025);
+  border: 1px solid rgba(255,255,255,0.07);
+  padding: 32px 28px;
+}
+.ros-layer-card:first-child { border-radius: 10px 0 0 10px; }
+.ros-layer-card:last-child { border-radius: 0 10px 10px 0; }
+.ros-layer-num {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 16px;
+  display: block;
+}
+.ros-layer-name {
+  font-family: "RocWideMedium", sans-serif;
+  font-size: 19px;
+  color: #fff;
+  letter-spacing: -0.4px;
+  margin-bottom: 12px;
+  line-height: 1.2;
+}
+.ros-layer-desc {
+  font-family: "Montserrat", sans-serif;
+  font-size: 14px;
+  color: rgba(255,255,255,0.42);
+  line-height: 1.75;
+  letter-spacing: -0.2px;
+}
+.ros-layer-card.ros-layer-coe {
+  border-color: rgba(232,99,74,0.3);
+  background: rgba(232,99,74,0.04);
+}
+.ros-layer-card.ros-layer-coe .ros-layer-name { color: var(--accent); }
+.ros-layer-badge {
+  display: inline-block;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(232,99,74,0.8);
+  background: rgba(232,99,74,0.1);
+  border: 1px solid rgba(232,99,74,0.2);
+  padding: 3px 8px;
+  border-radius: 2px;
+  margin-top: 16px;
+  display: block;
+  width: fit-content;
+}
+
+/* ── HYBRID ORG ── */
+.ros-hybrid-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+  margin-top: 0;
+}
+.ros-hybrid-copy { max-width: 480px; }
+.ros-hybrid-copy .ros-h2 { margin-bottom: 20px; }
+
+/* ── AI GOVERNANCE ── */
+.ros-ai-grid {
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  gap: 72px;
+  align-items: start;
+}
+.ros-ai-stat-stack { display: flex; flex-direction: column; gap: 2px; }
+.ros-ai-stat-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.07);
+  padding: 24px 28px;
+}
+.ros-ai-stat-card:first-child { border-radius: 10px 10px 0 0; }
+.ros-ai-stat-card:last-child { border-radius: 0 0 10px 10px; }
+.ros-ai-stat-num { font-family: "RocWideMedium", sans-serif; font-size: 42px; color: var(--accent); letter-spacing: -1.5px; line-height: 1; display: block; margin-bottom: 8px; }
+.ros-ai-stat-lbl { font-family: "IBM Plex Mono", monospace; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.3); }
+.ros-ai-copy .ros-h2-w { margin-bottom: 28px; }
+.ros-ai-copy p { margin-bottom: 20px; max-width: 600px; }
+.ros-ai-copy p:last-child { margin-bottom: 0; }
+.ros-ai-callout {
+  margin-top: 32px;
+  padding: 20px 24px;
+  background: rgba(232,99,74,0.08);
+  border: 1px solid rgba(232,99,74,0.2);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 6px 6px 0;
+}
+.ros-ai-callout p {
+  font-family: "Montserrat", sans-serif;
+  font-size: 14px;
+  color: rgba(255,255,255,0.65);
+  line-height: 1.7;
+  font-weight: 500;
+  margin-bottom: 0;
+}
+
+/* ── RHYTHM ── */
+.ros-rhythm-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 72px;
+  align-items: center;
+}
+.ros-rhythm-copy .ros-h2-w { margin-bottom: 20px; }
+.ros-cadence-list { margin-top: 32px; display: flex; flex-direction: column; }
+.ros-cadence-row {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 24px;
+  padding: 18px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  align-items: start;
+}
+.ros-cadence-row:last-child { border-bottom: none; }
+.ros-cadence-period {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  padding-top: 2px;
+}
+.ros-cadence-items { display: flex; flex-wrap: wrap; gap: 6px; }
+.ros-cadence-tag {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.09);
+  padding: 5px 10px;
+  border-radius: 2px;
+}
+
+/* ── CTA BRIDGE ── */
+.ros-cta { background: var(--accent); padding: 96px 48px; text-align: center; }
+.ros-cta-inner { max-width: 640px; margin: 0 auto; }
+.ros-cta-eyebrow { display: block; font-family: "IBM Plex Mono", monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.6); margin-bottom: 20px; }
+.ros-cta-h2 { font-family: "RocWideMedium", sans-serif; font-size: clamp(30px, 4vw, 46px); line-height: 1.08; letter-spacing: -1.5px; color: #fff; margin-bottom: 16px; }
+.ros-cta-body { font-family: "Montserrat", sans-serif; font-size: 16px; color: rgba(255,255,255,0.72); line-height: 1.75; margin-bottom: 40px; }
+
+/* ── DEPT HOVER INTERACTION ── */
+.ros-dept-hub { cursor: pointer; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1024px) {
+  .ros-inner { max-width: 880px; }
+  .ros-ai-grid { grid-template-columns: 280px 1fr; gap: 48px; }
+  .ros-rhythm-layout { gap: 48px; }
+}
+@media (max-width: 900px) {
+  .ros-stats { grid-template-columns: repeat(2, 1fr); }
+  .ros-layer-cards { grid-template-columns: 1fr; }
+  .ros-layer-card:first-child { border-radius: 10px 10px 0 0; }
+  .ros-layer-card:last-child { border-radius: 0 0 10px 10px; }
+  .ros-hybrid-grid { grid-template-columns: 1fr; gap: 40px; }
+  .ros-ai-grid { grid-template-columns: 1fr; gap: 40px; }
+  .ros-rhythm-layout { grid-template-columns: 1fr; gap: 40px; }
+}
+@media (max-width: 768px) {
+  .ros-sec { padding: 64px 20px; }
+  .ros-hero { padding: 80px 20px 0; }
+  .ros-h1 { font-size: clamp(28px, 7vw, 42px); letter-spacing: -1.2px; }
+  .ros-h2 { font-size: clamp(24px, 5.5vw, 36px); letter-spacing: -1px; }
+  .ros-stats { grid-template-columns: 1fr 1fr; }
+}
+</style>
+</head>
+<body>
+<div class="ros-pg">
+
+  <!-- ════════════════════════════════════════════
+       HERO — federated web as the argument
+       ════════════════════════════════════════════ -->
+  <section class="ros-hero ros-tex-dark">
+    <div class="ros-hero-inner">
+      <div class="ros-hero-text">
+        <span class="ros-eyebrow">Revenue Operating System</span>
+        <h1 class="ros-h1">Most revenue orgs have workflows.<br>Almost none have an <em>operating system.</em></h1>
+        <p class="ros-hero-lead">Below is what federation looks like. Every dot is a workflow. Every line is a dependency. When one department operates in isolation, dozens of these lines break.</p>
+      </div>
+
+      <!-- Federated Web -->
+      <div class="ros-web-stage">
+        <div class="ros-web-bar">
+          <span class="ros-web-tag">⚡ FEDERATED WORKFLOW MAP · rOS</span>
+          <div class="ros-web-meta">
+            <span>WORKFLOWS<b id="ros-stat-wf">65</b></span>
+            <span>DEPARTMENTS<b>8</b></span>
+            <span>CROSS-LINKS<b id="ros-stat-links">—</b></span>
+            <span>AVG TOUCHES<b id="ros-stat-avg">—</b></span>
+          </div>
+        </div>
+        <div class="ros-web-svg-wrap">
+          <svg id="ros-web-svg" class="ros-web-svg" viewBox="0 0 1200 840" preserveAspectRatio="xMidYMid meet"></svg>
+        </div>
+        <div class="ros-web-legend">
+          <span class="rli"><span class="rli-hub"></span>Department hub</span>
+          <span class="rli"><span class="rli-dot rli-dot-cf"></span>Cross-functional workflow (4+ departments)</span>
+          <span class="rli"><span class="rli-dot rli-dot-std"></span>Workflow</span>
+          <span class="rli"><span class="rli-line"></span>Cross-department dependency</span>
+        </div>
+      </div>
+
+      <!-- Stat strip -->
+      <div class="ros-stats">
+        <div class="ros-stat">
+          <span class="ros-stat-num" id="ros-stat-n1">65</span>
+          <span class="ros-stat-lbl">Workflows mapped</span>
+          <p>Across discovery, deal cycle, handoff, expansion, and renewal — every workflow that needs to compound.</p>
+        </div>
+        <div class="ros-stat">
+          <span class="ros-stat-num" id="ros-stat-n2">—</span>
+          <span class="ros-stat-lbl">Cross-dept dependencies</span>
+          <p>Every line is a handoff, an alert, or a shared signal that breaks the moment any one team runs solo.</p>
+        </div>
+        <div class="ros-stat">
+          <span class="ros-stat-num">8</span>
+          <span class="ros-stat-lbl">Departments federated</span>
+          <p>Sales, RevOps, CS, Marketing, Product, Data & Eng, Enablement, Leadership — one substrate.</p>
+        </div>
+        <div class="ros-stat">
+          <span class="ros-stat-num" id="ros-stat-n4">—</span>
+          <span class="ros-stat-lbl">Avg teams per workflow</span>
+          <p>The median GTM workflow touches four departments. None of them function alone.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ════════════════════════════════════════════
+       THREE LAYERS — the architecture
+       ════════════════════════════════════════════ -->
+  <section class="ros-sec ros-tex-dark">
+    <div class="ros-inner">
+      <span class="ros-eyebrow">The Architecture</span>
+      <h2 class="ros-h2 ros-h2-w">Three layers.<br>One substrate.</h2>
+      <p class="ros-sub ros-sub-d">A Revenue Operating System isn't a single tool or a single process. It's three interdependent layers — and all three have to be running for any of them to compound.</p>
+
+      <!-- VISUAL PLACEHOLDER: THREE-LAYER ARCHITECTURE -->
+      <div class="ros-vp" style="margin-top: 48px; min-height: 400px;">
+        <span class="ros-vp-label">Visual · Three-Layer Architecture</span>
+        <div class="ros-vp-icon">◎</div>
+        <div class="ros-vp-title">Concentric-ring architecture diagram</div>
+        <p class="ros-vp-note">Replace with Claude Design export · Prompt 1</p>
+      </div>
+
+      <div class="ros-layer-cards">
+        <div class="ros-layer-card">
+          <span class="ros-layer-num">Layer 01</span>
+          <div class="ros-layer-name">Workflow Foundation</div>
+          <p class="ros-layer-desc">The automations, integrations, and data pipelines that execute at every stage of the customer lifecycle. This is what your workflows actually run on. Without it, every automation is an island.</p>
+        </div>
+        <div class="ros-layer-card">
+          <span class="ros-layer-num">Layer 02</span>
+          <div class="ros-layer-name">Rhythm of Revenue</div>
+          <p class="ros-layer-desc">The operating cadence. Meeting structures, reporting frameworks, and the calendar that keeps every department aligned on the same reality — week over week, quarter over quarter.</p>
+        </div>
+        <div class="ros-layer-card ros-layer-coe">
+          <span class="ros-layer-num">Layer 03</span>
+          <div class="ros-layer-name">Center of Excellence</div>
+          <p class="ros-layer-desc">The governance layer. It governs process, people, and AI agents alike. Context ownership, output accountability, methodology enforcement — all under one roof. The layer that keeps the other two honest.</p>
+          <span class="ros-layer-badge">Governs agents + humans</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ════════════════════════════════════════════
+       HYBRID ORG ONRAMP — agents + sellers
+       ════════════════════════════════════════════ -->
+  <section class="ros-sec ros-tex-light">
+    <div class="ros-inner">
+      <div class="ros-hybrid-grid">
+        <div class="ros-hybrid-copy">
+          <span class="ros-eyebrow">The Hybrid Organization</span>
+          <h2 class="ros-h2">Sellers and agents.<br>Same motion.<br>Different layers.</h2>
+          <p class="ros-sub" style="margin-bottom: 20px;">The revenue organization is no longer just sellers. Agents run the workflows that support them. The same motion — different execution layers, different automation levels.</p>
+          <p class="ros-body">Different workflows run at different levels of automation. Some execute without intervention. Some require human direction before they move. Some require review before they close. An rOS defines which is which — and makes sure every agent operating in your revenue motion has governed context, not just access.</p>
+        </div>
+        <!-- VISUAL PLACEHOLDER: HYBRID SPECTRUM -->
+        <div class="ros-vp ros-vp-light">
+          <span class="ros-vp-label">Visual · Hybrid Workforce Spectrum</span>
+          <div class="ros-vp-icon" style="color: rgba(232,99,74,0.2);">⇆</div>
+          <div class="ros-vp-title" style="color: rgba(0,0,0,0.25);">Human-led → Hybrid → Agent-led</div>
+          <p class="ros-vp-note">Replace with Claude Design export · Prompt 2</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ════════════════════════════════════════════
+       AI GOVERNANCE — the differentiator
+       ════════════════════════════════════════════ -->
+  <section class="ros-sec ros-tex-charcoal">
+    <div class="ros-inner">
+      <div class="ros-ai-grid">
+        <div class="ros-ai-stat-stack">
+          <div class="ros-ai-stat-card">
+            <span class="ros-ai-stat-num">0</span>
+            <span class="ros-ai-stat-lbl">Governance frameworks built for AI agents before 2023</span>
+          </div>
+          <div class="ros-ai-stat-card">
+            <span class="ros-ai-stat-num">1</span>
+            <span class="ros-ai-stat-lbl">Layer of your rOS that governs both humans and agents</span>
+          </div>
+          <div class="ros-ai-stat-card">
+            <span class="ros-ai-stat-num" style="font-size: 28px; letter-spacing: -0.5px;">Every</span>
+            <span class="ros-ai-stat-lbl">Agent in your revenue motion needs governed context — not just access</span>
+          </div>
+        </div>
+
+        <div class="ros-ai-copy">
+          <span class="ros-eyebrow">AI Governance</span>
+          <h2 class="ros-h2 ros-h2-w">Every agent needs governed context.<br>Most orgs aren't built for it.</h2>
+          <p class="ros-body ros-body-d">A governance framework built for humans governs what people do and when. That model doesn't extend to agents. Agents don't have judgment about what they should know or what they're authorized to act on — they execute based on the context they're given.</p>
+          <p class="ros-body ros-body-d">The Center of Excellence is where that governance lives. What context each agent has. What data it can access. Which actions it's authorized to take. When it escalates to a human. The rOS enforces all of it — consistently, across every department that agent touches.</p>
+          <div class="ros-ai-callout">
+            <p>Without a governance layer, you don't have a hybrid revenue org. You have automation chaos with better tooling.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ════════════════════════════════════════════
+       RHYTHM OF REVENUE — operating cadence
+       ════════════════════════════════════════════ -->
+  <section class="ros-sec ros-tex-dark">
+    <div class="ros-inner">
+      <div class="ros-rhythm-layout">
+        <div class="ros-rhythm-copy">
+          <span class="ros-eyebrow">The Operating Cadence</span>
+          <h2 class="ros-h2 ros-h2-w">The business runs on rhythm.</h2>
+          <p class="ros-sub ros-sub-d" style="margin-bottom: 24px;">Workflows execute. Cadence compounds. A Revenue Operating System structures when the business reviews itself — not just what it runs.</p>
+          <p class="ros-body ros-body-d">Every ritual has a place in the cadence. Every cadence feeds the system. The organizations that pull away from the pack don't just run better workflows — they run a better operating calendar.</p>
+
+          <div class="ros-cadence-list">
+            <div class="ros-cadence-row">
+              <span class="ros-cadence-period">Daily</span>
+              <div class="ros-cadence-items">
+                <span class="ros-cadence-tag">Pipeline signals</span>
+                <span class="ros-cadence-tag">At-risk flags</span>
+                <span class="ros-cadence-tag">Agent output review</span>
+              </div>
+            </div>
+            <div class="ros-cadence-row">
+              <span class="ros-cadence-period">Weekly</span>
+              <div class="ros-cadence-items">
+                <span class="ros-cadence-tag">Pipeline sync</span>
+                <span class="ros-cadence-tag">Forecast review</span>
+                <span class="ros-cadence-tag">Sequence audit</span>
+                <span class="ros-cadence-tag">Coaching calibration</span>
+              </div>
+            </div>
+            <div class="ros-cadence-row">
+              <span class="ros-cadence-period">Monthly</span>
+              <div class="ros-cadence-items">
+                <span class="ros-cadence-tag">Revenue org review</span>
+                <span class="ros-cadence-tag">Attribution audit</span>
+                <span class="ros-cadence-tag">ICP calibration</span>
+              </div>
+            </div>
+            <div class="ros-cadence-row">
+              <span class="ros-cadence-period">Quarterly</span>
+              <div class="ros-cadence-items">
+                <span class="ros-cadence-tag">QBR</span>
+                <span class="ros-cadence-tag">ICP refinement</span>
+                <span class="ros-cadence-tag">Board package</span>
+                <span class="ros-cadence-tag">rOS health review</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- VISUAL PLACEHOLDER: RHYTHM CLOCK -->
+        <div class="ros-vp" style="min-height: 420px;">
+          <span class="ros-vp-label">Visual · Rhythm of Revenue Clock</span>
+          <div class="ros-vp-icon">◷</div>
+          <div class="ros-vp-title">Concentric cadence diagram</div>
+          <p class="ros-vp-note">Replace with Claude Design export · Prompt 3</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ════════════════════════════════════════════
+       CTA BRIDGE — → managed infrastructure
+       ════════════════════════════════════════════ -->
+  <section class="ros-cta">
+    <div class="ros-cta-inner">
+      <span class="ros-cta-eyebrow">What comes next</span>
+      <h2 class="ros-cta-h2">Now see how we govern it.</h2>
+      <p class="ros-cta-body">The rOS doesn't maintain itself. Managed infrastructure is how we keep it current, healthy, and compounding — as your team, your stack, and your market all change.</p>
+      <a href="/managed-infrastructure" class="ros-btn-white">Managed Infrastructure →</a>
+    </div>
+  </section>
+
+</div><!-- /ros-pg -->
+
+
+<script>
+(function () {
+  /* ═══════════════════════════════════════════════════════════
+     DATA
+     ═══════════════════════════════════════════════════════════ */
+  var DEPARTMENTS = [
+    { id: "sales",      label: "Sales",            short: "SALES"  },
+    { id: "revops",     label: "RevOps",           short: "REVOPS" },
+    { id: "cs",         label: "Customer Success", short: "CS"     },
+    { id: "marketing",  label: "Marketing",        short: "MKT"    },
+    { id: "product",    label: "Product",          short: "PROD"   },
+    { id: "data",       label: "Data & Eng",       short: "DATA"   },
+    { id: "enablement", label: "Enablement",       short: "ENABL"  },
+    { id: "exec",       label: "Leadership",       short: "EXEC"   }
+  ];
+
+  var WORKFLOWS = [
+    // SALES
+    { n:  1, owner: "sales",      touches: ["revops","data","enablement","exec"] },
+    { n:  2, owner: "sales",      touches: ["marketing","enablement","cs"] },
+    { n:  3, owner: "sales",      touches: ["enablement","marketing","product"] },
+    { n:  4, owner: "sales",      touches: ["revops","exec","marketing","cs"] },
+    { n:  5, owner: "sales",      touches: ["revops","cs","marketing","exec"] },
+    { n:  6, owner: "sales",      touches: ["revops","exec","enablement"] },
+    { n:  7, owner: "sales",      touches: ["revops","exec","data"] },
+    { n:  8, owner: "sales",      touches: ["enablement","revops","marketing","exec"] },
+    { n: 16, owner: "sales",      touches: ["enablement","revops","marketing"] },
+    { n: 17, owner: "sales",      touches: ["cs","marketing","product","revops"] },
+    { n: 18, owner: "sales",      touches: ["enablement","data","revops","marketing"] },
+    { n: 19, owner: "sales",      touches: ["revops","cs","exec"] },
+    { n: 20, owner: "sales",      touches: ["revops","exec","enablement","data"] },
+    { n: 21, owner: "sales",      touches: ["exec","revops","cs"] },
+    { n: 22, owner: "sales",      touches: ["marketing","revops","product","enablement"] },
+    { n: 23, owner: "sales",      touches: ["enablement","data","revops","marketing"] },
+    { n: 24, owner: "sales",      touches: ["enablement","product","marketing","revops"] },
+    // REVOPS
+    { n:  9, owner: "revops",     touches: ["sales","exec","data","enablement"] },
+    { n: 10, owner: "revops",     touches: ["sales","exec","data"] },
+    { n: 11, owner: "revops",     touches: ["sales","marketing","product","enablement","exec","cs"] },
+    { n: 12, owner: "revops",     touches: ["sales","enablement","exec"] },
+    { n: 13, owner: "revops",     touches: ["marketing","sales","product","data"] },
+    { n: 14, owner: "revops",     touches: ["marketing","data","sales","exec"] },
+    { n: 15, owner: "revops",     touches: ["sales","enablement","exec","data"] },
+    { n: 25, owner: "revops",     touches: ["sales","data","exec","enablement"] },
+    { n: 26, owner: "revops",     touches: ["data","sales","marketing","cs"] },
+    { n: 27, owner: "revops",     touches: ["sales","cs","enablement","marketing","exec"] },
+    { n: 28, owner: "revops",     touches: ["sales","exec","marketing","data"] },
+    { n: 29, owner: "revops",     touches: ["marketing","product","sales","enablement","exec"] },
+    { n: 30, owner: "revops",     touches: ["enablement","sales","marketing"] },
+    { n: 31, owner: "revops",     touches: ["sales","exec","data","marketing"] },
+    { n: 32, owner: "revops",     touches: ["sales","exec","data","enablement","product"] },
+    // CS
+    { n: 33, owner: "cs",         touches: ["product","exec","sales","data","marketing"] },
+    { n: 34, owner: "cs",         touches: ["sales","marketing","product","revops","exec"] },
+    { n: 35, owner: "cs",         touches: ["sales","revops","enablement","exec"] },
+    { n: 36, owner: "cs",         touches: ["exec","sales","product","revops"] },
+    { n: 37, owner: "cs",         touches: ["product","data","exec","sales","marketing"] },
+    // MARKETING
+    { n: 38, owner: "marketing",  touches: ["sales","data","product","cs","exec"] },
+    { n: 39, owner: "marketing",  touches: ["sales","product","exec","enablement"] },
+    { n: 40, owner: "marketing",  touches: ["sales","data","cs","enablement"] },
+    { n: 41, owner: "marketing",  touches: ["data","exec","sales","revops"] },
+    { n: 42, owner: "marketing",  touches: ["sales","enablement","product","revops"] },
+    // PRODUCT
+    { n: 43, owner: "product",    touches: ["cs","sales","data","marketing","exec"] },
+    { n: 44, owner: "product",    touches: ["marketing","sales","exec","revops"] },
+    { n: 45, owner: "product",    touches: ["cs","data","sales","exec"] },
+    // ENABLEMENT
+    { n: 46, owner: "enablement", touches: ["sales","revops","exec","marketing"] },
+    { n: 47, owner: "enablement", touches: ["sales","exec","revops","data"] },
+    { n: 48, owner: "enablement", touches: ["sales","revops","marketing","product"] },
+    { n: 49, owner: "enablement", touches: ["sales","exec","revops"] },
+    { n: 50, owner: "enablement", touches: ["sales","product","marketing","revops"] },
+    // DATA & ENG
+    { n: 51, owner: "data",       touches: ["sales","marketing","revops","cs"] },
+    { n: 52, owner: "data",       touches: ["marketing","revops","sales","exec"] },
+    { n: 53, owner: "data",       touches: ["revops","exec","sales","cs"] },
+    { n: 54, owner: "data",       touches: ["revops","exec","sales","marketing","cs","enablement"] },
+    { n: 55, owner: "data",       touches: ["revops","sales","cs","marketing"] },
+    // LEADERSHIP
+    { n: 56, owner: "exec",       touches: ["revops","sales","marketing","data"] },
+    { n: 57, owner: "exec",       touches: ["revops","data","sales","marketing","cs","product"] },
+    { n: 58, owner: "exec",       touches: ["revops","sales","data","enablement"] },
+    { n: 59, owner: "exec",       touches: ["revops","sales","data"] },
+    // MARKETING (cont)
+    { n: 60, owner: "marketing",  touches: ["sales","revops","data","exec","cs"] },
+    { n: 61, owner: "marketing",  touches: ["sales","data","revops","enablement"] },
+    { n: 62, owner: "marketing",  touches: ["revops","exec","sales","data","cs"] },
+    // CS (cont)
+    { n: 63, owner: "cs",         touches: ["data","sales","exec","product","revops"] },
+    { n: 64, owner: "cs",         touches: ["sales","marketing","revops","exec"] },
+    // ENABLEMENT (cont)
+    { n: 65, owner: "enablement", touches: ["sales","marketing","revops","data","exec"] }
+  ];
+
+  /* ═══════════════════════════════════════════════════════════
+     STATS — update DOM
+     ═══════════════════════════════════════════════════════════ */
+  var totalLinks = WORKFLOWS.reduce(function(s, w) { return s + w.touches.length; }, 0);
+  var avgTouches = (totalLinks / WORKFLOWS.length).toFixed(1);
+
+  document.getElementById('ros-stat-links').textContent = totalLinks;
+  document.getElementById('ros-stat-avg').textContent = avgTouches + 'x';
+  document.getElementById('ros-stat-n2').textContent = totalLinks;
+  document.getElementById('ros-stat-n4').textContent = avgTouches + 'x';
+
+  /* ═══════════════════════════════════════════════════════════
+     SVG HELPERS
+     ═══════════════════════════════════════════════════════════ */
+  var NS = 'http://www.w3.org/2000/svg';
+  function el(tag, attrs, parent) {
+    var e = document.createElementNS(NS, tag);
+    if (attrs) Object.keys(attrs).forEach(function(k) { e.setAttribute(k, attrs[k]); });
+    if (parent) parent.appendChild(e);
+    return e;
+  }
+  function txt(str, attrs, parent) {
+    var e = el('text', attrs, parent);
+    e.textContent = str;
+    return e;
+  }
+
+  /* ═══════════════════════════════════════════════════════════
+     LAYOUT — positions
+     ═══════════════════════════════════════════════════════════ */
+  var W = 1200, H = 840, cx = W / 2, cy = H / 2;
+  var DEPT_R = 286;
+  var WF_R_MIN = 128;
+  var SPREAD = Math.PI * 0.54;
+
+  var deptPos = {};
+  DEPARTMENTS.forEach(function(d, i) {
+    var angle = (i / DEPARTMENTS.length) * Math.PI * 2 - Math.PI / 2;
+    deptPos[d.id] = { x: cx + Math.cos(angle) * DEPT_R, y: cy + Math.sin(angle) * DEPT_R, angle: angle };
+  });
+
+  var byOwner = {};
+  WORKFLOWS.forEach(function(w) {
+    if (!byOwner[w.owner]) byOwner[w.owner] = [];
+    byOwner[w.owner].push(w);
+  });
+
+  var wfPos = {};
+  Object.keys(byOwner).forEach(function(ownerId) {
+    var list = byOwner[ownerId];
+    var dp = deptPos[ownerId];
+    if (!dp) return;
+    var count = list.length;
+    list.forEach(function(w, i) {
+      var t = count === 1 ? 0.5 : i / (count - 1);
+      var a = dp.angle - SPREAD / 2 + SPREAD * t;
+      var r = WF_R_MIN + (i % 3) * 26 + (count > 12 ? 16 : 0);
+      wfPos[w.n] = { x: dp.x + Math.cos(a) * r, y: dp.y + Math.sin(a) * r };
+    });
+  });
+
+  /* crossFunctional = touches 4+ other departments */
+  WORKFLOWS.forEach(function(w) { w.cf = w.touches.length >= 4; });
+
+  /* ═══════════════════════════════════════════════════════════
+     RENDER SVG
+     ═══════════════════════════════════════════════════════════ */
+  var svg = document.getElementById('ros-web-svg');
+
+  /* defs */
+  var defs = el('defs', null, svg);
+
+  var rg1 = el('radialGradient', { id: 'ros-glow-center', cx: '50%', cy: '50%', r: '50%' }, defs);
+  el('stop', { offset: '0%',   'stop-color': '#E8634A', 'stop-opacity': '0.15' }, rg1);
+  el('stop', { offset: '60%',  'stop-color': '#E8634A', 'stop-opacity': '0.04' }, rg1);
+  el('stop', { offset: '100%', 'stop-color': '#E8634A', 'stop-opacity': '0'    }, rg1);
+
+  var rg2 = el('radialGradient', { id: 'ros-glow-hub', cx: '50%', cy: '50%', r: '50%' }, defs);
+  el('stop', { offset: '0%',   'stop-color': '#E8634A', 'stop-opacity': '0.3' }, rg2);
+  el('stop', { offset: '100%', 'stop-color': '#E8634A', 'stop-opacity': '0'   }, rg2);
+
+  /* background rings */
+  el('circle', { cx: cx, cy: cy, r: 260, fill: 'url(#ros-glow-center)' }, svg);
+  el('circle', { cx: cx, cy: cy, r: DEPT_R,       fill: 'none', stroke: 'rgba(232,99,74,0.10)', 'stroke-width': '1', 'stroke-dasharray': '2 6' }, svg);
+  el('circle', { cx: cx, cy: cy, r: DEPT_R - 80,  fill: 'none', stroke: 'rgba(255,255,255,0.04)', 'stroke-width': '1' }, svg);
+  el('circle', { cx: cx, cy: cy, r: DEPT_R + 128, fill: 'none', stroke: 'rgba(255,255,255,0.04)', 'stroke-width': '1', 'stroke-dasharray': '1 5' }, svg);
+
+  /* center core */
+  var core = el('g', { transform: 'translate(' + cx + ',' + cy + ')' }, svg);
+  el('circle', { r: 56, fill: '#26242F', stroke: 'rgba(232,99,74,0.55)', 'stroke-width': '1.5' }, core);
+  txt('REVENUE', { 'text-anchor': 'middle', dy: '-7', fill: '#E8634A', 'font-family': '"IBM Plex Mono",monospace', 'font-size': '8', 'letter-spacing': '0.18em' }, core);
+  txt('rOS', { 'text-anchor': 'middle', dy: '8', fill: '#fff', 'font-family': '"RocWideMedium",sans-serif', 'font-size': '15', 'letter-spacing': '-0.01em' }, core);
+  txt('CORE', { 'text-anchor': 'middle', dy: '22', fill: 'rgba(255,255,255,0.4)', 'font-family': '"IBM Plex Mono",monospace', 'font-size': '7', 'letter-spacing': '0.18em' }, core);
+
+  /* spoke lines */
+  var spokeG = el('g', null, svg);
+  DEPARTMENTS.forEach(function(d) {
+    var p = deptPos[d.id];
+    el('line', { x1: cx, y1: cy, x2: p.x, y2: p.y, stroke: 'rgba(255,255,255,0.045)', 'stroke-width': '1' }, spokeG);
+  });
+
+  /* connection lines group — drawn before nodes */
+  var linesG = el('g', { id: 'ros-lines-g' }, svg);
+  WORKFLOWS.forEach(function(w) {
+    var wp = wfPos[w.n];
+    if (!wp) return;
+    w.touches.forEach(function(tId) {
+      var dp = deptPos[tId];
+      if (!dp) return;
+      var lineEl = el('line', {
+        x1: wp.x, y1: wp.y, x2: dp.x, y2: dp.y,
+        stroke: 'rgba(232,99,74,0.16)',
+        'stroke-width': '0.6',
+        'data-owner': w.owner,
+        'data-touches': w.touches.join(',')
+      }, linesG);
+    });
+  });
+
+  /* workflow nodes */
+  var nodesG = el('g', { id: 'ros-nodes-g' }, svg);
+  WORKFLOWS.forEach(function(w) {
+    var p = wfPos[w.n];
+    if (!p) return;
+    var fill = w.cf ? '#FAFAF9' : '#E8634A';
+    var stroke = w.cf ? 'rgba(232,99,74,0.55)' : '#F0745C';
+    var r = w.cf ? 5 : 4.5;
+    el('circle', {
+      cx: p.x, cy: p.y, r: r, fill: fill, stroke: stroke, 'stroke-width': '1',
+      'data-owner': w.owner,
+      'data-touches': w.touches.join(',')
+    }, nodesG);
+  });
+
+  /* department hubs */
+  var deptG = el('g', { id: 'ros-depts-g' }, svg);
+  DEPARTMENTS.forEach(function(d) {
+    var p = deptPos[d.id];
+    var g = el('g', { transform: 'translate(' + p.x + ',' + p.y + ')', class: 'ros-dept-hub', 'data-dept': d.id }, deptG);
+    el('circle', { r: 44, fill: 'url(#ros-glow-hub)' }, g);
+    el('circle', { r: 28, fill: '#26242F', stroke: 'rgba(232,99,74,0.7)', 'stroke-width': '1.5', class: 'ros-hub-ring' }, g);
+    txt(d.short, { 'text-anchor': 'middle', dy: '4', fill: '#fff', 'font-family': '"RocWideMedium",sans-serif', 'font-size': '10', 'letter-spacing': '-0.01em' }, g);
+    txt(d.label.toUpperCase(), { 'text-anchor': 'middle', dy: '52', fill: 'rgba(255,255,255,0.45)', 'font-family': '"IBM Plex Mono",monospace', 'font-size': '7.5', 'letter-spacing': '0.16em' }, g);
+  });
+
+  /* ═══════════════════════════════════════════════════════════
+     HOVER — isolate dept web
+     ═══════════════════════════════════════════════════════════ */
+  var allLines = linesG.querySelectorAll('line');
+  var allNodes = nodesG.querySelectorAll('circle');
+  var allHubs  = deptG.querySelectorAll('.ros-dept-hub');
+
+  function resetWeb() {
+    allLines.forEach(function(l) {
+      l.setAttribute('stroke', 'rgba(232,99,74,0.16)');
+      l.setAttribute('stroke-width', '0.6');
+      l.setAttribute('opacity', '1');
+    });
+    allNodes.forEach(function(n) { n.setAttribute('opacity', '1'); });
+    allHubs.forEach(function(h) {
+      h.querySelector('.ros-hub-ring').setAttribute('stroke', 'rgba(232,99,74,0.7)');
+      h.querySelector('.ros-hub-ring').setAttribute('stroke-width', '1.5');
+    });
+  }
+
+  function highlightDept(deptId) {
+    allLines.forEach(function(l) {
+      var owner = l.getAttribute('data-owner');
+      var touches = l.getAttribute('data-touches').split(',');
+      var active = owner === deptId || touches.indexOf(deptId) !== -1;
+      l.setAttribute('stroke', active ? 'rgba(232,99,74,0.55)' : 'rgba(232,99,74,0.03)');
+      l.setAttribute('stroke-width', active ? '1.1' : '0.4');
+      l.setAttribute('opacity', active ? '1' : '0.3');
+    });
+    allNodes.forEach(function(n) {
+      var owner = n.getAttribute('data-owner');
+      var touches = n.getAttribute('data-touches').split(',');
+      var active = owner === deptId || touches.indexOf(deptId) !== -1;
+      n.setAttribute('opacity', active ? '1' : '0.15');
+    });
+    allHubs.forEach(function(h) {
+      var ring = h.querySelector('.ros-hub-ring');
+      if (h.getAttribute('data-dept') === deptId) {
+        ring.setAttribute('stroke', '#E8634A');
+        ring.setAttribute('stroke-width', '2.5');
+      } else {
+        ring.setAttribute('stroke', 'rgba(232,99,74,0.25)');
+        ring.setAttribute('stroke-width', '1');
+      }
+    });
+  }
+
+  allHubs.forEach(function(h) {
+    h.addEventListener('mouseenter', function() { highlightDept(h.getAttribute('data-dept')); });
+    h.addEventListener('mouseleave', resetWeb);
+  });
+
+})();
+</script>
+
+</body>
+</html>
