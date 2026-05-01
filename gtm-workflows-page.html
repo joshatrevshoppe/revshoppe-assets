@@ -1,8 +1,8 @@
 <style>
 :root{--bg-light:#FAFAF9;--bg-dark:#26242F;--bg-charcoal:#2C2A27;--accent:#E8634A;--accent-hover:#F0745C;--headline:#111111;--body:#8F95A0;--border-light:rgba(0,0,0,0.07);--border-dark:rgba(255,255,255,0.07);}
 .wf-tex-dark{background-color:var(--bg-dark);background-image:linear-gradient(rgba(255,255,255,0.034) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.034) 1px,transparent 1px);background-size:40px 40px;}
+.wf-tex-deeper{background-color:#16141E;background-image:linear-gradient(rgba(255,255,255,0.028) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.028) 1px,transparent 1px);background-size:40px 40px;}
 .wf-tex-light{background-color:var(--bg-light);background-image:linear-gradient(rgba(0,0,0,0.027) 1px,transparent 1px),linear-gradient(90deg,rgba(0,0,0,0.027) 1px,transparent 1px);background-size:56px 56px;}
-.wf-tex-charcoal{background-color:var(--bg-charcoal);background-image:linear-gradient(rgba(255,255,255,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.025) 1px,transparent 1px);background-size:48px 48px;}
 .wf-sec{padding:88px 48px;}.wf-inner{max-width:1200px;margin:0 auto;}
 .wf-eyebrow{display:block;font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);margin-bottom:24px;}
 .wf-h2{font-family:"RocWideMedium",sans-serif;font-size:clamp(28px,4vw,48px);line-height:1.08;letter-spacing:-1.5px;color:var(--headline);margin-bottom:14px;}
@@ -18,8 +18,7 @@
 /* HERO */
 .wf-hero{padding:96px 48px 80px;text-align:center;}
 .wf-hero h1{font-family:"RocWideMedium",sans-serif;font-size:clamp(36px,4.8vw,64px);line-height:1.06;letter-spacing:-2px;color:#fff;max-width:820px;margin:0 auto 24px;}
-.wf-hero-lead{font-family:"Montserrat",sans-serif;font-size:17px;color:rgba(255,255,255,0.5);line-height:1.75;max-width:580px;margin:0 auto 14px;letter-spacing:-0.3px;}
-.wf-hero-diag{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(232,99,74,0.65);display:block;margin-bottom:36px;}
+.wf-hero-lead{font-family:"Montserrat",sans-serif;font-size:17px;color:rgba(255,255,255,0.5);line-height:1.75;max-width:580px;margin:0 auto 36px;letter-spacing:-0.3px;}
 .wf-hero-ctas{display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;}
 
 /* CML MARQUEE — inherits rs_css .cml-outer styles */
@@ -34,95 +33,100 @@
 .cml-item{display:inline-flex;align-items:center;justify-content:center;height:52px;padding:0 36px;border-right:0.5px solid rgba(0,0,0,0.07);flex-shrink:0;}
 .cml-item img{height:20px!important;width:auto!important;max-height:20px!important;max-width:120px!important;object-fit:contain!important;filter:grayscale(1);opacity:0.45;display:block!important;}
 
-/* FUNNEL VIZ */
-.wf-funnel-wrap{display:grid;grid-template-columns:320px 1fr;gap:56px;margin-top:56px;align-items:start;}
-.wf-funnel-svg-wrap{position:sticky;top:24px;}
-.wf-funnel-svg-wrap svg{width:100%;display:block;}
-.wf-stage-nav{margin-top:16px;display:flex;flex-direction:column;gap:4px;}
-.wf-snav-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:8px;cursor:pointer;border:1px solid transparent;transition:all 0.15s;}
-.wf-snav-item:hover{background:rgba(255,255,255,0.04);}
-.wf-snav-item.active{background:rgba(255,255,255,0.06);border-color:rgba(255,255,255,0.08);}
-.wf-snav-pip{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
-.wf-snav-item.active .wf-snav-pip{box-shadow:0 0 0 3px rgba(255,255,255,0.12);}
-.wf-snav-label{font-family:"Montserrat",sans-serif;font-size:13px;font-weight:500;color:rgba(255,255,255,0.4);flex:1;transition:color 0.15s;}
-.wf-snav-item.active .wf-snav-label,.wf-snav-item:hover .wf-snav-label{color:rgba(255,255,255,0.85);}
-.wf-snav-count{font-family:"IBM Plex Mono",monospace;font-size:9px;letter-spacing:0.08em;color:rgba(255,255,255,0.2);}
-.wf-snav-item.active .wf-snav-count{color:rgba(255,255,255,0.4);}
-
-/* WORKFLOW PANELS */
-.wf-panel{display:none;}
-.wf-panel.active{display:block;}
-.wf-panel-hdr{margin-bottom:28px;padding-bottom:20px;border-bottom:1px solid rgba(255,255,255,0.07);}
-.wf-panel-stage{font-family:"RocWideMedium",sans-serif;font-size:26px;letter-spacing:-0.8px;margin-bottom:8px;}
-.wf-panel-desc{font-family:"Montserrat",sans-serif;font-size:14px;color:rgba(255,255,255,0.35);line-height:1.65;max-width:520px;}
-.wf-tier-grp{margin-bottom:24px;}
-.wf-tier-lbl{font-family:"IBM Plex Mono",monospace;font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.2);margin-bottom:10px;display:block;}
-.wf-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;}
-.wf-card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:8px;padding:16px 18px;transition:background 0.15s,border-color 0.15s;}
-.wf-card:hover{background:rgba(255,255,255,0.055);}
-.wf-card-code{font-family:"IBM Plex Mono",monospace;font-size:9px;letter-spacing:0.08em;color:rgba(255,255,255,0.16);margin-bottom:7px;display:block;}
-.wf-card-name{font-family:"Montserrat",sans-serif;font-size:13px;font-weight:500;color:rgba(255,255,255,0.78);line-height:1.4;}
-
-/* PILLARS — dark stacked cards */
-.wf-pillars-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:40px;margin-top:56px;}
-.wf-pillar-stack{position:relative;transition:transform 0.3s ease;}
-.wf-pillar-stack:hover{transform:translateY(-5px) translateX(-2px);}
-.wf-pillar-stack::before{content:'';position:absolute;inset:0;border-radius:12px;border:1px solid rgba(255,255,255,0.03);background:#17151F;transform:translate(14px,18px);}
-.wf-pillar-stack::after{content:'';position:absolute;inset:0;border-radius:12px;border:1px solid rgba(255,255,255,0.05);background:#201E2B;transform:translate(7px,9px);}
-.wf-pillar-card{padding:36px 28px;background-color:#2A2838;background-image:linear-gradient(rgba(255,255,255,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.025) 1px,transparent 1px);background-size:32px 32px;border:1px solid rgba(255,255,255,0.1);border-radius:12px;position:relative;z-index:1;box-shadow:0 1px 2px rgba(0,0,0,0.3),0 4px 8px rgba(0,0,0,0.25);transition:box-shadow 0.3s ease;}
-.wf-pillar-stack:hover .wf-pillar-card{box-shadow:0 4px 8px rgba(0,0,0,0.3),0 20px 48px rgba(0,0,0,0.4),0 0 0 1px rgba(232,99,74,0.18);}
-.wf-pillar-num{font-family:"IBM Plex Mono",monospace;font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent);margin-bottom:16px;display:block;}
-.wf-pillar-name{font-family:"RocWideMedium",sans-serif;font-size:20px;letter-spacing:-0.5px;color:#fff;margin-bottom:14px;}
-.wf-pillar-desc{font-family:"Montserrat",sans-serif;font-size:13px;color:rgba(255,255,255,0.38);line-height:1.7;margin-bottom:24px;}
-.wf-pillar-examples{border-top:1px solid rgba(255,255,255,0.06);padding-top:16px;display:flex;flex-direction:column;gap:6px;}
-.wf-pillar-ex{font-family:"IBM Plex Mono",monospace;font-size:9px;letter-spacing:0.06em;color:rgba(255,255,255,0.25);line-height:1.5;}
-
 /* EXECUTION GAP */
-.wf-gap-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;margin-top:56px;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,0.08);box-shadow:0 8px 32px rgba(0,0,0,0.4);}
+.wf-gap-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;margin-top:56px;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,0.1);box-shadow:0 12px 48px rgba(0,0,0,0.6);}
 .wf-gap-col{display:flex;flex-direction:column;}
-.wf-gap-hdr{padding:20px 32px;border-bottom:1px solid rgba(255,255,255,0.06);}
-.wf-gap-before .wf-gap-hdr{background:rgba(0,0,0,0.2);}
-.wf-gap-after .wf-gap-hdr{background:rgba(232,99,74,0.1);border-left:1px solid rgba(255,255,255,0.06);}
+.wf-gap-hdr{padding:20px 32px;border-bottom:1px solid rgba(255,255,255,0.07);}
+.wf-gap-before .wf-gap-hdr{background:#1E1B2B;}
+.wf-gap-after .wf-gap-hdr{background:#271D29;border-left:1px solid rgba(255,255,255,0.07);}
 .wf-gap-hdr-label{font-family:"IBM Plex Mono",monospace;font-size:9px;letter-spacing:0.14em;text-transform:uppercase;}
-.wf-gap-before .wf-gap-hdr-label{color:rgba(255,255,255,0.25);}
+.wf-gap-before .wf-gap-hdr-label{color:rgba(255,255,255,0.3);}
 .wf-gap-after .wf-gap-hdr-label{color:var(--accent);}
-.wf-gap-row{display:flex;align-items:flex-start;gap:14px;padding:24px 32px;border-bottom:1px solid rgba(255,255,255,0.04);flex:1;}
+.wf-gap-row{display:flex;align-items:flex-start;gap:14px;padding:24px 32px;border-bottom:1px solid rgba(255,255,255,0.05);flex:1;}
 .wf-gap-row:last-child{border-bottom:none;}
-.wf-gap-before .wf-gap-row{background:rgba(0,0,0,0.12);}
-.wf-gap-after .wf-gap-row{background:rgba(232,99,74,0.04);border-left:1px solid rgba(255,255,255,0.04);}
+.wf-gap-before .wf-gap-row{background:#221F30;}
+.wf-gap-after .wf-gap-row{background:#28202E;border-left:1px solid rgba(232,99,74,0.12);}
 .wf-gap-icon{font-family:"IBM Plex Mono",monospace;font-size:13px;flex-shrink:0;margin-top:1px;line-height:1;}
-.wf-gap-before .wf-gap-icon{color:rgba(255,255,255,0.15);}
+.wf-gap-before .wf-gap-icon{color:rgba(255,255,255,0.2);}
 .wf-gap-after .wf-gap-icon{color:var(--accent);}
 .wf-gap-text{font-family:"Montserrat",sans-serif;font-size:14px;line-height:1.6;letter-spacing:-0.2px;}
-.wf-gap-before .wf-gap-text{color:rgba(255,255,255,0.32);font-style:italic;}
-.wf-gap-after .wf-gap-text{color:rgba(255,255,255,0.88);font-weight:500;}
+.wf-gap-before .wf-gap-text{color:rgba(255,255,255,0.38);font-style:italic;}
+.wf-gap-after .wf-gap-text{color:rgba(255,255,255,0.9);font-weight:500;}
 
 /* OUTCOMES — dark elevated cards */
 .wf-outcomes-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:48px;}
-.wf-outcome-card{background:var(--bg-dark);border:1px solid rgba(255,255,255,0.07);border-left:3px solid var(--accent);border-radius:10px;padding:28px 24px;transition:transform 0.25s ease,box-shadow 0.25s ease;box-shadow:0 2px 4px rgba(0,0,0,0.3),0 8px 24px rgba(0,0,0,0.25),inset 0 1px 0 rgba(255,255,255,0.04);}
+.wf-outcome-card{background:#2C293A;border:1px solid rgba(255,255,255,0.09);border-left:3px solid var(--accent);border-radius:10px;padding:28px 24px;transition:transform 0.25s ease,box-shadow 0.25s ease;box-shadow:0 4px 8px rgba(0,0,0,0.4),0 16px 40px rgba(0,0,0,0.35),inset 0 1px 0 rgba(255,255,255,0.06);}
 .wf-outcome-card:hover{transform:translateY(-4px);box-shadow:0 4px 8px rgba(0,0,0,0.35),0 20px 48px rgba(0,0,0,0.35),0 0 0 1px rgba(232,99,74,0.15),inset 0 1px 0 rgba(255,255,255,0.06);}
 .wf-outcome-stat{font-family:"RocWideMedium",sans-serif;font-size:48px;color:var(--accent);letter-spacing:-2px;line-height:1;margin-bottom:8px;}
 .wf-outcome-what{font-family:"Montserrat",sans-serif;font-size:13px;font-weight:500;color:rgba(255,255,255,0.75);line-height:1.5;margin-bottom:8px;}
 .wf-outcome-ctx{font-family:"Montserrat",sans-serif;font-size:11.5px;color:rgba(255,255,255,0.3);line-height:1.55;margin-bottom:12px;}
 .wf-outcome-tag{font-family:"IBM Plex Mono",monospace;font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.18);}
-
-/* BRIDGE */
-.wf-bridge-inner{max-width:760px;margin:0 auto;text-align:center;}
-.wf-bridge-div{display:flex;align-items:center;gap:24px;margin:44px auto;}
-.wf-bridge-line{flex:1;height:1px;background:rgba(255,255,255,0.07);}
-.wf-bridge-mid{font-family:"IBM Plex Mono",monospace;font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.18);white-space:nowrap;}
-.wf-bridge-tag{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(232,99,74,0.6);border:1px solid rgba(232,99,74,0.2);border-radius:2px;padding:4px 10px;margin-bottom:20px;}
-.wf-bridge-h2{font-family:"RocWideMedium",sans-serif;font-size:clamp(28px,4vw,48px);line-height:1.08;letter-spacing:-1.5px;color:#fff;margin-bottom:20px;}
-.wf-bridge-body{font-family:"Montserrat",sans-serif;font-size:15px;color:rgba(255,255,255,0.42);line-height:1.8;max-width:600px;margin:0 auto 36px;}
+.wf-outcomes-more{display:block;margin-top:32px;font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);text-decoration:none;}
+.wf-outcomes-more:hover{color:var(--accent-hover);}
 
 /* CTA */
 .wf-cta-sec{padding:88px 48px;background:var(--accent);text-align:center;}
 .wf-cta-h2{font-family:"RocWideMedium",sans-serif;font-size:clamp(28px,4vw,48px);line-height:1.08;letter-spacing:-1.5px;color:#fff;margin-bottom:16px;}
 .wf-cta-body{font-family:"Montserrat",sans-serif;font-size:16px;color:rgba(255,255,255,0.8);line-height:1.7;max-width:520px;margin:0 auto 36px;}
-.wf-cta-sub{display:block;margin-top:16px;font-family:"IBM Plex Mono",monospace;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.45);}
 
-@media(max-width:1024px){.wf-funnel-wrap{grid-template-columns:1fr;}.wf-pillars-grid{grid-template-columns:repeat(2,1fr);}.wf-outcomes-grid{grid-template-columns:repeat(2,1fr);}}
-@media(max-width:768px){.wf-sec{padding:64px 24px;}.wf-hero{padding:64px 24px 56px;}.wf-gap-grid{grid-template-columns:1fr;}.wf-pillars-grid{grid-template-columns:1fr;}.wf-outcomes-grid{grid-template-columns:1fr;}.wf-grid{grid-template-columns:1fr;}}
+/* HERO CENTERING FIX */
+.wf-hero .wf-inner{text-align:center;}
+
+/* STAT STRIP */
+.wf-stat-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;max-width:1240px;margin:0 auto 56px;}
+.wf-stat-card{border:1px solid rgba(255,255,255,0.09);background:#2C293A;padding:28px 24px;border-radius:10px;box-shadow:0 4px 8px rgba(0,0,0,0.4),0 16px 40px rgba(0,0,0,0.3),inset 0 1px 0 rgba(255,255,255,0.05);}
+.wf-stat-num{font-family:"RocWideMedium",sans-serif;font-size:56px;color:var(--accent);letter-spacing:-0.02em;line-height:1;}
+.wf-stat-lbl{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-top:14px;display:block;}
+.wf-stat-desc{color:rgba(255,255,255,0.65);font-family:"Montserrat",sans-serif;font-size:14px;line-height:1.55;margin-top:8px;}
+
+/* DEPT BAR */
+.wf-dept-bar-wrap{border:1px solid rgba(255,255,255,0.09);border-radius:10px;padding:28px 32px;background:#2C293A;max-width:1240px;margin:0 auto 56px;box-shadow:0 4px 8px rgba(0,0,0,0.4),0 16px 40px rgba(0,0,0,0.3),inset 0 1px 0 rgba(255,255,255,0.05);}
+.wf-dept-bar-title{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-bottom:18px;}
+.wf-dept-bar-rows{display:flex;flex-direction:column;gap:10px;}
+.wf-dept-row{display:grid;grid-template-columns:160px 1fr 100px;gap:16px;align-items:center;}
+.wf-dept-row-name{font-family:"RocWideMedium",sans-serif;font-size:14px;letter-spacing:-0.01em;color:#fff;}
+.wf-dept-row-track{height:8px;background:rgba(255,255,255,0.05);position:relative;border-radius:1px;}
+.wf-dept-fill-owned,.wf-dept-fill-touched{position:absolute;top:0;bottom:0;left:0;}
+.wf-dept-fill-owned{background:var(--accent);}
+.wf-dept-fill-touched{background:rgba(232,99,74,0.25);}
+.wf-dept-row-count{font-family:"IBM Plex Mono",monospace;font-size:11px;text-align:right;color:rgba(255,255,255,0.7);}
+.wf-dept-row-count b{color:var(--accent);font-weight:500;}
+
+/* CATALOG */
+.wf-catalog{border:1px solid rgba(255,255,255,0.09);border-radius:10px;overflow:hidden;max-width:1240px;margin:0 auto 56px;box-shadow:0 4px 8px rgba(0,0,0,0.4),0 16px 40px rgba(0,0,0,0.3);}
+.wf-catalog summary{padding:22px 28px;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;background:#2C293A;font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.7);}
+.wf-catalog summary::-webkit-details-marker{display:none;}
+.wf-catalog[open] summary{border-bottom:1px solid rgba(255,255,255,0.06);}
+.wf-catalog-body{display:grid;grid-template-columns:repeat(2,1fr);padding:24px;gap:28px;background:#1F1D27;}
+.wf-catalog-dept{font-family:"RocWideMedium",sans-serif;font-size:14px;color:var(--accent);margin-bottom:12px;letter-spacing:-0.005em;}
+.wf-catalog-count{font-family:"IBM Plex Mono",monospace;font-size:10px;color:rgba(255,255,255,0.45);margin-left:8px;}
+.wf-catalog-body ul{list-style:none;padding:0;margin:0;}
+.wf-catalog-body li{padding:7px 0;font-family:"Montserrat",sans-serif;font-size:13px;color:rgba(255,255,255,0.78);border-bottom:1px solid rgba(255,255,255,0.04);display:flex;align-items:baseline;gap:10px;}
+.wf-catalog-num{font-family:"IBM Plex Mono",monospace;font-size:10px;color:rgba(255,255,255,0.4);min-width:28px;flex-shrink:0;}
+
+/* FEDERATED STAGE */
+.wf-fed-stage{border:1px solid rgba(255,255,255,0.08);background:radial-gradient(ellipse 80% 60% at 50% 50%,rgba(232,99,74,0.04) 0%,transparent 70%) #1F1D27;border-radius:10px;overflow:hidden;max-width:1240px;margin:0 auto 56px;}
+.wf-fed-stage-head{display:flex;justify-content:space-between;align-items:center;padding:18px 24px;border-bottom:1px solid rgba(255,255,255,0.06);font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.55);}
+.wf-fed-meta{display:flex;gap:24px;}
+.wf-fed-meta span b{color:#fff;font-weight:500;margin-left:6px;}
+.wf-fed-svg-wrap{width:100%;padding:12px;}
+.wf-fed-legend{display:flex;gap:32px;padding:16px 24px;border-top:1px solid rgba(255,255,255,0.06);font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.55);flex-wrap:wrap;}
+.wf-fed-legend-item{display:flex;align-items:center;gap:8px;}
+.wf-fed-hub-dot{width:12px;height:12px;border-radius:50%;background:#26242F;border:1.5px solid rgba(232,99,74,0.7);display:inline-block;}
+.wf-fed-wf-dot{width:10px;height:10px;border-radius:50%;display:inline-block;}
+.wf-fed-wf-dot.cf{background:#FAFAF9;border:1px solid rgba(232,99,74,0.6);}
+.wf-fed-wf-dot.std{background:var(--accent);border:1px solid var(--accent);}
+.wf-fed-conn-line{width:22px;height:1px;background:rgba(232,99,74,0.45);display:inline-block;}
+
+@media(max-width:1024px){.wf-outcomes-grid{grid-template-columns:repeat(2,1fr);}
+  .wf-stat-strip{grid-template-columns:repeat(2,1fr);}
+  .wf-dept-row{grid-template-columns:120px 1fr 80px;}
+}
+@media(max-width:768px){.wf-sec{padding:64px 24px;}.wf-hero{padding:64px 24px 56px;}.wf-gap-grid{grid-template-columns:1fr;}.wf-outcomes-grid{grid-template-columns:1fr;}
+  .wf-catalog-body{grid-template-columns:1fr;}
+  .wf-fed-stage-head{flex-direction:column;gap:12px;align-items:flex-start;}
+  .wf-fed-meta{flex-wrap:wrap;gap:12px;}
+}
 </style>
 
 <!-- HERO -->
@@ -131,9 +135,8 @@
     <span class="wf-eyebrow">Solutions · GTM Workflows</span>
     <h1>Every revenue outcome has a workflow behind it.</h1>
     <p class="wf-hero-lead">Most GTM teams aren't underperforming — they're under-engineered. The motion exists. The tools exist. The workflow infrastructure connecting them doesn't. We build it across every stage of your commercial system.</p>
-    <span class="wf-hero-diag">Arriving from a GTM Diagnosis? Your findings map directly to the workflows below.</span>
     <div class="wf-hero-ctas">
-      <a href="#wf-workflows" class="wf-btn-p">Explore the Workflows →</a>
+      <a href="#wf-catalog" class="wf-btn-p">Browse the Catalog →</a>
       <a href="#wf-outcomes" class="wf-btn-o">See Client Outcomes</a>
     </div>
   </div>
@@ -146,134 +149,74 @@
   <div class="cml-track cml-track-3"><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b23bd07a2cd1361608e_siemens-healthineers.svg" alt="siemens-healthineers" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b234c93321897e2d0ab_vimeo.svg" alt="vimeo" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b21c9ea575cf8972334_algolia.svg" alt="algolia" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b22b08fb596257a39f5_keysight-technologies.svg" alt="keysight-technologies" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b23660d926355cb2205_patientpop.svg" alt="patientpop" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b2183bcb1f313166a52_bitrise.svg" alt="bitrise" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b23b0657c416737eb2b_okta.svg" alt="okta" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b236d79e1e43ef57671_sailpoint.svg" alt="sailpoint" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b2236fad45c54085611_bmc-software.svg" alt="bmc-software" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b237f56af09776b7906_usertesting.svg" alt="usertesting" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b24ebac5234e51b47df_capital-one.svg" alt="capital-one" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b222e3296bbe565f5a9_datadog.svg" alt="datadog" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b22e6344110a02f8815_dell.svg" alt="dell" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/67deaa39c8f20e3b837fa4aa_DOCUSIGN%20LOGO.svg" alt="docusign" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b3382b137969168571f_sitetracker.svg" alt="sitetracker" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b217832b010e1e29aee_adp.svg" alt="adp" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b22001319ce0c7b5d80_buchanan-technologies.svg" alt="buchanan-technologies" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b238bce5e48779e7662_pinterest.svg" alt="pinterest" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b23bd07a2cd1361608e_siemens-healthineers.svg" alt="siemens-healthineers" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b234c93321897e2d0ab_vimeo.svg" alt="vimeo" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b21c9ea575cf8972334_algolia.svg" alt="algolia" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b22b08fb596257a39f5_keysight-technologies.svg" alt="keysight-technologies" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b23660d926355cb2205_patientpop.svg" alt="patientpop" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b2183bcb1f313166a52_bitrise.svg" alt="bitrise" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b23b0657c416737eb2b_okta.svg" alt="okta" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b236d79e1e43ef57671_sailpoint.svg" alt="sailpoint" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b2236fad45c54085611_bmc-software.svg" alt="bmc-software" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b237f56af09776b7906_usertesting.svg" alt="usertesting" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b24ebac5234e51b47df_capital-one.svg" alt="capital-one" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b222e3296bbe565f5a9_datadog.svg" alt="datadog" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b22e6344110a02f8815_dell.svg" alt="dell" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/67deaa39c8f20e3b837fa4aa_DOCUSIGN%20LOGO.svg" alt="docusign" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b3382b137969168571f_sitetracker.svg" alt="sitetracker" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b217832b010e1e29aee_adp.svg" alt="adp" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b22001319ce0c7b5d80_buchanan-technologies.svg" alt="buchanan-technologies" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div><div class="cml-item"><img src="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/69c85b238bce5e48779e7662_pinterest.svg" alt="pinterest" loading="lazy" style="max-height:100%;max-width:100%;width:auto;object-fit:contain;"/></div></div>
 </div>
 
-<!-- WORKFLOW BROWSER (dark) -->
-<section class="wf-tex-dark wf-sec" id="wf-workflows">
-  <div class="wf-inner">
-    <span class="wf-eyebrow">Full-Funnel Coverage</span>
-    <h2 class="wf-h2 wf-h2-w">Every stage of your commercial system.</h2>
-    <p class="wf-desc wf-desc-d">Select a funnel stage to explore the workflows we build. Click any stage in the funnel or use the navigation below.</p>
-    <div class="wf-funnel-wrap">
-      <div class="wf-funnel-svg-wrap">
-        <svg viewBox="0 0 280 380" xmlns="http://www.w3.org/2000/svg">
-          <defs><filter id="wf-glow"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
-          <!-- Demand Gen -->
-          <g class="wf-funnel-seg" data-stage="demand" onclick="wfStage('demand',this)" style="cursor:pointer;">
-            <path d="M20,20 L260,20 L240,92 L40,92 Z" fill="rgba(232,99,74,0.15)" stroke="#E8634A" stroke-width="1.5" id="wf-seg-demand" style="transition:all 0.3s;"/>
-            <text x="140" y="52" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-family="IBM Plex Mono" font-size="9" letter-spacing="1.5" text-transform="uppercase" id="wf-seg-demand-t1">01 · DEMAND GEN</text>
-            <text x="140" y="68" text-anchor="middle" fill="rgba(255,255,255,0.25)" font-family="Montserrat" font-size="9" id="wf-seg-demand-t2">6 workflows</text>
-          </g>
-          <!-- Pipeline -->
-          <g class="wf-funnel-seg" data-stage="pipeline" onclick="wfStage('pipeline',this)" style="cursor:pointer;">
-            <path d="M40,96 L240,96 L218,168 L62,168 Z" fill="rgba(123,104,200,0.15)" stroke="#7B68C8" stroke-width="1.5" id="wf-seg-pipeline" style="transition:all 0.3s;"/>
-            <text x="140" y="128" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-family="IBM Plex Mono" font-size="9" letter-spacing="1.5" id="wf-seg-pipeline-t1">02 · PIPELINE</text>
-            <text x="140" y="144" text-anchor="middle" fill="rgba(255,255,255,0.25)" font-family="Montserrat" font-size="9" id="wf-seg-pipeline-t2">10 workflows</text>
-          </g>
-          <!-- Close -->
-          <g class="wf-funnel-seg" data-stage="close" onclick="wfStage('close',this)" style="cursor:pointer;">
-            <path d="M62,172 L218,172 L200,244 L80,244 Z" fill="rgba(43,175,130,0.15)" stroke="#2BAF82" stroke-width="1.5" id="wf-seg-close" style="transition:all 0.3s;"/>
-            <text x="140" y="204" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-family="IBM Plex Mono" font-size="9" letter-spacing="1.5" id="wf-seg-close-t1">03 · CLOSE</text>
-            <text x="140" y="220" text-anchor="middle" fill="rgba(255,255,255,0.25)" font-family="Montserrat" font-size="9" id="wf-seg-close-t2">6 workflows</text>
-          </g>
-          <!-- Expand -->
-          <g class="wf-funnel-seg" data-stage="expand" onclick="wfStage('expand',this)" style="cursor:pointer;">
-            <path d="M80,248 L200,248 L182,320 L98,320 Z" fill="rgba(74,143,196,0.15)" stroke="#4A8FC4" stroke-width="1.5" id="wf-seg-expand" style="transition:all 0.3s;"/>
-            <text x="140" y="280" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-family="IBM Plex Mono" font-size="9" letter-spacing="1.5" id="wf-seg-expand-t1">04 · EXPAND</text>
-            <text x="140" y="296" text-anchor="middle" fill="rgba(255,255,255,0.25)" font-family="Montserrat" font-size="9" id="wf-seg-expand-t2">8 workflows</text>
-          </g>
-          <!-- Ops -->
-          <g class="wf-funnel-seg" data-stage="ops" onclick="wfStage('ops',this)" style="cursor:pointer;">
-            <path d="M98,324 L182,324 L165,370 L115,370 Z" fill="rgba(196,154,43,0.15)" stroke="#C49A2B" stroke-width="1.5" id="wf-seg-ops" style="transition:all 0.3s;"/>
-            <text x="140" y="348" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-family="IBM Plex Mono" font-size="9" letter-spacing="1.5" id="wf-seg-ops-t1">05 · OPS</text>
-            <text x="140" y="362" text-anchor="middle" fill="rgba(255,255,255,0.25)" font-family="Montserrat" font-size="9" id="wf-seg-ops-t2">9 workflows</text>
-          </g>
-        </svg>
-        <div class="wf-stage-nav">
-          <div class="wf-snav-item active" data-stage="demand" onclick="wfStage('demand',this)"><div class="wf-snav-pip" style="background:#E8634A;"></div><span class="wf-snav-label">Demand Gen</span><span class="wf-snav-count">6</span></div>
-          <div class="wf-snav-item" data-stage="pipeline" onclick="wfStage('pipeline',this)"><div class="wf-snav-pip" style="background:#7B68C8;"></div><span class="wf-snav-label">Pipeline</span><span class="wf-snav-count">10</span></div>
-          <div class="wf-snav-item" data-stage="close" onclick="wfStage('close',this)"><div class="wf-snav-pip" style="background:#2BAF82;"></div><span class="wf-snav-label">Close</span><span class="wf-snav-count">6</span></div>
-          <div class="wf-snav-item" data-stage="expand" onclick="wfStage('expand',this)"><div class="wf-snav-pip" style="background:#4A8FC4;"></div><span class="wf-snav-label">Expand</span><span class="wf-snav-count">8</span></div>
-          <div class="wf-snav-item" data-stage="ops" onclick="wfStage('ops',this)"><div class="wf-snav-pip" style="background:#C49A2B;"></div><span class="wf-snav-label">Ops Foundation</span><span class="wf-snav-count">9</span></div>
-        </div>
-      </div>
-      <div id="wf-panels">
-        <!-- DEMAND -->
-        <div class="wf-panel active" id="wf-panel-demand">
-          <div class="wf-panel-hdr"><div class="wf-panel-stage" style="color:#E8634A;">Demand Gen</div><p class="wf-panel-desc">Generate awareness, capture demand, and build a pipeline the rest of the funnel can work with.</p></div>
-          <div class="wf-tier-grp"><span class="wf-tier-lbl">Quick Win</span><div class="wf-grid"><div class="wf-card"><span class="wf-card-code">DG-QW-001</span><div class="wf-card-name">Inbound Lead Routing, Scoring + Prioritization</div></div><div class="wf-card"><span class="wf-card-code">DG-QW-002</span><div class="wf-card-name">Event Pre-Registration Workflow</div></div><div class="wf-card"><span class="wf-card-code">DG-QW-003</span><div class="wf-card-name">Post-Event Follow-Up</div></div></div></div>
-          <div class="wf-tier-grp"><span class="wf-tier-lbl">Core</span><div class="wf-grid"><div class="wf-card"><span class="wf-card-code">DG-CO-001</span><div class="wf-card-name">ABM Campaign Execution</div></div></div></div>
-          <div class="wf-tier-grp"><span class="wf-tier-lbl">Enterprise</span><div class="wf-grid"><div class="wf-card"><span class="wf-card-code">DG-EN-001</span><div class="wf-card-name">TAM + ICP Sourcing</div></div><div class="wf-card"><span class="wf-card-code">DG-EN-003</span><div class="wf-card-name">Full-Funnel Attribution Build + Monitoring</div></div></div></div>
-        </div>
-        <!-- PIPELINE -->
-        <div class="wf-panel" id="wf-panel-pipeline">
-          <div class="wf-panel-hdr"><div class="wf-panel-stage" style="color:#7B68C8;">Pipeline</div><p class="wf-panel-desc">Convert interest into qualified opportunities. Reps show up prepared — with the right context and the right message.</p></div>
-          <div class="wf-tier-grp"><span class="wf-tier-lbl">Quick Win</span><div class="wf-grid"><div class="wf-card"><span class="wf-card-code">PL-QW-001</span><div class="wf-card-name">Catalist-Based Prospecting</div></div><div class="wf-card"><span class="wf-card-code">PL-QW-002</span><div class="wf-card-name">Multi-Channel Outbound Sequencing</div></div><div class="wf-card"><span class="wf-card-code">PL-QW-003</span><div class="wf-card-name">Meeting Scheduling + Prep</div></div><div class="wf-card"><span class="wf-card-code">PL-QW-004</span><div class="wf-card-name">Data Enrichment + Validation</div></div></div></div>
-          <div class="wf-tier-grp"><span class="wf-tier-lbl">Core</span><div class="wf-grid"><div class="wf-card"><span class="wf-card-code">PL-CO-001</span><div class="wf-card-name">Pre-Meeting Deck Build</div></div><div class="wf-card"><span class="wf-card-code">PL-CO-002</span><div class="wf-card-name">Competitive Battlecard Build</div></div><div class="wf-card"><span class="wf-card-code">PL-CO-003</span><div class="wf-card-name">Call Grading + Coaching Rhythm</div></div><div class="wf-card"><span class="wf-card-code">PL-CO-004</span><div class="wf-card-name">Internal Knowledge Base Search</div></div></div></div>
-          <div class="wf-tier-grp"><span class="wf-tier-lbl">Enterprise</span><div class="wf-grid"><div class="wf-card"><span class="wf-card-code">PL-EN-001</span><div class="wf-card-name">Conversation Catalist Detection</div></div><div class="wf-card"><span class="wf-card-code">PL-EN-003</span><div class="wf-card-name">Multi-Product Cross-Sell</div></div></div></div>
-        </div>
-        <!-- CLOSE -->
-        <div class="wf-panel" id="wf-panel-close">
-          <div class="wf-panel-hdr"><div class="wf-panel-stage" style="color:#2BAF82;">Close</div><p class="wf-panel-desc">Accelerate deal velocity, flag risk before it becomes loss, and build the governance structure that makes forecasts reliable.</p></div>
-          <div class="wf-tier-grp"><span class="wf-tier-lbl">Quick Win</span><div class="wf-grid"><div class="wf-card"><span class="wf-card-code">CL-QW-001</span><div class="wf-card-name">Deal Desk Automation</div></div><div class="wf-card"><span class="wf-card-code">CL-QW-002</span><div class="wf-card-name">Proposal + SOW Generation</div></div></div></div>
-          <div class="wf-tier-grp"><span class="wf-tier-lbl">Core</span><div class="wf-grid"><div class="wf-card"><span class="wf-card-code">CL-CO-001</span><div class="wf-card-name">Pipeline Forecast Modeling</div></div><div class="wf-card"><span class="wf-card-code">CL-CO-002</span><div class="wf-card-name">Deal Risk Scoring + Alerts</div></div><div class="wf-card"><span class="wf-card-code">CL-CO-003</span><div class="wf-card-name">Mutual Close Plan Tracking</div></div><div class="wf-card"><span class="wf-card-code">CL-CO-004</span><div class="wf-card-name">Win/Loss Analysis</div></div></div></div>
-        </div>
-        <!-- EXPAND -->
-        <div class="wf-panel" id="wf-panel-expand">
-          <div class="wf-panel-hdr"><div class="wf-panel-stage" style="color:#4A8FC4;">Expand</div><p class="wf-panel-desc">Protect revenue, surface expansion opportunities, and build the post-sale infrastructure that turns customers into compounding assets.</p></div>
-          <div class="wf-tier-grp"><span class="wf-tier-lbl">Quick Win</span><div class="wf-grid"><div class="wf-card"><span class="wf-card-code">EX-QW-001</span><div class="wf-card-name">Customer Health Scoring</div></div><div class="wf-card"><span class="wf-card-code">EX-QW-002</span><div class="wf-card-name">Renewal Workflow Automation</div></div><div class="wf-card"><span class="wf-card-code">EX-QW-003</span><div class="wf-card-name">NPS + Customer Feedback Loop</div></div></div></div>
-          <div class="wf-tier-grp"><span class="wf-tier-lbl">Core</span><div class="wf-grid"><div class="wf-card"><span class="wf-card-code">EX-CO-001</span><div class="wf-card-name">Customer Onboarding Tracking</div></div><div class="wf-card"><span class="wf-card-code">EX-CO-002</span><div class="wf-card-name">Expansion Opportunity Identification</div></div><div class="wf-card"><span class="wf-card-code">EX-CO-003</span><div class="wf-card-name">Customer Advocacy Program</div></div></div></div>
-          <div class="wf-tier-grp"><span class="wf-tier-lbl">Enterprise</span><div class="wf-grid"><div class="wf-card"><span class="wf-card-code">EX-EN-001</span><div class="wf-card-name">Customer Success Dashboard</div></div><div class="wf-card"><span class="wf-card-code">EX-EN-002</span><div class="wf-card-name">Strategic Account Intelligence</div></div></div></div>
-        </div>
-        <!-- OPS -->
-        <div class="wf-panel" id="wf-panel-ops">
-          <div class="wf-panel-hdr"><div class="wf-panel-stage" style="color:#C49A2B;">Ops Foundation</div><p class="wf-panel-desc">The infrastructure every stage above depends on. Clean data, integrated tools, reliable reporting, and visibility across the commercial system.</p></div>
-          <div class="wf-tier-grp"><span class="wf-tier-lbl">Quick Win</span><div class="wf-grid"><div class="wf-card"><span class="wf-card-code">OP-QW-001</span><div class="wf-card-name">CRM Hygiene + Data Integrity</div></div><div class="wf-card"><span class="wf-card-code">OP-QW-002</span><div class="wf-card-name">Activity + Adoption Tracking</div></div><div class="wf-card"><span class="wf-card-code">OP-QW-003</span><div class="wf-card-name">Automated Reporting + Distribution</div></div></div></div>
-          <div class="wf-tier-grp"><span class="wf-tier-lbl">Core</span><div class="wf-grid"><div class="wf-card"><span class="wf-card-code">OP-CO-001</span><div class="wf-card-name">Lead-to-Revenue Lifecycle Tracking</div></div><div class="wf-card"><span class="wf-card-code">OP-CO-002</span><div class="wf-card-name">Tech Stack Integration</div></div><div class="wf-card"><span class="wf-card-code">OP-CO-004</span><div class="wf-card-name">GTM Playbook Documentation</div></div></div></div>
-          <div class="wf-tier-grp"><span class="wf-tier-lbl">Enterprise</span><div class="wf-grid"><div class="wf-card"><span class="wf-card-code">OP-EN-001</span><div class="wf-card-name">RevOps Performance Dashboard</div></div><div class="wf-card"><span class="wf-card-code">OP-EN-002</span><div class="wf-card-name">AI Workflow Monitoring + Governance</div></div><div class="wf-card"><span class="wf-card-code">OP-EN-003</span><div class="wf-card-name">Change Management + Enablement</div></div></div></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FOUR PILLARS (dark, stacked cards) -->
-<section class="wf-tex-dark wf-sec">
-  <div class="wf-inner">
-    <span class="wf-eyebrow">The Build Framework</span>
-    <h2 class="wf-h2 wf-h2-w">Every workflow is built on the same four pillars.</h2>
-    <p class="wf-desc wf-desc-d">GTM Workflows builds operating logic across People, Technology, Context, and Data — the same four pillars your Diagnosis assessed.</p>
-    <div class="wf-pillars-grid">
-      <div class="wf-pillar-stack"><div class="wf-pillar-card"><span class="wf-pillar-num">01 · People</span><div class="wf-pillar-name">People</div><p class="wf-pillar-desc">Reps default to intuition when prioritization signals aren't built into the motion. Workflows define who contacts which accounts, when, in what order, and how managers coach to it.</p><div class="wf-pillar-examples"><span class="wf-pillar-ex">→ Call Grading + Coaching Rhythm</span><span class="wf-pillar-ex">→ Change Management + Enablement</span><span class="wf-pillar-ex">→ Activity + Adoption Tracking</span></div></div></div>
-      <div class="wf-pillar-stack"><div class="wf-pillar-card"><span class="wf-pillar-num">02 · Technology</span><div class="wf-pillar-name">Technology</div><p class="wf-pillar-desc">We build on your existing stack — not ours. We map the full infrastructure, specify every configuration required, and build the integrations that make your tools compound instead of conflict.</p><div class="wf-pillar-examples"><span class="wf-pillar-ex">→ Tech Stack Integration</span><span class="wf-pillar-ex">→ AI Workflow Monitoring + Governance</span><span class="wf-pillar-ex">→ Deal Desk Automation</span></div></div></div>
-      <div class="wf-pillar-stack"><div class="wf-pillar-card"><span class="wf-pillar-num">03 · Context</span><div class="wf-pillar-name">Context</div><p class="wf-pillar-desc">Generic outreach at scale is expensive noise. Every workflow that touches a buyer is built around specific context — the right message to the right person based on what's actually happening in their world.</p><div class="wf-pillar-examples"><span class="wf-pillar-ex">→ Conversation Catalist Detection</span><span class="wf-pillar-ex">→ Pre-Meeting Deck Build</span><span class="wf-pillar-ex">→ Competitive Battlecard Build</span></div></div></div>
-      <div class="wf-pillar-stack"><div class="wf-pillar-card"><span class="wf-pillar-num">04 · Data</span><div class="wf-pillar-name">Data</div><p class="wf-pillar-desc">A workflow is only as strong as the data underneath it. We build the data layer first — enrichment, hygiene, lead source attribution, lifecycle tracking — so every workflow above it fires on accurate inputs.</p><div class="wf-pillar-examples"><span class="wf-pillar-ex">→ Data Enrichment + Validation</span><span class="wf-pillar-ex">→ CRM Hygiene + Data Integrity</span><span class="wf-pillar-ex">→ Full-Funnel Attribution Build + Monitoring</span></div></div></div>
-    </div>
-  </div>
-</section>
-
-<!-- EXECUTION GAP (light) -->
-<section class="wf-tex-light wf-sec">
-  <div class="wf-inner">
-    <span class="wf-eyebrow">The Execution Gap</span>
-    <h2 class="wf-h2">Revenue consequences don't appear randomly.</h2>
-    <p class="wf-desc">They're the predictable output of missing infrastructure. This is what that gap looks like — and what closes it.</p>
-    <div class="wf-gap-grid">
+<!-- THE PROBLEM -->
+<section class="wf-tex-deeper wf-sec" id="wf-gap">
+  <div class="wf-inner" style="text-align:center;">
+    <span class="wf-eyebrow">The Problem</span>
+    <h2 class="wf-h2 wf-h2-w" style="margin:0 auto 20px;max-width:760px;">Your sellers are using AI. Your organization isn't.</h2>
+    <p class="wf-desc wf-desc-d" style="margin:0 auto 56px;max-width:620px;">Every team prompts its own tools, pulls its own data, writes its own playbooks. None of it feeds the next team. None of it builds on itself. This is what that costs.</p>
+    <div class="wf-gap-grid" style="text-align:left;">
       <div class="wf-gap-col wf-gap-before">
-        <div class="wf-gap-hdr"><span class="wf-gap-hdr-label">✕  Without workflow infrastructure</span></div>
-        <div class="wf-gap-row"><span class="wf-gap-icon">—</span><p class="wf-gap-text">Reps spend hours researching accounts they'll never reach. What they find is incomplete. What they send reflects it.</p></div>
-        <div class="wf-gap-row"><span class="wf-gap-icon">—</span><p class="wf-gap-text">Leads route manually and slowly. Speed-to-lead collapses. The first impression goes to whoever responds first — which isn't you.</p></div>
-        <div class="wf-gap-row"><span class="wf-gap-icon">—</span><p class="wf-gap-text">Deals slip without detection. No risk signal. No trigger. You find out on the forecast call when it's already too late.</p></div>
-        <div class="wf-gap-row"><span class="wf-gap-icon">—</span><p class="wf-gap-text">Churn surprises you. Health data lives in three systems that don't talk to each other. No one owns the signal.</p></div>
-        <div class="wf-gap-row"><span class="wf-gap-icon">—</span><p class="wf-gap-text">Expansion is ad hoc. Revenue from existing customers depends entirely on relationship quality and timing.</p></div>
+        <div class="wf-gap-hdr"><span class="wf-gap-hdr-label">✕  Running in isolation</span></div>
+        <div class="wf-gap-row"><span class="wf-gap-icon">—</span><p class="wf-gap-text">Every team uses AI on their own terms. No shared context, no shared standards, no shared memory across the commercial motion.</p></div>
+        <div class="wf-gap-row"><span class="wf-gap-icon">—</span><p class="wf-gap-text">Sales works an ICP that marketing never sees. Marketing runs campaigns that sales doesn't follow. Two teams, two signals, zero coordination.</p></div>
+        <div class="wf-gap-row"><span class="wf-gap-icon">—</span><p class="wf-gap-text">A deal closes. CS gets a handoff summary. The call that closed it — the objections, the language, the moment — stays in a folder nobody touches.</p></div>
+        <div class="wf-gap-row"><span class="wf-gap-icon">—</span><p class="wf-gap-text">Customer health data sits across three platforms. Nobody owns the signal until churn is already happening and the conversation is already hard.</p></div>
+        <div class="wf-gap-row"><span class="wf-gap-icon">—</span><p class="wf-gap-text">Individual effort gets rewarded. Organizational compounding gets zero infrastructure. Every rep starts from scratch.</p></div>
       </div>
       <div class="wf-gap-col wf-gap-after">
-        <div class="wf-gap-hdr"><span class="wf-gap-hdr-label">✓  With workflow infrastructure</span></div>
-        <div class="wf-gap-row"><span class="wf-gap-icon">→</span><p class="wf-gap-text">Catalist-based briefing surfaces the right account at the right moment. Reps arrive prepared — not scrambling.</p></div>
-        <div class="wf-gap-row"><span class="wf-gap-icon">→</span><p class="wf-gap-text">Automated scoring and routing assigns leads in minutes. Speed-to-lead becomes a structural advantage, not a heroic effort.</p></div>
-        <div class="wf-gap-row"><span class="wf-gap-icon">→</span><p class="wf-gap-text">Deal risk scoring flags at-risk opportunities before they're lost. Intervention happens while there's still time to act.</p></div>
-        <div class="wf-gap-row"><span class="wf-gap-icon">→</span><p class="wf-gap-text">Health scoring aggregates every signal into a single view and triggers intervention before the conversation gets hard.</p></div>
-        <div class="wf-gap-row"><span class="wf-gap-icon">→</span><p class="wf-gap-text">Expansion opportunities are identified from usage and engagement data. The motion runs whether or not the relationship is warm.</p></div>
+        <div class="wf-gap-hdr"><span class="wf-gap-hdr-label">✓  Federated across the organization</span></div>
+        <div class="wf-gap-row"><span class="wf-gap-icon">→</span><p class="wf-gap-text">One context layer connects every signal. A discovery call surfaces as a feature request, a renewal alert, and a coaching clip — same week, without anyone routing it manually.</p></div>
+        <div class="wf-gap-row"><span class="wf-gap-icon">→</span><p class="wf-gap-text">ICP definition stays live. Sales signals update the model. Marketing executes to it in real time. One buyer profile powers both motions.</p></div>
+        <div class="wf-gap-row"><span class="wf-gap-icon">→</span><p class="wf-gap-text">Every closed deal feeds win/loss automatically. Every lost deal sharpens messaging. The motion improves without a quarterly retro required.</p></div>
+        <div class="wf-gap-row"><span class="wf-gap-icon">→</span><p class="wf-gap-text">Customer health aggregates from product usage, CS conversations, and expansion signals. The alert fires before the customer says anything.</p></div>
+        <div class="wf-gap-row"><span class="wf-gap-icon">→</span><p class="wf-gap-text">65 workflows. 8 departments. Federated across a single operating system. Individual effort becomes organizational compound interest.</p></div>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- FEDERATED REVENUE OPERATING SYSTEM (dark) -->
+<section class="wf-tex-dark wf-sec" id="wf-fed">
+  <div class="wf-inner">
+    <div style="text-align:center;margin-bottom:56px;">
+      <span class="wf-eyebrow">Federated Revenue Operating System</span>
+      <h2 class="wf-h2 wf-h2-w" style="margin:0 auto 14px;max-width:900px;">You are not running a revenue org.<br>You are running eight disconnected automation projects.</h2>
+      <p class="wf-desc wf-desc-d" style="margin:0 auto;">Workflows aren't things individuals do in isolation. They're organizational infrastructure — and the median workflow in this map touches more than four departments. This is what it looks like when they're actually connected.</p>
+    </div>
+
+    <!-- STAT STRIP -->
+    <div class="wf-stat-strip" id="wf-stat-strip"></div>
+
+    <!-- DEPT LOAD BAR -->
+    <div class="wf-dept-bar-wrap">
+      <div class="wf-dept-bar-title">Workflow load by department · owned vs. touched</div>
+      <div class="wf-dept-bar-rows" id="wf-dept-bar-rows"></div>
+    </div>
+
+    <!-- FEDERATED WEB SVG -->
+    <div class="wf-fed-stage">
+      <div class="wf-fed-stage-head">
+        <span style="color:var(--accent);">⚡ FEDERATED REVENUE OPERATING SYSTEM · v.65</span>
+        <div class="wf-fed-meta" id="wf-fed-meta"></div>
+      </div>
+      <div class="wf-fed-svg-wrap" id="wf-fed-svg-wrap"></div>
+      <div class="wf-fed-legend">
+        <span class="wf-fed-legend-item"><span class="wf-fed-hub-dot"></span>Department hub</span>
+        <span class="wf-fed-legend-item"><span class="wf-fed-wf-dot cf"></span>Cross-functional workflow (5+ teams)</span>
+        <span class="wf-fed-legend-item"><span class="wf-fed-wf-dot std"></span>Workflow</span>
+        <span class="wf-fed-legend-item"><span class="wf-fed-conn-line"></span>Cross-department dependency</span>
+      </div>
+    </div>
+
+    <!-- CATALOG -->
+    <details class="wf-catalog" open id="wf-catalog">
+      <summary>
+        <span id="wf-catalog-label">The full catalog · 65 workflows</span>
+        <span style="color:var(--accent);">EXPAND →</span>
+      </summary>
+      <div class="wf-catalog-body" id="wf-catalog-body"></div>
+    </details>
   </div>
 </section>
 
@@ -282,77 +225,259 @@
   <div class="wf-inner">
     <span class="wf-eyebrow">Client Outcomes</span>
     <h2 class="wf-h2 wf-h2-w">What workflow infrastructure actually produces.</h2>
-    <p class="wf-desc wf-desc-d">From real engagements. All figures verified.</p>
+    <p class="wf-desc wf-desc-d">The reps in these organizations aren't working harder. The system is.</p>
     <div class="wf-outcomes-grid">
       <div class="wf-outcome-card"><div class="wf-outcome-stat">9 hrs</div><p class="wf-outcome-what">Recovered per rep, per week</p><p class="wf-outcome-ctx">Enterprise cybersecurity org · Workflow automation eliminating manual admin across the full sales motion</p><span class="wf-outcome-tag">Identity confidential</span></div>
       <div class="wf-outcome-card"><div class="wf-outcome-stat">34%</div><p class="wf-outcome-what">Net new pipeline increase</p><p class="wf-outcome-ctx">Enterprise cybersecurity org · Catalist-based prospecting replacing commoditized intent signals</p><span class="wf-outcome-tag">Identity confidential</span></div>
       <div class="wf-outcome-card"><div class="wf-outcome-stat">61%</div><p class="wf-outcome-what">SQL creation quarter-over-quarter</p><p class="wf-outcome-ctx">Enterprise HR technology org · Full pipeline workflow build across People, Context, and Data pillars</p><span class="wf-outcome-tag">Identity confidential</span></div>
       <div class="wf-outcome-card"><div class="wf-outcome-stat">21</div><p class="wf-outcome-what">Day reduction in sales cycle</p><p class="wf-outcome-ctx">Enterprise HR technology org · Structured talk tracks, mutual close plan tracking, and calendar governance</p><span class="wf-outcome-tag">Identity confidential</span></div>
     </div>
+    <a href="/clients" class="wf-outcomes-more">See more results →</a>
   </div>
 </section>
 
-<!-- BRIDGE TO REVENUEOS (light) -->
-<section class="wf-tex-light wf-sec">
-  <div class="wf-inner">
-    <div class="wf-bridge-inner">
-      <span class="wf-eyebrow" style="text-align:center;">What Comes Next</span>
-      <h2 class="wf-h2" style="text-align:center;">Workflows run your motion.<br>RevenueOS runs the company<br>that runs the motion.</h2>
-      <div class="wf-bridge-div">
-        <div class="wf-bridge-line" style="background:rgba(0,0,0,0.08);"></div>
-        <span class="wf-bridge-mid" style="color:rgba(0,0,0,0.2);">the next step</span>
-        <div class="wf-bridge-line" style="background:rgba(0,0,0,0.08);"></div>
-      </div>
-      <span class="wf-bridge-tag">Revenue Operating System</span>
-      <p class="wf-bridge-body" style="color:var(--body);">GTM Workflows eliminates the execution gap. But workflows without a governing operating model drift — as people change, markets shift, and tools evolve. RevenueOS is the system that governs, measures, and evolves everything you've built here.</p>
-      <a href="/revenue-operating-system" style="display:inline-flex;align-items:center;gap:8px;font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--headline);border:1px solid rgba(0,0,0,0.15);padding:12px 26px;border-radius:3px;text-decoration:none;">Explore Revenue Operating System →</a>
-    </div>
-  </div>
-</section>
-
-<!-- CTA (coral) -->
+<!-- CTA -->
 <section class="wf-cta-sec">
   <div class="wf-inner" style="text-align:center;">
-    <h2 class="wf-cta-h2">Start with one workflow.<br>Build the system.</h2>
-    <p class="wf-cta-body">Most clients begin with a single focused engagement — a defined scope and a working system in weeks. Book a 30-minute call. We'll map your Diagnosis findings to the highest-impact workflow and scope it.</p>
-    <a href="/contact" class="wf-btn-w">Book a Strategy Call →</a>
-    <span class="wf-cta-sub">30 min · No commitment · Diagnosis findings welcome</span>
+    <h2 class="wf-cta-h2">Book your diagnosis.</h2>
+    <p class="wf-cta-body">The right workflows for your org depend on where you are in the motion, what your team can actually adopt, and where the biggest drag is today. A diagnosis answers all three — before you commit to a build.</p>
+    <a href="/contact" class="wf-btn-w">Book your diagnosis →</a>
   </div>
 </section>
 
 <script>
-var WF_STAGES={demand:'#E8634A',pipeline:'#7B68C8',close:'#2BAF82',expand:'#4A8FC4',ops:'#C49A2B'};
-var wfActive='demand';
-function wfStage(stage,el){
-  if(wfActive===stage)return;
-  wfActive=stage;
-  // Reset all funnel segments
-  Object.keys(WF_STAGES).forEach(function(s){
-    var seg=document.getElementById('wf-seg-'+s);
-    var col=WF_STAGES[s];
-    if(seg){seg.style.fill='rgba('+hexToRgb(col)+',0.15)';seg.style.strokeWidth='1.5';seg.style.filter='none';}
-    var t1=document.getElementById('wf-seg-'+s+'-t1');
-    var t2=document.getElementById('wf-seg-'+s+'-t2');
-    if(t1)t1.style.fill='rgba(255,255,255,0.5)';
-    if(t2)t2.style.fill='rgba(255,255,255,0.25)';
+/* ── FEDERATED WEB DATA ── */
+var FW_DEPTS=[
+  {id:"sales",label:"Sales",short:"SALES"},
+  {id:"revops",label:"RevOps",short:"REVOPS"},
+  {id:"cs",label:"Customer Success",short:"CS"},
+  {id:"marketing",label:"Marketing",short:"MKT"},
+  {id:"product",label:"Product",short:"PROD"},
+  {id:"data",label:"Data & Eng",short:"DATA"},
+  {id:"enablement",label:"Enablement",short:"ENABL"},
+  {id:"exec",label:"Leadership",short:"EXEC"}
+];
+var FW_WF=[
+  /* SALES */
+  {n:1,o:"sales",t:"Auto-populate MEDDIC fields after every call",d:["revops","data","enablement","exec"]},
+  {n:2,o:"sales",t:"Draft follow-ups using prospect's own words",d:["marketing","enablement","cs"]},
+  {n:3,o:"sales",t:"Surface battlecards mid-call in real time",d:["enablement","marketing","product"]},
+  {n:4,o:"sales",t:"Auto-generate business cases from multi-call synth",d:["revops","exec","marketing","cs"]},
+  {n:5,o:"sales",t:"Build stakeholder maps from transcript mentions",d:["revops","cs","marketing","exec"]},
+  {n:6,o:"sales",t:"Detect single-threaded deals; trigger multi-thread",d:["revops","exec","enablement"]},
+  {n:7,o:"sales",t:"Alert on deal velocity drops",d:["revops","exec","data"]},
+  {n:8,o:"sales",t:"Personalized objection heat maps per rep",d:["enablement","revops","marketing","exec"]},
+  {n:16,o:"sales",t:"SDR-to-AE handoff packages from call clips",d:["enablement","revops","marketing"]},
+  {n:17,o:"sales",t:"Route cross-sell from account conversations",d:["cs","marketing","product","revops"]},
+  {n:18,o:"sales",t:"Detect buying signals to optimize pitch timing",d:["enablement","data","revops","marketing"]},
+  {n:19,o:"sales",t:"Generate mutual action plans from call language",d:["revops","cs","exec"]},
+  {n:20,o:"sales",t:"Pricing negotiation prep from historical patterns",d:["revops","exec","enablement","data"]},
+  {n:21,o:"sales",t:"Optimize executive sponsor engagement timing",d:["exec","revops","cs"]},
+  {n:22,o:"sales",t:"Customize proposals from transcript insights",d:["marketing","revops","product","enablement"]},
+  {n:23,o:"sales",t:"A/B test cold call openers from transcript data",d:["enablement","data","revops","marketing"]},
+  {n:24,o:"sales",t:"Discovery-to-demo prep briefs",d:["enablement","product","marketing","revops"]},
+  /* REVOPS */
+  {n:9,o:"revops",t:"Score deal risk from conversation signals",d:["sales","exec","data","enablement"]},
+  {n:10,o:"revops",t:"Validate forecasts against transcript evidence",d:["sales","exec","data"]},
+  {n:11,o:"revops",t:"Automate win/loss analysis on every closed deal",d:["sales","marketing","product","enablement","exec","cs"]},
+  {n:12,o:"revops",t:"Monitor methodology compliance at scale",d:["sales","enablement","exec"]},
+  {n:13,o:"revops",t:"Closed-lost re-engagement from objection mining",d:["marketing","sales","product","data"]},
+  {n:14,o:"revops",t:"Refine ICP from won-deal conversation patterns",d:["marketing","data","sales","exec"]},
+  {n:15,o:"revops",t:"Compress sales cycles via call-pattern analysis",d:["sales","enablement","exec","data"]},
+  {n:25,o:"revops",t:"Validate stage gates from transcript evidence",d:["sales","data","exec","enablement"]},
+  {n:26,o:"revops",t:"Automate CRM hygiene from transcript cross-ref",d:["data","sales","marketing","cs"]},
+  {n:27,o:"revops",t:"Score cross-team handoff quality",d:["sales","cs","enablement","marketing","exec"]},
+  {n:28,o:"revops",t:"Pricing & discount pattern analytics",d:["sales","exec","marketing","data"]},
+  {n:29,o:"revops",t:"Mine competitive intelligence from call library",d:["marketing","product","sales","enablement","exec"]},
+  {n:30,o:"revops",t:"Curated call libraries for onboarding",d:["enablement","sales","marketing"]},
+  {n:31,o:"revops",t:"Rebalance territories from conversation effort",d:["sales","exec","data","marketing"]},
+  {n:32,o:"revops",t:"Identify process bottlenecks from call clusters",d:["sales","exec","data","enablement","product"]},
+  /* CS */
+  {n:33,o:"cs",t:"Churn early warning from call sentiment",d:["product","exec","sales","data","marketing"]},
+  {n:34,o:"cs",t:"Detect expansion signals from conversations",d:["sales","marketing","product","revops","exec"]},
+  {n:35,o:"cs",t:"Eliminate context loss on sales→CS handoffs",d:["sales","revops","enablement","exec"]},
+  {n:36,o:"cs",t:"Auto-generate QBR prep from quarterly synthesis",d:["exec","sales","product","revops"]},
+  {n:37,o:"cs",t:"Customer health from sentiment + signals",d:["product","data","exec","sales","marketing"]},
+  /* MARKETING */
+  {n:38,o:"marketing",t:"Mine VoC for messaging and ad copy",d:["sales","data","product","cs","exec"]},
+  {n:39,o:"marketing",t:"Aggregate competitive intel from live calls",d:["sales","product","exec","enablement"]},
+  {n:40,o:"marketing",t:"Generate content from anonymized transcripts",d:["sales","data","cs","enablement"]},
+  {n:41,o:"marketing",t:"Track campaign attribution via call mentions",d:["data","exec","sales","revops"]},
+  {n:42,o:"marketing",t:"Objection-driven content strategy",d:["sales","enablement","product","revops"]},
+  /* PRODUCT */
+  {n:43,o:"product",t:"Aggregate feature requests to product board",d:["cs","sales","data","marketing","exec"]},
+  {n:44,o:"product",t:"Competitive feature gap from lost-deal calls",d:["marketing","sales","exec","revops"]},
+  {n:45,o:"product",t:"Detect bugs from support call patterns",d:["cs","data","sales","exec"]},
+  /* ENABLEMENT */
+  {n:46,o:"enablement",t:"Onboard new hires around real deal arcs",d:["sales","revops","exec","marketing"]},
+  {n:47,o:"enablement",t:"AI coaching scorecards with rep feedback",d:["sales","exec","revops","data"]},
+  {n:48,o:"enablement",t:"Discovery question repository from top performers",d:["sales","revops","marketing","product"]},
+  {n:49,o:"enablement",t:"Behavior drift alerts to leadership",d:["sales","exec","revops"]},
+  {n:50,o:"enablement",t:"AI roleplay from real customer conversations",d:["sales","product","marketing","revops"]},
+  /* DATA & ENG */
+  {n:51,o:"data",t:"Lead-to-account matching automation",d:["sales","marketing","revops","cs"]},
+  {n:52,o:"data",t:"ICP firmographic enrichment pipelines",d:["marketing","revops","sales","exec"]},
+  {n:53,o:"data",t:"CRM permission & role governance",d:["revops","exec","sales","cs"]},
+  {n:54,o:"data",t:"Sales tech stack consolidation audit",d:["revops","exec","sales","marketing","cs","enablement"]},
+  {n:55,o:"data",t:"Conversation-to-CRM data quality pipeline",d:["revops","sales","cs","marketing"]},
+  /* LEADERSHIP */
+  {n:56,o:"exec",t:"Pipeline coverage forecasting & gap modeling",d:["revops","sales","marketing","data"]},
+  {n:57,o:"exec",t:"Board reporting auto-generation",d:["revops","data","sales","marketing","cs","product"]},
+  {n:58,o:"exec",t:"Compensation plan attainment tracking",d:["revops","sales","data","enablement"]},
+  {n:59,o:"exec",t:"Deal desk approval routing & SLA",d:["revops","sales","data"]},
+  /* MARKETING continued */
+  {n:60,o:"marketing",t:"Account-based pipeline orchestration",d:["sales","revops","data","exec","cs"]},
+  {n:61,o:"marketing",t:"Intent signal triage from 3rd-party tools",d:["sales","data","revops","enablement"]},
+  {n:62,o:"marketing",t:"Partner & channel attribution",d:["revops","exec","sales","data","cs"]},
+  /* CS continued */
+  {n:63,o:"cs",t:"Renewal risk modeling from product usage",d:["data","sales","exec","product","revops"]},
+  {n:64,o:"cs",t:"Customer reference matching for active deals",d:["sales","marketing","revops","exec"]},
+  /* ENABLEMENT continued */
+  {n:65,o:"enablement",t:"Outbound sequence A/B governance",d:["sales","marketing","revops","data","exec"]}
+];
+
+/* ── COMPUTE STATS ── */
+var FW_STATS={};
+FW_DEPTS.forEach(function(d){FW_STATS[d.id]={owned:0,touched:0,total:0};});
+FW_WF.forEach(function(w){
+  FW_STATS[w.o].owned++;FW_STATS[w.o].total++;
+  w.d.forEach(function(id){if(FW_STATS[id]){FW_STATS[id].touched++;FW_STATS[id].total++;}});
+});
+var FW_N=FW_WF.length;
+var FW_LINKS=FW_WF.reduce(function(s,w){return s+w.d.length;},0);
+var FW_AVG=((FW_LINKS+FW_N)/FW_N).toFixed(1);
+
+/* ── STAT STRIP ── */
+(function(){
+  var el=document.getElementById('wf-stat-strip');if(!el)return;
+  var cards=[
+    {num:FW_N,lbl:'Workflows mapped',desc:'Across discovery, deal cycle, handoff, expansion, and renewal.'},
+    {num:FW_LINKS,lbl:'Cross-dept dependencies',desc:'Every line is a handoff or shared signal that breaks when any one team runs solo.'},
+    {num:FW_DEPTS.length,lbl:'Departments federated',desc:'Sales, RevOps, CS, Marketing, Product, Data & Eng, Enablement, Leadership.'},
+    {num:FW_AVG+'×',lbl:'Avg teams per workflow',desc:'The median workflow touches more than four departments. None of them work alone.'}
+  ];
+  el.innerHTML=cards.map(function(c){
+    return '<div class="wf-stat-card"><div class="wf-stat-num">'+c.num+'</div><span class="wf-stat-lbl">'+c.lbl+'</span><p class="wf-stat-desc">'+c.desc+'</p></div>';
+  }).join('');
+})();
+
+/* ── DEPT BAR ── */
+(function(){
+  var el=document.getElementById('wf-dept-bar-rows');if(!el)return;
+  var maxT=Math.max.apply(null,FW_DEPTS.map(function(d){return FW_STATS[d.id].total;}));
+  el.innerHTML=FW_DEPTS.map(function(d){
+    var s=FW_STATS[d.id];
+    var ow=(s.owned/maxT*100).toFixed(1);
+    var tw=(s.touched/maxT*100).toFixed(1);
+    return '<div class="wf-dept-row"><span class="wf-dept-row-name">'+d.label+'</span>'
+      +'<div class="wf-dept-row-track"><span class="wf-dept-fill-touched" style="width:'+(+ow+ +tw)+'%"></span><span class="wf-dept-fill-owned" style="width:'+ow+'%"></span></div>'
+      +'<span class="wf-dept-row-count"><b>'+s.owned+'</b> · '+s.touched+' touched</span></div>';
+  }).join('');
+})();
+
+/* ── CATALOG ── */
+(function(){
+  var lbl=document.getElementById('wf-catalog-label');
+  if(lbl)lbl.textContent='The full catalog · '+FW_N+' workflows';
+  var el=document.getElementById('wf-catalog-body');if(!el)return;
+  el.innerHTML=FW_DEPTS.map(function(d){
+    var owned=FW_WF.filter(function(w){return w.o===d.id;});
+    return '<div><h6 class="wf-catalog-dept">'+d.label+'<span class="wf-catalog-count">'+owned.length+' owned</span></h6>'
+      +'<ul>'+owned.map(function(w){
+        return '<li><span class="wf-catalog-num">#'+String(w.n).padStart(2,'0')+'</span><span>'+w.t+'</span></li>';
+      }).join('')
+      +'</ul></div>';
+  }).join('');
+})();
+
+/* ── FEDERATED SVG ── */
+(function(){
+  var el=document.getElementById('wf-fed-svg-wrap');if(!el)return;
+  var meta=document.getElementById('wf-fed-meta');
+  if(meta)meta.innerHTML='<span>WORKFLOWS<b> '+FW_N+'</b></span><span>DEPARTMENTS<b> '+FW_DEPTS.length+'</b></span><span>CROSS-LINKS<b> '+FW_LINKS+'</b></span><span>AVG TEAMS<b> '+FW_AVG+'×</b></span>';
+
+  var W=1200,H=900,CX=600,CY=450,DR=280,WR=140;
+  var dp={};
+  FW_DEPTS.forEach(function(d,i){
+    var a=(i/FW_DEPTS.length)*Math.PI*2-Math.PI/2;
+    dp[d.id]={x:CX+Math.cos(a)*DR,y:CY+Math.sin(a)*DR,a:a};
   });
-  // Activate selected segment
-  var activeSeg=document.getElementById('wf-seg-'+stage);
-  var activeCol=WF_STAGES[stage];
-  if(activeSeg){activeSeg.style.fill='rgba('+hexToRgb(activeCol)+',0.5)';activeSeg.style.strokeWidth='2.5';activeSeg.style.filter='url(#wf-glow)';}
-  var at1=document.getElementById('wf-seg-'+stage+'-t1');
-  var at2=document.getElementById('wf-seg-'+stage+'-t2');
-  if(at1)at1.style.fill='#fff';
-  if(at2)at2.style.fill='rgba(255,255,255,0.6)';
-  // Nav items
-  document.querySelectorAll('.wf-snav-item').forEach(function(i){i.classList.remove('active');});
-  document.querySelectorAll('.wf-snav-item[data-stage="'+stage+'"]').forEach(function(i){i.classList.add('active');});
-  // Panels
-  document.querySelectorAll('.wf-panel').forEach(function(p){p.classList.remove('active');});
-  var panel=document.getElementById('wf-panel-'+stage);
-  if(panel)panel.classList.add('active');
-}
-function hexToRgb(hex){var r=parseInt(hex.slice(1,3),16);var g=parseInt(hex.slice(3,5),16);var b=parseInt(hex.slice(5,7),16);return r+','+g+','+b;}
-// Init first segment as active
-(function(){var seg=document.getElementById('wf-seg-demand');if(seg){seg.style.fill='rgba(232,99,74,0.5)';seg.style.strokeWidth='2.5';}var t1=document.getElementById('wf-seg-demand-t1');var t2=document.getElementById('wf-seg-demand-t2');if(t1)t1.style.fill='#fff';if(t2)t2.style.fill='rgba(255,255,255,0.6)';}());
+  var wp={};
+  var byO={};
+  FW_WF.forEach(function(w){if(!byO[w.o])byO[w.o]=[];byO[w.o].push(w);});
+  Object.keys(byO).forEach(function(oid){
+    var list=byO[oid],p=dp[oid],sp=Math.PI*0.55,n=list.length;
+    list.forEach(function(w,i){
+      var t=n===1?0.5:i/(n-1);
+      var a=p.a-sp/2+sp*t;
+      var r=WR+((i%3)*28)+(n>12?18:0);
+      wp[w.n]={x:p.x+Math.cos(a)*r,y:p.y+Math.sin(a)*r,cf:w.d.length>=4};
+    });
+  });
+
+  var s=['<svg id="wf-fed-svg" viewBox="0 0 '+W+' '+H+'" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;">'];
+  s.push('<defs><radialGradient id="fwgc" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#E8634A" stop-opacity="0.35"/><stop offset="100%" stop-color="#E8634A" stop-opacity="0"/></radialGradient>');
+  s.push('<radialGradient id="fwgg" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#E8634A" stop-opacity="0.18"/><stop offset="60%" stop-color="#E8634A" stop-opacity="0.04"/><stop offset="100%" stop-color="#E8634A" stop-opacity="0"/></radialGradient></defs>');
+  s.push('<circle cx="'+CX+'" cy="'+CY+'" r="260" fill="url(#fwgg)"/>');
+  s.push('<circle cx="'+CX+'" cy="'+CY+'" r="'+DR+'" fill="none" stroke="rgba(232,99,74,0.10)" stroke-width="1" stroke-dasharray="2 6"/>');
+  s.push('<circle cx="'+CX+'" cy="'+CY+'" r="'+( DR-80)+'" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>');
+  s.push('<circle cx="'+CX+'" cy="'+CY+'" r="'+( DR+130)+'" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="1" stroke-dasharray="1 4"/>');
+  s.push('<g transform="translate('+CX+','+CY+')"><circle r="58" fill="#26242F" stroke="rgba(232,99,74,0.55)" stroke-width="1.5"/>');
+  s.push('<text text-anchor="middle" dy="-6" fill="#E8634A" font-family="IBM Plex Mono,monospace" font-size="9" letter-spacing="0.18em">REVENUE</text>');
+  s.push('<text text-anchor="middle" dy="8" fill="#fff" font-family="RocWideMedium,sans-serif" font-size="14" letter-spacing="-0.01em">rOS</text>');
+  s.push('<text text-anchor="middle" dy="22" fill="rgba(255,255,255,0.45)" font-family="IBM Plex Mono,monospace" font-size="7" letter-spacing="0.18em">CORE</text></g>');
+  s.push('<g id="fw-lines">');
+  FW_WF.forEach(function(w){
+    var p=wp[w.n];if(!p)return;
+    w.d.forEach(function(tid){
+      var tp=dp[tid];if(!tp)return;
+      s.push('<line class="fw-line" data-wf="'+w.n+'" data-o="'+w.o+'" data-t="'+tid+'" x1="'+p.x.toFixed(1)+'" y1="'+p.y.toFixed(1)+'" x2="'+tp.x.toFixed(1)+'" y2="'+tp.y.toFixed(1)+'" stroke="rgba(232,99,74,0.18)" stroke-width="0.6"/>');
+    });
+  });
+  s.push('</g><g>');
+  FW_DEPTS.forEach(function(d){var p=dp[d.id];s.push('<line x1="'+CX+'" y1="'+CY+'" x2="'+p.x.toFixed(1)+'" y2="'+p.y.toFixed(1)+'" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>');});
+  s.push('</g><g id="fw-nodes">');
+  FW_WF.forEach(function(w){
+    var p=wp[w.n];if(!p)return;
+    var fill=p.cf?'#FAFAF9':'#E8634A';
+    var stroke=p.cf?'rgba(232,99,74,0.6)':'#F0745C';
+    s.push('<circle class="fw-node" data-wf="'+w.n+'" data-o="'+w.o+'" cx="'+p.x.toFixed(1)+'" cy="'+p.y.toFixed(1)+'" r="'+( p.cf?4.5:4)+'" fill="'+fill+'" stroke="'+stroke+'" stroke-width="1"/>');
+  });
+  s.push('</g><g id="fw-hubs">');
+  FW_DEPTS.forEach(function(d){
+    var p=dp[d.id];
+    s.push('<g class="fw-dept-hub" data-dept="'+d.id+'" transform="translate('+p.x.toFixed(1)+','+p.y.toFixed(1)+')" style="cursor:pointer;">');
+    s.push('<circle r="44" fill="url(#fwgc)"/><circle class="fw-hub-ring" r="28" fill="#26242F" stroke="rgba(232,99,74,0.7)" stroke-width="1.5"/>');
+    s.push('<text text-anchor="middle" dy="4" fill="#fff" font-family="RocWideMedium,sans-serif" font-size="11" letter-spacing="-0.01em">'+d.short+'</text>');
+    s.push('<text text-anchor="middle" dy="56" fill="rgba(255,255,255,0.55)" font-family="IBM Plex Mono,monospace" font-size="8" letter-spacing="0.18em">'+d.label.toUpperCase()+'</text></g>');
+  });
+  s.push('</g></svg>');
+  el.innerHTML=s.join('');
+
+  var svg=document.getElementById('wf-fed-svg');if(!svg)return;
+  svg.querySelectorAll('.fw-dept-hub').forEach(function(hub){
+    hub.addEventListener('mouseenter',function(){
+      var did=hub.dataset.dept;
+      svg.querySelectorAll('.fw-line').forEach(function(ln){
+        var rel=(ln.dataset.o===did||ln.dataset.t===did);
+        ln.setAttribute('stroke',rel?'rgba(232,99,74,0.6)':'rgba(232,99,74,0.04)');
+        ln.setAttribute('stroke-width',rel?'1.2':'0.6');
+      });
+      svg.querySelectorAll('.fw-node').forEach(function(node){
+        var w=FW_WF.find(function(x){return String(x.n)===node.dataset.wf;});
+        node.style.opacity=(w&&(w.o===did||w.d.indexOf(did)>=0))?'1':'0.12';
+      });
+      svg.querySelectorAll('.fw-hub-ring').forEach(function(r){
+        r.setAttribute('stroke','rgba(232,99,74,0.35)');r.setAttribute('stroke-width','1.5');
+      });
+      var active=hub.querySelector('.fw-hub-ring');
+      if(active){active.setAttribute('stroke','#E8634A');active.setAttribute('stroke-width','2.5');}
+    });
+    hub.addEventListener('mouseleave',function(){
+      svg.querySelectorAll('.fw-line').forEach(function(ln){ln.setAttribute('stroke','rgba(232,99,74,0.18)');ln.setAttribute('stroke-width','0.6');});
+      svg.querySelectorAll('.fw-node').forEach(function(node){node.style.opacity='1';});
+      svg.querySelectorAll('.fw-hub-ring').forEach(function(r){r.setAttribute('stroke','rgba(232,99,74,0.7)');r.setAttribute('stroke-width','1.5');});
+    });
+  });
+})();
 </script>
