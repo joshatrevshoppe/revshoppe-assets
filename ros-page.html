@@ -367,20 +367,220 @@ html { scroll-behavior: smooth; }
 /* ── DEPT HOVER INTERACTION ── */
 .ros-dept-hub { cursor: pointer; }
 
+/* ── ARCHITECTURE DIAGRAM ── */
+.rarch-wrap {
+  margin-top: 0;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+  background: var(--bg-dark);
+  background-image: radial-gradient(circle, rgba(255,255,255,0.07) 1px, transparent 1.2px);
+  background-size: 22px 22px;
+}
+.rarch-wrap::before {
+  content: "";
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 50% 80% at 65% 50%, rgba(38,36,47,0.9) 0%, rgba(38,36,47,0) 65%);
+  pointer-events: none;
+  z-index: 0;
+}
+.rarch-inner {
+  position: relative; z-index: 1;
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  align-items: center;
+  gap: 0;
+  padding: 64px 56px 64px 64px;
+}
+.rarch-rail {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 40px;
+  padding-right: 48px;
+}
+.rarch-eyebrow {
+  display: block;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 18px;
+}
+.rarch-h2 {
+  font-family: "RocWideMedium", sans-serif;
+  font-size: clamp(22px, 2.4vw, 30px);
+  line-height: 1.15; letter-spacing: -0.5px;
+  color: #FAFAF9; margin: 0 0 18px;
+}
+.rarch-desc {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 12px; line-height: 1.75;
+  color: rgba(255,255,255,0.58); letter-spacing: 0.01em;
+}
+.rarch-key { display: flex; flex-direction: column; gap: 22px; }
+.rarch-key-row { display: grid; grid-template-columns: 14px 1fr; column-gap: 18px; align-items: start; }
+.rarch-key-mark {
+  width: 10px; height: 10px; border-radius: 50%;
+  border: 1px solid var(--accent); margin-top: 5px;
+}
+.rarch-key-row.rk-outer .rarch-key-mark { background: rgba(232,99,74,0); box-shadow: 0 0 8px rgba(232,99,74,0.7); }
+.rarch-key-row.rk-middle .rarch-key-mark { background: rgba(232,99,74,0.18); }
+.rarch-key-row.rk-inner .rarch-key-mark { background: rgba(232,99,74,0.45); }
+.rarch-key-row.rk-core .rarch-key-mark { background: var(--accent); border-color: var(--accent); }
+.rarch-key-name {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+  color: #FAFAF9; font-weight: 500; line-height: 1.3;
+}
+.rarch-key-role { color: rgba(255,255,255,0.4); font-weight: 400; margin-left: 8px; letter-spacing: 0.14em; }
+.rarch-key-examples {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 10px; line-height: 1.7;
+  color: rgba(255,255,255,0.5); margin-top: 6px; letter-spacing: 0.01em;
+}
+.rarch-diagram { position: relative; }
+.rarch-svg { width: 100%; height: auto; display: block; }
+.rarch-core-label {
+  position: absolute; left: 50%; top: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center; pointer-events: none;
+}
+.rarch-core-name {
+  font-family: "RocWideMedium", sans-serif;
+  font-size: clamp(14px, 1.6vw, 20px);
+  letter-spacing: 0.01em; color: #FAFAF9; display: block;
+}
+
+/* ── HYBRID SPECTRUM ── */
+.rhyb-hdr { margin-bottom: 40px; }
+.rhyb-hdr-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: start;
+  margin-top: 20px;
+}
+.rhyb-fig-wrap {
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.07);
+}
+.rhyb-fig {
+  width: 100%;
+  background: #FAFAF9;
+  background-image: linear-gradient(to right, rgba(0,0,0,0.027) 1px, transparent 1px), linear-gradient(to bottom, rgba(0,0,0,0.027) 1px, transparent 1px);
+  background-size: 56px 56px;
+  background-position: -1px -1px;
+  position: relative;
+  padding: 32px 32px 68px;
+  box-sizing: border-box;
+}
+.rhyb-cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0;
+}
+.rhyb-col {
+  position: relative;
+  padding: 0 24px;
+  display: flex; flex-direction: column;
+}
+.rhyb-col + .rhyb-col::before {
+  content: ""; position: absolute;
+  left: 0; top: -4px; bottom: -4px;
+  width: 1px; background: rgba(17,17,17,0.10);
+}
+.rhyb-index {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 10px; color: #8F95A0; letter-spacing: 0.18em; margin-bottom: 10px;
+}
+.rhyb-zone {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 13px; font-weight: 600; letter-spacing: 0.18em;
+  text-transform: uppercase; color: #111; margin: 0 0 6px;
+}
+.rhyb-col.rhyb-hybrid .rhyb-zone,
+.rhyb-col.rhyb-agent  .rhyb-zone { color: var(--accent); }
+.rhyb-tagline {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 10.5px; line-height: 1.55; color: #8F95A0;
+  letter-spacing: 0.02em; margin: 0 0 24px; max-width: 220px;
+}
+.rhyb-flow { margin-top: 6px; }
+.rhyb-flow + .rhyb-flow { margin-top: 18px; }
+.rhyb-flow-label {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase;
+  color: #8F95A0; margin-bottom: 6px;
+  display: flex; align-items: center; gap: 8px;
+}
+.rhyb-flow-label::before {
+  content: ""; display: inline-block;
+  width: 5px; height: 5px;
+  border: 1px solid #8F95A0; background: transparent; flex-shrink: 0;
+}
+.rhyb-col.rhyb-hybrid .rhyb-flow-label::before { border-color: var(--accent); background: rgba(232,99,74,0.18); }
+.rhyb-col.rhyb-agent  .rhyb-flow-label::before { border-color: var(--accent); background: var(--accent); }
+.rhyb-flow-body {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 11px; line-height: 1.55; color: #111; letter-spacing: 0.005em;
+}
+.rhyb-flow-body em { font-style: normal; color: #8F95A0; }
+.rhyb-axis {
+  position: absolute; left: 32px; right: 32px; bottom: 26px;
+  height: 22px; display: flex; align-items: center;
+}
+.rhyb-axis-label {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 9px; letter-spacing: 0.28em; text-transform: uppercase;
+  color: #8F95A0; white-space: nowrap; margin-right: 14px;
+}
+.rhyb-axis-line {
+  flex: 1; height: 1px; background: rgba(17,17,17,0.10); position: relative;
+}
+.rhyb-axis-line::before,
+.rhyb-axis-line::after {
+  content: ""; position: absolute; top: -3px; height: 7px;
+  width: 1px; background: rgba(17,17,17,0.10);
+}
+.rhyb-axis-line::before { left: 33.333%; }
+.rhyb-axis-line::after  { left: 66.666%; }
+.rhyb-axis-arrow {
+  width: 0; height: 0;
+  border-top: 4px solid transparent; border-bottom: 4px solid transparent;
+  border-left: 7px solid var(--accent); margin-left: 4px;
+}
+.rhyb-corner {
+  position: absolute; width: 10px; height: 10px;
+  border-color: #8F95A0; border-style: solid; opacity: 0.4;
+}
+.rhyb-corner.tl { top: 10px; left: 10px;     border-width: 1px 0 0 1px; }
+.rhyb-corner.tr { top: 10px; right: 10px;    border-width: 1px 1px 0 0; }
+.rhyb-corner.bl { bottom: 10px; left: 10px;  border-width: 0 0 1px 1px; }
+.rhyb-corner.br { bottom: 10px; right: 10px; border-width: 0 1px 1px 0; }
+
 /* ── RESPONSIVE ── */
 @media (max-width: 1024px) {
   .ros-inner { max-width: 880px; }
   .ros-ai-grid { grid-template-columns: 280px 1fr; gap: 48px; }
   .ros-rhythm-layout { gap: 48px; }
+  .rarch-inner { padding: 48px 40px; }
+  .rarch-rail { padding-right: 32px; }
 }
 @media (max-width: 900px) {
   .ros-stats { grid-template-columns: repeat(2, 1fr); }
-  .ros-layer-cards { grid-template-columns: 1fr; }
-  .ros-layer-card:first-child { border-radius: 10px 10px 0 0; }
-  .ros-layer-card:last-child { border-radius: 0 0 10px 10px; }
-  .ros-hybrid-grid { grid-template-columns: 1fr; gap: 40px; }
   .ros-ai-grid { grid-template-columns: 1fr; gap: 40px; }
   .ros-rhythm-layout { grid-template-columns: 1fr; gap: 40px; }
+  .rarch-inner { grid-template-columns: 1fr; padding: 40px 32px; }
+  .rarch-rail { padding-right: 0; }
+  .rhyb-hdr-grid { grid-template-columns: 1fr; gap: 24px; }
+  .rhyb-cols { grid-template-columns: 1fr; }
+  .rhyb-col + .rhyb-col::before { display: none; }
+  .rhyb-col { padding: 20px 0; border-bottom: 1px solid rgba(0,0,0,0.06); }
+  .rhyb-col:last-child { border-bottom: none; }
+  .rhyb-axis { position: static; margin-top: 16px; }
+  .rhyb-fig { padding-bottom: 24px; }
 }
 @media (max-width: 768px) {
   .ros-sec { padding: 64px 20px; }
@@ -458,35 +658,133 @@ html { scroll-behavior: smooth; }
        THREE LAYERS — the architecture
        ════════════════════════════════════════════ -->
   <section class="ros-sec ros-tex-dark">
-    <div class="ros-inner">
-      <span class="ros-eyebrow">The Architecture</span>
-      <h2 class="ros-h2 ros-h2-w">Three layers.<br>One substrate.</h2>
-      <p class="ros-sub ros-sub-d">A Revenue Operating System isn't a single tool or a single process. It's three interdependent layers — and all three have to be running for any of them to compound.</p>
+    <div class="ros-inner-wide">
+      <div class="rarch-wrap">
+        <div class="rarch-inner">
 
-      <!-- VISUAL PLACEHOLDER: THREE-LAYER ARCHITECTURE -->
-      <div class="ros-vp" style="margin-top: 48px; min-height: 400px;">
-        <span class="ros-vp-label">Visual · Three-Layer Architecture</span>
-        <div class="ros-vp-icon">◎</div>
-        <div class="ros-vp-title">Concentric-ring architecture diagram</div>
-        <p class="ros-vp-note">Replace with Claude Design export · Prompt 1</p>
-      </div>
+          <!-- Left rail: heading + key -->
+          <div class="rarch-rail">
+            <div>
+              <span class="rarch-eyebrow">Revenue Operating System</span>
+              <h2 class="rarch-h2">How the rOS is built.</h2>
+              <p class="rarch-desc">The Center of Excellence governs the operating cadence. The cadence runs on the workflow. The workflow writes to the Nucleus. Read the architecture from the outside in.</p>
+            </div>
+            <div class="rarch-key">
+              <div class="rarch-key-row rk-outer">
+                <span class="rarch-key-mark"></span>
+                <div>
+                  <div class="rarch-key-name">Center of Excellence <span class="rarch-key-role">Governance</span></div>
+                  <div class="rarch-key-examples">Charter. Decision rights. Policy. Quarterly<br>business review.</div>
+                </div>
+              </div>
+              <div class="rarch-key-row rk-middle">
+                <span class="rarch-key-mark"></span>
+                <div>
+                  <div class="rarch-key-name">Rhythm of Revenue <span class="rarch-key-role">Cadence</span></div>
+                  <div class="rarch-key-examples">Forecast call. Pipeline review. Deal desk. Monthly operating review.</div>
+                </div>
+              </div>
+              <div class="rarch-key-row rk-inner">
+                <span class="rarch-key-mark"></span>
+                <div>
+                  <div class="rarch-key-name">Workflow Foundation <span class="rarch-key-role">Execution</span></div>
+                  <div class="rarch-key-examples">Automations. Integrations. Data model. Routing.</div>
+                </div>
+              </div>
+              <div class="rarch-key-row rk-core">
+                <span class="rarch-key-mark"></span>
+                <div>
+                  <div class="rarch-key-name">rOS Nucleus <span class="rarch-key-role">The center</span></div>
+                  <div class="rarch-key-examples">One record. One number. One version of the pipeline.</div>
+                </div>
+              </div>
+            </div>
+          </div>
 
-      <div class="ros-layer-cards">
-        <div class="ros-layer-card">
-          <span class="ros-layer-num">Layer 01</span>
-          <div class="ros-layer-name">Workflow Foundation</div>
-          <p class="ros-layer-desc">The automations, integrations, and data pipelines that execute at every stage of the customer lifecycle. This is what your workflows actually run on. Without it, every automation is an island.</p>
-        </div>
-        <div class="ros-layer-card">
-          <span class="ros-layer-num">Layer 02</span>
-          <div class="ros-layer-name">Rhythm of Revenue</div>
-          <p class="ros-layer-desc">The operating cadence. Meeting structures, reporting frameworks, and the calendar that keeps every department aligned on the same reality — week over week, quarter over quarter.</p>
-        </div>
-        <div class="ros-layer-card ros-layer-coe">
-          <span class="ros-layer-num">Layer 03</span>
-          <div class="ros-layer-name">Center of Excellence</div>
-          <p class="ros-layer-desc">The governance layer. It governs process, people, and AI agents alike. Context ownership, output accountability, methodology enforcement — all under one roof. The layer that keeps the other two honest.</p>
-          <span class="ros-layer-badge">Governs agents + humans</span>
+          <!-- Right: SVG diagram -->
+          <div class="rarch-diagram">
+            <svg class="rarch-svg" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <defs>
+                <filter id="rarch-outer-glow" x="-30%" y="-30%" width="160%" height="160%">
+                  <feGaussianBlur stdDeviation="6" result="b" />
+                  <feMerge><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge>
+                </filter>
+                <path id="rarch-arc-coe" d="M 30,300  A 270,270 0 0 1 570,300" fill="none" />
+                <path id="rarch-arc-ror" d="M 100,300 A 200,200 0 0 1 500,300" fill="none" />
+                <path id="rarch-arc-wf"  d="M 180,300 A 120,120 0 0 1 420,300" fill="none" />
+              </defs>
+
+              <!-- Compass ticks -->
+              <g stroke="rgba(232,99,74,0.28)" stroke-width="1">
+                <g transform="translate(300,300)">
+                  <g><line x1="0" y1="-318" x2="0" y2="-306" /></g>
+                  <g transform="rotate(15)"><line x1="0" y1="-318" x2="0" y2="-313" /></g>
+                  <g transform="rotate(30)"><line x1="0" y1="-318" x2="0" y2="-313" /></g>
+                  <g transform="rotate(45)"><line x1="0" y1="-318" x2="0" y2="-306" /></g>
+                  <g transform="rotate(60)"><line x1="0" y1="-318" x2="0" y2="-313" /></g>
+                  <g transform="rotate(75)"><line x1="0" y1="-318" x2="0" y2="-313" /></g>
+                  <g transform="rotate(90)"><line x1="0" y1="-318" x2="0" y2="-306" /></g>
+                  <g transform="rotate(105)"><line x1="0" y1="-318" x2="0" y2="-313" /></g>
+                  <g transform="rotate(120)"><line x1="0" y1="-318" x2="0" y2="-313" /></g>
+                  <g transform="rotate(135)"><line x1="0" y1="-318" x2="0" y2="-306" /></g>
+                  <g transform="rotate(150)"><line x1="0" y1="-318" x2="0" y2="-313" /></g>
+                  <g transform="rotate(165)"><line x1="0" y1="-318" x2="0" y2="-313" /></g>
+                  <g transform="rotate(180)"><line x1="0" y1="-318" x2="0" y2="-306" /></g>
+                  <g transform="rotate(195)"><line x1="0" y1="-318" x2="0" y2="-313" /></g>
+                  <g transform="rotate(210)"><line x1="0" y1="-318" x2="0" y2="-313" /></g>
+                  <g transform="rotate(225)"><line x1="0" y1="-318" x2="0" y2="-306" /></g>
+                  <g transform="rotate(240)"><line x1="0" y1="-318" x2="0" y2="-313" /></g>
+                  <g transform="rotate(255)"><line x1="0" y1="-318" x2="0" y2="-313" /></g>
+                  <g transform="rotate(270)"><line x1="0" y1="-318" x2="0" y2="-306" /></g>
+                  <g transform="rotate(285)"><line x1="0" y1="-318" x2="0" y2="-313" /></g>
+                  <g transform="rotate(300)"><line x1="0" y1="-318" x2="0" y2="-313" /></g>
+                  <g transform="rotate(315)"><line x1="0" y1="-318" x2="0" y2="-306" /></g>
+                  <g transform="rotate(330)"><line x1="0" y1="-318" x2="0" y2="-313" /></g>
+                  <g transform="rotate(345)"><line x1="0" y1="-318" x2="0" y2="-313" /></g>
+                </g>
+              </g>
+
+              <!-- CoE outer band -->
+              <circle cx="300" cy="300" r="300" fill="rgba(232,99,74,0.018)" stroke="rgba(232,99,74,0.85)" stroke-width="1.25" filter="url(#rarch-outer-glow)" />
+              <circle cx="300" cy="300" r="240" fill="none" stroke="rgba(232,99,74,0.45)" stroke-width="1" />
+
+              <!-- RoR band -->
+              <circle cx="300" cy="300" r="240" fill="rgba(255,255,255,0.025)" stroke="rgba(232,99,74,0.7)" stroke-width="1" />
+              <circle cx="300" cy="300" r="160" fill="none" stroke="rgba(232,99,74,0.55)" stroke-width="1" />
+
+              <!-- Workflow Foundation band -->
+              <circle cx="300" cy="300" r="160" fill="rgba(232,99,74,0.06)" stroke="rgba(232,99,74,0.7)" stroke-width="1" />
+              <circle cx="300" cy="300" r="80"  fill="none" stroke="rgba(232,99,74,0.7)" stroke-width="1" />
+
+              <!-- Core -->
+              <circle cx="300" cy="300" r="80" fill="#E8634A" stroke="#E8634A" stroke-width="1" />
+              <circle cx="300" cy="300" r="64" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="1" stroke-dasharray="2 4" />
+
+              <!-- Crosshair marks -->
+              <g stroke="rgba(232,99,74,0.4)" stroke-width="1">
+                <line x1="300" y1="220" x2="300" y2="232" />
+                <line x1="300" y1="368" x2="300" y2="380" />
+                <line x1="220" y1="300" x2="232" y2="300" />
+                <line x1="368" y1="300" x2="380" y2="300" />
+              </g>
+
+              <!-- Ring name labels along arcs -->
+              <text font-family="IBM Plex Mono, monospace" font-size="10" fill="#E8634A" letter-spacing="4" text-anchor="middle">
+                <textPath href="#rarch-arc-coe" startOffset="50%">CENTER OF EXCELLENCE</textPath>
+              </text>
+              <text font-family="IBM Plex Mono, monospace" font-size="10" fill="#E8634A" letter-spacing="4" text-anchor="middle">
+                <textPath href="#rarch-arc-ror" startOffset="50%">RHYTHM OF REVENUE</textPath>
+              </text>
+              <text font-family="IBM Plex Mono, monospace" font-size="9" fill="#E8634A" letter-spacing="3" text-anchor="middle">
+                <textPath href="#rarch-arc-wf" startOffset="50%">WORKFLOW FOUNDATION</textPath>
+              </text>
+            </svg>
+
+            <div class="rarch-core-label">
+              <span class="rarch-core-name">rOS Nucleus</span>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
@@ -498,21 +796,81 @@ html { scroll-behavior: smooth; }
        ════════════════════════════════════════════ -->
   <section class="ros-sec ros-tex-light">
     <div class="ros-inner">
-      <div class="ros-hybrid-grid">
-        <div class="ros-hybrid-copy">
-          <span class="ros-eyebrow">The Hybrid Organization</span>
-          <h2 class="ros-h2">Sellers and agents.<br>Same motion.<br>Different layers.</h2>
-          <p class="ros-sub" style="margin-bottom: 20px;">The revenue organization is no longer just sellers. Agents run the workflows that support them. The same motion — different execution layers, different automation levels.</p>
-          <p class="ros-body">Different workflows run at different levels of automation. Some execute without intervention. Some require human direction before they move. Some require review before they close. An rOS defines which is which — and makes sure every agent operating in your revenue motion has governed context, not just access.</p>
-        </div>
-        <!-- VISUAL PLACEHOLDER: HYBRID SPECTRUM -->
-        <div class="ros-vp ros-vp-light">
-          <span class="ros-vp-label">Visual · Hybrid Workforce Spectrum</span>
-          <div class="ros-vp-icon" style="color: rgba(232,99,74,0.2);">⇆</div>
-          <div class="ros-vp-title" style="color: rgba(0,0,0,0.25);">Human-led → Hybrid → Agent-led</div>
-          <p class="ros-vp-note">Replace with Claude Design export · Prompt 2</p>
+
+      <!-- Header: 2-col copy block -->
+      <div class="rhyb-hdr">
+        <span class="ros-eyebrow">The Hybrid Organization</span>
+        <div class="rhyb-hdr-grid">
+          <div>
+            <h2 class="ros-h2">Sellers and agents.<br>Same motion.<br>Different layers.</h2>
+          </div>
+          <div>
+            <p class="ros-sub" style="margin-bottom: 20px;">The revenue organization is no longer just sellers. Agents run the workflows that support them. The same motion — different execution layers, different automation levels.</p>
+            <p class="ros-body">An rOS defines which workflows run fully automated, which require human direction, and which require review before they close. Every agent in your revenue motion gets governed context — not just access.</p>
+          </div>
         </div>
       </div>
+
+      <!-- Hybrid Workforce Spectrum visual -->
+      <div class="rhyb-fig-wrap">
+        <div class="rhyb-fig">
+          <span class="rhyb-corner tl"></span>
+          <span class="rhyb-corner tr"></span>
+          <span class="rhyb-corner bl"></span>
+          <span class="rhyb-corner br"></span>
+
+          <div class="rhyb-cols">
+            <div class="rhyb-col rhyb-human">
+              <div class="rhyb-index">01 / 03</div>
+              <h3 class="rhyb-zone">Human-Led</h3>
+              <p class="rhyb-tagline">Seller executes. Minimal automation in the loop.</p>
+              <div class="rhyb-flow">
+                <div class="rhyb-flow-label">Post-call follow-up</div>
+                <div class="rhyb-flow-body">Rep writes recap from memory, retypes notes into CRM, sends email manually.</div>
+              </div>
+              <div class="rhyb-flow">
+                <div class="rhyb-flow-label">Deal risk scoring</div>
+                <div class="rhyb-flow-body">Manager reads the deal, judges the risk, calls it on the forecast review.</div>
+              </div>
+            </div>
+
+            <div class="rhyb-col rhyb-hybrid">
+              <div class="rhyb-index">02 / 03</div>
+              <h3 class="rhyb-zone">Hybrid</h3>
+              <p class="rhyb-tagline">Agent assists. Seller directs and approves the work.</p>
+              <div class="rhyb-flow">
+                <div class="rhyb-flow-label">Post-call follow-up</div>
+                <div class="rhyb-flow-body">Agent drafts recap and email from the transcript. <em>Seller edits, sends.</em></div>
+              </div>
+              <div class="rhyb-flow">
+                <div class="rhyb-flow-label">Deal risk scoring</div>
+                <div class="rhyb-flow-body">Agent flags slipping deals with reasons. <em>Manager confirms or overrides.</em></div>
+              </div>
+            </div>
+
+            <div class="rhyb-col rhyb-agent">
+              <div class="rhyb-index">03 / 03</div>
+              <h3 class="rhyb-zone">Agent-Led</h3>
+              <p class="rhyb-tagline">Agent executes autonomously. Human governs the context.</p>
+              <div class="rhyb-flow">
+                <div class="rhyb-flow-label">Post-call follow-up</div>
+                <div class="rhyb-flow-body">Agent logs the call, updates fields, sends the follow-up under policy.</div>
+              </div>
+              <div class="rhyb-flow">
+                <div class="rhyb-flow-label">Deal risk scoring</div>
+                <div class="rhyb-flow-body">Agent re-scores pipeline continuously, routes at-risk deals to the right owner.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="rhyb-axis">
+            <span class="rhyb-axis-label">Automation Level</span>
+            <span class="rhyb-axis-line"></span>
+            <span class="rhyb-axis-arrow"></span>
+          </div>
+        </div>
+      </div>
+
     </div>
   </section>
 
