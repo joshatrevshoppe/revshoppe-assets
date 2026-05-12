@@ -5,19 +5,12 @@
 <script src="https://js.hsforms.net/forms/embed/5046646.js" defer></script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="preload" href="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/67dea6a57df5c619dba13468_RocGroteskWide-Medium.woff2" as="font" type="font/woff2" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; }
 img, svg { display: block; }
 a { color: inherit; text-decoration: none; }
 button { font: inherit; cursor: pointer; border: none; }
-
-@font-face {
-  font-family: "RocWideMedium";
-  src: url("https://cdn.prod.website-files.com/61f825b46abaae2807007e90/67dea6a57df5c619dba13468_RocGroteskWide-Medium.woff2") format("woff2");
-  font-weight: 500; font-display: block;
-}
 
 :root {
   --gc-accent:       #E8634A;
@@ -32,7 +25,7 @@ button { font: inherit; cursor: pointer; border: none; }
   --gc-hair-light:   rgba(26,24,32,0.10);
   --gc-muted-white:  rgba(255,255,255,0.62);
   --gc-muted-mono:   rgba(255,255,255,0.45);
-  --gc-f-display:    "RocWideMedium","Archivo","Helvetica Neue",Arial,sans-serif;
+  --gc-f-display:    "roc-grotesk-wide","Archivo","Helvetica Neue",Arial,sans-serif;
   --gc-f-mono:       "IBM Plex Mono","Courier New",monospace;
   --gc-f-body:       "Montserrat","Helvetica Neue",Arial,sans-serif;
 }
@@ -185,11 +178,16 @@ button { font: inherit; cursor: pointer; border: none; }
 .gc-field::placeholder { color: rgba(255,255,255,0.32); }
 .gc-field:focus { outline: none; border-color: var(--gc-accent); }
 /* HubSpot hs-form-frame overrides — match gc-card-form dark style */
-.gc-card-form .hs-form fieldset { max-width: 100%; border: none; padding: 0; margin: 0; }
+.gc-card-form .hs-form,
+.gc-card-form .hs-form fieldset { max-width: 100% !important; border: none; padding: 0; margin: 0; }
+.gc-card-form .hs-form .form-columns-1,
+.gc-card-form .hs-form .form-columns-2 { float: none; width: 100% !important; }
 .gc-card-form .hs-form .hs-form-field { margin-bottom: 0; }
-.gc-card-form .hs-form label { display: none; }
+.gc-card-form .hs-form label { display: none !important; }
+.gc-card-form .hs-form .input { margin-right: 0 !important; }
 .gc-card-form .hs-form .hs-input {
-  display: block; width: 100%;
+  display: block; width: 100% !important;
+  box-sizing: border-box;
   background: rgba(255,255,255,0.04);
   border: 1px solid var(--gc-hair-dark);
   border-radius: 6px;
@@ -197,25 +195,32 @@ button { font: inherit; cursor: pointer; border: none; }
   color: var(--gc-white);
   font-family: var(--gc-f-body);
   font-size: 14px;
-  margin-bottom: 14px;
+  margin-bottom: 12px;
   transition: border-color 0.2s;
 }
 .gc-card-form .hs-form .hs-input::placeholder { color: rgba(255,255,255,0.32); }
 .gc-card-form .hs-form .hs-input:focus { outline: none; border-color: var(--gc-accent); }
 .gc-card-form .hs-form .hs-submit { margin-top: 0; }
+.gc-card-form .hs-form .actions { padding: 0; margin: 0; }
+.gc-card-form .hs-form input[type="submit"].hs-button,
 .gc-card-form .hs-form .hs-button {
-  display: block; width: 100%;
-  background: var(--gc-accent); color: var(--gc-white);
+  display: block !important; width: 100% !important;
+  box-sizing: border-box;
+  background: var(--gc-accent) !important; color: var(--gc-white) !important;
   border: none; border-radius: 6px;
   padding: 15px 22px;
-  font-family: var(--gc-f-mono); font-size: 12px;
+  font-family: var(--gc-f-mono) !important; font-size: 12px !important;
   letter-spacing: 0.18em; text-transform: uppercase;
   cursor: pointer; transition: background 0.15s;
+  -webkit-appearance: none; appearance: none;
 }
-.gc-card-form .hs-form .hs-button:hover { background: #d9543c; }
+.gc-card-form .hs-form input[type="submit"].hs-button:hover,
+.gc-card-form .hs-form .hs-button:hover { background: #d9543c !important; }
 .gc-card-form .hs-form .hs-error-msgs { list-style: none; padding: 0; margin: 4px 0 8px; }
 .gc-card-form .hs-form .hs-error-msgs li { font-size: 11px; color: var(--gc-accent); }
-.gc-card-form .hs-richtext, .gc-card-form .hs-form .legal-consent-container { display: none; }
+.gc-card-form .hs-richtext,
+.gc-card-form .hs-form .legal-consent-container,
+.gc-card-form .hs-form .hs-dependent-field { display: none !important; }
 .gc-form-fine {
   margin-top: 14px;
   font-family: var(--gc-f-mono);
@@ -1157,7 +1162,7 @@ button { font: inherit; cursor: pointer; border: none; }
           <!-- TRIGGER node -->
           <circle cx="330" cy="158" r="16" fill="#FAFAF9" stroke="#E8634A" stroke-width="1.6"/>
           <circle cx="330" cy="158" r="5" fill="#E8634A"/>
-          <text x="360" y="154" font-family="RocWideMedium, Archivo, sans-serif" font-size="13" fill="#1A1820">TRIGGER</text>
+          <text x="360" y="154" font-family="roc-grotesk-wide, Archivo, sans-serif" font-size="13" fill="#1A1820">TRIGGER</text>
           <text x="360" y="170" font-family="IBM Plex Mono, monospace" font-size="9" fill="#4B4956" letter-spacing="1">signal received</text>
 
           <line x1="330" y1="174" x2="330" y2="212" stroke="#E8634A" stroke-width="1.2"/>
@@ -1165,7 +1170,7 @@ button { font: inherit; cursor: pointer; border: none; }
           <!-- QUALIFY diamond -->
           <path d="M 330 216 L 372 240 L 330 264 L 288 240 Z" fill="#FAFAF9" stroke="#E8634A" stroke-width="1.4"/>
           <text x="330" y="244" font-family="IBM Plex Mono, monospace" font-size="9" fill="#4B4956" letter-spacing="1" text-anchor="middle">ICP FIT?</text>
-          <text x="385" y="237" font-family="RocWideMedium, Archivo, sans-serif" font-size="12" fill="#1A1820">QUALIFY</text>
+          <text x="385" y="237" font-family="roc-grotesk-wide, Archivo, sans-serif" font-size="12" fill="#1A1820">QUALIFY</text>
           <text x="385" y="252" font-family="IBM Plex Mono, monospace" font-size="9" fill="#4B4956" letter-spacing="1">match · score · route</text>
 
           <!-- NO branch -->
@@ -1186,7 +1191,7 @@ button { font: inherit; cursor: pointer; border: none; }
           <!-- ASSEMBLE node -->
           <circle cx="330" cy="312" r="10" fill="#FAFAF9" stroke="#E8634A" stroke-width="1.4"/>
           <circle cx="330" cy="312" r="3" fill="#E8634A"/>
-          <text x="350" y="309" font-family="RocWideMedium, Archivo, sans-serif" font-size="12" fill="#1A1820">ASSEMBLE CONTEXT</text>
+          <text x="350" y="309" font-family="roc-grotesk-wide, Archivo, sans-serif" font-size="12" fill="#1A1820">ASSEMBLE CONTEXT</text>
           <text x="350" y="322" font-family="IBM Plex Mono, monospace" font-size="9" fill="#4B4956" letter-spacing="1">news · stack · history</text>
 
           <!-- Context layer side input -->
@@ -1201,7 +1206,7 @@ button { font: inherit; cursor: pointer; border: none; }
           <!-- GENERATE node -->
           <circle cx="330" cy="372" r="10" fill="#FAFAF9" stroke="#E8634A" stroke-width="1.4"/>
           <circle cx="330" cy="372" r="3" fill="#E8634A"/>
-          <text x="350" y="369" font-family="RocWideMedium, Archivo, sans-serif" font-size="12" fill="#1A1820">GENERATE</text>
+          <text x="350" y="369" font-family="roc-grotesk-wide, Archivo, sans-serif" font-size="12" fill="#1A1820">GENERATE</text>
           <text x="350" y="382" font-family="IBM Plex Mono, monospace" font-size="9" fill="#4B4956" letter-spacing="1">Claude reads + writes</text>
 
           <line x1="330" y1="382" x2="330" y2="418" stroke="#E8634A" stroke-width="1.2"/>
@@ -1209,7 +1214,7 @@ button { font: inherit; cursor: pointer; border: none; }
           <!-- REVIEW diamond -->
           <path d="M 330 422 L 372 446 L 330 470 L 288 446 Z" fill="#FAFAF9" stroke="#E8634A" stroke-width="1.4"/>
           <text x="330" y="450" font-family="IBM Plex Mono, monospace" font-size="9" fill="#4B4956" letter-spacing="1" text-anchor="middle">REVIEW</text>
-          <text x="385" y="443" font-family="RocWideMedium, Archivo, sans-serif" font-size="12" fill="#1A1820">REP APPROVES</text>
+          <text x="385" y="443" font-family="roc-grotesk-wide, Archivo, sans-serif" font-size="12" fill="#1A1820">REP APPROVES</text>
           <text x="385" y="458" font-family="IBM Plex Mono, monospace" font-size="9" fill="#4B4956" letter-spacing="1">human in the loop</text>
 
           <line x1="330" y1="470" x2="330" y2="504" stroke="#E8634A" stroke-width="1.2"/>
@@ -1217,7 +1222,7 @@ button { font: inherit; cursor: pointer; border: none; }
           <!-- EXECUTE node -->
           <circle cx="330" cy="514" r="10" fill="#FAFAF9" stroke="#E8634A" stroke-width="1.4"/>
           <circle cx="330" cy="514" r="3" fill="#E8634A"/>
-          <text x="350" y="511" font-family="RocWideMedium, Archivo, sans-serif" font-size="12" fill="#1A1820">EXECUTE</text>
+          <text x="350" y="511" font-family="roc-grotesk-wide, Archivo, sans-serif" font-size="12" fill="#1A1820">EXECUTE</text>
           <text x="350" y="524" font-family="IBM Plex Mono, monospace" font-size="9" fill="#4B4956" letter-spacing="1">send · log · update</text>
 
           <line x1="330" y1="524" x2="330" y2="626" stroke="#E8634A" stroke-width="1.2"/>
@@ -1225,7 +1230,7 @@ button { font: inherit; cursor: pointer; border: none; }
           <!-- OUTCOME (filled coral) -->
           <circle cx="330" cy="642" r="16" fill="#E8634A" stroke="#E8634A" stroke-width="1.6"/>
           <circle cx="330" cy="642" r="6" fill="#FAFAF9"/>
-          <text x="360" y="638" font-family="RocWideMedium, Archivo, sans-serif" font-size="13" fill="#1A1820">OUTCOME</text>
+          <text x="360" y="638" font-family="roc-grotesk-wide, Archivo, sans-serif" font-size="13" fill="#1A1820">OUTCOME</text>
           <text x="360" y="654" font-family="IBM Plex Mono, monospace" font-size="9" fill="#4B4956" letter-spacing="1">meeting · oppty · renewal</text>
 
           <!-- Feedback arc -->
