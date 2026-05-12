@@ -6,16 +6,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-@font-face {
-  font-family: "roc-grotesk-wide";
-  src: url("https://cdn.prod.website-files.com/61f825b46abaae2807007e90/67dea6a57df5c619dba13468_RocGroteskWide-Medium.woff2") format("woff2");
-  font-weight: 500; font-display: block;
-}
-@font-face {
-  font-family: "roc-grotesk-wide";
-  src: url("https://cdn.prod.website-files.com/61f825b46abaae2807007e90/67dea6a54f0aa4e3e2f1f6e8_RocGroteskWide-Light.woff2") format("woff2");
-  font-weight: 300; font-display: block;
-}
 *, *::before, *::after { box-sizing: border-box; }
 img, svg { display: block; }
 a { color: inherit; text-decoration: none; }
@@ -196,47 +186,6 @@ button { font: inherit; cursor: pointer; border: none; }
   color: var(--gc-muted-mono);
   text-align: center;
 }
-
-/* HubSpot form — override to match gc-field design */
-#gc-hs-form-target label,
-#gc-hs-form-target .hs-field-desc,
-#gc-hs-form-target legend { display: none !important; }
-#gc-hs-form-target fieldset { max-width: 100% !important; border: none !important; padding: 0 !important; margin: 0 !important; }
-#gc-hs-form-target .hs-form-field { margin-bottom: 14px !important; }
-#gc-hs-form-target .input { margin: 0 !important; }
-#gc-hs-form-target .hs-input {
-  display: block !important; width: 100% !important;
-  background: rgba(255,255,255,0.04) !important;
-  border: 1px solid rgba(255,255,255,0.10) !important;
-  border-radius: 6px !important;
-  padding: 14px 16px !important;
-  color: #FAFAF9 !important;
-  font-family: "Montserrat","Helvetica Neue",Arial,sans-serif !important;
-  font-size: 14px !important;
-  box-sizing: border-box !important;
-  margin-bottom: 0 !important;
-}
-#gc-hs-form-target .hs-input::placeholder { color: rgba(255,255,255,0.32) !important; }
-#gc-hs-form-target .hs-input:focus { outline: none !important; border-color: #E8634A !important; }
-#gc-hs-form-target .hs-button {
-  display: block !important; width: 100% !important;
-  background: #E8634A !important;
-  color: #FAFAF9 !important;
-  border: none !important;
-  border-radius: 6px !important;
-  padding: 15px 22px !important;
-  font-family: "IBM Plex Mono","Courier New",monospace !important;
-  font-size: 12px !important;
-  letter-spacing: 0.18em !important;
-  text-transform: uppercase !important;
-  cursor: pointer !important;
-  transition: background 0.15s !important;
-  margin-top: 14px !important;
-}
-#gc-hs-form-target .hs-button:hover { background: #d9543c !important; }
-#gc-hs-form-target .hs-error-msgs { color: #ff8080 !important; font-size: 11px !important; list-style: none !important; padding: 0 !important; margin: 4px 0 !important; }
-#gc-hs-form-target .submitted-message,
-#gc-hs-form-target .hs-richtext { color: rgba(255,255,255,0.8) !important; font-family: "IBM Plex Mono","Courier New",monospace !important; font-size: 13px !important; line-height: 1.7 !important; }
 
 /* Hero SVG circuit background */
 .gc-hero-circuit {
@@ -986,7 +935,10 @@ button { font: inherit; cursor: pointer; border: none; }
       <div class="gc-card-form">
         <span class="gc-eyebrow">Book a Call</span>
         <h3>Go AI-native.</h3>
-        <div id="gc-hs-form-target"></div>
+        <form id="gc-hero-form">
+          <input class="gc-field" type="email" name="email" placeholder="Work email" required>
+          <button class="gc-btn gc-btn-coral" type="submit">Start Building Circuits <span class="arrow">→</span></button>
+        </form>
       </div>
     </div>
   </div>
@@ -1609,22 +1561,31 @@ button { font: inherit; cursor: pointer; border: none; }
   window.addEventListener('resize', onScroll);
   onScroll();
 
-  // Load HubSpot form — b17af1ad is the circuits intake form with workflow attached
-  (function() {
-    var s = document.createElement('script');
-    s.charset = 'utf-8';
-    s.src = '//js.hsforms.net/forms/embed/v2.js';
-    s.onload = function() {
-      hbspt.forms.create({
-        region: 'na1',
-        portalId: '5046646',
-        formId: 'b17af1ad-180f-4b22-a3fd-97a321b8d6c3',
-        target: '#gc-hs-form-target',
-        css: ''
+  // Custom form → HubSpot Forms API (b17af1ad = circuits intake, workflow attached)
+  var heroForm = document.getElementById('gc-hero-form');
+  if (heroForm) {
+    heroForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      var email = heroForm.querySelector('input[type="email"]').value;
+      var ctx = { pageUri: window.location.href, pageName: 'GTM Circuits' };
+      var hutk = (document.cookie.match(/hubspotutk=([^;]+)/) || [])[1];
+      if (hutk) ctx.hutk = hutk;
+      fetch('https://api.hsforms.com/submissions/v3/integration/submit/5046646/b17af1ad-180f-4b22-a3fd-97a321b8d6c3', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ fields: [{ name: 'email', value: email }], context: ctx })
+      }).then(function(res) {
+        var card = heroForm.closest('.gc-card-form');
+        if (res.ok) {
+          if (card) card.innerHTML = '<p style="font-family:\'IBM Plex Mono\',monospace;font-size:13px;line-height:1.7;color:rgba(255,255,255,0.8);">Got it. We\'ll be in touch within one business day.</p>';
+        } else {
+          window.location.href = '/contact' + (email ? '?email=' + encodeURIComponent(email) : '');
+        }
+      }).catch(function() {
+        window.location.href = '/contact' + (email ? '?email=' + encodeURIComponent(email) : '');
       });
-    };
-    document.body.appendChild(s);
-  })();
+    });
+  }
 
 })();
 </script>
