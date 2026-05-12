@@ -138,10 +138,10 @@ button { font: inherit; cursor: pointer; border: none; }
   position: relative;
 }
 .gc-section .gc-hero h1 {
-  font-size: clamp(44px, 4.2vw, 64px);
+  font-size: clamp(34px, 3.2vw, 46px);
   line-height: 1.08;
   letter-spacing: -0.015em;
-  text-wrap: balance;
+  text-wrap: pretty;
 }
 .gc-hero h1 .accent { color: var(--gc-accent); }
 .gc-hero .gc-lede { max-width: 560px; font-size: 17px; margin-top: 32px; }
@@ -186,6 +186,19 @@ button { font: inherit; cursor: pointer; border: none; }
   color: var(--gc-muted-mono);
   text-align: center;
 }
+
+/* HubSpot form within dark hero card */
+.gc-card-form .hs-form-private fieldset { padding: 0; margin: 0; border: none; max-width: 100% !important; }
+.gc-card-form .hs-form-private .hs-form-field { margin-bottom: 14px; }
+.gc-card-form .hs-form-private label { display: block; color: rgba(255,255,255,0.5); font-family: var(--gc-f-mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 6px; }
+.gc-card-form .hs-form-private input[type="email"],
+.gc-card-form .hs-form-private input[type="text"] { display: block; width: 100%; background: rgba(255,255,255,0.04); border: 1px solid var(--gc-hair-dark); border-radius: 6px; padding: 14px 16px; color: var(--gc-white); font-family: var(--gc-f-body); font-size: 14px; box-sizing: border-box; }
+.gc-card-form .hs-form-private input::placeholder { color: rgba(255,255,255,0.32); }
+.gc-card-form .hs-form-private input:focus { outline: none; border-color: var(--gc-accent); }
+.gc-card-form .hs-form-private .hs-error-msgs { color: #ff8080; font-size: 11px; list-style: none; padding: 0; margin: 4px 0; font-family: var(--gc-f-mono); }
+.gc-card-form .hs-form-private .hs-button { display: block; width: 100%; background: var(--gc-accent); color: var(--gc-white); border: none; border-radius: 6px; padding: 15px 22px; font-family: var(--gc-f-mono); font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; cursor: pointer; transition: background 0.15s; }
+.gc-card-form .hs-form-private .hs-button:hover { background: #d9543c; }
+.gc-card-form .submitted-message { color: rgba(255,255,255,0.8); font-family: var(--gc-f-mono); font-size: 13px; line-height: 1.7; }
 
 /* Hero SVG circuit background */
 .gc-hero-circuit {
@@ -741,6 +754,7 @@ button { font: inherit; cursor: pointer; border: none; }
   font-size: 56px;
   line-height: 1.06;
   margin-bottom: 48px;
+  text-align: center !important;
 }
 
 /* ── RESPONSIVE ── */
@@ -934,10 +948,7 @@ button { font: inherit; cursor: pointer; border: none; }
       <div class="gc-card-form">
         <span class="gc-eyebrow">Book a Call</span>
         <h3>Go AI-native.</h3>
-        <form id="gc-hero-form">
-          <input class="gc-field" type="email" name="email" placeholder="Work email" required>
-          <button class="gc-btn gc-btn-coral" type="submit">Start Building Circuits <span class="arrow">→</span></button>
-        </form>
+        <div id="gc-hs-form-target"></div>
       </div>
     </div>
   </div>
@@ -1560,36 +1571,21 @@ button { font: inherit; cursor: pointer; border: none; }
   window.addEventListener('resize', onScroll);
   onScroll();
 
-  // Hero form → HubSpot Forms API
-  var heroForm = document.getElementById('gc-hero-form');
-  if (heroForm) {
-    heroForm.addEventListener('submit', function(e) {
-      e.preventDefault();
-      var email = heroForm.querySelector('input[type="email"]').value;
-      var hutkMatch = document.cookie.match(/hubspotutk=([^;]+)/);
-      fetch('https://api.hsforms.com/submissions/v3/integration/submit/5046646/b17af1ad-180f-4b22-a3fd-97a321b8d6c3', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({
-          fields: [{name: 'email', value: email}],
-          context: {
-            hutk: hutkMatch ? hutkMatch[1] : undefined,
-            pageUri: window.location.href,
-            pageName: 'GTM Circuits'
-          }
-        })
-      }).then(function(res) {
-        if (res.ok) {
-          var card = heroForm.closest('.gc-card-form');
-          if (card) card.innerHTML = '<p style="font-family:\'IBM Plex Mono\',monospace;font-size:13px;line-height:1.7;color:rgba(255,255,255,0.8);">Got it. We\'ll be in touch within one business day.</p>';
-        } else {
-          window.location.href = '/contact' + (email ? '?email=' + encodeURIComponent(email) : '');
-        }
-      }).catch(function() {
-        window.location.href = '/contact' + (email ? '?email=' + encodeURIComponent(email) : '');
+  // Load HubSpot intake form into hero card
+  var hsScript = document.createElement('script');
+  hsScript.charset = 'utf-8';
+  hsScript.src = '//js.hsforms.net/forms/embed/v2.js';
+  hsScript.onload = function() {
+    if (window.hbspt && document.getElementById('gc-hs-form-target')) {
+      hbspt.forms.create({
+        region: 'na1',
+        portalId: '5046646',
+        formId: 'b17af1ad-180f-4b22-a3fd-97a321b8d6c3',
+        target: '#gc-hs-form-target'
       });
-    });
-  }
+    }
+  };
+  document.body.appendChild(hsScript);
 
 })();
 </script>
