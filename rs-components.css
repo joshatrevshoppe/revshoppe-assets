@@ -1,0 +1,173 @@
+/* ============================================================
+   RevShoppe — Components
+   Typography primitives, buttons, fields, eyebrows, pills, cards.
+   Class prefix: .rs-
+   ============================================================ */
+
+/* ── Display type ─────────────────────────────────────── */
+.rs-h1, .rs-h2, .rs-h3 {
+  font-family: var(--rs-f-display);
+  font-weight: 500;
+  letter-spacing: var(--rs-tracking-display);
+  line-height: 1.08;
+  margin: 0;
+  text-wrap: balance;
+}
+.rs-h1 { font-size: var(--rs-size-h1); line-height: 1.06; letter-spacing: -0.015em; }
+.rs-h2 { font-size: var(--rs-size-h2); }
+.rs-h3 { font-size: var(--rs-size-h3); }
+.rs-h1 .accent, .rs-h2 .accent, .rs-h3 .accent { color: var(--rs-accent); }
+
+.rs-eyebrow {
+  font-family: var(--rs-f-mono);
+  font-size: var(--rs-size-mono-eyebrow);
+  letter-spacing: var(--rs-tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--rs-accent);
+  font-weight: 500;
+  display: block;
+  margin: 0 0 24px 0;
+}
+
+.rs-lede {
+  font-family: var(--rs-f-body);
+  font-size: var(--rs-size-lede);
+  line-height: 1.65;
+  font-weight: 400;
+  max-width: 640px;
+  margin: 28px 0 0 0;
+}
+.rs-section.dark  .rs-lede { color: var(--rs-muted-white); }
+.rs-section.light .rs-lede { color: var(--rs-body-gray); }
+
+/* ── Buttons ──────────────────────────────────────────── */
+.rs-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 15px 22px;
+  font-family: var(--rs-f-mono);
+  font-size: 12px;
+  letter-spacing: var(--rs-tracking-nav);
+  text-transform: uppercase;
+  border-radius: var(--rs-radius-btn);
+  border: none;
+  transition: transform 0.15s, background 0.15s;
+}
+.rs-btn-coral {
+  background: var(--rs-accent);
+  color: var(--rs-white);
+  width: 100%;
+}
+.rs-btn-coral:hover { background: var(--rs-accent-hover); }
+.rs-btn-white {
+  background: var(--rs-white);
+  color: var(--rs-accent);
+  padding: 18px 32px;
+}
+.rs-btn-white:hover { background: #f0eeea; }
+.rs-btn .arrow { font-family: var(--rs-f-body); font-size: 16px; letter-spacing: 0; }
+
+/* ── Form field ───────────────────────────────────────── */
+.rs-field {
+  display: block;
+  width: 100%;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--rs-hair-dark);
+  border-radius: var(--rs-radius-field);
+  padding: 14px 16px;
+  color: var(--rs-white);
+  font-family: var(--rs-f-body);
+  font-size: 14px;
+  margin-bottom: 14px;
+  transition: border-color 0.2s;
+}
+.rs-field::placeholder { color: rgba(255,255,255,0.32); }
+.rs-field:focus { outline: none; border-color: var(--rs-accent); }
+
+/* ── Card surfaces ────────────────────────────────────── */
+.rs-card-form {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid var(--rs-hair-dark);
+  border-radius: var(--rs-radius-card);
+  padding: 32px;
+  position: relative;
+  backdrop-filter: blur(4px);
+}
+.rs-card-form .rs-eyebrow { margin-bottom: 20px; }
+.rs-card-form h3 {
+  font-size: 20px;
+  line-height: 1.2;
+  margin-bottom: 22px;
+  color: var(--rs-white);
+}
+
+.rs-card-light {
+  background: var(--rs-white);
+  border: 1px solid var(--rs-hair-light);
+  border-radius: var(--rs-radius-card);
+  padding: 32px;
+}
+
+/* ── Pills ────────────────────────────────────────────── */
+.rs-pills { display: flex; flex-wrap: wrap; gap: 5px; }
+.rs-pill {
+  font-family: var(--rs-f-mono);
+  font-size: var(--rs-size-pill);
+  letter-spacing: var(--rs-tracking-pill);
+  text-transform: uppercase;
+  color: var(--rs-body-gray);
+  background: transparent;
+  border: 1px solid var(--rs-hair-light);
+  padding: 3px 7px;
+  border-radius: var(--rs-radius-pill);
+  transition: color 0.3s, border-color 0.3s, background 0.3s;
+}
+.rs-pill.on-dark {
+  color: rgba(250,250,249,0.78);
+  background: var(--rs-ink);
+  border-color: transparent;
+}
+
+/* ── Brand mark (small coral dot, used in nav + accents) ── */
+.rs-brand-mark {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--rs-accent);
+  box-shadow: 0 0 10px rgba(232,99,74,0.7);
+  display: inline-block;
+}
+
+/* ── Outcome / stat card ──────────────────────────────── */
+.rs-stat-card {
+  background: rgba(255,255,255,0.025);
+  border: 1px solid var(--rs-hair-dark);
+  border-left: 3px solid var(--rs-accent);
+  border-radius: 8px;
+  padding: 40px 32px 36px;
+  position: relative;
+}
+.rs-stat-card .figure {
+  font-family: var(--rs-f-display);
+  font-weight: 500;
+  font-size: 72px;
+  letter-spacing: -0.025em;
+  color: var(--rs-accent);
+  line-height: 1;
+  margin-bottom: 24px;
+}
+.rs-stat-card .copy {
+  font-family: var(--rs-f-body);
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: var(--rs-muted-white);
+  margin: 0 0 16px 0;
+}
+.rs-stat-card .conf {
+  font-family: var(--rs-f-mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--rs-muted-mono);
+}

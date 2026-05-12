@@ -1,0 +1,56 @@
+/* ============================================================
+   RevShoppe — Section Backgrounds
+   The signature dot-grid texture on dark + light sections, and
+   the coral CTA surface.
+   ============================================================ */
+
+.rs-section {
+  position: relative;
+  padding: var(--rs-section-pad-y) 0;
+  overflow: hidden;
+}
+
+/* DARK — dot grid texture on ink background */
+.rs-section.dark {
+  background-color: var(--rs-bg-dark);
+  color: var(--rs-white);
+  background-image:
+    radial-gradient(circle, rgba(255,255,255,0.045) 1px, transparent 1.2px);
+  background-size: 22px 22px;
+}
+
+/* LIGHT — dot grid texture on paper background */
+.rs-section.light {
+  background-color: var(--rs-bg-light);
+  color: var(--rs-ink);
+  background-image:
+    radial-gradient(circle, rgba(26,24,32,0.045) 1px, transparent 1.2px);
+  background-size: 22px 22px;
+}
+
+/* CORAL — solid brand surface, used for high-impact CTAs */
+.rs-section.coral {
+  background-color: var(--rs-accent);
+  color: var(--rs-white);
+}
+
+/* Wrap — content container */
+.rs-wrap {
+  width: 100%;
+  max-width: var(--rs-wrap-max);
+  margin: 0 auto;
+  padding: 0 var(--rs-wrap-pad-x);
+  position: relative;
+  z-index: 2;
+}
+
+/* Diagonal hatch — used for "broken / static" treatment */
+.rs-hatch {
+  background: repeating-linear-gradient(
+    45deg,
+    rgba(255,255,255,0.22),
+    rgba(255,255,255,0.22) 4px,
+    rgba(255,255,255,0.08) 4px,
+    rgba(255,255,255,0.08) 8px
+  );
+}

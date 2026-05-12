@@ -1,0 +1,115 @@
+/* ============================================================
+   RevShoppe — Node Scroll Pattern
+   The vertical "trunk with numbered nodes" diagram used in the
+   Anatomy section. Cards alternate left/right of a central spine.
+   As the user scrolls, the card nearest viewport center fills coral,
+   passed cards dim, and an SVG trail draws down the trunk.
+   ============================================================ */
+
+.rs-trunk-stage {
+  margin: 64px auto 0;
+  position: relative;
+  width: 100%;
+  max-width: 1080px;
+  aspect-ratio: 1080 / 1500;     /* 10 nodes spaced ~140 units apart */
+}
+
+.rs-trunk-spine {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Trail = the coral overlay line that draws as you scroll */
+.rs-trunk-trail {
+  stroke-dasharray: 1340;
+  stroke-dashoffset: 1340;
+  transition: stroke-dashoffset 0.4s ease-out;
+}
+
+/* Feedback arc (loops from last node back to first) */
+.rs-trunk-arc,
+.rs-trunk-arc-lbl { transition: opacity 0.8s ease; }
+.rs-trunk-arc.draw { animation: rs-trunk-arc-draw 1.4s ease-out forwards; }
+@keyframes rs-trunk-arc-draw {
+  from { stroke-dashoffset: 2400; opacity: 0; }
+  20%  { opacity: 0.95; }
+  to   { stroke-dashoffset: 0; opacity: 0.95; }
+}
+
+/* Numbered trunk nodes */
+.rs-trunk-node circle.outer { transition: fill 0.3s, stroke 0.3s, stroke-width 0.3s; }
+.rs-trunk-node text          { transition: fill 0.3s; }
+.rs-trunk-node circle.glow   { opacity: 0; transition: opacity 0.4s; }
+.rs-trunk-node.lit circle.outer { fill: var(--rs-accent); stroke: var(--rs-accent); }
+.rs-trunk-node.lit text          { fill: var(--rs-white); }
+.rs-trunk-node.lit circle.glow   { opacity: 0.35; }
+
+/* Cards (10 of them, alternating L/R of the trunk) */
+.rs-trunk-cards { position: absolute; inset: 0; z-index: 2; }
+
+.rs-trunk-card {
+  position: absolute;
+  width: 31.5%;
+  padding: 18px 20px 18px;
+  border: 1px solid var(--rs-hair-light);
+  border-radius: var(--rs-radius-card);
+  background: var(--rs-white);
+  opacity: 0.55;
+  transform: translateY(-50%);
+  transition:
+    background 0.45s ease,
+    border-color 0.45s ease,
+    transform 0.45s ease,
+    box-shadow 0.45s ease,
+    opacity 0.45s ease;
+}
+.rs-trunk-card.past { opacity: 0.9; }
+.rs-trunk-card.lit {
+  opacity: 1;
+  background: var(--rs-accent);
+  border-color: var(--rs-accent);
+  box-shadow: var(--rs-shadow-coral);
+  transform: translateY(calc(-50% - 2px));
+}
+.rs-trunk-card.lit .num  { color: rgba(255,255,255,0.85); }
+.rs-trunk-card.lit .name { color: var(--rs-white); }
+.rs-trunk-card.lit .desc { color: rgba(255,255,255,0.9); }
+.rs-trunk-card.lit .rs-pill {
+  color: rgba(255,255,255,0.92);
+  border-color: rgba(255,255,255,0.55);
+  background: rgba(255,255,255,0.12);
+}
+
+/* Alternating L / R placement around the central spine */
+.rs-trunk-card.ana-L { right: 50%; margin-right: 6.5%; }
+.rs-trunk-card.ana-R { left:  50%; margin-left:  6.5%; }
+
+/* Card internals */
+.rs-trunk-card .num {
+  font-family: var(--rs-f-mono);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  color: var(--rs-accent);
+  margin-bottom: 6px;
+  display: block;
+}
+.rs-trunk-card .name {
+  font-family: var(--rs-f-display);
+  font-weight: 500;
+  font-size: 17px;
+  line-height: 1.15;
+  color: var(--rs-ink);
+  margin: 0 0 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+}
+.rs-trunk-card .desc {
+  font-family: var(--rs-f-body);
+  font-size: 12.5px;
+  line-height: 1.55;
+  color: var(--rs-body-gray);
+  margin: 0 0 12px;
+}

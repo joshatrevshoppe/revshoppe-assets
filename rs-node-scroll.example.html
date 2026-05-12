@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>RevShoppe — Trunk Pattern Example</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="tokens.css" />
+<link rel="stylesheet" href="backgrounds.css" />
+<link rel="stylesheet" href="components.css" />
+<link rel="stylesheet" href="node-scroll-pattern.css" />
+</head>
+<body style="background: var(--rs-bg-light);">
+
+<section class="rs-section light">
+  <div class="rs-wrap">
+    <span class="rs-eyebrow">Anatomy</span>
+    <h2 class="rs-h2" style="color: var(--rs-ink); max-width: 760px;">
+      Every Circuit follows the same anatomy.
+    </h2>
+
+    <div class="rs-trunk-stage" id="anaStage">
+      <svg class="rs-trunk-spine" viewBox="0 0 1080 1500" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+        <defs>
+          <marker id="rs-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="#E8634A"/>
+          </marker>
+          <filter id="rs-glow" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="4" result="b"/>
+            <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+
+        <!-- base trunk -->
+        <line x1="540" y1="60" x2="540" y2="1400" stroke="#d8d6d0" stroke-width="1.2"/>
+        <!-- coral trail overlay (animated) -->
+        <line class="rs-trunk-trail" x1="540" y1="60" x2="540" y2="1400"
+              stroke="#E8634A" stroke-width="2"
+              stroke-dasharray="1340" stroke-dashoffset="1340"/>
+
+        <!-- card-to-trunk stubs (L cards: 540→432, R cards: 540→648) -->
+        <g stroke="#d8d6d0" stroke-width="1">
+          <line x1="540" y1="120"  x2="432" y2="120"/>
+          <line x1="540" y1="260"  x2="648" y2="260"/>
+          <line x1="540" y1="400"  x2="432" y2="400"/>
+          <line x1="540" y1="540"  x2="648" y2="540"/>
+          <line x1="540" y1="680"  x2="432" y2="680"/>
+          <line x1="540" y1="820"  x2="648" y2="820"/>
+          <line x1="540" y1="960"  x2="432" y2="960"/>
+          <line x1="540" y1="1100" x2="648" y2="1100"/>
+          <line x1="540" y1="1240" x2="432" y2="1240"/>
+          <line x1="540" y1="1380" x2="648" y2="1380"/>
+        </g>
+
+        <!-- numbered trunk nodes -->
+        <g>
+          <!-- 10 of these. Step N at cy = 120 + (N-1)*140. -->
+          <g class="rs-trunk-node" data-step="1"><circle class="glow" cx="540" cy="120" r="22" fill="#E8634A"/><circle class="outer" cx="540" cy="120" r="16" fill="#FAFAF9" stroke="#d8d6d0" stroke-width="1.2"/><text x="540" y="124" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" font-weight="500" fill="#E8634A">01</text></g>
+          <g class="rs-trunk-node" data-step="2"><circle class="glow" cx="540" cy="260" r="22" fill="#E8634A"/><circle class="outer" cx="540" cy="260" r="16" fill="#FAFAF9" stroke="#d8d6d0" stroke-width="1.2"/><text x="540" y="264" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" font-weight="500" fill="#E8634A">02</text></g>
+          <g class="rs-trunk-node" data-step="3"><circle class="glow" cx="540" cy="400" r="22" fill="#E8634A"/><circle class="outer" cx="540" cy="400" r="16" fill="#FAFAF9" stroke="#d8d6d0" stroke-width="1.2"/><text x="540" y="404" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" font-weight="500" fill="#E8634A">03</text></g>
+          <g class="rs-trunk-node" data-step="4"><circle class="glow" cx="540" cy="540" r="22" fill="#E8634A"/><circle class="outer" cx="540" cy="540" r="16" fill="#FAFAF9" stroke="#d8d6d0" stroke-width="1.2"/><text x="540" y="544" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" font-weight="500" fill="#E8634A">04</text></g>
+          <g class="rs-trunk-node" data-step="5"><circle class="glow" cx="540" cy="680" r="22" fill="#E8634A"/><circle class="outer" cx="540" cy="680" r="16" fill="#FAFAF9" stroke="#d8d6d0" stroke-width="1.2"/><text x="540" y="684" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" font-weight="500" fill="#E8634A">05</text></g>
+          <g class="rs-trunk-node" data-step="6"><circle class="glow" cx="540" cy="820" r="22" fill="#E8634A"/><circle class="outer" cx="540" cy="820" r="16" fill="#FAFAF9" stroke="#d8d6d0" stroke-width="1.2"/><text x="540" y="824" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" font-weight="500" fill="#E8634A">06</text></g>
+          <g class="rs-trunk-node" data-step="7"><circle class="glow" cx="540" cy="960" r="22" fill="#E8634A"/><circle class="outer" cx="540" cy="960" r="16" fill="#FAFAF9" stroke="#d8d6d0" stroke-width="1.2"/><text x="540" y="964" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" font-weight="500" fill="#E8634A">07</text></g>
+          <g class="rs-trunk-node" data-step="8"><circle class="glow" cx="540" cy="1100" r="22" fill="#E8634A"/><circle class="outer" cx="540" cy="1100" r="16" fill="#FAFAF9" stroke="#d8d6d0" stroke-width="1.2"/><text x="540" y="1104" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" font-weight="500" fill="#E8634A">08</text></g>
+          <g class="rs-trunk-node" data-step="9"><circle class="glow" cx="540" cy="1240" r="22" fill="#E8634A"/><circle class="outer" cx="540" cy="1240" r="16" fill="#FAFAF9" stroke="#d8d6d0" stroke-width="1.2"/><text x="540" y="1244" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" font-weight="500" fill="#E8634A">09</text></g>
+          <g class="rs-trunk-node" data-step="10"><circle class="glow" cx="540" cy="1380" r="22" fill="#E8634A"/><circle class="outer" cx="540" cy="1380" r="16" fill="#FAFAF9" stroke="#d8d6d0" stroke-width="1.2"/><text x="540" y="1384" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" font-weight="500" fill="#E8634A">10</text></g>
+        </g>
+
+        <!-- feedback arc -->
+        <path class="rs-trunk-arc" d="M 540 1380 Q 1040 1380 1040 750 Q 1040 80 540 120"
+              fill="none" stroke="#E8634A" stroke-width="1.5" stroke-dasharray="6 5"
+              stroke-dashoffset="2400" opacity="0" marker-end="url(#rs-arr)"/>
+        <text class="rs-trunk-arc-lbl" x="1056" y="750"
+              font-family="IBM Plex Mono, monospace" font-size="11"
+              fill="#E8634A" letter-spacing="2.5"
+              transform="rotate(90 1056 750)" opacity="0">FEEDBACK · NEXT RUN STARTS STRONGER</text>
+
+        <!-- traveling current pulse (loops continuously) -->
+        <circle r="4.5" fill="#E8634A" filter="url(#rs-glow)" opacity="0.9">
+          <animateMotion dur="5.5s" repeatCount="indefinite" path="M 540 60 V 1400"/>
+        </circle>
+      </svg>
+
+      <div class="rs-trunk-cards">
+        <!-- Cards positioned by `top: %` based on their node y in viewBox.
+             Step N top% = ((120 + (N-1)*140) / 1500) * 100  -->
+        <div class="rs-trunk-card ana-L" style="top: 8%;"    data-step="1">
+          <span class="num">01 · TRIGGER</span>
+          <div class="name">Signal activates the circuit</div>
+          <p class="desc">A rep action, a Salesforce field change, a date that arrives, or a compelling event.</p>
+          <div class="rs-pills"><span class="rs-pill">Context</span><span class="rs-pill">Data</span></div>
+        </div>
+        <div class="rs-trunk-card ana-R" style="top: 17.33%;" data-step="2">
+          <span class="num">02 · QUALIFICATION</span>
+          <div class="name">ICP fit checked</div>
+          <p class="desc">Right size, right stack, not already in an active deal.</p>
+          <div class="rs-pills"><span class="rs-pill">Data</span></div>
+        </div>
+        <!-- …repeat for steps 3–10, each top% = step*9.333… - 1.333… -->
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="node-scroll-pattern.js"></script>
+</body>
+</html>

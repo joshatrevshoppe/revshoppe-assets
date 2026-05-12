@@ -536,6 +536,7 @@ section {
     <a href="#colors">Colors</a>
     <a href="#type">Typography</a>
     <a href="#components">Components</a>
+    <a href="#rs-system">RS System</a>
     <a href="#voice">Voice</a>
     <a href="#products">Products</a>
   </div>
@@ -639,8 +640,8 @@ section {
     </div>
 
     <div style="margin-top:48px; padding:28px; background:rgba(255,255,255,0.03); border:1px solid var(--border-dark); border-radius:var(--radius-card);">
-      <span class="section-label">Grid Texture — Required on Every Section</span>
-      <p style="color:rgba(255,255,255,0.7);">Every section has a subtle 1px grid overlay. <strong>Dark sections:</strong> <code style="font-family:var(--f-mono); color:#fff;">rgba(255,255,255,0.034)</code> at 40px. <strong>Light sections:</strong> <code style="font-family:var(--f-mono); color:#fff;">rgba(0,0,0,0.027)</code> at 56px. Coral CTA sections are the only sections with NO texture — solid coral only.</p>
+      <span class="section-label">Dot-Grid Texture — Required on Every Section</span>
+      <p style="color:rgba(255,255,255,0.7);">Every section has a 22px dot-grid overlay using radial gradients. <strong>Dark sections:</strong> <code style="font-family:var(--f-mono); color:#fff;">radial-gradient(circle, rgba(255,255,255,0.045) 1px, transparent 1.2px)</code> at 22px. <strong>Light sections:</strong> <code style="font-family:var(--f-mono); color:#fff;">radial-gradient(circle, rgba(26,24,32,0.045) 1px, transparent 1.2px)</code> at 22px. Coral CTA sections are the only sections with NO texture — solid coral only. Use <code style="font-family:var(--f-mono); color:#fff;">.rs-section.dark/.light/.coral</code> for new pages; legacy <code style="font-family:var(--f-mono); color:#fff;">.tex-dark/.tex-light</code> classes are preserved for existing pages.</p>
     </div>
   </div>
 </section>
@@ -797,6 +798,94 @@ section {
 </section>
 
 <!-- ══════════════════════════════════════════════════
+     6b. RS WEB COMPONENT SYSTEM
+     ══════════════════════════════════════════════════ -->
+<section id="rs-system" class="tex-dark">
+  <div class="wrap">
+    <span class="section-label">05 — RS Web Component System</span>
+    <h2 style="color:#fff;">The <code style="font-family:var(--f-mono); font-size:0.7em; color:var(--accent);">.rs-</code> prefix library.</h2>
+    <p style="margin-top:24px; color:rgba(255,255,255,0.7); max-width:68ch;">All new page work uses the <code style="font-family:var(--f-mono); color:var(--accent);">--rs-*</code> tokens and <code style="font-family:var(--f-mono); color:var(--accent);">.rs-</code> class prefix. Source files live in the repo as <strong style="color:#fff;">rs-tokens.css</strong>, <strong style="color:#fff;">rs-backgrounds.css</strong>, <strong style="color:#fff;">rs-components.css</strong>, <strong style="color:#fff;">rs-node-scroll.css</strong>, and <strong style="color:#fff;">rs-node-scroll.js</strong>. The trunk pattern JS is opt-in per page — it does not run globally.</p>
+
+    <div style="margin-top:48px;">
+      <span class="section-label" style="color:rgba(255,255,255,0.7);">Section pattern — use this on every new page section</span>
+      <div style="margin-top:16px; padding:24px; background:rgba(255,255,255,0.04); border:1px solid var(--border-dark); border-radius:var(--radius-card);">
+        <pre style="font-family:var(--f-mono); font-size:12px; color:rgba(255,255,255,0.8); white-space:pre-wrap; margin:0;">&lt;section class="rs-section dark"&gt;  &lt;!-- or .light / .coral --&gt;
+  &lt;div class="rs-wrap"&gt;
+    &lt;span class="rs-eyebrow"&gt;Eyebrow Text&lt;/span&gt;
+    &lt;h2 class="rs-h2"&gt;Section heading goes here.&lt;/h2&gt;
+    &lt;p class="rs-lede"&gt;Supporting paragraph copy…&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</pre>
+      </div>
+    </div>
+
+    <div style="margin-top:48px;">
+      <span class="section-label" style="color:rgba(255,255,255,0.7);">Typography classes</span>
+      <div class="grid-3" style="margin-top:20px;">
+        <div class="card-pillar">
+          <span class="card-pillar-num">.rs-eyebrow</span>
+          <p style="font-size:13px; color:rgba(255,255,255,0.65);">IBM Plex Mono · 11px · 0.24em tracking · uppercase · coral</p>
+        </div>
+        <div class="card-pillar">
+          <span class="card-pillar-num">.rs-h1 / .rs-h2 / .rs-h3</span>
+          <p style="font-size:13px; color:rgba(255,255,255,0.65);">RocWideMedium · fluid clamp sizing · –0.012em tracking · 1.08 line-height</p>
+        </div>
+        <div class="card-pillar">
+          <span class="card-pillar-num">.rs-lede</span>
+          <p style="font-size:13px; color:rgba(255,255,255,0.65);">Montserrat · 16px · 1.65 line-height · muted on dark, body-gray on light</p>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:48px;">
+      <span class="section-label" style="color:rgba(255,255,255,0.7);">Buttons</span>
+      <div style="display:flex; gap:14px; flex-wrap:wrap; padding:28px 0; align-items:center;">
+        <a href="#" style="display:inline-flex;align-items:center;gap:10px;padding:15px 22px;font-family:var(--f-mono);font-size:12px;letter-spacing:0.18em;text-transform:uppercase;border-radius:6px;border:none;background:var(--accent);color:#fff;text-decoration:none;">.rs-btn-coral</a>
+        <a href="#" style="display:inline-flex;align-items:center;gap:10px;padding:18px 32px;font-family:var(--f-mono);font-size:12px;letter-spacing:0.18em;text-transform:uppercase;border-radius:6px;border:none;background:#FAFAF9;color:var(--accent);text-decoration:none;">.rs-btn-white</a>
+      </div>
+      <p style="font-family:var(--f-mono); font-size:12px; color:rgba(255,255,255,0.6); letter-spacing:0.04em;">
+        <strong style="color:#fff;">.rs-btn-coral</strong> — coral fill, 15px/22px pad, 12px mono, 0.18em tracking, 6px radius, full-width in forms<br>
+        <strong style="color:#fff;">.rs-btn-white</strong> — off-white fill with coral text, 18px/32px pad, used on dark/coral sections
+      </p>
+    </div>
+
+    <div style="margin-top:48px;">
+      <span class="section-label" style="color:rgba(255,255,255,0.7);">Card surfaces</span>
+      <div class="grid-3" style="margin-top:20px;">
+        <div class="card-pillar">
+          <span class="card-pillar-num">.rs-card-form</span>
+          <p style="font-size:13px; color:rgba(255,255,255,0.65);">rgba(255,255,255,0.02) bg · hairline dark border · backdrop-blur · 32px pad. Used for sidebar forms on dark sections.</p>
+        </div>
+        <div class="card-pillar">
+          <span class="card-pillar-num">.rs-card-light</span>
+          <p style="font-size:13px; color:rgba(255,255,255,0.65);">Off-white bg · hairline light border · 32px pad. Used on light sections.</p>
+        </div>
+        <div class="card-pillar">
+          <span class="card-pillar-num">.rs-stat-card</span>
+          <p style="font-size:13px; color:rgba(255,255,255,0.65);">Dark bg · hairline border · 3px coral left accent. Contains .figure (72px display), .copy (body), .conf (mono label).</p>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:48px;">
+      <span class="section-label" style="color:rgba(255,255,255,0.7);">Trunk + Nodes scroll pattern (rs-node-scroll.css + .js)</span>
+      <div style="padding:28px; background:rgba(255,255,255,0.03); border:1px solid var(--border-dark); border-radius:var(--radius-card); margin-top:16px;">
+        <p style="color:rgba(255,255,255,0.75); margin-bottom:16px;">A vertical SVG spine with N numbered coral nodes, cards alternating left/right, three motion layers: (1) continuous current pulse, (2) scroll-active card lighting, (3) feedback arc on completion. Auto-inits any <code style="font-family:var(--f-mono); color:var(--accent);">.rs-trunk-stage</code> element on DOMReady.</p>
+        <pre style="font-family:var(--f-mono); font-size:12px; color:rgba(255,255,255,0.8); white-space:pre-wrap; margin:0;">.rs-trunk-stage
+  svg.rs-trunk-spine
+    line.rs-trunk-trail
+    g.rs-trunk-node[data-step]   (one per step, 1..N)
+    path.rs-trunk-arc            (optional — feedback loop)
+  .rs-trunk-cards
+    .rs-trunk-card[data-step]    (one per step)
+      .num · .name · .desc · .rs-pills</pre>
+        <p style="color:rgba(255,255,255,0.5); font-family:var(--f-mono); font-size:11px; margin-top:16px;">Defaults: 10 steps · 1080×1500 viewBox · 140px node spacing. Override via data-trail-total / data-trail-start / data-node-spacing / data-node-first-y. See node-scroll-pattern.example.html in the Downloads handoff for full markup.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
      7. VOICE & COPY
      ══════════════════════════════════════════════════ -->
 <section id="voice" class="tex-light">
@@ -942,7 +1031,7 @@ section {
         <ul>
           <li>No pure #000 or pure #fff as backgrounds — always use #26242F or #FAFAF9</li>
           <li>No new colors outside the six-token palette</li>
-          <li>No sections without the grid texture (except coral CTAs)</li>
+          <li>No sections without the dot-grid texture (except coral CTAs) — 22px radial-gradient dots</li>
           <li>No two same-tone sections back-to-back (dark/dark or light/light)</li>
           <li>No fonts outside the four approved (Roc Wide, IBM Plex Mono, Montserrat)</li>
           <li>No generic AI aesthetics — no purple gradients, no Space Grotesk, no stock Tailwind defaults</li>
