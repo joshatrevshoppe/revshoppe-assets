@@ -18,18 +18,18 @@
 :root {
   /* ── Colors ─────────────────────────────── */
   --accent: #E8634A;           /* Coral — only warm color. CTAs, eyebrows, highlights */
-  --accent-hover: #F0745C;     /* Coral hover */
+  --accent-hover: #d9543c;     /* Coral hover — darkens on interaction */
   --bg-dark: #26242F;          /* Primary dark — nav, hero, dark sections */
   --bg-charcoal: #2C2A27;      /* Secondary warm dark — use sparingly */
   --bg-light: #FAFAF9;         /* Off-white — light sections. NEVER pure #fff */
-  --headline: #111111;         /* Near-black for headlines on light */
-  --body: #8F95A0;             /* Body copy gray */
-  --border-light: rgba(0,0,0,0.07);
-  --border-dark: rgba(255,255,255,0.07);
+  --headline: #1A1820;         /* Near-black for headlines on light */
+  --body: #4B4956;             /* Body copy gray — on light backgrounds */
+  --border-light: rgba(26,24,32,0.10);
+  --border-dark: rgba(255,255,255,0.10);
 
   /* ── Type ───────────────────────────────── */
-  --f-display: "RocWideMedium", "Times New Roman", Georgia, serif;
-  --f-display-italic: "RocWideLight", Georgia, serif;
+  --f-display: "RocWideMedium", "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --f-display-italic: "RocWideLight", "Archivo", sans-serif;
   --f-mono: "IBM Plex Mono", "Courier New", monospace;
   --f-body: "Montserrat", "Helvetica Neue", Arial, sans-serif;
 
@@ -41,6 +41,48 @@
   --radius-tag: 3px;
   --radius-card: 10px;
   --radius-pillar: 12px;
+
+  /* ── RS Prefixed Tokens (web component system) ──────── */
+  /* These are the canonical tokens for all new page work.
+     The bare tokens above are kept for backward compatibility. */
+  --rs-accent:        #E8634A;
+  --rs-accent-hover:  #d9543c;
+  --rs-accent-soft:   rgba(232,99,74,0.18);
+  --rs-accent-faint:  rgba(232,99,74,0.08);
+  --rs-bg-dark:       #26242F;
+  --rs-bg-light:      #FAFAF9;
+  --rs-ink:           #1A1820;
+  --rs-body-gray:     #4B4956;
+  --rs-white:         #FAFAF9;
+  --rs-hair-dark:     rgba(255,255,255,0.10);
+  --rs-hair-light:    rgba(26,24,32,0.10);
+  --rs-muted-white:   rgba(255,255,255,0.62);
+  --rs-muted-mono:    rgba(255,255,255,0.45);
+  --rs-f-display:     "RocWideMedium","Archivo","Helvetica Neue",Arial,sans-serif;
+  --rs-f-display-light: "RocWideLight","Archivo","Helvetica Neue",Arial,sans-serif;
+  --rs-f-mono:        "IBM Plex Mono","Courier New",monospace;
+  --rs-f-body:        "Montserrat","Helvetica Neue",Arial,sans-serif;
+  --rs-size-h1:       clamp(44px, 4.2vw, 64px);
+  --rs-size-h2:       44px;
+  --rs-size-h3:       22px;
+  --rs-size-lede:     16px;
+  --rs-size-body:     14.5px;
+  --rs-size-mono-eyebrow: 11px;
+  --rs-size-pill:     9px;
+  --rs-tracking-eyebrow: 0.24em;
+  --rs-tracking-nav:  0.18em;
+  --rs-tracking-pill: 0.14em;
+  --rs-tracking-display: -0.012em;
+  --rs-radius-card:   10px;
+  --rs-radius-card-lg: 14px;
+  --rs-radius-btn:    6px;
+  --rs-radius-field:  6px;
+  --rs-radius-pill:   3px;
+  --rs-shadow-coral:  0 10px 28px -12px rgba(232,99,74,0.45);
+  --rs-shadow-coral-sm: 0 6px 24px -10px rgba(232,99,74,0.35);
+  --rs-section-pad-y: 120px;
+  --rs-wrap-max:      1200px;
+  --rs-wrap-pad-x:    48px;
 }
 
 /* NOTE: RocWideMedium is normally base64-embedded in the rs_css site script.
@@ -63,16 +105,14 @@ body {
 .tex-light {
   background-color: var(--bg-light);
   background-image:
-    linear-gradient(rgba(0,0,0,0.027) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0,0,0,0.027) 1px, transparent 1px);
-  background-size: 56px 56px;
+    radial-gradient(circle, rgba(26,24,32,0.045) 1px, transparent 1.2px);
+  background-size: 22px 22px;
 }
 .tex-dark {
   background-color: var(--bg-dark);
   background-image:
-    linear-gradient(rgba(255,255,255,0.034) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.034) 1px, transparent 1px);
-  background-size: 40px 40px;
+    radial-gradient(circle, rgba(255,255,255,0.045) 1px, transparent 1.2px);
+  background-size: 22px 22px;
   color: #fff;
 }
 .tex-coral {
@@ -561,10 +601,10 @@ section {
         <div class="token-note">Coral. The brand's only warm color. CTAs, eyebrows, highlights, active states, accent lines.</div>
       </div>
       <div class="token-row">
-        <div class="token-swatch" style="background:#F0745C;"></div>
+        <div class="token-swatch" style="background:#d9543c;"></div>
         <div class="token-name">--accent-hover</div>
-        <div class="token-hex">#F0745C</div>
-        <div class="token-note">Coral hover state.</div>
+        <div class="token-hex">#d9543c</div>
+        <div class="token-note">Coral hover state — darkens on interaction.</div>
       </div>
       <div class="token-row">
         <div class="token-swatch" style="background:#26242F;"></div>
@@ -585,16 +625,16 @@ section {
         <div class="token-note">Off-white. Light section backgrounds. NOT pure white.</div>
       </div>
       <div class="token-row">
-        <div class="token-swatch" style="background:#111111;"></div>
+        <div class="token-swatch" style="background:#1A1820;"></div>
         <div class="token-name">--headline</div>
-        <div class="token-hex">#111111</div>
-        <div class="token-note">Near-black for headlines on light backgrounds.</div>
+        <div class="token-hex">#1A1820</div>
+        <div class="token-note">Near-black for headlines on light backgrounds. Also aliased as <code style="font-family:var(--f-mono);">--rs-ink</code>.</div>
       </div>
       <div class="token-row">
-        <div class="token-swatch" style="background:#8F95A0;"></div>
+        <div class="token-swatch" style="background:#4B4956;"></div>
         <div class="token-name">--body</div>
-        <div class="token-hex">#8F95A0</div>
-        <div class="token-note">Body copy gray on light backgrounds.</div>
+        <div class="token-hex">#4B4956</div>
+        <div class="token-note">Body copy gray on light backgrounds. Also aliased as <code style="font-family:var(--f-mono);">--rs-body-gray</code>.</div>
       </div>
     </div>
 
