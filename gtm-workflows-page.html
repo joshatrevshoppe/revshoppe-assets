@@ -1,484 +1,1593 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta name="rs-page" content="gtm-workflows">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
+*, *::before, *::after { box-sizing: border-box; }
+img, svg { display: block; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; cursor: pointer; border: none; }
+
 :root {
-  --bg-light:     #FAFAF9;
-  --bg-dark:      #26242F;
-  --bg-charcoal:  #2C2A27;
-  --accent:       #E8634A;
-  --accent-hover: #F0745C;
-  --headline:     #111111;
-  --body:         #8F95A0;
-  --border-light: rgba(0,0,0,0.07);
-  --border-dark:  rgba(255,255,255,0.07);
+  --gc-accent:       #E8634A;
+  --gc-accent-soft:  rgba(232,99,74,0.18);
+  --gc-accent-faint: rgba(232,99,74,0.08);
+  --gc-bg-dark:      #26242F;
+  --gc-bg-light:     #FAFAF9;
+  --gc-ink:          #1A1820;
+  --gc-body-gray:    #4B4956;
+  --gc-white:        #FAFAF9;
+  --gc-hair-dark:    rgba(255,255,255,0.10);
+  --gc-hair-light:   rgba(26,24,32,0.10);
+  --gc-muted-white:  rgba(255,255,255,0.62);
+  --gc-muted-mono:   rgba(255,255,255,0.45);
+  --gc-f-display:    "roc-grotesk-wide","Archivo","Helvetica Neue",Arial,sans-serif;
+  --gc-f-mono:       "IBM Plex Mono","Courier New",monospace;
+  --gc-f-body:       "Montserrat","Helvetica Neue",Arial,sans-serif;
 }
 
-@font-face {
-  font-family: "RocWideMedium";
-  src: url("https://cdn.prod.website-files.com/61f825b46abaae2807007e90/67dea6a57df5c619dba13468_RocGroteskWide-Medium.woff2") format("woff2");
-  font-weight: 500; font-display: block;
+/* ── SECTION SCAFFOLDING ── */
+.gc-section {
+  display: block;
+  position: relative;
+  padding: 120px 0;
+  overflow: hidden;
+  font-family: var(--gc-f-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+.gc-section.dark {
+  background-color: var(--gc-bg-dark);
+  color: var(--gc-white);
+  background-image: radial-gradient(circle, rgba(255,255,255,0.045) 1px, transparent 1.2px);
+  background-size: 22px 22px;
+}
+.gc-section.light {
+  background-color: var(--gc-bg-light);
+  color: var(--gc-ink);
+  background-image: radial-gradient(circle, rgba(26,24,32,0.045) 1px, transparent 1.2px);
+  background-size: 22px 22px;
+}
+.gc-section.coral {
+  background-color: var(--gc-accent);
+  color: var(--gc-white);
 }
 
-/* TEXTURES */
-.wf-tex-dark {
-  background-color: var(--bg-dark);
-  background-image: linear-gradient(rgba(255,255,255,0.034) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.034) 1px,transparent 1px);
-  background-size: 40px 40px;
-  border-top: 1px solid rgba(255,255,255,0.08); border-bottom: 1px solid rgba(255,255,255,0.08);
-  box-shadow: 0 8px 32px rgba(0,0,0,0.35),0 2px 8px rgba(0,0,0,0.20),0 -8px 32px rgba(0,0,0,0.35),0 -2px 8px rgba(0,0,0,0.20);
-  position: relative; z-index: 2;
-}
-.wf-tex-light {
-  background-color: var(--bg-light);
-  background-image:
-    repeating-linear-gradient(17deg,transparent 0px,transparent 2px,rgba(0,0,0,0.032) 2px,rgba(0,0,0,0.032) 3px),
-    repeating-linear-gradient(103deg,transparent 0px,transparent 3px,rgba(0,0,0,0.022) 3px,rgba(0,0,0,0.022) 4px),
-    repeating-linear-gradient(197deg,transparent 0px,transparent 4px,rgba(0,0,0,0.016) 4px,rgba(0,0,0,0.016) 5px);
-  border-top: 1px solid rgba(255,255,255,0.95); border-bottom: 1px solid rgba(0,0,0,0.06);
-  box-shadow: 0 4px 20px rgba(0,0,0,0.10),0 1px 4px rgba(0,0,0,0.06),0 -4px 16px rgba(0,0,0,0.08);
-  position: relative; z-index: 1;
-}
-.wf-tex-charcoal {
-  background-color: var(--bg-charcoal);
-  background-image: linear-gradient(rgba(255,255,255,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.025) 1px,transparent 1px);
-  background-size: 48px 48px;
-  border-top: 1px solid rgba(255,255,255,0.08); border-bottom: 1px solid rgba(255,255,255,0.08);
-  box-shadow: 0 8px 32px rgba(0,0,0,0.35),0 2px 8px rgba(0,0,0,0.20),0 -8px 32px rgba(0,0,0,0.35),0 -2px 8px rgba(0,0,0,0.20);
-  position: relative; z-index: 2;
+.gc-wrap {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 48px;
+  position: relative;
+  z-index: 2;
 }
 
-/* LAYOUT */
-.wf-sec   { padding: 88px 48px; }
-.wf-inner { max-width: 1160px; margin: 0 auto; }
-.wf-eyebrow { display: block; font-family: "IBM Plex Mono",monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 20px; }
-
-/* HERO */
-.wf-hero { padding: 96px 48px 88px; }
-.wf-hero-grid { display: grid; grid-template-columns: 1fr 460px; gap: 80px; align-items: start; max-width: 1160px; margin: 0 auto; }
-.wf-hero h1 { font-family: "RocWideMedium",sans-serif; font-size: clamp(30px,3.6vw,50px); line-height: 1.07; letter-spacing: -1.8px; color: #fff; margin-bottom: 28px; }
-.wf-hero-lead { font-family: "Montserrat",sans-serif; font-size: 16px; color: rgba(255,255,255,0.5); line-height: 1.85; letter-spacing: -0.3px; max-width: 520px; }
-.wf-hero-lead p + p { margin-top: 16px; }
-
-/* FORM CARD — exact match to contact page */
-.form-card { background: #1A1825; border: 1px solid rgba(255,255,255,0.08); border-top: 3px solid var(--accent); border-radius: 10px; padding: 40px 36px; box-shadow: 0 16px 48px rgba(0,0,0,0.35),0 4px 16px rgba(0,0,0,0.25); }
-.form-card-label { font-family: "IBM Plex Mono",monospace; font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
-.form-card-title { font-family: "RocWideMedium",sans-serif; font-size: 22px; letter-spacing: -0.5px; color: #fff; margin-bottom: 8px; }
-.form-card-sub { font-family: "Montserrat",sans-serif; font-size: 13px; color: rgba(255,255,255,0.35); line-height: 1.6; margin-bottom: 24px; }
-.cf-label { font-family: "IBM Plex Mono",monospace; font-size: 9px; font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.4); }
-.cf-input { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12); border-radius: 3px; color: rgba(255,255,255,0.85); font-family: "Montserrat",sans-serif; font-size: 13px; font-weight: 400; padding: 10px 14px; outline: none; transition: border-color 0.15s; width: 100%; box-sizing: border-box; }
-.cf-input:focus { border-color: rgba(232,99,74,0.5); }
-.cf-input::placeholder { color: rgba(255,255,255,0.18); }
-.cf-select { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12); border-radius: 3px; color: rgba(255,255,255,0.5); font-family: "Montserrat",sans-serif; font-size: 13px; padding: 10px 14px; outline: none; width: 100%; box-sizing: border-box; -webkit-appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='rgba(255,255,255,0.3)' stroke-width='1.5' fill='none'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; }
-.cf-select option { background: #1A1825; color: #fff; }
-.cf-btn { background: var(--accent); border: none; border-radius: 3px; font-family: "IBM Plex Mono",monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; padding: 13px 28px; color: #fff; width: 100%; cursor: pointer; transition: background 0.15s; }
-.cf-btn:hover { background: var(--accent-hover); }
-.cf-btn:disabled { opacity: 0.6; cursor: not-allowed; }
-
-/* SAY GOODBYE TO */
-.wf-goodbye-list { margin-top: 48px; display: grid; grid-template-columns: 1fr 1fr; gap: 0; border-top: 1px solid rgba(255,255,255,0.08); }
-.wf-goodbye-item { display: flex; align-items: baseline; gap: 16px; padding: 22px 0; border-bottom: 1px solid rgba(255,255,255,0.06); padding-right: 48px; }
-.wf-goodbye-item:nth-child(even) { padding-right: 0; padding-left: 48px; border-left: 1px solid rgba(255,255,255,0.06); }
-.wf-goodbye-x { font-family: "IBM Plex Mono",monospace; font-size: 12px; color: var(--accent); flex-shrink: 0; opacity: 0.7; }
-.wf-goodbye-text { font-family: "Montserrat",sans-serif; font-size: 15px; color: rgba(255,255,255,0.65); line-height: 1.55; letter-spacing: -0.25px; }
-
-/* CAPABILITY SECTIONS */
-.wf-cap { display: grid; grid-template-columns: 1fr 200px; gap: 64px; align-items: start; }
-.wf-cap-eyebrow { display: block; font-family: "IBM Plex Mono",monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 18px; }
-.wf-cap-h2 { font-family: "RocWideMedium",sans-serif; font-size: clamp(22px,2.8vw,36px); line-height: 1.1; letter-spacing: -1.2px; margin-bottom: 20px; }
-.wf-cap-h2.light { color: var(--headline); }
-.wf-cap-h2.dark  { color: #fff; }
-.wf-cap-body { font-family: "Montserrat",sans-serif; font-size: 15px; line-height: 1.85; letter-spacing: -0.25px; }
-.wf-cap-body.light { color: var(--body); }
-.wf-cap-body.dark  { color: rgba(255,255,255,0.5); }
-.wf-cap-body p + p { margin-top: 16px; }
-.wf-cap-stat { text-align: right; padding-top: 6px; }
-.wf-cap-stat-num { font-family: "RocWideMedium",sans-serif; font-size: clamp(48px,5vw,72px); color: var(--accent); letter-spacing: -0.02em; line-height: 1; display: block; margin-bottom: 8px; }
-.wf-cap-stat-lbl { font-family: "Montserrat",sans-serif; font-size: 12px; line-height: 1.5; }
-.wf-cap-stat-lbl.light { color: var(--body); }
-.wf-cap-stat-lbl.dark  { color: rgba(255,255,255,0.4); }
-.wf-cap-stat-src { font-family: "IBM Plex Mono",monospace; font-size: 8.5px; letter-spacing: 0.1em; text-transform: uppercase; margin-top: 6px; display: block; }
-.wf-cap-stat-src.light { color: rgba(0,0,0,0.2); }
-.wf-cap-stat-src.dark  { color: rgba(255,255,255,0.15); }
-
-/* PROOF */
-.wf-logos { display: flex; flex-wrap: wrap; margin-top: 44px; border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; overflow: hidden; }
-.wf-logo-cell { flex: 1 1 calc(100% / 6); min-width: 110px; display: flex; align-items: center; justify-content: center; padding: 28px 20px; border-right: 1px solid rgba(255,255,255,0.06); }
-.wf-logo-cell:last-child { border-right: none; }
-.wf-logo-cell img { height: 22px; width: auto; max-width: 110px; object-fit: contain; filter: brightness(0) invert(1); opacity: 0.35; display: block; }
-.wf-roi-link { display: inline-flex; align-items: center; gap: 8px; margin-top: 28px; font-family: "IBM Plex Mono",monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); text-decoration: none; }
-.wf-roi-link:hover { color: var(--accent-hover); }
-
-/* BOTTOM CTA */
-.wf-cta { padding: 96px 48px; background: var(--accent); background-image: linear-gradient(rgba(255,255,255,0.07) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.07) 1px,transparent 1px); background-size: 48px 48px; border-top: 2px solid rgba(170,45,25,0.4); box-shadow: 0 -16px 48px rgba(0,0,0,0.4),0 -4px 12px rgba(0,0,0,0.3); position: relative; z-index: 3; }
-.wf-cta-grid { max-width: 1160px; margin: 0 auto; display: grid; grid-template-columns: 1fr 460px; gap: 80px; align-items: start; }
-.wf-cta-h2 { font-family: "RocWideMedium",sans-serif; font-size: clamp(26px,3.2vw,44px); line-height: 1.07; letter-spacing: -1.4px; color: #fff; margin-bottom: 18px; }
-.wf-cta-body { font-family: "Montserrat",sans-serif; font-size: 16px; color: rgba(255,255,255,0.72); line-height: 1.8; letter-spacing: -0.3px; }
-/* CTA form overrides */
-.wf-cta .form-card { background: rgba(0,0,0,0.2); border-color: rgba(255,255,255,0.15); }
-.wf-cta .cf-label { color: rgba(255,255,255,0.45); }
-.wf-cta .cf-input { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.2); }
-.wf-cta .cf-input:focus { border-color: rgba(255,255,255,0.5); }
-.wf-cta .cf-select { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.2); color: rgba(255,255,255,0.7); }
-.wf-cta .cf-btn { background: #fff; color: var(--accent); }
-.wf-cta .cf-btn:hover { background: rgba(255,255,255,0.93); }
-.wf-cta .form-card-label { color: rgba(255,255,255,0.45); }
-.wf-cta .form-card-title { color: #fff; }
-.wf-cta .form-card-sub { color: rgba(255,255,255,0.45); }
-
-/* RESPONSIVE */
-@media (max-width: 1024px) {
-  .wf-hero-grid { grid-template-columns: 1fr; }
-  .wf-cap { grid-template-columns: 1fr; gap: 32px; }
-  .wf-cap-stat { text-align: left; }
-  .wf-cta-grid { grid-template-columns: 1fr; gap: 48px; }
-  .wf-goodbye-list { grid-template-columns: 1fr; }
-  .wf-goodbye-item:nth-child(even) { padding-left: 0; border-left: none; }
+/* ── TYPOGRAPHY ── */
+.gc-eyebrow {
+  font-family: var(--gc-f-mono);
+  font-size: 11px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--gc-accent);
+  font-weight: 500;
+  display: block;
+  margin: 0 0 24px 0;
 }
-@media (max-width: 768px) {
-  .wf-sec  { padding: 64px 24px; }
-  .wf-hero { padding: 64px 24px 56px; }
-  .wf-cta  { padding: 64px 24px; }
-  .wf-logos { justify-content: center; }
-  .wf-logo-cell { flex: 1 1 calc(100% / 3); }
+.gc-section h1, .gc-section h2, .gc-section h3 {
+  font-family: var(--gc-f-display);
+  font-weight: 500;
+  letter-spacing: -0.012em;
+  line-height: 1.08;
+  margin: 0;
+  text-wrap: balance;
 }
-@media (max-width: 480px) {
-  .wf-hero { padding: 48px 20px 40px; }
-  .wf-sec  { padding: 52px 20px; }
-  .wf-cta  { padding: 52px 20px; }
-  .form-card { padding: 28px 20px; }
+.gc-section h2 { font-size: 44px; }
+.gc-section h3 { font-size: 22px; }
+
+.gc-lede {
+  font-family: var(--gc-f-body);
+  font-size: 16px;
+  line-height: 1.65;
+  font-weight: 400;
+  max-width: 640px;
+  margin: 28px 0 0 0;
+}
+.dark .gc-lede { color: var(--gc-muted-white); }
+.light .gc-lede { color: var(--gc-body-gray); }
+
+/* ── BUTTONS ── */
+.gc-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 15px 22px;
+  font-family: var(--gc-f-mono);
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  border-radius: 6px;
+  transition: background 0.15s;
+}
+.gc-btn-coral {
+  background: var(--gc-accent);
+  color: var(--gc-white);
+  width: 100%;
+}
+.gc-btn-coral:hover { background: #d9543c; }
+.gc-btn-white {
+  background: var(--gc-white);
+  color: var(--gc-accent);
+  padding: 18px 32px;
+}
+.gc-btn-white:hover { background: #f0eeea; }
+.gc-btn .arrow { font-family: var(--gc-f-body); font-size: 16px; letter-spacing: 0; }
+
+/* ── HERO ── */
+.gc-hero {
+  padding: 180px 0 140px;
+}
+.gc-hero-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 80px;
+  align-items: start;
+  position: relative;
+}
+.gc-section .gc-hero h1 {
+  font-size: clamp(44px, 4.2vw, 64px) !important;
+  line-height: 1.08 !important;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+.gc-hero h1 .accent { color: var(--gc-accent); }
+.gc-hero .gc-lede { max-width: 560px; font-size: 17px; margin-top: 32px; }
+
+/* Hero form card */
+.gc-card-form {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid var(--gc-hair-dark);
+  border-radius: 10px;
+  padding: 32px;
+  position: relative;
+  backdrop-filter: blur(4px);
+}
+.gc-card-form .gc-eyebrow { margin-bottom: 20px; }
+.gc-card-form h3 {
+  font-size: 20px;
+  line-height: 1.2;
+  margin-bottom: 22px;
+  color: var(--gc-white);
+}
+.gc-field {
+  display: block;
+  width: 100%;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--gc-hair-dark);
+  border-radius: 6px;
+  padding: 14px 16px;
+  color: var(--gc-white);
+  font-family: var(--gc-f-body);
+  font-size: 14px;
+  margin-bottom: 14px;
+  transition: border-color 0.2s;
+}
+.gc-field::placeholder { color: rgba(255,255,255,0.32); }
+.gc-field:focus { outline: none; border-color: var(--gc-accent); }
+.gc-form-fine {
+  margin-top: 14px;
+  font-family: var(--gc-f-mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gc-muted-mono);
+  text-align: center;
+}
+
+/* Hero SVG circuit background */
+.gc-hero-circuit {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1;
+  opacity: 0.55;
+}
+.gc-hero-circuit svg { position: absolute; top: 0; right: -60px; }
+
+/* ── GAP (Section 2) ── */
+.gc-section.gc-gap {
+  padding-top: 0;
+  padding-bottom: 140px;
+}
+.gc-divider {
+  height: 1px;
+  background: var(--gc-hair-dark);
+  margin: 0 0 120px 0;
+}
+.gc-compare-grid {
+  margin-top: 80px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--gc-hair-dark);
+  border: 1px solid var(--gc-hair-dark);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.gc-compare-panel {
+  background: var(--gc-bg-dark);
+  padding: 48px 44px 44px;
+  position: relative;
+}
+.gc-compare-panel .label {
+  font-family: var(--gc-f-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--gc-muted-mono);
+  margin-bottom: 36px;
+}
+.gc-compare-panel.right .label { color: var(--gc-accent); }
+
+/* AI-Aspirational */
+.asp-explainer {
+  border: 1px dashed rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.025);
+  padding: 16px 18px;
+  margin-bottom: 18px;
+  font-family: var(--gc-f-body);
+  font-size: 14px;
+  line-height: 1.6;
+  color: rgba(255,255,255,0.7);
+}
+.asp-explainer strong { color: var(--gc-white); font-weight: 600; }
+
+.merge-template {
+  border: 1px solid rgba(255,255,255,0.18);
+  background: rgba(255,255,255,0.03);
+  padding: 18px 18px 16px;
+  margin-bottom: 14px;
+  font-family: var(--gc-f-mono);
+  font-size: 12.5px;
+  line-height: 1.95;
+  color: rgba(255,255,255,0.78);
+  position: relative;
+}
+.merge-template::before {
+  content: "TEMPLATE";
+  position: absolute;
+  top: -8px; left: 14px;
+  padding: 0 8px;
+  background: var(--gc-bg-dark);
+  font-family: var(--gc-f-mono);
+  font-size: 9px;
+  letter-spacing: 0.24em;
+  color: rgba(255,255,255,0.5);
+}
+.slot {
+  display: inline-block;
+  padding: 1px 7px;
+  border: 1px dashed var(--gc-accent);
+  background: rgba(232,99,74,0.12);
+  color: var(--gc-accent);
+  font-family: var(--gc-f-mono);
+  font-size: 11.5px;
+  font-weight: 500;
+}
+.merge-runs { display: grid; gap: 8px; margin-top: 18px; }
+.merge-run {
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  gap: 16px;
+  padding: 12px 14px;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.018);
+  font-family: var(--gc-f-body);
+  font-size: 13px;
+  line-height: 1.65;
+  color: rgba(255,255,255,0.55);
+}
+.merge-run-tag {
+  font-family: var(--gc-f-mono);
+  font-size: 9.5px;
+  letter-spacing: 0.22em;
+  color: rgba(255,255,255,0.4);
+  padding-top: 3px;
+}
+.merge-fill {
+  color: var(--gc-white);
+  background: rgba(255,255,255,0.07);
+  padding: 1px 5px;
+}
+
+/* AI-Native */
+.signal-explainer {
+  border: 1px dashed rgba(232,99,74,0.5);
+  background: rgba(232,99,74,0.06);
+  padding: 16px 18px;
+  margin-bottom: 18px;
+  font-family: var(--gc-f-body);
+  font-size: 14px;
+  line-height: 1.6;
+  color: rgba(255,255,255,0.82);
+}
+.signal-explainer strong { color: var(--gc-white); font-weight: 600; }
+.signal-cards { display: grid; gap: 12px; }
+.signal-card {
+  border: 1px solid rgba(232,99,74,0.3);
+  background: rgba(255,255,255,0.025);
+  padding: 14px 16px 15px;
+}
+.sc-tag {
+  font-family: var(--gc-f-mono);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  color: var(--gc-accent);
+  margin-bottom: 9px;
+}
+.signal-ribbon { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 10px; }
+.gc-chip {
+  font-family: var(--gc-f-mono);
+  font-size: 8.5px;
+  letter-spacing: 0.14em;
+  padding: 3px 7px;
+  border: 1px solid;
+  text-transform: uppercase;
+}
+.gc-chip.catalist { color: var(--gc-accent); border-color: rgba(232,99,74,0.5); background: rgba(232,99,74,0.1); }
+.gc-chip.first    { color: rgba(255,255,255,0.75); border-color: rgba(255,255,255,0.28); background: rgba(255,255,255,0.03); }
+.signal-msg {
+  font-family: var(--gc-f-body);
+  font-size: 13px;
+  line-height: 1.65;
+  color: rgba(255,255,255,0.88);
+}
+
+/* Pipeline strip */
+.gc-pipeline-strip {
+  margin-top: 28px;
+  padding: 28px 36px 30px;
+  border: 1px solid var(--gc-hair-dark);
+  border-radius: 12px;
+  background: rgba(255,255,255,0.02);
+}
+.ps-label {
+  font-family: var(--gc-f-mono);
+  font-size: 10px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--gc-muted-mono);
+  margin-bottom: 18px;
+}
+.ps-grid {
+  display: grid;
+  grid-template-columns: 1fr 190px 1fr;
+  gap: 28px;
+  align-items: center;
+}
+.ps-bar {
+  height: 22px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  position: relative;
+  overflow: hidden;
+}
+.ps-fill { display: block; height: 100%; }
+.ps-fill.flat {
+  width: 8%;
+  background: repeating-linear-gradient(45deg, rgba(255,255,255,0.22), rgba(255,255,255,0.22) 4px, rgba(255,255,255,0.08) 4px, rgba(255,255,255,0.08) 8px);
+}
+.ps-fill.grow {
+  width: 72%;
+  background: var(--gc-accent);
+  box-shadow: 0 0 18px rgba(232,99,74,0.5);
+}
+.ps-meta {
+  margin-top: 10px;
+  font-family: var(--gc-f-mono);
+  font-size: 11px;
+  line-height: 1.6;
+  color: var(--gc-muted-mono);
+  letter-spacing: 0.01em;
+}
+.ps-gap { text-align: center; }
+.ps-gap-label {
+  display: block;
+  font-family: var(--gc-f-display);
+  font-size: 17px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  color: var(--gc-accent);
+  text-transform: uppercase;
+}
+.ps-gap-sub {
+  display: block;
+  margin-top: 8px;
+  font-family: var(--gc-f-mono);
+  font-size: 9.5px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gc-muted-mono);
+}
+
+/* ── DEFINITION (Section 3) ── */
+.gc-def-layout {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 80px;
+  align-items: start;
+  margin-top: 80px;
+}
+.gc-def-copy h2 { color: var(--gc-ink); max-width: 580px; }
+.gc-def-copy .gc-lede { max-width: 540px; }
+
+.notlist {
+  margin-top: 48px;
+  max-width: 540px;
+  border-top: 1px solid var(--gc-hair-light);
+  padding-top: 28px;
+}
+.notlist-head {
+  font-family: var(--gc-f-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: rgba(26,24,32,0.55);
+  margin-bottom: 22px;
+}
+.notlist-item {
+  display: grid;
+  grid-template-columns: 22px 1fr;
+  gap: 18px;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--gc-hair-light);
+}
+.notlist-item:last-child { border-bottom: none; }
+.nl-mark {
+  width: 10px; height: 10px;
+  margin-top: 7px;
+  border-radius: 50%;
+  border: 1px solid var(--gc-accent);
+  position: relative;
+}
+.nl-mark::before {
+  content: "";
+  position: absolute;
+  left: 14px; top: 4px;
+  width: 18px; height: 1px;
+  background: var(--gc-accent);
+  opacity: 0.45;
+}
+.nl-body { min-width: 0; }
+.nl-label {
+  display: block;
+  font-family: var(--gc-f-mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gc-accent);
+  margin-bottom: 6px;
+}
+.nl-body p {
+  margin: 0;
+  font-family: var(--gc-f-body);
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: var(--gc-body-gray);
+}
+.gc-def-circuit { width: 100%; max-width: 560px; margin-left: auto; }
+
+/* ── PILLARS (Section 4) ── */
+.gc-pillars-head {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: end;
+}
+.gc-pillars-head .gc-lede { margin-top: 0; }
+.gc-link-inline {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 22px;
+  font-family: var(--gc-f-mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gc-accent);
+  border-bottom: 1px solid var(--gc-accent);
+  padding-bottom: 4px;
+}
+.gc-link-inline:hover { color: #f08571; border-color: #f08571; }
+
+.gc-pillar-grid {
+  margin-top: 80px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  border: 1px solid var(--gc-hair-dark);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.gc-pillar {
+  padding: 36px 30px 40px;
+  border-right: 1px solid var(--gc-hair-dark);
+  position: relative;
+  background: var(--gc-bg-dark);
+}
+.gc-pillar:last-child { border-right: none; }
+.gc-pillar .num {
+  font-family: var(--gc-f-mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  color: var(--gc-accent);
+  margin-bottom: 60px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.gc-pillar .num::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--gc-hair-dark);
+}
+.gc-pillar .name {
+  font-family: var(--gc-f-display);
+  font-weight: 500;
+  font-size: 22px;
+  letter-spacing: -0.005em;
+  color: var(--gc-white);
+  margin-bottom: 16px;
+}
+.gc-pillar .desc {
+  font-family: var(--gc-f-body);
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--gc-muted-white);
+  margin: 0;
+}
+.gc-pillar::before {
+  content: "";
+  position: absolute;
+  right: -5px; top: 88px;
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  background: var(--gc-bg-dark);
+  border: 1px solid var(--gc-accent);
+  z-index: 3;
+}
+.gc-pillar:last-child::before { display: none; }
+.gc-pillar::after {
+  content: "";
+  position: absolute;
+  left: 30px; right: 30px;
+  top: 92px;
+  height: 1px;
+  background: var(--gc-hair-dark);
+  z-index: 1;
+}
+
+/* ── ANATOMY (Section 5) ── */
+.gc-anatomy-head { max-width: 760px; }
+.gc-anatomy-head h2 { color: var(--gc-ink); }
+.gc-anatomy-head .gc-lede { max-width: 720px; }
+
+.ana-stage {
+  margin: 64px auto 0;
+  position: relative;
+  width: 100%;
+  max-width: 1080px;
+  aspect-ratio: 1080 / 1500;
+}
+.ana-spine {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+.ana-trail {
+  stroke-dasharray: 1340;
+  stroke-dashoffset: 1340;
+  transition: stroke-dashoffset 0.4s ease-out;
+}
+.ana-arc {
+  transition: opacity 0.8s ease;
+}
+.ana-arc.draw {
+  animation: gc-arc-draw 1.4s ease-out forwards;
+}
+@keyframes gc-arc-draw {
+  from { stroke-dashoffset: 2400; opacity: 0; }
+  20%  { opacity: 0.95; }
+  to   { stroke-dashoffset: 0; opacity: 0.95; }
+}
+.ana-node circle.outer { transition: fill 0.3s, stroke 0.3s, stroke-width 0.3s; }
+.ana-node text { transition: fill 0.3s; }
+.ana-node.lit circle.outer { fill: #E8634A; stroke: #E8634A; }
+.ana-node.lit text { fill: #FAFAF9; }
+.ana-node.lit circle.glow { opacity: 0.35; }
+.ana-node circle.glow { opacity: 0; transition: opacity 0.4s; }
+
+.ana-cards { position: absolute; inset: 0; z-index: 2; }
+.ana-card {
+  position: absolute;
+  width: 31.5%;
+  padding: 18px 20px;
+  border: 1px solid var(--gc-hair-light);
+  border-radius: 10px;
+  background: var(--gc-white);
+  transition: background 0.45s ease, border-color 0.45s ease, transform 0.45s ease, box-shadow 0.45s ease, opacity 0.45s ease;
+  opacity: 0.55;
+  transform: translateY(-50%);
+}
+.ana-card.lit {
+  opacity: 1;
+  background: #E8634A;
+  border-color: #E8634A;
+  box-shadow: 0 10px 28px -12px rgba(232,99,74,0.45);
+  transform: translateY(calc(-50% - 2px));
+}
+.ana-card.lit .num { color: rgba(255,255,255,0.85); }
+.ana-card.lit .name,
+.ana-card.lit .desc { color: #FAFAF9; }
+.ana-card.lit .desc { color: rgba(255,255,255,0.9); }
+.ana-card.lit .gc-pill {
+  color: rgba(255,255,255,0.92);
+  border-color: rgba(255,255,255,0.55);
+  background: rgba(255,255,255,0.12);
+}
+.ana-card.past { opacity: 0.9; }
+.ana-card.ana-L { right: 50%; margin-right: 6.5%; }
+.ana-card.ana-R { left: 50%; margin-left: 6.5%; }
+
+.ana-card .num {
+  font-family: var(--gc-f-mono);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  color: var(--gc-accent);
+  margin-bottom: 6px;
+  display: block;
+}
+.ana-card .name {
+  font-family: var(--gc-f-display);
+  font-weight: 500;
+  font-size: 17px;
+  line-height: 1.15;
+  color: var(--gc-ink);
+  margin: 0 0 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+}
+.ana-card .desc {
+  font-family: var(--gc-f-body);
+  font-size: 12.5px;
+  line-height: 1.55;
+  color: var(--gc-body-gray);
+  margin: 0 0 12px;
+}
+.gc-pills { display: flex; flex-wrap: wrap; gap: 5px; }
+.gc-pill {
+  font-family: var(--gc-f-mono);
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gc-body-gray);
+  background: transparent;
+  border: 1px solid var(--gc-hair-light);
+  padding: 3px 7px;
+  border-radius: 3px;
+  transition: color 0.3s, border-color 0.3s, background 0.3s;
+}
+.ana-card.lit .gc-pill {
+  color: rgba(255,255,255,0.9);
+  border-color: rgba(255,255,255,0.45);
+  background: rgba(255,255,255,0.12);
+}
+
+/* ── RESULTS (Section 6) ── */
+.gc-results-grid {
+  margin-top: 80px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.gc-outcome-card {
+  background: rgba(255,255,255,0.025);
+  border: 1px solid var(--gc-hair-dark);
+  border-left: 3px solid var(--gc-accent);
+  border-radius: 8px;
+  padding: 40px 32px 36px;
+}
+.gc-outcome-card .figure {
+  font-family: var(--gc-f-display);
+  font-weight: 500;
+  font-size: 72px;
+  letter-spacing: -0.025em;
+  color: var(--gc-accent);
+  line-height: 1;
+  margin-bottom: 24px;
+}
+.gc-outcome-card .copy {
+  font-family: var(--gc-f-body);
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: var(--gc-muted-white);
+  margin: 0;
+}
+
+/* ── CORAL CTA (Section 7) ── */
+.gc-section.coral { padding: 160px 0; text-align: center; }
+.gc-cta-circuit {
+  position: absolute; inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1;
+}
+.gc-cta-inner {
+  max-width: 820px;
+  margin: 0 auto;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+.gc-cta-inner h2 {
+  color: var(--gc-white);
+  font-size: 56px;
+  line-height: 1.06;
+  margin-bottom: 48px;
+  text-align: center !important;
+}
+
+/* ── RESPONSIVE ── */
+
+/* Tablet landscape: 900–1199px */
+@media (max-width: 1199px) {
+  .gc-section { padding: 96px 0; }
+  .gc-hero { padding: 160px 0 100px; }
+  .gc-section h2 { font-size: 38px; }
+  .gc-pillar-grid { grid-template-columns: 1fr 1fr; }
+  .gc-pillar:nth-child(2) { border-right: none; }
+  .gc-pillar:nth-child(3) { border-top: 1px solid var(--gc-hair-dark); border-right: 1px solid var(--gc-hair-dark); }
+  .gc-pillar:nth-child(4) { border-top: 1px solid var(--gc-hair-dark); border-right: none; }
+  .gc-pillar::before, .gc-pillar::after { display: none; }
+  .gc-results-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
+}
+
+/* Tablet portrait: 768–899px */
+@media (max-width: 899px) {
+  .gc-section { padding: 80px 0; }
+  .gc-hero { padding: 140px 0 80px; }
+  .gc-wrap { padding: 0 32px; }
+  .gc-section h2 { font-size: 32px; }
+  .gc-cta-inner h2 { font-size: 36px; }
+  .gc-hero-grid,
+  .gc-def-layout,
+  .gc-pillars-head { grid-template-columns: 1fr; gap: 48px; }
+  .gc-def-circuit { max-width: 480px; margin: 0 auto; }
+  /* anatomy collapses at this width */
+  .ana-stage { display: none; }
+  .gc-anatomy-list { display: grid; }
+  /* pipeline strip */
+  .ps-grid { grid-template-columns: 1fr; gap: 16px; }
+  .ps-gap { text-align: left; padding: 8px 0; }
+}
+
+/* Mobile landscape + portrait: ≤ 767px */
+@media (max-width: 767px) {
+  .gc-section { padding: 72px 0; }
+  .gc-hero { padding: 120px 0 72px; }
+  .gc-wrap { padding: 0 24px; }
+  .gc-section h1, .gc-section .gc-hero h1 { font-size: clamp(32px, 7vw, 42px); }
+  .gc-section h2 { font-size: clamp(24px, 5.5vw, 32px); }
+  .gc-lede { font-size: 15px; }
+  .gc-hero .gc-lede { font-size: 15px; }
+  .gc-hero-circuit { display: none; }
+  .gc-compare-grid { grid-template-columns: 1fr; }
+  .gc-compare-panel { padding: 32px 24px; }
+  .gc-pillar-grid { grid-template-columns: 1fr; }
+  .gc-pillar { border-right: none; border-bottom: 1px solid var(--gc-hair-dark); }
+  .gc-pillar:nth-child(2),
+  .gc-pillar:nth-child(3),
+  .gc-pillar:nth-child(4) { border-top: none; border-right: none; }
+  .gc-results-grid { grid-template-columns: 1fr; }
+  .gc-outcome-card .figure { font-size: 56px; }
+  .gc-section.coral { padding: 100px 0; }
+  .gc-cta-inner h2 { font-size: clamp(26px, 6vw, 36px); }
+  .gc-btn-white { padding: 16px 28px; }
+  .merge-template { font-size: 11px; line-height: 1.8; }
+  .merge-run { grid-template-columns: 60px 1fr; gap: 10px; font-size: 12px; }
+  .signal-card { padding: 12px 14px; }
+  .signal-msg { font-size: 12px; }
+  .gc-pipeline-strip { padding: 20px 20px 22px; }
+  .notlist { max-width: 100%; }
+}
+
+/* Mobile portrait: ≤ 479px */
+@media (max-width: 479px) {
+  .gc-section { padding: 60px 0; }
+  .gc-hero { padding: 100px 0 60px; }
+  .gc-wrap { padding: 0 20px; }
+  .gc-section h2 { font-size: 22px; }
+  .gc-cta-inner h2 { font-size: 22px; }
+  .gc-hero .gc-lede { font-size: 14px; }
+  .gc-lede { font-size: 14px; }
+  .gc-card-form { padding: 24px; }
+  .gc-outcome-card { padding: 28px 20px; }
+  .gc-outcome-card .figure { font-size: 48px; }
+  .gc-pillar { padding: 28px 20px 32px; }
+  .gc-pillar .num { margin-bottom: 40px; }
+  .signal-ribbon { gap: 4px; }
+  .gc-chip { font-size: 7.5px; padding: 2px 5px; }
+}
+
+/* Anatomy mobile fallback */
+.gc-anatomy-list { display: none; }
+.gc-anatomy-list {
+  gap: 0;
+  margin-top: 48px;
+}
+.gc-anatomy-list-item {
+  border: 1px solid var(--gc-hair-light);
+  border-bottom: none;
+  padding: 20px 20px 22px;
+  background: var(--gc-white);
+}
+.gc-anatomy-list-item:first-child { border-radius: 10px 10px 0 0; }
+.gc-anatomy-list-item:last-child { border-bottom: 1px solid var(--gc-hair-light); border-radius: 0 0 10px 10px; }
+.gc-anatomy-list-item .num {
+  font-family: var(--gc-f-mono);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  color: var(--gc-accent);
+  margin-bottom: 6px;
+  display: block;
+}
+.gc-anatomy-list-item .name {
+  font-family: var(--gc-f-display);
+  font-weight: 500;
+  font-size: 16px;
+  color: var(--gc-ink);
+  margin: 0 0 8px;
+  text-transform: uppercase;
+}
+.gc-anatomy-list-item .desc {
+  font-family: var(--gc-f-body);
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--gc-body-gray);
+  margin: 0;
+}
+
+/* Overflow guards */
+.gc-compare-panel, .signal-card, .merge-run, .gc-card-form { min-width: 0; overflow-wrap: break-word; word-break: break-word; }
+.merge-template { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+/* ── REDUCE MOTION ── */
+@media (prefers-reduced-motion: reduce) {
+  .ana-trail { transition: none; }
+  .ana-arc { transition: none; animation: none; }
+  .ana-card { transition: none; }
+  .ana-stage circle[r="4.5"],
+  .ana-stage circle[r="3"] { display: none; }
 }
 </style>
-
-<link rel="preload" href="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/67dea6a57df5c619dba13468_RocGroteskWide-Medium.woff2" as="font" type="font/woff2" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Service","name":"GTM Workflows","description":"GTM Workflows is RevShoppe's AI-native commercial motion design service. A GTM Workflow is a 10-step triggered orchestration that converts a buying signal into a revenue outcome and feeds the result back in — so each run outperforms the last. Built for enterprise CROs and revenue leaders replacing sequences with compounding systems.","provider":{"@type":"Organization","name":"RevShoppe","url":"https://www.revshoppe.com"},"serviceType":"Revenue Architecture and GTM Strategy","url":"https://www.revshoppe.com/solutions/gtm-workflows","audience":{"@type":"Audience","audienceType":"Chief Revenue Officers, VP of Revenue, VP of Sales, Revenue Operations Leaders"}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is a GTM Workflow?","acceptedAnswer":{"@type":"Answer","text":"A GTM Workflow is a triggered orchestration of steps that converts a buying signal into a revenue outcome and feeds the outcome back into the next run. Because it loops, the context layer gets sharper, AI generation gets more specific, and each run outperforms the last. It is not a sequence, a play, or an automation — it is a self-improving commercial motion."}},{"@type":"Question","name":"How is a GTM Workflow different from a sales sequence?","acceptedAnswer":{"@type":"Answer","text":"A sequence is one commercial step inside a Workflow — the delivery mechanism, not the loop. A GTM Workflow orchestrates 10 steps across Context, Data, Process, and Technology, with a feedback loop that makes each subsequent run smarter than the last. Sequences run off a single pillar. Workflows are designed across all four."}},{"@type":"Question","name":"What are the 10 steps in a GTM Workflow?","acceptedAnswer":{"@type":"Answer","text":"Every GTM Workflow follows the same 10-step anatomy: 1) Trigger — a signal activates the circuit; 2) Account Qualification — ICP fit is checked; 3) Scoring — signal strength multiplied by ICP fit determines routing; 4) Contact Mapping — buying committee identified; 5) Context Assembly — live company news, tech stack, history, and proof points are structured before a word is generated; 6) AI Generation — Claude reads the assembled context and writes the output; 7) Rep Review — a human approves before anything sends; 8) Execution — message sends, task creates, CRM updates; 9) Revenue Outcome — meeting, opportunity, or renewal; 10) Feedback — what worked feeds back into the context layer so the next run starts stronger."}},{"@type":"Question","name":"What are the four pillars that power a GTM Workflow?","acceptedAnswer":{"@type":"Answer","text":"The four pillars of the GTM Infrastructure that power every Circuit are: Context (ICP profiles, messaging, proof points, prompt architecture), Data (signals, enrichment, CRM records, outcomes data), Process (playbooks, rep interaction design, handoff protocols, SOPs), and Technology (SEP, CRM, AI deployment, stack integration). Most organizations are broken in at least two pillars without knowing it."}},{"@type":"Question","name":"What results do GTM Workflows produce?","acceptedAnswer":{"@type":"Answer","text":"RevShoppe clients running GTM Workflows have seen: 2.1× account engagement rate from Catalist-triggered outbound Workflows, +34% net-new pipeline quarter over quarter, and +61% SQL creation quarter over quarter."}},{"@type":"Question","name":"What is the difference between AI-aspirational and AI-native GTM?","acceptedAnswer":{"@type":"Answer","text":"An AI-aspirational organization has added AI to existing motions — sequences still fire, but AI-generated messages don't get sent because they don't sound authentic, data is dirty and unstructured, and nothing feeds back so nothing gets smarter. An AI-native organization runs GTM Workflows: each prospect receives a message generated from their live moment using proprietary signals, first-party context, and precise timing. Every run sharpens the next."}}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.revshoppe.com"},{"@type":"ListItem","position":2,"name":"Solutions","item":"https://www.revshoppe.com/solutions"},{"@type":"ListItem","position":3,"name":"GTM Workflows","item":"https://www.revshoppe.com/solutions/gtm-workflows"}]}
+</script>
 </head>
 <body>
 
-<!-- ======================================================= HERO -->
-<section class="wf-tex-dark wf-hero">
-  <div class="wf-hero-grid">
+<!-- ── HERO ── -->
+<section class="gc-section dark gc-hero">
+  <div class="gc-hero-circuit" aria-hidden="true">
+    <svg width="900" height="700" viewBox="0 0 900 700" fill="none">
+      <defs>
+        <radialGradient id="gc-nodeGlow" cx="0.5" cy="0.5" r="0.5">
+          <stop offset="0" stop-color="#E8634A" stop-opacity="0.55"/>
+          <stop offset="1" stop-color="#E8634A" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+      <g stroke="rgba(232,99,74,0.42)" stroke-width="1" fill="none">
+        <path d="M 50 120 L 220 120 L 220 220 L 420 220"/>
+        <path d="M 420 220 L 540 220 L 540 320 L 700 320"/>
+        <path d="M 100 380 L 280 380 L 280 460 L 460 460 L 460 560 L 680 560"/>
+        <path d="M 60 540 L 220 540 L 220 620 L 380 620"/>
+        <path d="M 700 320 L 800 320"/>
+      </g>
+      <g fill="#26242F" stroke="#E8634A" stroke-width="1.5">
+        <circle cx="50"  cy="120" r="4"/>
+        <circle cx="220" cy="120" r="3"/>
+        <circle cx="420" cy="220" r="4"/>
+        <circle cx="540" cy="220" r="3"/>
+        <circle cx="700" cy="320" r="5"/>
+        <circle cx="800" cy="320" r="4"/>
+        <circle cx="100" cy="380" r="3"/>
+        <circle cx="280" cy="380" r="3"/>
+        <circle cx="460" cy="460" r="3"/>
+        <circle cx="680" cy="560" r="4"/>
+        <circle cx="60"  cy="540" r="3"/>
+        <circle cx="380" cy="620" r="3"/>
+      </g>
+      <circle cx="700" cy="320" r="20" fill="url(#gc-nodeGlow)"/>
+    </svg>
+  </div>
 
-    <div>
-      <span class="wf-eyebrow">Solutions · GTM Workflows</span>
-      <h1>Sequences aren't a workflow.<br>That's why AI isn't working.</h1>
-      <div class="wf-hero-lead">
-        <p>You gave Claude the new messaging. Marketing loaded the sequences. Your reps rewrote them or ignored them and went back to writing their own emails. A quarter later you're looking at conversion data trying to figure out what changed.</p>
-        <p>Nothing changed. You added AI to a broken process.</p>
+  <div class="gc-wrap">
+    <div class="gc-hero-grid">
+      <div>
+        <span class="gc-eyebrow">GTM Workflows</span>
+        <h1>Your GTM is running sequences. <span class="accent">Your competitors are running Workflows.</span></h1>
+        <p class="gc-lede">You've approved the AI tools, built the playbooks, and staffed the team — but the motion underneath is still running the same direction it ran three years ago: one trigger, one message, no memory of what happened next. Your competitors are building something that learns — and booking more conversations because of it.</p>
       </div>
-    </div>
 
-    <div>
-      <div class="form-card">
-        <div class="form-card-label">GTM Workflows</div>
-        <div class="form-card-title">Let's build the motion.</div>
-        <div class="form-card-sub">No SDR. No automated sequence. A member of the RevShoppe team reviews every submission.</div>
-        <form id="wf-hero-form" novalidate>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;">
-            <div style="display:flex;flex-direction:column;gap:6px;">
-              <label class="cf-label" for="wfh-first">First Name <span style="color:var(--accent);">*</span></label>
-              <input class="cf-input" type="text" id="wfh-first" name="firstname" placeholder="Phil" autocomplete="given-name" required>
-            </div>
-            <div style="display:flex;flex-direction:column;gap:6px;">
-              <label class="cf-label" for="wfh-last">Last Name <span style="color:var(--accent);">*</span></label>
-              <input class="cf-input" type="text" id="wfh-last" name="lastname" placeholder="Funnel" autocomplete="family-name" required>
-            </div>
-          </div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;">
-            <div style="display:flex;flex-direction:column;gap:6px;">
-              <label class="cf-label" for="wfh-email">Work Email <span style="color:var(--accent);">*</span></label>
-              <input class="cf-input" type="email" id="wfh-email" name="email" placeholder="phil@pipeline.com" autocomplete="email" required>
-            </div>
-            <div style="display:flex;flex-direction:column;gap:6px;">
-              <label class="cf-label" for="wfh-phone">Phone</label>
-              <input class="cf-input" type="tel" id="wfh-phone" name="phone" placeholder="281-330-8004" autocomplete="tel">
-            </div>
-          </div>
-          <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:14px;">
-            <label class="cf-label" for="wfh-interest">What brings you here <span style="color:var(--accent);">*</span></label>
-            <select class="cf-select" id="wfh-interest" name="where_can_we_support_your_team_" required>
-              <option value="" disabled>Select one</option>
-              <option value="GTM Diagnosis">GTM Diagnosis</option>
-              <option value="Catalist Signals / CCR">Catalist Signals / CCR</option>
-              <option value="Salesforce Architecture">Salesforce Architecture</option>
-              <option value="GTM Workflows" selected>GTM Workflows</option>
-              <option value="Revenue Operating System">Revenue Operating System</option>
-              <option value="Managed Infrastructure">Managed Infrastructure</option>
-              <option value="General inquiry">General inquiry</option>
-            </select>
-          </div>
-          <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:14px;">
-            <label class="cf-label" for="wfh-msg">What are you working on <span style="color:var(--accent);">*</span></label>
-            <textarea class="cf-input" id="wfh-msg" name="message" rows="4" placeholder="Describe what's underperforming and what you've already tried." style="resize:vertical;min-height:100px;" required></textarea>
-          </div>
-          <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:20px;">
-            <label class="cf-label" for="wfh-contact">How should we contact you <span style="color:var(--accent);">*</span></label>
-            <select class="cf-select" id="wfh-contact" name="preferred_contact_method" required>
-              <option value="" disabled selected>Select one</option>
-              <option value="Email">Email</option>
-              <option value="Phone">Phone</option>
-              <option value="Either">Either works</option>
-            </select>
-          </div>
-          <div id="wfh-error" style="display:none;font-family:'IBM Plex Mono',monospace;font-size:10px;color:#f87171;letter-spacing:0.06em;margin-bottom:12px;"></div>
-          <button type="submit" id="wfh-btn" class="cf-btn">Send Message →</button>
+      <div class="gc-card-form">
+        <span class="gc-eyebrow">Book a Call</span>
+        <h3>Go AI-native.</h3>
+        <form id="gc-hero-form">
+          <input class="gc-field" type="email" name="email" placeholder="Work email" required>
+          <button class="gc-btn gc-btn-coral" type="submit">Start Building Workflows <span class="arrow">→</span></button>
         </form>
-        <div id="wfh-success" style="display:none;text-align:center;padding:40px 0;">
-          <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);margin-bottom:12px;">Message received</div>
-          <div style="font-family:'RocWideMedium',sans-serif;font-size:20px;color:#fff;letter-spacing:-0.5px;margin-bottom:10px;">We'll be in touch within one business day.</div>
-          <div style="font-family:'Montserrat',sans-serif;font-size:13px;color:rgba(255,255,255,0.35);line-height:1.6;">A member of the RevShoppe team reviews every submission.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── THE GAP ── -->
+<section class="gc-section dark gc-gap">
+  <div class="gc-wrap">
+    <div class="gc-divider"></div>
+    <div style="max-width: 820px;">
+      <span class="gc-eyebrow">The Problem</span>
+      <h2>The gap between an AI-aspirational org and an AI-native one is showing up in your pipeline.</h2>
+      <p class="gc-lede">AI-aspirational means you've added AI to what you already had. Your Outreach or Salesloft sequences fire, but the rep doesn't send the AI-generated message because it doesn't sound like anything they'd actually say. Apollo surfaces the contacts, but the data is dirty, unstructured, and the same list every competitor is working. Your reps have more tools open and less clarity on what to do next, and nothing in the motion feeds back in so nothing gets smarter. Every quarter starts from roughly the same place the last one did.</p>
+    </div>
+
+    <div class="gc-compare-grid">
+      <!-- LEFT: AI-Aspirational -->
+      <div class="gc-compare-panel left">
+        <div class="label">AI-Aspirational</div>
+        <div class="asp-explainer">
+          Every prospect receives <strong>the same message</strong>. Only the merge fields change — name, company, trigger. The system isn't reasoning; it's stamping.
+        </div>
+        <div class="merge-template">
+          Hi <span class="slot">{{first_name}}</span>,<br>
+          Noticed <span class="slot">{{company}}</span> just <span class="slot">{{trigger_event}}</span>. We help teams like <span class="slot">{{company}}</span> with <span class="slot">{{pain_point}}</span>.<br>
+          Worth a quick chat?
+        </div>
+        <div class="merge-runs">
+          <div class="merge-run">
+            <span class="merge-run-tag">SEND 01</span>
+            <span>Hi <span class="merge-fill">Sarah</span>, noticed <span class="merge-fill">Acme</span> just <span class="merge-fill">hired a CRO</span>. We help teams like <span class="merge-fill">Acme</span> with <span class="merge-fill">pipeline efficiency</span>.</span>
+          </div>
+          <div class="merge-run">
+            <span class="merge-run-tag">SEND 02</span>
+            <span>Hi <span class="merge-fill">Mike</span>, noticed <span class="merge-fill">Beta Corp</span> just <span class="merge-fill">hired a CRO</span>. We help teams like <span class="merge-fill">Beta Corp</span> with <span class="merge-fill">pipeline efficiency</span>.</span>
+          </div>
+          <div class="merge-run">
+            <span class="merge-run-tag">SEND 03</span>
+            <span>Hi <span class="merge-fill">Jamie</span>, noticed <span class="merge-fill">Gamma Inc</span> just <span class="merge-fill">hired a CRO</span>. We help teams like <span class="merge-fill">Gamma Inc</span> with <span class="merge-fill">pipeline efficiency</span>.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: AI-Native -->
+      <div class="gc-compare-panel right">
+        <div class="label">AI-Native</div>
+        <div class="signal-explainer">
+          Each prospect receives a message generated from <strong>that prospect's live moment</strong> — proprietary Catalist signals, first-party context, and timing.
+        </div>
+        <div class="signal-cards">
+          <div class="signal-card">
+            <div class="sc-tag">SARAH · ACME</div>
+            <div class="signal-ribbon">
+              <span class="gc-chip catalist">Catalist · Headcount build</span>
+              <span class="gc-chip catalist">Catalist · New CRO (11d)</span>
+              <span class="gc-chip first">1st party · 2 prior champions</span>
+            </div>
+            <div class="signal-msg">Sarah — saw you posted six enterprise AE roles this week. With your new CRO 11 days in, the next 90 days are about giving the team something to actually run. We helped two of your former Outreach champions stand that up. Worth comparing notes?</div>
+          </div>
+          <div class="signal-card">
+            <div class="sc-tag">MIKE · BETA CORP</div>
+            <div class="signal-ribbon">
+              <span class="gc-chip catalist">Catalist · Stack change</span>
+              <span class="gc-chip catalist">Catalist · Positioning shift</span>
+              <span class="gc-chip first">1st party · Pricing page 3×</span>
+            </div>
+            <div class="signal-msg">Mike — the new pricing page leaning into "AI-native sales" lines up with what we're seeing in your stack changes. The hard part of that pivot isn't the message; it's the motion underneath. That's where we work.</div>
+          </div>
+          <div class="signal-card">
+            <div class="sc-tag">JAMIE · GAMMA INC</div>
+            <div class="signal-ribbon">
+              <span class="gc-chip catalist">Catalist · AI initiative ($12M)</span>
+              <span class="gc-chip catalist">Catalist · Anthropic named</span>
+              <span class="gc-chip first">1st party · Q2 RFP opened</span>
+            </div>
+            <div class="signal-msg">Jamie — your Q3 call put a number on the AI-native GTM build. We're an Anthropic Solutions Partner and the team your prior RFP was scoped against. Worth a working session on where to start.</div>
+          </div>
         </div>
       </div>
     </div>
 
-  </div>
-</section>
-
-<!-- ======================================================= SAY GOODBYE TO -->
-<section class="wf-tex-dark wf-sec" style="border-top:1px solid rgba(255,255,255,0.05);box-shadow:none;padding-top:16px;">
-  <div class="wf-inner">
-    <h2 style="font-family:'RocWideMedium',sans-serif;font-size:clamp(22px,2.6vw,32px);line-height:1.1;letter-spacing:-1px;color:#fff;">Say goodbye to:</h2>
-    <div class="wf-goodbye-list">
-      <div class="wf-goodbye-item">
-        <span class="wf-goodbye-x">✕</span>
-        <span class="wf-goodbye-text">Messaging that doesn't convert — and nobody knows what's actually hitting inboxes</span>
-      </div>
-      <div class="wf-goodbye-item">
-        <span class="wf-goodbye-x">✕</span>
-        <span class="wf-goodbye-text">Reps who rewrite every AI draft before they'll send it</span>
-      </div>
-      <div class="wf-goodbye-item">
-        <span class="wf-goodbye-x">✕</span>
-        <span class="wf-goodbye-text">Static sequences nobody updated after the last rebrand</span>
-      </div>
-      <div class="wf-goodbye-item">
-        <span class="wf-goodbye-x">✕</span>
-        <span class="wf-goodbye-text">Signals you're paying for that nobody acts on</span>
-      </div>
-      <div class="wf-goodbye-item">
-        <span class="wf-goodbye-x">✕</span>
-        <span class="wf-goodbye-text">Your best rep converting 3x more — with no playbook to replicate it</span>
-      </div>
-      <div class="wf-goodbye-item">
-        <span class="wf-goodbye-x">✕</span>
-        <span class="wf-goodbye-text">Six weeks between new positioning and what your reps are actually sending</span>
-      </div>
-      <div class="wf-goodbye-item">
-        <span class="wf-goodbye-x">✕</span>
-        <span class="wf-goodbye-text">A QBR where you can't explain why one territory missed</span>
-      </div>
-      <div class="wf-goodbye-item">
-        <span class="wf-goodbye-x">✕</span>
-        <span class="wf-goodbye-text">AI output that sounds like AI — and every enterprise buyer can tell</span>
+    <!-- Pipeline outcome strip -->
+    <div class="gc-pipeline-strip">
+      <div class="ps-label">Pipeline outcome →</div>
+      <div class="ps-grid">
+        <div class="ps-side">
+          <div class="ps-bar"><span class="ps-fill flat"></span></div>
+          <div class="ps-meta">0 / 3 reply · zero learning carry · tomorrow's send starts at the same place</div>
+        </div>
+        <div class="ps-gap">
+          <span class="ps-gap-label">← The Gap →</span>
+          <span class="ps-gap-sub">same send volume, widening outcomes by the day</span>
+        </div>
+        <div class="ps-side">
+          <div class="ps-bar"><span class="ps-fill grow"></span></div>
+          <div class="ps-meta">2 / 3 reply · every prospect sharpens the next · compounds day over day</div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ======================================================= CAP 1: BOOK MORE CONVERSATIONS -->
-<section class="wf-tex-light wf-sec">
-  <div class="wf-inner">
-    <div class="wf-cap">
+<!-- ── THE CIRCUIT (Definition) ── -->
+<section class="gc-section light" id="circuit">
+  <div class="gc-wrap">
+    <div class="gc-def-layout">
+      <div class="gc-def-copy">
+        <span class="gc-eyebrow">Definition</span>
+        <h2>A GTM Workflow is what AI-native looks like in practice.</h2>
+        <p class="gc-lede">A GTM Workflow is a triggered orchestration of steps that converts a signal into a revenue outcome and feeds the outcome back into the next run. Because it loops, your context layer gets sharper, your AI generation gets more specific, and each run outperforms the last.</p>
+
+        <div class="notlist">
+          <div class="notlist-head">What it isn't</div>
+          <div class="notlist-item">
+            <span class="nl-mark"></span>
+            <div class="nl-body">
+              <span class="nl-label">Not a Sequence</span>
+              <p>A sequence is one commercial step inside a Workflow. It's the delivery mechanism, not the loop.</p>
+            </div>
+          </div>
+          <div class="notlist-item">
+            <span class="nl-mark"></span>
+            <div class="nl-body">
+              <span class="nl-label">Not a Play</span>
+              <p>A play is a set of instructions for a rep to follow. It doesn't execute itself and it doesn't feed back.</p>
+            </div>
+          </div>
+          <div class="notlist-item">
+            <span class="nl-mark"></span>
+            <div class="nl-body">
+              <span class="nl-label">Not an Automation</span>
+              <p>An automation runs logic. A GTM Workflow reads context, generates from it, and loops the output back in. Different machine entirely.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="gc-def-circuit">
+        <svg viewBox="0 0 560 760" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <marker id="gc-arr-def-end" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+              <path d="M0,0 L10,5 L0,10 z" fill="#E8634A"/>
+            </marker>
+          </defs>
+
+          <!-- Phase rail labels -->
+          <g font-family="IBM Plex Mono, monospace" font-size="9" fill="#9B96A3" letter-spacing="2">
+            <text x="24" y="24">01 · TRIGGERS</text>
+            <text x="24" y="148">02 · ACTIVATION</text>
+            <text x="24" y="332">03 · EXECUTION</text>
+            <text x="24" y="616">04 · OUTCOME</text>
+          </g>
+          <g stroke="rgba(26,24,32,0.10)" stroke-width="1">
+            <line x1="24" y1="32" x2="124" y2="32"/>
+            <line x1="24" y1="156" x2="124" y2="156"/>
+            <line x1="24" y1="340" x2="124" y2="340"/>
+            <line x1="24" y1="624" x2="124" y2="624"/>
+          </g>
+
+          <!-- 4 trigger input nodes -->
+          <g font-family="IBM Plex Mono, monospace" font-size="9.5" fill="#4B4956" letter-spacing="1" text-anchor="middle">
+            <text x="195" y="58">REP ACTION</text>
+            <text x="285" y="58">SF FIELD</text>
+            <text x="375" y="58">DATE ARRIVES</text>
+            <text x="465" y="58">CMP EVENT</text>
+          </g>
+          <g fill="#FAFAF9" stroke="#E8634A" stroke-width="1.3">
+            <circle cx="195" cy="78" r="5"/>
+            <circle cx="285" cy="78" r="5"/>
+            <circle cx="375" cy="78" r="5"/>
+            <circle cx="465" cy="78" r="5"/>
+          </g>
+          <!-- Fan-in to TRIGGER -->
+          <g fill="none" stroke="#E8634A" stroke-width="1.2">
+            <path d="M 195 84 Q 195 130 330 145"/>
+            <path d="M 285 84 Q 285 120 330 145"/>
+            <path d="M 375 84 Q 375 120 330 145"/>
+            <path d="M 465 84 Q 465 130 330 145"/>
+          </g>
+
+          <!-- TRIGGER node -->
+          <circle cx="330" cy="158" r="16" fill="#FAFAF9" stroke="#E8634A" stroke-width="1.6"/>
+          <circle cx="330" cy="158" r="5" fill="#E8634A"/>
+          <text x="360" y="154" font-family="roc-grotesk-wide, Archivo, sans-serif" font-size="13" fill="#1A1820">TRIGGER</text>
+          <text x="360" y="170" font-family="IBM Plex Mono, monospace" font-size="9" fill="#4B4956" letter-spacing="1">signal received</text>
+
+          <line x1="330" y1="174" x2="330" y2="212" stroke="#E8634A" stroke-width="1.2"/>
+
+          <!-- QUALIFY diamond -->
+          <path d="M 330 216 L 372 240 L 330 264 L 288 240 Z" fill="#FAFAF9" stroke="#E8634A" stroke-width="1.4"/>
+          <text x="330" y="244" font-family="IBM Plex Mono, monospace" font-size="9" fill="#4B4956" letter-spacing="1" text-anchor="middle">ICP FIT?</text>
+          <text x="385" y="237" font-family="roc-grotesk-wide, Archivo, sans-serif" font-size="12" fill="#1A1820">QUALIFY</text>
+          <text x="385" y="252" font-family="IBM Plex Mono, monospace" font-size="9" fill="#4B4956" letter-spacing="1">match · score · route</text>
+
+          <!-- NO branch -->
+          <g fill="none" stroke="rgba(26,24,32,0.25)" stroke-width="1" stroke-dasharray="3 3">
+            <path d="M 288 240 L 220 240 L 220 274"/>
+          </g>
+          <g stroke="rgba(26,24,32,0.32)" stroke-width="1">
+            <line x1="214" y1="268" x2="226" y2="280"/>
+            <line x1="226" y1="268" x2="214" y2="280"/>
+          </g>
+          <text x="220" y="298" font-family="IBM Plex Mono, monospace" font-size="8" fill="#9B96A3" letter-spacing="1" text-anchor="middle">EXIT</text>
+          <text x="258" y="232" font-family="IBM Plex Mono, monospace" font-size="8" fill="#9B96A3" letter-spacing="1">no</text>
+
+          <!-- YES continues -->
+          <text x="336" y="281" font-family="IBM Plex Mono, monospace" font-size="8" fill="#E8634A" letter-spacing="1">yes</text>
+          <line x1="330" y1="264" x2="330" y2="302" stroke="#E8634A" stroke-width="1.2"/>
+
+          <!-- ASSEMBLE node -->
+          <circle cx="330" cy="312" r="10" fill="#FAFAF9" stroke="#E8634A" stroke-width="1.4"/>
+          <circle cx="330" cy="312" r="3" fill="#E8634A"/>
+          <text x="350" y="309" font-family="roc-grotesk-wide, Archivo, sans-serif" font-size="12" fill="#1A1820">ASSEMBLE CONTEXT</text>
+          <text x="350" y="322" font-family="IBM Plex Mono, monospace" font-size="9" fill="#4B4956" letter-spacing="1">news · stack · history</text>
+
+          <!-- Context layer side input -->
+          <g fill="none" stroke="rgba(232,99,74,0.45)" stroke-width="1" stroke-dasharray="2 3">
+            <path d="M 195 312 L 320 312"/>
+          </g>
+          <circle cx="195" cy="312" r="3.5" fill="#FAFAF9" stroke="#E8634A" stroke-width="1"/>
+          <text x="190" y="303" font-family="IBM Plex Mono, monospace" font-size="8" fill="#9B96A3" letter-spacing="1" text-anchor="end">CONTEXT LAYER</text>
+
+          <line x1="330" y1="322" x2="330" y2="362" stroke="#E8634A" stroke-width="1.2"/>
+
+          <!-- GENERATE node -->
+          <circle cx="330" cy="372" r="10" fill="#FAFAF9" stroke="#E8634A" stroke-width="1.4"/>
+          <circle cx="330" cy="372" r="3" fill="#E8634A"/>
+          <text x="350" y="369" font-family="roc-grotesk-wide, Archivo, sans-serif" font-size="12" fill="#1A1820">GENERATE</text>
+          <text x="350" y="382" font-family="IBM Plex Mono, monospace" font-size="9" fill="#4B4956" letter-spacing="1">Claude reads + writes</text>
+
+          <line x1="330" y1="382" x2="330" y2="418" stroke="#E8634A" stroke-width="1.2"/>
+
+          <!-- REVIEW diamond -->
+          <path d="M 330 422 L 372 446 L 330 470 L 288 446 Z" fill="#FAFAF9" stroke="#E8634A" stroke-width="1.4"/>
+          <text x="330" y="450" font-family="IBM Plex Mono, monospace" font-size="9" fill="#4B4956" letter-spacing="1" text-anchor="middle">REVIEW</text>
+          <text x="385" y="443" font-family="roc-grotesk-wide, Archivo, sans-serif" font-size="12" fill="#1A1820">REP APPROVES</text>
+          <text x="385" y="458" font-family="IBM Plex Mono, monospace" font-size="9" fill="#4B4956" letter-spacing="1">human in the loop</text>
+
+          <line x1="330" y1="470" x2="330" y2="504" stroke="#E8634A" stroke-width="1.2"/>
+
+          <!-- EXECUTE node -->
+          <circle cx="330" cy="514" r="10" fill="#FAFAF9" stroke="#E8634A" stroke-width="1.4"/>
+          <circle cx="330" cy="514" r="3" fill="#E8634A"/>
+          <text x="350" y="511" font-family="roc-grotesk-wide, Archivo, sans-serif" font-size="12" fill="#1A1820">EXECUTE</text>
+          <text x="350" y="524" font-family="IBM Plex Mono, monospace" font-size="9" fill="#4B4956" letter-spacing="1">send · log · update</text>
+
+          <line x1="330" y1="524" x2="330" y2="626" stroke="#E8634A" stroke-width="1.2"/>
+
+          <!-- OUTCOME (filled coral) -->
+          <circle cx="330" cy="642" r="16" fill="#E8634A" stroke="#E8634A" stroke-width="1.6"/>
+          <circle cx="330" cy="642" r="6" fill="#FAFAF9"/>
+          <text x="360" y="638" font-family="roc-grotesk-wide, Archivo, sans-serif" font-size="13" fill="#1A1820">OUTCOME</text>
+          <text x="360" y="654" font-family="IBM Plex Mono, monospace" font-size="9" fill="#4B4956" letter-spacing="1">meeting · oppty · renewal</text>
+
+          <!-- Feedback arc -->
+          <path d="M 330 658 Q 330 720 430 720 Q 520 720 520 640 Q 520 180 520 130 Q 520 30 430 30 Q 380 30 330 30"
+                fill="none" stroke="#E8634A" stroke-width="1.4" stroke-dasharray="5 4"
+                marker-end="url(#gc-arr-def-end)"/>
+          <g fill="#E8634A">
+            <circle cx="520" cy="500" r="2"/>
+            <circle cx="520" cy="260" r="2"/>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOUR PILLARS ── -->
+<section class="gc-section dark" id="pillars">
+  <div class="gc-wrap">
+    <div class="gc-pillars-head">
       <div>
-        <span class="wf-cap-eyebrow">01 — Book More Conversations</span>
-        <h2 class="wf-cap-h2 light">The reps booking meetings aren't writing better emails. They're sending the right one.</h2>
-        <div class="wf-cap-body light">
-          <p>A workflow is a series of steps that captures what's happening at an account, routes it to the right channel, and drives one thing: a conversation. Not a template with personalization fields nobody fills. Not a sequence that was relevant when marketing wrote it three months ago.</p>
-          <p>Your best rep already does this manually. He spends 40 minutes before a cold call pulling account research he'll use once. A workflow does it for every rep on your team before they open Outreach.</p>
-        </div>
+        <span class="gc-eyebrow">GTM Infrastructure</span>
+        <h2>What powers a Workflow and where most orgs are broken.</h2>
       </div>
-      <div class="wf-cap-stat">
-        <span class="wf-cap-stat-num">142%</span>
-        <div class="wf-cap-stat-lbl light">higher reply rates from context-driven outreach</div>
-        <span class="wf-cap-stat-src light">Instantly, 2026</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ======================================================= CAP 2: RUN A MOTION YOUR REPS TRUST -->
-<section class="wf-tex-dark wf-sec">
-  <div class="wf-inner">
-    <div class="wf-cap">
       <div>
-        <span class="wf-cap-eyebrow">02 — Run a Motion Your Reps Trust</span>
-        <h2 class="wf-cap-h2 dark">The thing nobody says in the QBR.</h2>
-        <div class="wf-cap-body dark">
-          <p>Your reps stopped using the AI sequences because the first draft was embarrassing. They said "I prefer to write my own." Same thing.</p>
-          <p>Sequences reps trust are built on enough context that the first draft is close. Close enough that editing is faster than rewriting. When that's true, reps stop going rogue and start acting like editors. The time they were spending on email goes to calls. That's where the conversation rate actually moves.</p>
-        </div>
-      </div>
-      <div class="wf-cap-stat">
-        <span class="wf-cap-stat-num">3.7×</span>
-        <div class="wf-cap-stat-lbl dark">more likely to hit quota when AI runs on the right infrastructure</div>
-        <span class="wf-cap-stat-src dark">Gartner</span>
+        <p class="gc-lede" style="margin-top: 0;">Context, Data, Process, and Technology. Every step of the Workflow draws from one or more of them. Most orgs are breaking in at least two pillars without knowing it: reps doing research the context layer should have assembled, sequences running off data that's dirty and unstructured, tools that were never wired together. The Diagnosis finds which ones and in what order to fix them.</p>
+        <a href="/solutions/gtm-diagnosis" class="gc-link-inline">Read more about the GTM Diagnosis →</a>
       </div>
     </div>
-  </div>
-</section>
 
-<!-- ======================================================= CAP 3: KNOW WHAT'S WORKING -->
-<section class="wf-tex-light wf-sec">
-  <div class="wf-inner">
-    <div class="wf-cap">
-      <div>
-        <span class="wf-cap-eyebrow">03 — Know What's Working</span>
-        <h2 class="wf-cap-h2 light">You can't coach to something you can't see.</h2>
-        <div class="wf-cap-body light">
-          <p>72% of reps miss quota. When everyone on the team runs a different version of the motion — different prep, different channels, different interpretation of the messaging — and the number misses, there's no variable to isolate.</p>
-          <p>Consistent workflows give you consistent inputs. That's when the data starts telling you something useful.</p>
-        </div>
+    <div class="gc-pillar-grid">
+      <div class="gc-pillar">
+        <div class="num">01</div>
+        <div class="name">Context</div>
+        <p class="desc">ICP profiles, messaging, proof points, prompt architecture.</p>
       </div>
-      <div class="wf-cap-stat">
-        <span class="wf-cap-stat-num">72%</span>
-        <div class="wf-cap-stat-lbl light">of reps miss quota — most revenue leaders call it a people problem</div>
-        <span class="wf-cap-stat-src light">Industry Benchmark</span>
+      <div class="gc-pillar">
+        <div class="num">02</div>
+        <div class="name">Data</div>
+        <p class="desc">Signals, enrichment, CRM records, outcomes data.</p>
+      </div>
+      <div class="gc-pillar">
+        <div class="num">03</div>
+        <div class="name">Process</div>
+        <p class="desc">Playbooks, rep interaction design, handoff protocols, SOPs.</p>
+      </div>
+      <div class="gc-pillar">
+        <div class="num">04</div>
+        <div class="name">Technology</div>
+        <p class="desc">SEP, CRM, AI deployment, stack integration.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ======================================================= PROOF -->
-<section class="wf-tex-charcoal wf-sec">
-  <div class="wf-inner">
-    <span class="wf-eyebrow">Client Results</span>
-    <h2 style="font-family:'RocWideMedium',sans-serif;font-size:clamp(20px,2.4vw,30px);line-height:1.1;letter-spacing:-0.8px;color:#fff;">The organizations that fixed the foundation.</h2>
-    <div class="wf-logos">
-      <div class="wf-logo-cell"><img src="https://raw.githubusercontent.com/joshatrevshoppe/revshoppe-assets/refs/heads/main/ibm.svg" alt="IBM"></div>
-      <div class="wf-logo-cell"><img src="https://raw.githubusercontent.com/joshatrevshoppe/revshoppe-assets/refs/heads/main/siemens.svg" alt="Siemens"></div>
-      <div class="wf-logo-cell"><img src="https://raw.githubusercontent.com/joshatrevshoppe/revshoppe-assets/refs/heads/main/expedia-group.svg" alt="Expedia Group"></div>
-      <div class="wf-logo-cell"><img src="https://raw.githubusercontent.com/joshatrevshoppe/revshoppe-assets/refs/heads/main/bmc-software.svg" alt="BMC"></div>
-      <div class="wf-logo-cell"><img src="https://raw.githubusercontent.com/joshatrevshoppe/revshoppe-assets/refs/heads/main/hubspot.svg" alt="HubSpot"></div>
-      <div class="wf-logo-cell"><img src="https://raw.githubusercontent.com/joshatrevshoppe/revshoppe-assets/refs/heads/main/fis-global.svg" alt="FIS"></div>
-    </div>
-    <a href="/roi" class="wf-roi-link">See client results →</a>
-  </div>
-</section>
-
-<!-- ======================================================= BOTTOM CTA -->
-<section class="wf-cta">
-  <div class="wf-cta-grid">
-
-    <div>
-      <span class="wf-eyebrow" style="color:rgba(255,255,255,0.55);">GTM Workflows</span>
-      <h2 class="wf-cta-h2">Don't become obsolete. Start having more conversations.</h2>
-      <p class="wf-cta-body">RevShoppe builds the GTM workflows that drive conversations at scale — on the right channel, at the right time, with context your reps actually trust.</p>
+<!-- ── ANATOMY ── -->
+<section class="gc-section light" id="anatomy">
+  <div class="gc-wrap">
+    <div class="gc-anatomy-head">
+      <span class="gc-eyebrow">Anatomy</span>
+      <h2>Every GTM Workflow follows the same anatomy.</h2>
+      <p class="gc-lede">Sequences are binary. They run off a single pillar with no guardrails, which means a great playbook collapses the moment the data feeding it is dirty, or the technology supporting it wasn't built for it, or the messaging has no context behind it. A GTM Workflow is intentionally designed across all four pillars. Because every pillar is governed and continuously updated, the Workflow doesn't just run, it evolves.</p>
     </div>
 
-    <div>
-      <div class="form-card">
-        <div class="form-card-label">Get Started</div>
-        <div class="form-card-title">Let's build the motion.</div>
-        <div class="form-card-sub">No SDR. No automated sequence. We'll be in touch within one business day.</div>
-        <form id="wf-cta-form" novalidate>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;">
-            <div style="display:flex;flex-direction:column;gap:6px;">
-              <label class="cf-label" for="wfc-first">First Name <span style="color:rgba(255,255,255,0.8);">*</span></label>
-              <input class="cf-input" type="text" id="wfc-first" name="firstname" placeholder="Phil" autocomplete="given-name" required>
-            </div>
-            <div style="display:flex;flex-direction:column;gap:6px;">
-              <label class="cf-label" for="wfc-last">Last Name <span style="color:rgba(255,255,255,0.8);">*</span></label>
-              <input class="cf-input" type="text" id="wfc-last" name="lastname" placeholder="Funnel" autocomplete="family-name" required>
-            </div>
-          </div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;">
-            <div style="display:flex;flex-direction:column;gap:6px;">
-              <label class="cf-label" for="wfc-email">Work Email <span style="color:rgba(255,255,255,0.8);">*</span></label>
-              <input class="cf-input" type="email" id="wfc-email" name="email" placeholder="phil@pipeline.com" autocomplete="email" required>
-            </div>
-            <div style="display:flex;flex-direction:column;gap:6px;">
-              <label class="cf-label" for="wfc-phone">Phone</label>
-              <input class="cf-input" type="tel" id="wfc-phone" name="phone" placeholder="281-330-8004" autocomplete="tel">
-            </div>
-          </div>
-          <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:14px;">
-            <label class="cf-label" for="wfc-interest">What brings you here <span style="color:rgba(255,255,255,0.8);">*</span></label>
-            <select class="cf-select" id="wfc-interest" name="where_can_we_support_your_team_" required>
-              <option value="" disabled>Select one</option>
-              <option value="GTM Diagnosis">GTM Diagnosis</option>
-              <option value="Catalist Signals / CCR">Catalist Signals / CCR</option>
-              <option value="Salesforce Architecture">Salesforce Architecture</option>
-              <option value="GTM Workflows" selected>GTM Workflows</option>
-              <option value="Revenue Operating System">Revenue Operating System</option>
-              <option value="Managed Infrastructure">Managed Infrastructure</option>
-              <option value="General inquiry">General inquiry</option>
-            </select>
-          </div>
-          <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:14px;">
-            <label class="cf-label" for="wfc-msg">What are you working on <span style="color:rgba(255,255,255,0.8);">*</span></label>
-            <textarea class="cf-input" id="wfc-msg" name="message" rows="4" placeholder="Describe what's underperforming and what you've already tried." style="resize:vertical;min-height:100px;" required></textarea>
-          </div>
-          <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:20px;">
-            <label class="cf-label" for="wfc-contact">How should we contact you <span style="color:rgba(255,255,255,0.8);">*</span></label>
-            <select class="cf-select" id="wfc-contact" name="preferred_contact_method" required>
-              <option value="" disabled selected>Select one</option>
-              <option value="Email">Email</option>
-              <option value="Phone">Phone</option>
-              <option value="Either">Either works</option>
-            </select>
-          </div>
-          <div id="wfc-error" style="display:none;font-family:'IBM Plex Mono',monospace;font-size:10px;color:rgba(255,255,255,0.75);letter-spacing:0.06em;margin-bottom:12px;"></div>
-          <button type="submit" id="wfc-btn" class="cf-btn">Send Message →</button>
-        </form>
-        <div id="wfc-success" style="display:none;text-align:center;padding:40px 0;">
-          <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);margin-bottom:12px;">Message received</div>
-          <div style="font-family:'RocWideMedium',sans-serif;font-size:20px;color:#fff;letter-spacing:-0.5px;margin-bottom:10px;">We'll be in touch within one business day.</div>
-          <div style="font-family:'Montserrat',sans-serif;font-size:13px;color:rgba(255,255,255,0.35);line-height:1.6;">A member of the RevShoppe team reviews every submission.</div>
+    <!-- Desktop: trunk diagram (hidden on mobile via CSS) -->
+    <div class="ana-stage" id="gcAnaStage">
+      <svg class="ana-spine" viewBox="0 0 1080 1500" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+        <defs>
+          <marker id="gc-ana-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="#E8634A"/>
+          </marker>
+          <filter id="gc-ana-glow" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="4" result="blur"/>
+            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+
+        <!-- Base trunk -->
+        <line x1="540" y1="60" x2="540" y2="1400" stroke="#d8d6d0" stroke-width="1.2"/>
+
+        <!-- Activated trunk overlay -->
+        <line class="ana-trail" id="gcAnaTrail"
+              x1="540" y1="60" x2="540" y2="1400"
+              stroke="#E8634A" stroke-width="2"
+              stroke-dasharray="1340" stroke-dashoffset="1340"/>
+
+        <!-- Stubs: trunk → card edge -->
+        <g stroke="#d8d6d0" stroke-width="1">
+          <line x1="540" y1="120"  x2="432" y2="120"/>
+          <line x1="540" y1="260"  x2="648" y2="260"/>
+          <line x1="540" y1="400"  x2="432" y2="400"/>
+          <line x1="540" y1="540"  x2="648" y2="540"/>
+          <line x1="540" y1="680"  x2="432" y2="680"/>
+          <line x1="540" y1="820"  x2="648" y2="820"/>
+          <line x1="540" y1="960"  x2="432" y2="960"/>
+          <line x1="540" y1="1100" x2="648" y2="1100"/>
+          <line x1="540" y1="1240" x2="432" y2="1240"/>
+          <line x1="540" y1="1380" x2="648" y2="1380"/>
+        </g>
+
+        <!-- Numbered trunk nodes -->
+        <g class="ana-nodes" id="gcAnaNodes">
+          <g class="ana-node" data-step="1"><circle class="glow" cx="540" cy="120"  r="22" fill="#E8634A"/><circle class="outer" cx="540" cy="120"  r="16" fill="#FAFAF9" stroke="#d8d6d0" stroke-width="1.2"/><text x="540" y="124"  text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="500" fill="#E8634A">01</text></g>
+          <g class="ana-node" data-step="2"><circle class="glow" cx="540" cy="260"  r="22" fill="#E8634A"/><circle class="outer" cx="540" cy="260"  r="16" fill="#FAFAF9" stroke="#d8d6d0" stroke-width="1.2"/><text x="540" y="264"  text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="500" fill="#E8634A">02</text></g>
+          <g class="ana-node" data-step="3"><circle class="glow" cx="540" cy="400"  r="22" fill="#E8634A"/><circle class="outer" cx="540" cy="400"  r="16" fill="#FAFAF9" stroke="#d8d6d0" stroke-width="1.2"/><text x="540" y="404"  text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="500" fill="#E8634A">03</text></g>
+          <g class="ana-node" data-step="4"><circle class="glow" cx="540" cy="540"  r="22" fill="#E8634A"/><circle class="outer" cx="540" cy="540"  r="16" fill="#FAFAF9" stroke="#d8d6d0" stroke-width="1.2"/><text x="540" y="544"  text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="500" fill="#E8634A">04</text></g>
+          <g class="ana-node" data-step="5"><circle class="glow" cx="540" cy="680"  r="22" fill="#E8634A"/><circle class="outer" cx="540" cy="680"  r="16" fill="#FAFAF9" stroke="#d8d6d0" stroke-width="1.2"/><text x="540" y="684"  text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="500" fill="#E8634A">05</text></g>
+          <g class="ana-node" data-step="6"><circle class="glow" cx="540" cy="820"  r="22" fill="#E8634A"/><circle class="outer" cx="540" cy="820"  r="16" fill="#FAFAF9" stroke="#d8d6d0" stroke-width="1.2"/><text x="540" y="824"  text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="500" fill="#E8634A">06</text></g>
+          <g class="ana-node" data-step="7"><circle class="glow" cx="540" cy="960"  r="22" fill="#E8634A"/><circle class="outer" cx="540" cy="960"  r="16" fill="#FAFAF9" stroke="#d8d6d0" stroke-width="1.2"/><text x="540" y="964"  text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="500" fill="#E8634A">07</text></g>
+          <g class="ana-node" data-step="8"><circle class="glow" cx="540" cy="1100" r="22" fill="#E8634A"/><circle class="outer" cx="540" cy="1100" r="16" fill="#FAFAF9" stroke="#d8d6d0" stroke-width="1.2"/><text x="540" y="1104" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="500" fill="#E8634A">08</text></g>
+          <g class="ana-node" data-step="9"><circle class="glow" cx="540" cy="1240" r="22" fill="#E8634A"/><circle class="outer" cx="540" cy="1240" r="16" fill="#FAFAF9" stroke="#d8d6d0" stroke-width="1.2"/><text x="540" y="1244" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="500" fill="#E8634A">09</text></g>
+          <g class="ana-node" data-step="10"><circle class="glow" cx="540" cy="1380" r="22" fill="#E8634A"/><circle class="outer" cx="540" cy="1380" r="16" fill="#FAFAF9" stroke="#d8d6d0" stroke-width="1.2"/><text x="540" y="1384" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="500" fill="#E8634A">10</text></g>
+        </g>
+
+        <!-- Feedback arc (strokes in at step 10) -->
+        <path class="ana-arc" id="gcAnaArc"
+              d="M 540 1380 Q 1040 1380 1040 750 Q 1040 80 540 120"
+              fill="none" stroke="#E8634A" stroke-width="1.5" stroke-dasharray="6 5"
+              stroke-dashoffset="2400" opacity="0"
+              marker-end="url(#gc-ana-arr)"/>
+        <text id="gcAnaArcLbl" x="1056" y="750"
+              font-family="IBM Plex Mono,monospace" font-size="11"
+              fill="#E8634A" letter-spacing="2.5"
+              transform="rotate(90 1056 750)" opacity="0">FEEDBACK · NEXT RUN STARTS STRONGER</text>
+
+        <!-- Traveling current pulse -->
+        <circle r="4.5" fill="#E8634A" filter="url(#gc-ana-glow)" opacity="0.9">
+          <animateMotion dur="5.5s" repeatCount="indefinite" path="M 540 60 V 1400"/>
+        </circle>
+        <circle r="3" fill="#E8634A" opacity="0.7">
+          <animateMotion dur="5.5s" begin="-2.7s" repeatCount="indefinite" path="M 540 60 V 1400"/>
+        </circle>
+      </svg>
+
+      <div class="ana-cards">
+        <div class="ana-card ana-L" style="top: 8%;"     data-step="1">
+          <span class="num">01 · TRIGGER</span>
+          <div class="name">Signal activates the circuit</div>
+          <p class="desc">A rep action, a Salesforce field change, a date that arrives, or a compelling event. The circuit fires.</p>
+          <div class="gc-pills"><span class="gc-pill">Context</span><span class="gc-pill">Data</span><span class="gc-pill">Process</span><span class="gc-pill">Tech</span></div>
+        </div>
+        <div class="ana-card ana-R" style="top: 17.33%;" data-step="2">
+          <span class="num">02 · ACCOUNT QUALIFICATION</span>
+          <div class="name">ICP fit checked</div>
+          <p class="desc">Right size, right stack, not already in an active deal. The circuit doesn't run on accounts that shouldn't be run.</p>
+          <div class="gc-pills"><span class="gc-pill">Data</span><span class="gc-pill">Context</span></div>
+        </div>
+        <div class="ana-card ana-L" style="top: 26.67%;" data-step="3">
+          <span class="num">03 · SCORING</span>
+          <div class="name">Signal strength × ICP fit</div>
+          <p class="desc">Determines routing. High scores move immediately; lower scores queue and wait for stronger signal.</p>
+          <div class="gc-pills"><span class="gc-pill">Data</span><span class="gc-pill">Tech</span></div>
+        </div>
+        <div class="ana-card ana-R" style="top: 36%;"    data-step="4">
+          <span class="num">04 · CONTACT MAPPING</span>
+          <div class="name">Buying committee identified</div>
+          <p class="desc">Who decides, who influences, who blocks. The Workflow knows who it's actually for before it generates a word.</p>
+          <div class="gc-pills"><span class="gc-pill">Data</span><span class="gc-pill">Tech</span></div>
+        </div>
+        <div class="ana-card ana-L" style="top: 45.33%;" data-step="5">
+          <span class="num">05 · CONTEXT ASSEMBLY</span>
+          <div class="name">Live context pulled & structured</div>
+          <p class="desc">Company news, tech stack, pain points, proof points, prior history. All of it, structured, before a single word is generated.</p>
+          <div class="gc-pills"><span class="gc-pill">Context</span><span class="gc-pill">Data</span></div>
+        </div>
+        <div class="ana-card ana-R" style="top: 54.67%;" data-step="6">
+          <span class="num">06 · AI GENERATION</span>
+          <div class="name">Claude reads context, generates</div>
+          <p class="desc">Output written from what's actually known about the account. Not a template with the company name swapped in.</p>
+          <div class="gc-pills"><span class="gc-pill">Context</span><span class="gc-pill">Tech</span></div>
+        </div>
+        <div class="ana-card ana-L" style="top: 64%;"    data-step="7">
+          <span class="num">07 · REP REVIEW</span>
+          <div class="name">Rep approves</div>
+          <p class="desc">The rep sees the output, reviews it, approves it. The Workflow did the research so the rep can make the call.</p>
+          <div class="gc-pills"><span class="gc-pill">Process</span></div>
+        </div>
+        <div class="ana-card ana-R" style="top: 73.33%;" data-step="8">
+          <span class="num">08 · EXECUTION</span>
+          <div class="name">Send, task, CRM, timeline</div>
+          <p class="desc">The message sends, the task creates, the CRM updates, the timeline logs. The motion happens.</p>
+          <div class="gc-pills"><span class="gc-pill">Process</span><span class="gc-pill">Tech</span></div>
+        </div>
+        <div class="ana-card ana-L" style="top: 82.67%;" data-step="9">
+          <span class="num">09 · REVENUE OUTCOME</span>
+          <div class="name">Meeting · Opp · Renewal</div>
+          <p class="desc">The revenue outcome the trigger was designed to produce. A meeting books, an opportunity opens, or a renewal closes.</p>
+          <div class="gc-pills"><span class="gc-pill">Context</span><span class="gc-pill">Data</span><span class="gc-pill">Process</span><span class="gc-pill">Tech</span></div>
+        </div>
+        <div class="ana-card ana-R" style="top: 92%;"    data-step="10">
+          <span class="num">10 · FEEDBACK</span>
+          <div class="name">Context layer updates</div>
+          <p class="desc">What worked feeds back. The Workflow gets sharper. The next run starts stronger than this one.</p>
+          <div class="gc-pills"><span class="gc-pill">Data</span><span class="gc-pill">Context</span></div>
         </div>
       </div>
     </div>
 
+    <!-- Mobile fallback list -->
+    <div class="gc-anatomy-list">
+      <div class="gc-anatomy-list-item"><span class="num">01 · TRIGGER</span><div class="name">Signal activates the circuit</div><p class="desc">A rep action, a Salesforce field change, a date that arrives, or a compelling event.</p></div>
+      <div class="gc-anatomy-list-item"><span class="num">02 · ACCOUNT QUALIFICATION</span><div class="name">ICP fit checked</div><p class="desc">Right size, right stack, not already in an active deal.</p></div>
+      <div class="gc-anatomy-list-item"><span class="num">03 · SCORING</span><div class="name">Signal strength × ICP fit</div><p class="desc">Determines routing. High scores move immediately; lower scores queue.</p></div>
+      <div class="gc-anatomy-list-item"><span class="num">04 · CONTACT MAPPING</span><div class="name">Buying committee identified</div><p class="desc">Who decides, who influences, who blocks.</p></div>
+      <div class="gc-anatomy-list-item"><span class="num">05 · CONTEXT ASSEMBLY</span><div class="name">Live context pulled & structured</div><p class="desc">Company news, tech stack, pain points, proof points, prior history — before a single word is generated.</p></div>
+      <div class="gc-anatomy-list-item"><span class="num">06 · AI GENERATION</span><div class="name">Claude reads context, generates</div><p class="desc">Output written from what's actually known about the account. Not a template.</p></div>
+      <div class="gc-anatomy-list-item"><span class="num">07 · REP REVIEW</span><div class="name">Rep approves</div><p class="desc">The Workflow did the research so the rep can make the call.</p></div>
+      <div class="gc-anatomy-list-item"><span class="num">08 · EXECUTION</span><div class="name">Send, task, CRM, timeline</div><p class="desc">The message sends, the task creates, the CRM updates, the timeline logs.</p></div>
+      <div class="gc-anatomy-list-item"><span class="num">09 · REVENUE OUTCOME</span><div class="name">Meeting · Opp · Renewal</div><p class="desc">The revenue outcome the trigger was designed to produce.</p></div>
+      <div class="gc-anatomy-list-item"><span class="num">10 · FEEDBACK</span><div class="name">Context layer updates</div><p class="desc">What worked feeds back. The Workflow gets sharper. The next run starts stronger.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── RESULTS ── -->
+<section class="gc-section dark" id="results">
+  <div class="gc-wrap">
+    <div style="max-width: 720px;">
+      <span class="gc-eyebrow">Outcomes</span>
+      <h2>What happens when the current flows.</h2>
+      <p class="gc-lede" style="margin-top: 16px;">Three clients and three Workflows. What their loops produced.</p>
+    </div>
+    <div class="gc-results-grid">
+      <div class="gc-outcome-card">
+        <div class="figure">2.1×</div>
+        <p class="copy">Account engagement rate. Catalist-triggered outbound Workflow.</p>
+      </div>
+      <div class="gc-outcome-card">
+        <div class="figure">+34%</div>
+        <p class="copy">Net-new pipeline, quarter over quarter.</p>
+      </div>
+      <div class="gc-outcome-card">
+        <div class="figure">+61%</div>
+        <p class="copy">SQL creation, quarter over quarter.</p>
+      </div>
+    </div>
+    <div style="margin-top: 40px;">
+      <a href="https://www.revshoppe.com/clients" class="gc-link-inline" style="margin-top:0;">See More Client Results →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── CORAL CTA ── -->
+<section class="gc-section coral">
+  <div class="gc-cta-circuit" aria-hidden="true">
+    <svg width="100%" height="100%" viewBox="0 0 1600 520" preserveAspectRatio="xMidYMid slice">
+      <g stroke="rgba(255,255,255,0.28)" stroke-width="1" fill="none">
+        <path d="M 40 90 L 220 90 L 220 180 L 460 180"/>
+        <path d="M 460 180 L 600 180 L 600 80 L 820 80"/>
+        <path d="M 820 80 L 980 80 L 980 200 L 1180 200 L 1180 110 L 1400 110"/>
+        <path d="M 1400 110 L 1560 110"/>
+        <path d="M 80 360 L 280 360 L 280 440 L 520 440"/>
+        <path d="M 520 440 L 720 440 L 720 360 L 940 360 L 940 460 L 1180 460"/>
+        <path d="M 1180 460 L 1360 460 L 1360 380 L 1560 380"/>
+      </g>
+      <g fill="rgba(255,255,255,0)" stroke="rgba(255,255,255,0.6)" stroke-width="1.4">
+        <circle cx="40"   cy="90"  r="4"/>
+        <circle cx="220"  cy="90"  r="3"/>
+        <circle cx="460"  cy="180" r="4"/>
+        <circle cx="600"  cy="80"  r="3"/>
+        <circle cx="820"  cy="80"  r="4"/>
+        <circle cx="980"  cy="200" r="3"/>
+        <circle cx="1180" cy="110" r="4"/>
+        <circle cx="1400" cy="110" r="3"/>
+        <circle cx="80"   cy="360" r="3"/>
+        <circle cx="280"  cy="360" r="3"/>
+        <circle cx="520"  cy="440" r="4"/>
+        <circle cx="720"  cy="440" r="3"/>
+        <circle cx="940"  cy="360" r="4"/>
+        <circle cx="1180" cy="460" r="3"/>
+        <circle cx="1360" cy="460" r="3"/>
+      </g>
+    </svg>
+  </div>
+  <div class="gc-wrap">
+    <div class="gc-cta-inner">
+      <h2>Stop running sequences.<br>Build Workflows.</h2>
+      <a href="/contact" class="gc-btn gc-btn-white">Book a Call <span class="arrow">→</span></a>
+    </div>
   </div>
 </section>
 
 <script>
 (function(){
-  var PID  = '5046646';
-  var FGID = 'fec27ad0-206b-45e2-8bcc-12c1db7e269f';
+  var stage = document.getElementById('gcAnaStage');
+  if (!stage) return;
 
-  function submitHS(fields, cb) {
-    fetch('https://api.hsforms.com/submissions/v3/integration/submit/'+PID+'/'+FGID, {
-      method: 'POST',
-      headers: {'Content-Type':'application/json'},
-      body: JSON.stringify({fields:fields, context:{pageUri:window.location.href, pageName:'GTM Workflows'}})
-    }).then(function(r){ cb(r.ok); }).catch(function(){ cb(false); });
+  var trail  = document.getElementById('gcAnaTrail');
+  var arc    = document.getElementById('gcAnaArc');
+  var arcLbl = document.getElementById('gcAnaArcLbl');
+  var nodes  = stage.querySelectorAll('.ana-node');
+  var cards  = stage.querySelectorAll('.ana-card');
+
+  var active   = 0;
+  var progress = 0;
+  var ticking  = false;
+
+  function compute() {
+    var center  = window.innerHeight * 0.5;
+    var first   = cards[0].getBoundingClientRect();
+    var last    = cards[cards.length - 1].getBoundingClientRect();
+    var firstMid = first.top + first.height * 0.5;
+    var lastMid  = last.top  + last.height  * 0.5;
+
+    if (firstMid > center) { active = 0; progress = 0; return; }
+    if (lastMid  < center) { active = 10; progress = 10; return; }
+
+    var nearest = 1, nearestD = Infinity;
+    for (var i = 0; i < cards.length; i++) {
+      var r = cards[i].getBoundingClientRect();
+      var y = r.top + r.height * 0.5;
+      var d = Math.abs(y - center);
+      if (d < nearestD) { nearestD = d; nearest = +cards[i].dataset.step; }
+    }
+
+    var p = nearest;
+    for (var j = 0; j < cards.length - 1; j++) {
+      var a = cards[j].getBoundingClientRect();
+      var b = cards[j + 1].getBoundingClientRect();
+      var ay = a.top + a.height * 0.5;
+      var by = b.top + b.height * 0.5;
+      if (center >= ay && center <= by) {
+        p = (+cards[j].dataset.step) + (center - ay) / (by - ay);
+        break;
+      }
+    }
+
+    active   = nearest;
+    progress = p;
   }
 
-  function wire(formId, btnId, errId, sucId) {
-    var form = document.getElementById(formId);
-    var btn  = document.getElementById(btnId);
-    var err  = document.getElementById(errId);
-    var suc  = document.getElementById(sucId);
-    if (!form) return;
-    form.addEventListener('submit', function(e){
+  function update() {
+    cards.forEach(function(card) {
+      var s = +card.dataset.step;
+      card.classList.toggle('past', s < active);
+      card.classList.toggle('lit',  s === active);
+    });
+    nodes.forEach(function(node) {
+      node.classList.toggle('lit', (+node.dataset.step) <= active && active > 0);
+    });
+
+    if (trail) {
+      if (progress <= 0) {
+        trail.style.strokeDashoffset = 1340;
+      } else {
+        var nodeY = 120 + (Math.max(0, progress) - 1) * 140;
+        var drawn = Math.max(0, Math.min(1340, nodeY - 60));
+        trail.style.strokeDashoffset = 1340 - drawn;
+      }
+    }
+
+    if (arc) {
+      var on = active >= 10;
+      arc.classList.toggle('draw', on);
+      arc.style.strokeDashoffset = on ? 0 : '';
+      arc.style.opacity          = on ? 0.95 : '';
+      if (arcLbl) arcLbl.style.opacity = on ? 1 : '';
+    }
+  }
+
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function() { compute(); update(); ticking = false; });
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  onScroll();
+
+  // Custom form → HubSpot Forms API (b17af1ad = circuits intake, workflow attached)
+  var heroForm = document.getElementById('gc-hero-form');
+  if (heroForm) {
+    heroForm.addEventListener('submit', function(e) {
       e.preventDefault();
-      var ok = true;
-      form.querySelectorAll('[required]').forEach(function(f){
-        if (!f.value.trim()) { ok = false; f.style.borderColor = 'rgba(248,113,113,0.6)'; }
-        else { f.style.borderColor = ''; }
-      });
-      if (!ok) { err.textContent = 'Please fill in all required fields.'; err.style.display='block'; return; }
-      err.style.display = 'none';
-      btn.disabled = true; btn.textContent = 'Sending...';
-      var fields = [];
-      form.querySelectorAll('[name]').forEach(function(f){
-        if (f.name && f.value.trim()) fields.push({name:f.name, value:f.value.trim()});
-      });
-      submitHS(fields, function(ok){
-        if (ok) { form.style.display='none'; suc.style.display='block'; }
-        else {
-          btn.disabled=false; btn.textContent='Send Message →';
-          err.textContent='Something went wrong. Please try again.'; err.style.display='block';
+      var email = heroForm.querySelector('input[type="email"]').value;
+      var ctx = { pageUri: window.location.href, pageName: 'GTM Workflows' };
+      var hutk = (document.cookie.match(/hubspotutk=([^;]+)/) || [])[1];
+      if (hutk) ctx.hutk = hutk;
+      fetch('https://api.hsforms.com/submissions/v3/integration/submit/5046646/b17af1ad-180f-4b22-a3fd-97a321b8d6c3', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ fields: [{ name: 'email', value: email }], context: ctx })
+      }).then(function(res) {
+        var card = heroForm.closest('.gc-card-form');
+        if (res.ok) {
+          if (card) card.innerHTML = '<p style="font-family:\'IBM Plex Mono\',monospace;font-size:13px;line-height:1.7;color:rgba(255,255,255,0.8);">Got it. We\'ll be in touch within one business day.</p>';
+        } else {
+          window.location.href = '/contact' + (email ? '?email=' + encodeURIComponent(email) : '');
         }
+      }).catch(function() {
+        window.location.href = '/contact' + (email ? '?email=' + encodeURIComponent(email) : '');
       });
     });
   }
 
-  wire('wf-hero-form','wfh-btn','wfh-error','wfh-success');
-  wire('wf-cta-form', 'wfc-btn','wfc-error','wfc-success');
 })();
 </script>
-
 </body>
 </html>
