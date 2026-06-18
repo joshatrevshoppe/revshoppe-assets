@@ -219,12 +219,15 @@
       overflow: hidden;
     }
     .hero-inner {
-      max-width: 760px;
+      max-width: 1180px;
       margin: 0 auto;
       position: relative;
       z-index: 1;
-      text-align: center;
+      display: flex;
+      gap: 64px;
+      align-items: center;
     }
+    .hero-left { flex: 1; min-width: 0; }
     .eyebrow {
       display: block;
       font-family: "IBM Plex Mono", monospace;
@@ -251,7 +254,7 @@
       color: rgba(255,255,255,0.58);
       line-height: 1.68;
       max-width: 52ch;
-      margin: 0 auto 32px;
+      margin: 0 0 0;
       letter-spacing: -0.3px;
     }
     .hero-see-how {
@@ -871,25 +874,6 @@
       line-height: 1.5;
     }
 
-    /* FLOATING CCR FORM — position:fixed, right rail */
-    .float-form {
-      position: fixed;
-      right: 40px;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 340px;
-      z-index: 50;
-      background: #1A1825;
-      border: 1px solid rgba(255,255,255,0.08);
-      border-top: 3px solid var(--accent);
-      border-radius: 10px;
-      padding: 32px 28px;
-      box-shadow: 0 24px 64px rgba(0,0,0,0.45), 0 8px 24px rgba(0,0,0,0.3), 0 2px 8px rgba(0,0,0,0.2);
-      max-height: calc(100vh - 140px);
-      overflow-y: auto;
-    }
-    /* Hidden at viewports where form would overlap content */
-    @media (max-width: 1379px) { .float-form { display: none; } }
 
     /* RESPONSIVE */
     /* ═══════════════════════════════════════════
@@ -963,13 +947,6 @@
       border-bottom: none !important;
     }
 
-    /* ══ 1380px+ — Float form visible: push section content left ══ */
-    @media (min-width: 1380px) {
-      .section { padding-right: 420px; }
-      .section-inner { max-width: 960px; margin-left: 0; margin-right: 0; }
-      .cta-section { padding-right: 420px; }
-    }
-
     /* ══ 1024px — Small desktop / iPad landscape ══ */
     @media (max-width: 1024px) {
       nav { padding: 0 32px; }
@@ -989,6 +966,11 @@
       .section { padding: 72px 24px; }
       .hero { padding: 72px 24px 56px; }
       .cta-section { padding: 72px 24px; }
+
+      .hero-inner { flex-direction: column; gap: 48px; align-items: stretch; }
+      .hero-left { text-align: center; }
+      .hero-left .hero-lead { max-width: none; }
+      .ccr-form-card[style*="width:380px"] { width: 100% !important; }
 
 .problem-2x2 { grid-template-columns: 1fr 1fr; gap: 12px; }
       .how-grid { grid-template-columns: 1fr; gap: 0; }
@@ -1084,55 +1066,55 @@
   <!-- ═══ HERO — DARK ════════════════════════════════════════ -->
   <section class="tex-dark hero">
     <div class="hero-inner">
-      <span class="eyebrow">Intelligence · Catalist Signals</span>
-      <h1>Intent signals are <em>commoditized.</em></h1>
-      <p class="hero-lead">Catalist Signals surface the real-world events creating buying urgency in your market before your competitors see them in an intent platform.</p>
+      <div class="hero-left">
+        <span class="eyebrow">Intelligence · Catalist Signals</span>
+        <h1>Intent signals are <em>commoditized.</em></h1>
+        <p class="hero-lead">Catalist Signals surface the real-world events creating buying urgency in your market before your competitors see them in an intent platform.</p>
+      </div>
+      <div class="ccr-form-card" style="flex-shrink:0;width:380px;">
+        <div class="ccr-card-label">Conversation Catalist Report</div>
+        <div class="ccr-card-title" style="margin-bottom:20px;">Your industry's buying catalists. Mapped. Free.</div>
+        <form id="ccr-form-custom" novalidate>
+          <div class="ccr-cf-row">
+            <div style="display:flex;flex-direction:column;gap:6px;">
+              <label class="ccr-cf-label" for="ccr-firstname">First Name <span style="color:#E8634A;">*</span></label>
+              <input class="ccr-cf-input" type="text" id="ccr-firstname" name="firstname" placeholder="Phil" autocomplete="given-name" required>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:6px;">
+              <label class="ccr-cf-label" for="ccr-lastname">Last Name <span style="color:#E8634A;">*</span></label>
+              <input class="ccr-cf-input" type="text" id="ccr-lastname" name="lastname" placeholder="Funnel" autocomplete="family-name" required>
+            </div>
+          </div>
+          <div class="ccr-cf-field">
+            <label class="ccr-cf-label" for="ccr-email">Work Email <span style="color:#E8634A;">*</span></label>
+            <input class="ccr-cf-input" type="email" id="ccr-email" name="email" placeholder="phil@company.com" autocomplete="email" required>
+          </div>
+          <div class="ccr-cf-field">
+            <label class="ccr-cf-label" for="ccr-company">Company <span style="color:#E8634A;">*</span></label>
+            <input class="ccr-cf-input" type="text" id="ccr-company" name="company" placeholder="Acme Corp" autocomplete="organization" required>
+          </div>
+          <div class="ccr-cf-field" style="margin-bottom:20px;">
+            <label class="ccr-cf-label" for="ccr-industry">Vertical <span style="color:#E8634A;">*</span></label>
+            <select class="ccr-cf-select" id="ccr-industry" name="whats_your_industry" required>
+              <option value="" disabled selected>Select your vertical</option>
+              <option value="Technology / SaaS">Technology / SaaS</option>
+              <option value="Financial Services">Financial Services</option>
+              <option value="Healthcare / Life Sciences">Healthcare / Life Sciences</option>
+              <option value="Manufacturing">Manufacturing</option>
+              <option value="Professional Services">Professional Services</option>
+              <option value="Retail / E-commerce">Retail / E-commerce</option>
+              <option value="Media / Publishing">Media / Publishing</option>
+              <option value="Real Estate">Real Estate</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <button type="submit" class="ccr-cf-btn" id="ccr-submit-btn">Get My Free Report →</button>
+          <div id="ccr-form-msg" class="ccr-cf-msg"></div>
+        </form>
+        <div class="ccr-free-note" style="text-align:left;margin-top:14px;">Free · No credit card · No sales call</div>
+      </div>
     </div>
   </section>
-
-  <!-- ═══ FLOATING CCR FORM ════════════════════════════════ -->
-  <div class="float-form">
-    <div class="ccr-card-label">Conversation Catalist Report</div>
-    <div class="ccr-card-title" style="margin-bottom:20px;">Your industry's buying catalists. Mapped. Free.</div>
-    <form id="ccr-form-custom" novalidate>
-      <div class="ccr-cf-row">
-        <div style="display:flex;flex-direction:column;gap:6px;">
-          <label class="ccr-cf-label" for="ccr-firstname">First Name <span style="color:#E8634A;">*</span></label>
-          <input class="ccr-cf-input" type="text" id="ccr-firstname" name="firstname" placeholder="Phil" autocomplete="given-name" required>
-        </div>
-        <div style="display:flex;flex-direction:column;gap:6px;">
-          <label class="ccr-cf-label" for="ccr-lastname">Last Name <span style="color:#E8634A;">*</span></label>
-          <input class="ccr-cf-input" type="text" id="ccr-lastname" name="lastname" placeholder="Funnel" autocomplete="family-name" required>
-        </div>
-      </div>
-      <div class="ccr-cf-field">
-        <label class="ccr-cf-label" for="ccr-email">Work Email <span style="color:#E8634A;">*</span></label>
-        <input class="ccr-cf-input" type="email" id="ccr-email" name="email" placeholder="phil@company.com" autocomplete="email" required>
-      </div>
-      <div class="ccr-cf-field">
-        <label class="ccr-cf-label" for="ccr-company">Company <span style="color:#E8634A;">*</span></label>
-        <input class="ccr-cf-input" type="text" id="ccr-company" name="company" placeholder="Acme Corp" autocomplete="organization" required>
-      </div>
-      <div class="ccr-cf-field" style="margin-bottom:20px;">
-        <label class="ccr-cf-label" for="ccr-industry">Vertical <span style="color:#E8634A;">*</span></label>
-        <select class="ccr-cf-select" id="ccr-industry" name="whats_your_industry" required>
-          <option value="" disabled selected>Select your vertical</option>
-          <option value="Technology / SaaS">Technology / SaaS</option>
-          <option value="Financial Services">Financial Services</option>
-          <option value="Healthcare / Life Sciences">Healthcare / Life Sciences</option>
-          <option value="Manufacturing">Manufacturing</option>
-          <option value="Professional Services">Professional Services</option>
-          <option value="Retail / E-commerce">Retail / E-commerce</option>
-          <option value="Media / Publishing">Media / Publishing</option>
-          <option value="Real Estate">Real Estate</option>
-          <option value="Other">Other</option>
-        </select>
-      </div>
-      <button type="submit" class="ccr-cf-btn" id="ccr-submit-btn">Get My Free Report →</button>
-      <div id="ccr-form-msg" class="ccr-cf-msg"></div>
-    </form>
-    <div class="ccr-free-note" style="text-align:left;margin-top:14px;">Free · No credit card · No sales call</div>
-  </div>
 
   <!-- ═══ PROBLEM — LIGHT ════════════════════════════════════ -->
   <section class="tex-light hatch-light section">
