@@ -18,8 +18,8 @@
 <!-- ═══ CTA — LIGHT ═══ -->
 <section class="cp-cta cp-cta-light">
   <div class="cp-cta-inner">
-    <h2 class="cp-cta-h2">Turn Your GTM into a Competitive Advantage</h2>
-    <a href="https://revshoppe.com/contact" class="cp-btn-coral">Talk to Us →</a>
+    <h2 class="cp-cta-h2">Turn Your GTM into a<br>Competitive Advantage</h2>
+    <a href="https://revshoppe.com/contact" class="cp-btn-coral">Stop GTM Decay Now</a>
   </div>
 </section>
 
@@ -319,5 +319,21 @@
     }
     grid.appendChild(div);
   }
+})();
+
+(function () {
+  var foldBottom = null;
+  function getFold() {
+    return window.innerHeight;
+  }
+  function handleNavScroll() {
+    var nav = document.querySelector('nav');
+    if (!nav) return;
+    if (window.innerWidth <= 768) { nav.style.transform = 'translateY(0)'; return; }
+    if (foldBottom === null) foldBottom = getFold();
+    var y = window.scrollY || window.pageYOffset || 0;
+    nav.style.transform = y > foldBottom ? 'translateY(-100%)' : 'translateY(0)';
+  }
+  window.addEventListener('scroll', handleNavScroll, { passive: true });
 })();
 </script>

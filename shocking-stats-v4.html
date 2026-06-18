@@ -1104,8 +1104,7 @@ body {
 <!-- ═══════════════════════════════════════════════ -->
 <section class="cta-section">
   <h2 class="cta-h2">Don't be a statistic.</h2>
-  <p class="cta-sub">Every number on this page is recoverable. None of it requires new headcount. Start with a diagnosis.</p>
-  <a href="https://revshoppe.com/solutions/gtm-diagnosis" class="cta-btn">Get your GTM Diagnosis →</a>
+  <a href="https://revshoppe.com/contact" class="cta-btn">Stop GTM Decay Now</a>
 </section>
 
 <!-- ═══════════════════════════════════════════════ -->
@@ -1134,6 +1133,25 @@ body {
   });
 
   cards.forEach(card => observer.observe(card));
+})();
+
+(function () {
+  var foldBottom = null;
+  function getFold() {
+    var hero = document.querySelector('.hero');
+    if (!hero) return window.innerHeight;
+    var r = hero.getBoundingClientRect();
+    return r.bottom + (window.scrollY || window.pageYOffset || 0);
+  }
+  function handleNavScroll() {
+    var nav = document.querySelector('nav');
+    if (!nav) return;
+    if (window.innerWidth <= 768) { nav.style.transform = 'translateY(0)'; return; }
+    if (foldBottom === null) foldBottom = getFold();
+    var y = window.scrollY || window.pageYOffset || 0;
+    nav.style.transform = y > foldBottom ? 'translateY(-100%)' : 'translateY(0)';
+  }
+  window.addEventListener('scroll', handleNavScroll, { passive: true });
 })();
 </script>
 
