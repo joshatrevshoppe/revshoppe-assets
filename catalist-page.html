@@ -219,10 +219,11 @@
       overflow: hidden;
     }
     .hero-inner {
-      max-width: 1180px;
+      max-width: 860px;
       margin: 0 auto;
       position: relative;
       z-index: 1;
+      text-align: center;
     }
     .eyebrow {
       display: block;
@@ -240,7 +241,6 @@
       line-height: 0.94;
       letter-spacing: -0.025em;
       color: #fff;
-      max-width: 14ch;
       margin: 0 0 36px;
     }
     .hero h1 em { font-style: normal; color: var(--accent); }
@@ -251,7 +251,7 @@
       color: rgba(255,255,255,0.58);
       line-height: 1.68;
       max-width: 52ch;
-      margin: 0 0 32px;
+      margin: 0 auto 32px;
       letter-spacing: -0.3px;
     }
     .hero-see-how {
@@ -874,14 +874,14 @@
     /* PAGE RAIL — sticky sidebar layout */
     .page-rail {
       display: flex;
-      align-items: flex-start;
+      align-items: stretch;
       background: #F5F3EF;
     }
     .rail-main { flex: 1; min-width: 0; }
     .rail-sidebar {
       width: 400px;
       flex-shrink: 0;
-      padding: 64px 40px 80px 32px;
+      padding: 120px 40px 80px 32px;
       background: #F5F3EF;
       border-left: 1px solid rgba(0,0,0,0.07);
     }
@@ -990,7 +990,8 @@
       .cta-section { padding: 72px 24px; }
 
       .page-rail { flex-direction: column; }
-      .rail-sidebar { width: 100%; border-left: none; border-top: 1px solid rgba(0,0,0,0.08); padding: 48px 24px; }
+      .rail-sidebar { width: 100%; border-left: none; border-top: 1px solid rgba(0,0,0,0.08); padding: 48px 24px; order: 2; }
+      .rail-main { order: 1; }
       .sticky-form-card { position: static; }
 
       .problem-2x2 { grid-template-columns: 1fr 1fr; gap: 12px; }
@@ -1084,19 +1085,18 @@
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
-<!-- ═══ HERO — DARK ════════════════════════════════════════ -->
+  <!-- ═══ PAGE RAIL — two-column: content + sticky form ══════ -->
+  <div class="page-rail">
+  <div class="rail-main">
+
+  <!-- ═══ HERO — DARK ════════════════════════════════════════ -->
   <section class="tex-dark hero">
     <div class="hero-inner">
       <span class="eyebrow">Intelligence · Catalist Signals</span>
       <h1>Intent signals are <em>commoditized.</em></h1>
       <p class="hero-lead">Catalist Signals surface the real-world events creating buying urgency in your market before your competitors see them in an intent platform.</p>
-      <a href="#how-it-works" class="hero-see-how">See how it works ↓</a>
     </div>
   </section>
-
-  <!-- ═══ PAGE RAIL — two-column: content + sticky form ══════ -->
-  <div class="page-rail">
-  <div class="rail-main">
 
   <!-- ═══ PROBLEM — LIGHT ════════════════════════════════════ -->
   <section class="tex-light hatch-light section">
