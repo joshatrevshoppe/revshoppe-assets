@@ -8,14 +8,15 @@
 
     :root {
       --bg-light:      #FAFAF9;
-      --bg-dark:       #26242F;
-      --bg-charcoal:   #2C2A27;
+      --bg-dark:       #15141C;
+      --bg-charcoal:   #1A1922;
       --accent:        #E8634A;
       --accent-hover:  #F0745C;
       --headline:      #111111;
       --body:          #8F95A0;
       --border-light:  rgba(0,0,0,0.07);
       --border-dark:   rgba(255,255,255,0.07);
+      --f-display:     "RocWideMedium", "Archivo", sans-serif;
     }
 
     /* Kill any space from Webflow injected divs above our content */
@@ -191,7 +192,7 @@
       margin-bottom: 20px;
     }
     .sec-h2 {
-      font-family: "RocWideMedium", sans-serif;
+      font-family: var(--f-display);
       font-size: clamp(28px, 3.8vw, 48px);
       line-height: 1.08;
       letter-spacing: -1.5px;
@@ -213,71 +214,58 @@
 
     /* HERO */
     .hero {
-      padding: 96px 48px 80px;
-      text-align: center;
+      padding: 120px 48px 80px;
       position: relative;
       overflow: hidden;
     }
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: -120px; left: 50%; transform: translateX(-50%);
-      width: 600px; height: 600px;
-      background: radial-gradient(circle, rgba(232,99,74,0.08) 0%, transparent 70%);
-      pointer-events: none;
+    .hero-inner {
+      max-width: 1180px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
     }
-    .hero-inner { max-width: 860px; margin: 0 auto; position: relative; z-index: 1; }
     .eyebrow {
-      display: inline-block;
+      display: block;
       font-family: "IBM Plex Mono", monospace;
-      font-size: 10px;
-      letter-spacing: 0.16em;
+      font-size: 12px;
+      letter-spacing: 0.24em;
       text-transform: uppercase;
       color: var(--accent);
       margin-bottom: 28px;
     }
     .hero h1 {
-      font-family: "RocWideMedium", sans-serif;
-      font-size: clamp(36px, 4.5vw, 62px);
-      line-height: 1.06;
-      letter-spacing: -2px;
+      font-family: var(--f-display);
+      font-weight: 500;
+      font-size: clamp(46px, 6.5vw, 96px);
+      line-height: 0.94;
+      letter-spacing: -0.025em;
       color: #fff;
-      margin-bottom: 28px;
+      max-width: 14ch;
+      margin: 0 0 36px;
     }
     .hero h1 em { font-style: normal; color: var(--accent); }
     .hero-lead {
       font-family: "Montserrat", sans-serif;
-      font-size: 17px;
+      font-size: clamp(16px, 1.5vw, 18px);
       font-weight: 400;
-      color: rgba(255,255,255,0.55);
-      line-height: 1.75;
-      max-width: 620px;
-      margin: 0 auto 44px;
+      color: rgba(255,255,255,0.58);
+      line-height: 1.68;
+      max-width: 52ch;
+      margin: 0 0 32px;
       letter-spacing: -0.3px;
     }
-    .hero-cta-row {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
-    .contrast-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 40px;
-      padding: 8px 20px;
-      margin-top: 52px;
+    .hero-see-how {
       font-family: "IBM Plex Mono", monospace;
-      font-size: 10px;
-      letter-spacing: 0.1em;
+      font-size: 11px;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.35);
+      color: rgba(255,255,255,0.38);
+      border-bottom: 1px solid rgba(255,255,255,0.12);
+      padding-bottom: 2px;
+      text-decoration: none;
+      transition: color 0.15s, border-color 0.15s;
     }
-    .contrast-badge span { color: var(--accent); }
+    .hero-see-how:hover { color: rgba(255,255,255,0.65); border-color: rgba(255,255,255,0.3); }
 
     /* PROBLEM 2×2 GRID */
     .problem-2x2 {
@@ -321,7 +309,7 @@
     }
     .prob-icon svg { width: 16px; height: 16px; }
     .prob-copy h3 {
-      font-family: "RocWideMedium", sans-serif;
+      font-family: var(--f-display);
       font-size: 15px;
       letter-spacing: -0.4px;
       color: var(--headline);
@@ -380,7 +368,7 @@
       padding-top: 4px;
     }
     .step-copy h3 {
-      font-family: "RocWideMedium", sans-serif;
+      font-family: var(--f-display);
       font-size: 18px;
       letter-spacing: -0.5px;
       color: #fff;
@@ -538,7 +526,7 @@
       margin-bottom: 16px;
     }
     .cat-title {
-      font-family: "RocWideMedium", sans-serif;
+      font-family: var(--f-display);
       font-size: 19px;
       letter-spacing: -0.5px;
       color: var(--headline);
@@ -579,7 +567,7 @@
         inset 0 1px 0 rgba(255,255,255,0.06);
     }
     .outcome-stat {
-      font-family: "RocWideMedium", sans-serif;
+      font-family: var(--f-display);
       font-size: 52px;
       color: var(--accent);
       letter-spacing: -2px;
@@ -613,7 +601,7 @@
       align-items: center;
     }
     .ccr-left h2 {
-      font-family: "RocWideMedium", sans-serif;
+      font-family: var(--f-display);
       font-size: clamp(26px, 3.5vw, 44px);
       line-height: 1.1;
       letter-spacing: -1.5px;
@@ -661,7 +649,7 @@
       margin-bottom: 16px;
     }
     .ccr-card-title {
-      font-family: "RocWideMedium", sans-serif;
+      font-family: var(--f-display);
       font-size: 24px;
       letter-spacing: -0.5px;
       color: #fff;
@@ -736,7 +724,7 @@
       margin-bottom: 24px;
     }
     .cta-h2 {
-      font-family: "RocWideMedium", sans-serif;
+      font-family: var(--f-display);
       font-size: clamp(28px, 4vw, 50px);
       line-height: 1.06;
       letter-spacing: -1.5px;
@@ -847,7 +835,7 @@
       margin-bottom: 14px;
     }
     .bridge-card-title {
-      font-family: "RocWideMedium", sans-serif;
+      font-family: var(--f-display);
       font-size: 18px;
       letter-spacing: -0.5px;
       color: rgba(255,255,255,0.7);
@@ -882,6 +870,32 @@
       color: rgba(255,255,255,0.4);
       line-height: 1.5;
     }
+
+    /* PAGE RAIL — sticky sidebar layout */
+    .page-rail {
+      display: flex;
+      align-items: flex-start;
+      background: #F5F3EF;
+    }
+    .rail-main { flex: 1; min-width: 0; }
+    .rail-sidebar {
+      width: 400px;
+      flex-shrink: 0;
+      padding: 64px 40px 80px 32px;
+      background: #F5F3EF;
+      border-left: 1px solid rgba(0,0,0,0.07);
+    }
+    .sticky-form-card {
+      position: sticky;
+      top: 88px;
+      background: #1A1825;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-top: 3px solid var(--accent);
+      border-radius: 10px;
+      padding: 36px 32px;
+      box-shadow: 0 16px 48px rgba(0,0,0,0.35), 0 4px 16px rgba(0,0,0,0.25);
+    }
+    .sticky-form-card .ccr-free-note { text-align: left; }
 
     /* RESPONSIVE */
     /* ═══════════════════════════════════════════
@@ -974,6 +988,10 @@
       .section { padding: 72px 24px; }
       .hero { padding: 72px 24px 56px; }
       .cta-section { padding: 72px 24px; }
+
+      .page-rail { flex-direction: column; }
+      .rail-sidebar { width: 100%; border-left: none; border-top: 1px solid rgba(0,0,0,0.08); padding: 48px 24px; }
+      .sticky-form-card { position: static; }
 
       .problem-2x2 { grid-template-columns: 1fr 1fr; gap: 12px; }
       .how-grid { grid-template-columns: 1fr; gap: 0; }
@@ -1070,19 +1088,15 @@
   <section class="tex-dark hero">
     <div class="hero-inner">
       <span class="eyebrow">Intelligence · Catalist Signals</span>
-      <h1>Intent signals are<br><em>commoditized.</em><br>Your competitors have<br>the same data you do.</h1>
-      <p class="hero-lead">
-        Catalist Signals surface the real-world events creating buying urgency in your market before your competitors see them in an intent platform.
-      </p>
-      <div class="hero-cta-row">
-        <a href="#wf__generate-ccr" class="btn-primary">Get Your Free CCR →</a>
-        <a href="#how-it-works" class="btn-outline">See How It Works</a>
-      </div>
-      <div class="contrast-badge">
-        <span>Catalist</span> tracks what's actually changing inside a company's operating environment
-      </div>
+      <h1>Intent signals are <em>commoditized.</em></h1>
+      <p class="hero-lead">Catalist Signals surface the real-world events creating buying urgency in your market before your competitors see them in an intent platform.</p>
+      <a href="#how-it-works" class="hero-see-how">See how it works ↓</a>
     </div>
   </section>
+
+  <!-- ═══ PAGE RAIL — two-column: content + sticky form ══════ -->
+  <div class="page-rail">
+  <div class="rail-main">
 
   <!-- ═══ PROBLEM — LIGHT ════════════════════════════════════ -->
   <section class="tex-light hatch-light section">
@@ -1284,115 +1298,56 @@
     </div>
   </section>
 
-  <!-- ═══ CCR FORM — WARM ════════════════════════════════════ -->
-  <section class="section" id="wf__generate-ccr" style="background-color:#F0EDE8;background-image:repeating-linear-gradient(17deg,transparent 0px,transparent 2px,rgba(0,0,0,0.032) 2px,rgba(0,0,0,0.032) 3px),repeating-linear-gradient(103deg,transparent 0px,transparent 3px,rgba(0,0,0,0.022) 3px,rgba(0,0,0,0.022) 4px),repeating-linear-gradient(197deg,transparent 0px,transparent 4px,rgba(0,0,0,0.016) 4px,rgba(0,0,0,0.016) 5px);border-top:1.5px solid rgba(0,0,0,0.12);border-bottom:1.5px solid rgba(0,0,0,0.12);position:relative;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,0.08),0 1px 4px rgba(0,0,0,0.05),0 -4px 16px rgba(0,0,0,0.06);z-index:1;">
-    <div class="section-inner">
-      <div class="ccr-form-grid">
-        <div class="ccr-form-left">
-          <span class="sec-label">Free Offer</span>
-          <h2 class="sec-h2">See your industry's top catalists before you decide anything.</h2>
-          <p class="sec-sub sec-sub-warm">The Conversation Catalist Report is free. It maps the specific real-world events creating buying urgency in your segment right now, classified by intensity, category, and buyer response. No sales call required to receive it.</p>
-          <div class="ccr-includes-list">
-            <div class="ccr-include-item"><span class="ccr-include-arrow">→</span><span>Five primary catalists with full analysis: intensity level, category, and buyer response for each</span></div>
-            <div class="ccr-include-item"><span class="ccr-include-arrow">→</span><span>Signal classification: primary catalists with deep-dive analysis plus supporting signals in a summary table</span></div>
-            <div class="ccr-include-item"><span class="ccr-include-arrow">→</span><span>Sample GTM workflow per catalist: automated steps mapped through to the human conversation touchpoint</span></div>
-            <div class="ccr-include-item"><span class="ccr-include-arrow">→</span><span>Detection sources for every catalist: SEC filings, job boards, press releases, earnings calls, community forums, and more</span></div>
-            <div class="ccr-include-item"><span class="ccr-include-arrow">→</span><span>Delivered as a formatted report in 48 hours</span></div>
+  </div><!-- /rail-main -->
+
+  <!-- ═══ STICKY SIDEBAR — CCR FORM ══════════════════════════ -->
+  <aside class="rail-sidebar">
+    <div class="sticky-form-card">
+      <div class="ccr-card-label">Conversation Catalist Report</div>
+      <div class="ccr-card-title">Your industry's buying catalists. Mapped. Free.</div>
+      <form id="ccr-form-custom" novalidate>
+        <div class="ccr-cf-row">
+          <div style="display:flex;flex-direction:column;gap:6px;">
+            <label class="ccr-cf-label" for="ccr-firstname">First Name <span style="color:#E8634A;">*</span></label>
+            <input class="ccr-cf-input" type="text" id="ccr-firstname" name="firstname" placeholder="Phil" autocomplete="given-name" required>
           </div>
-          <div class="ccr-free-badge">Free · No credit card · No sales call to receive it</div>
-        </div>
-        <div class="ccr-form-right">
-          <div class="ccr-form-card">
-            <div class="ccr-card-label">Conversation Catalist Report (CCR)</div>
-            <div class="ccr-card-title">Your industry's buying catalists. Mapped. Delivered free.</div>
-          <form id="ccr-form-custom" novalidate>
-            <div class="ccr-cf-row">
-              <div style="display:flex;flex-direction:column;gap:6px;">
-                <label class="ccr-cf-label" for="ccr-firstname">First Name <span style="color:#E8634A;">*</span></label>
-                <input class="ccr-cf-input" type="text" id="ccr-firstname" name="firstname" placeholder="Phil" autocomplete="given-name" required>
-              </div>
-              <div style="display:flex;flex-direction:column;gap:6px;">
-                <label class="ccr-cf-label" for="ccr-lastname">Last Name <span style="color:#E8634A;">*</span></label>
-                <input class="ccr-cf-input" type="text" id="ccr-lastname" name="lastname" placeholder="Funnel" autocomplete="family-name" required>
-              </div>
-            </div>
-            <div class="ccr-cf-field">
-              <label class="ccr-cf-label" for="ccr-email">Work Email <span style="color:#E8634A;">*</span></label>
-              <input class="ccr-cf-input" type="email" id="ccr-email" name="email" placeholder="phil@company.com" autocomplete="email" required>
-            </div>
-            <div class="ccr-cf-field">
-              <label class="ccr-cf-label" for="ccr-company">Company <span style="color:#E8634A;">*</span></label>
-              <input class="ccr-cf-input" type="text" id="ccr-company" name="company" placeholder="Acme Corp" autocomplete="organization" required>
-            </div>
-            <div class="ccr-cf-field" style="margin-bottom:20px;">
-              <label class="ccr-cf-label" for="ccr-industry">Which vertical do you sell best into? <span style="color:#E8634A;">*</span></label>
-              <select class="ccr-cf-select" id="ccr-industry" name="whats_your_industry" required>
-                <option value="" disabled selected>Select your vertical</option>
-                <option value="Technology / SaaS">Technology / SaaS</option>
-                <option value="Financial Services">Financial Services</option>
-                <option value="Healthcare / Life Sciences">Healthcare / Life Sciences</option>
-                <option value="Manufacturing">Manufacturing</option>
-                <option value="Professional Services">Professional Services</option>
-                <option value="Retail / E-commerce">Retail / E-commerce</option>
-                <option value="Media / Publishing">Media / Publishing</option>
-                <option value="Real Estate">Real Estate</option>
-                <option value="Other">Other</option>
-              </select>
-            </div>
-            <button type="submit" class="ccr-cf-btn" id="ccr-submit-btn">Get My Free Report →</button>
-            <div id="ccr-form-msg" class="ccr-cf-msg"></div>
-          </form>
+          <div style="display:flex;flex-direction:column;gap:6px;">
+            <label class="ccr-cf-label" for="ccr-lastname">Last Name <span style="color:#E8634A;">*</span></label>
+            <input class="ccr-cf-input" type="text" id="ccr-lastname" name="lastname" placeholder="Funnel" autocomplete="family-name" required>
           </div>
         </div>
-      </div>
+        <div class="ccr-cf-field">
+          <label class="ccr-cf-label" for="ccr-email">Work Email <span style="color:#E8634A;">*</span></label>
+          <input class="ccr-cf-input" type="email" id="ccr-email" name="email" placeholder="phil@company.com" autocomplete="email" required>
+        </div>
+        <div class="ccr-cf-field">
+          <label class="ccr-cf-label" for="ccr-company">Company <span style="color:#E8634A;">*</span></label>
+          <input class="ccr-cf-input" type="text" id="ccr-company" name="company" placeholder="Acme Corp" autocomplete="organization" required>
+        </div>
+        <div class="ccr-cf-field" style="margin-bottom:20px;">
+          <label class="ccr-cf-label" for="ccr-industry">Which vertical do you sell best into? <span style="color:#E8634A;">*</span></label>
+          <select class="ccr-cf-select" id="ccr-industry" name="whats_your_industry" required>
+            <option value="" disabled selected>Select your vertical</option>
+            <option value="Technology / SaaS">Technology / SaaS</option>
+            <option value="Financial Services">Financial Services</option>
+            <option value="Healthcare / Life Sciences">Healthcare / Life Sciences</option>
+            <option value="Manufacturing">Manufacturing</option>
+            <option value="Professional Services">Professional Services</option>
+            <option value="Retail / E-commerce">Retail / E-commerce</option>
+            <option value="Media / Publishing">Media / Publishing</option>
+            <option value="Real Estate">Real Estate</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+        <button type="submit" class="ccr-cf-btn" id="ccr-submit-btn">Get My Free Report →</button>
+        <div id="ccr-form-msg" class="ccr-cf-msg"></div>
+      </form>
+      <div class="ccr-free-note">Free · No credit card · No sales call to receive it</div>
     </div>
-  </section>
+  </aside>
 
+  </div><!-- /page-rail -->
 
-
-<script>
-document.querySelectorAll('a[href="#wf__generate-ccr"]').forEach(function(el){
-  el.addEventListener('click',function(e){
-    e.preventDefault();
-    var t=document.getElementById('wf__generate-ccr');
-    if(t)t.scrollIntoView({behavior:'instant',block:'start'});
-  });
-});
-</script>
-
-  <!-- ═══ NEXT STEP — GTM DIAGNOSIS BRIDGE — DARK GRID ══════════ -->
-  <section class="tex-light section" style="background-image:linear-gradient(rgba(0,0,0,0.022) 1px,transparent 1px),linear-gradient(90deg,rgba(0,0,0,0.022) 1px,transparent 1px);background-size:40px 40px;">
-    <div class="section-inner">
-      <div class="bridge-grid">
-        <div class="bridge-left">
-          <span class="sec-label">What Comes Next</span>
-          <h2 class="sec-h2">Catalist tells you who's ready. The GTM Diagnosis tells you if your system can act on it.</h2>
-          <p class="sec-sub">Knowing who to reach and when is only half the equation. If your sequences are generic, your CRM data is incomplete, and your reps are running on intuition, the best signal in the world doesn't close the gap. The GTM Diagnosis finds exactly where the execution breaks down.</p>
-        </div>
-        <div class="bridge-right">
-          <div class="bridge-card">
-            <div class="bridge-card-eyebrow">Solutions · GTM Diagnosis</div>
-            <div class="bridge-card-title">Four pillars. Six weeks. A complete picture of what's breaking and what it costs.</div>
-            <div class="bridge-stats">
-              <div class="bridge-stat">
-                <div class="bridge-stat-num">$0.007</div>
-                <div class="bridge-stat-label">Pipeline per activity vs. $0.70–$1.05 benchmark</div>
-              </div>
-              <div class="bridge-stat">
-                <div class="bridge-stat-num">80%</div>
-                <div class="bridge-stat-label">CRM contacts missing firmographic data</div>
-              </div>
-              <div class="bridge-stat">
-                <div class="bridge-stat-num">0.7%</div>
-                <div class="bridge-stat-label">BDM email reply rate vs. 2–3% industry median</div>
-              </div>
-            </div>
-            <a href="https://www.revshoppe.com/gtm-diagnosis" class="btn-primary" style="width:100%;justify-content:center;margin-top:8px;">See the GTM Diagnosis →</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <!-- ═══ CTA — CORAL ════════════════════════════════════════ -->
 <section class="cta-section" style="border-top:2px solid rgba(180,50,30,0.5);box-shadow:0 -16px 48px rgba(0,0,0,0.4),0 -4px 12px rgba(0,0,0,0.3);position:relative;z-index:3;text-align:center;align-items:center;">
@@ -1401,7 +1356,7 @@ document.querySelectorAll('a[href="#wf__generate-ccr"]').forEach(function(el){
         <h2 class="cta-h2" style="text-align:center;">Stop chasing signals. Start acting on catalists.</h2>
         <p class="cta-body">Signals tell you who clicked. Catalist tells you who's ready and why. The CCR is free and your industry's top catalists are delivered in 48 hours.</p>
       <div class="cta-btn-row">
-        <a href="#wf__generate-ccr" class="btn-white">Get Your Free CCR →</a>
+        <a href="#ccr-form-custom" class="btn-white">Get Your Free CCR →</a>
         <a href="https://www.revshoppe.com/contact" class="btn-white-ghost">Talk to Us</a>
       </div>
     </div>
