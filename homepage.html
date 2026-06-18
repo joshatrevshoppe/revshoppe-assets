@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<!-- WEBFLOW PAGE SETTINGS — set these in Webflow Page Settings > SEO
+     Title:       RevShoppe — Stop GTM Decay
+     Description: RevShoppe diagnoses GTM Decay, builds the Revenue Operating System to stop it, and governs the workflows permanently so performance compounds instead of decays.
+     OG Image:    /revshoppe-og-homepage.png (1200×630, dark with bolt mark)
+     Slug:        / (homepage)
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=IBM+Plex+Mono:wght@400&family=Archivo:wght@500&display=swap');
+
+/* ── Reset & wrapper ─────────────────────────────────── */
+.rs-home *, .rs-home *::before, .rs-home *::after { box-sizing: border-box; margin: 0; padding: 0; }
+.rs-home {
+  font-family: "Montserrat", sans-serif;
+  background: #15141C;
+  color: #fff;
+  overflow-x: hidden;
+  --f-display: "RocWideMedium", "Archivo", sans-serif;
+  --f-body: "Montserrat", sans-serif;
+  --f-mono: "IBM Plex Mono", monospace;
+  --coral: #E8634A;
+  --coral-hover: #F0745C;
+}
+.rs-home ::selection { background: rgba(232,99,74,0.3); color: #fff; }
+
+@keyframes rs-pulse { 0%{transform:scale(1)} 45%{transform:scale(1.22)} 100%{transform:scale(1)} }
+
+/* ── CTA buttons ─────────────────────────────────────── */
+.rs-home .rs-cta {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--f-mono);
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #fff;
+  background: #E8634A;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: background .18s, transform .18s;
+}
+.rs-home .rs-cta:hover { background: #F0745C; transform: translateY(-2px); }
+.rs-home .rs-cta--sm { font-size: 12px; padding: 15px 26px; }
+.rs-home .rs-cta--md { font-size: 13px; padding: 18px 30px; }
+.rs-home .rs-cta--lg { font-size: 14px; padding: 21px 38px; box-shadow: 0 24px 50px -22px rgba(232,99,74,0.8); }
+.rs-home .rs-cta--hero { font-size: 13px; padding: 19px 32px; }
+
+/* ── Section connector ───────────────────────────────── */
+.rs-home .rs-connector { position: relative; height: 0; z-index: 6; }
+.rs-home .rs-connector svg { position: absolute; left: 50%; top: -46px; transform: translateX(-50%); }
+
+/* ── CCR popup ───────────────────────────────────────── */
+#ccr-popup { will-change: transform, opacity; }
+#ccr-popup .rs-cta:hover { background: #F0745C; transform: translateY(-2px); }
+#ccr-close:hover { color: #fff !important; }
+
+/* ── Scroll reveal ───────────────────────────────────── */
+.rs-home [data-reveal] {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+.rs-home [data-reveal].rs-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Responsive ──────────────────────────────────────── */
+@media (max-width: 900px) {
+  .rs-home [data-sec]       { padding: 88px 24px !important; }
+  .rs-home [data-h1]        { font-size: 13.5vw !important; }
+  .rs-home [data-h2]        { font-size: 9vw !important; }
+  .rs-home [data-2col],
+  .rs-home [data-split],
+  .rs-home [data-pillars]   { grid-template-columns: 1fr !important; }
+  .rs-home [data-5col]      { grid-template-columns: 1fr 1fr !important; }
+  .rs-home [data-3col]      { grid-template-columns: 1fr !important; }
+  .rs-home [data-metric-row]{ grid-template-columns: 1fr !important; gap: 14px !important; }
+  .rs-home [data-bignum]    { font-size: 24vw !important; }
+  .rs-home [data-herofig]   { display: none !important; }
+  .rs-home [data-hero]      { min-height: auto !important; }
+}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://www.revshoppe.com/#organization",
+      "name": "RevShoppe",
+      "url": "https://www.revshoppe.com",
+      "description": "RevShoppe builds and governs Revenue Operating Systems (rOS) that stop GTM Decay — the compounding failure of go-to-market infrastructure left unowned. Serving VP Sales and CRO teams at enterprise and mid-market revenue organizations.",
+      "knowsAbout": ["GTM Decay","Revenue Operating System","GTM Infrastructure","Go-to-Market Workflows","AI-powered sales workflows","Revenue Operations","GTM Optimization"]
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://www.revshoppe.com/#gtm-decay",
+      "name": "GTM Decay",
+      "description": "The gradual failure of go-to-market systems — sequences, scoring models, and integrations — that keep running after the people who built them leave. They operate unattended, drifting from the market reality they were designed for, compounding in cost over time. The defining characteristic: ownership was handed off, but never reassigned.",
+      "inDefinedTermSet": {"@type":"DefinedTermSet","name":"RevShoppe Revenue Vocabulary","url":"https://www.revshoppe.com"}
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://www.revshoppe.com/#ros",
+      "name": "Revenue Operating System",
+      "alternateName": "rOS",
+      "description": "The governed state of GTM operations built by RevShoppe: infrastructure established across Context, Data, Process, and Technology; AI-powered workflows built for specific ICPs and use cases; and continuous optimization governance that prevents GTM Decay from returning.",
+      "inDefinedTermSet": {"@type":"DefinedTermSet","name":"RevShoppe Revenue Vocabulary","url":"https://www.revshoppe.com"}
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://www.revshoppe.com/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is GTM Decay?",
+          "acceptedAnswer": {"@type":"Answer","text":"GTM Decay is the gradual failure of go-to-market systems that keep running after the people who built them leave — sequences, scoring models, and integrations operating unattended, drifting from the reality they were designed for. It is also the compounding cost of ownership that was handed off but never reassigned."}
+        },
+        {
+          "@type": "Question",
+          "name": "What does GTM Decay cost a sales organization?",
+          "acceptedAnswer": {"@type":"Answer","text":"GTM Decay costs a sales organization in several compounding ways: ramp takes longer than it should (at $275,000 loaded per AE, 60 extra days equals $45,000 in lost output per hire); 70% of the team cannot replicate what top performers built without documented workflows; pipeline coverage requirements rise every cycle because signal quality is insufficient to distinguish real buyers; and technology spend on platforms like Outreach, Salesforce, Gong, and Clay becomes unaccountable."}
+        },
+        {
+          "@type": "Question",
+          "name": "What are the four pillars of GTM Infrastructure?",
+          "acceptedAnswer": {"@type":"Answer","text":"The four pillars of GTM Infrastructure are: (1) Context — ICP profiles, battle cards, and buying signal logic; (2) Data — clean, connected, and measurable contact records and CRM data; (3) Process — playbooks, handoffs, rep interaction patterns, and review cadences; (4) Technology — the specific tools each workflow runs on, configured correctly for that workflow."}
+        },
+        {
+          "@type": "Question",
+          "name": "What is the difference between a GTM workflow and a sequence?",
+          "acceptedAnswer": {"@type":"Answer","text":"A sequence stamps the same message and forgets. A GTM workflow is a triggered, end-to-end process that reads buying signals, qualifies fit against ICP, gathers live context about the prospect, generates a relevant output via Claude, routes to a human for approval, executes against the right channel, and logs the outcome for the next run. Every run starts sharper than the last."}
+        },
+        {
+          "@type": "Question",
+          "name": "What is a Revenue Operating System (rOS)?",
+          "acceptedAnswer": {"@type":"Answer","text":"A Revenue Operating System (rOS) is the governed state of GTM operations — the opposite of GTM Decay. Built by RevShoppe, it consists of four infrastructure pillars (Context, Data, Process, Technology), AI-powered GTM workflows built on that foundation, and ongoing governance that keeps every workflow current as markets shift, teams change, and data drifts."}
+        },
+        {
+          "@type": "Question",
+          "name": "What results has RevShoppe produced for clients?",
+          "acceptedAnswer": {"@type":"Answer","text":"RevShoppe client engagements have produced: 2.1x engagement on workflow-driven outbound; +34% qualified pipeline within two quarters; +61% SQLs from the same headcount; 21 days cut from average sales cycle; and 9 hours per rep per week recovered."}
+        },
+        {
+          "@type": "Question",
+          "name": "Why doesn't RevShoppe hand off after building?",
+          "acceptedAnswer": {"@type":"Answer","text":"Every vendor delivers and leaves. Performance peaks at handoff, then decays the moment no one owns it. RevShoppe stays in the optimization rhythm after build — catching workflow performance drops before they cost a quarter, keeping infrastructure current, and ensuring the rOS compounds rather than decays."}
+        }
+      ]
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://www.revshoppe.com/#webpage",
+      "url": "https://www.revshoppe.com",
+      "name": "RevShoppe — Stop GTM Decay",
+      "description": "RevShoppe diagnoses GTM Decay, builds the Revenue Operating System to stop it, and governs the workflows permanently so performance compounds instead of decays.",
+      "isPartOf": {"@id": "https://www.revshoppe.com/#organization"},
+      "about": {"@id": "https://www.revshoppe.com/#gtm-decay"},
+      "mentions": [{"@id":"https://www.revshoppe.com/#gtm-decay"},{"@id":"https://www.revshoppe.com/#ros"}],
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "cssSelector": ["#decay", "#consequences", "#infrastructure"]
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<div class="rs-home" role="main">
+
+  <!-- ══ 01 · HERO ══════════════════════════════════════════════════ -->
+  <section aria-label="Hero" data-sec data-hero style="position:relative; background:#15141C; padding:150px 56px 110px; min-height:96vh; display:flex; flex-direction:column; justify-content:center; overflow:hidden;">
+
+    <!-- decay canvas — generated by JS -->
+    <div id="rs-decay-canvas" data-herofig style="position:absolute; inset:0; z-index:1; pointer-events:none;"></div>
+
+    <!-- bolt watermark, dark-on-dark -->
+    <svg data-herofig viewBox="8 -6 86 142" style="position:absolute; right:-1%; bottom:-12%; height:128%; width:auto; z-index:2; pointer-events:none;">
+      <polygon points="55,8 22,68 47,68 40,122 80,57 55,57" fill="none" stroke="rgba(255,255,255,0.013)" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>
+      <circle cx="55" cy="8"  r="4" fill="rgba(255,255,255,0.013)"/>
+      <circle cx="22" cy="68" r="4" fill="rgba(255,255,255,0.013)"/>
+      <circle cx="40" cy="122" r="4" fill="rgba(255,255,255,0.013)"/>
+      <circle cx="80" cy="57" r="4" fill="rgba(255,255,255,0.013)"/>
+    </svg>
+
+    <div style="max-width:1180px; margin:0 auto; width:100%; position:relative; z-index:3;">
+      <div data-reveal style="font-family:var(--f-mono); font-size:12px; letter-spacing:0.24em; text-transform:uppercase; color:#E8634A; margin:0 0 22px;">GTM INFRASTRUCTURE · WORKFLOWS · GOVERNANCE</div>
+      <h1 data-h1 data-reveal style="font-family:var(--f-display); font-weight:500; font-size:clamp(46px,8.2vw,128px); line-height:0.94; letter-spacing:-0.025em; color:#fff; max-width:15ch;">You're running a <span style="color:rgba(255,255,255,0.34); text-decoration:line-through; text-decoration-color:rgba(232,99,74,0.55); text-decoration-thickness:3px;">2022</span> playbook in a <span style="color:#E8634A;">2026</span> market.</h1>
+      <p data-reveal data-reveal-delay="120" style="font-size:clamp(16px,1.5vw,20px); line-height:1.65; color:rgba(255,255,255,0.6); max-width:54ch; margin:38px 0 0;">Your reps spend eighty percent of their day on work an AI could finish in three minutes, your sequences haven't been updated since the last RevOps lead left, and the forecast you presented Monday was wrong before you opened the deck. Nobody owns any of it anymore. That's GTM Decay, and it's what's standing between you and the number you promised the board.</p>
+      <a data-reveal data-reveal-delay="200" href="https://www.revshoppe.com/contact" class="rs-cta rs-cta--hero" style="margin-top:44px;">Stop GTM Decay Now</a>
+    </div>
+  </section>
+
+  <div class="rs-connector"><svg width="14" height="92"><line x1="7" y1="0" x2="7" y2="92" stroke="rgba(255,255,255,0.16)" stroke-width="1.5" stroke-dasharray="2 9" stroke-linecap="round"/><circle cx="7" cy="46" r="3" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1.4"/></svg></div>
+
+  <!-- ══ 02 · GTM DECAY ══════════════════════════════════════════════ -->
+  <section id="decay" aria-label="GTM Decay — definition" data-sec style="position:relative; background:#1A1922; padding:128px 56px;">
+    <div style="max-width:1180px; margin:0 auto;">
+      <article>
+      <div data-reveal style="display:flex; align-items:flex-end; gap:24px; flex-wrap:wrap;">
+        <span data-h2 style="font-family:var(--f-display); font-weight:500; font-size:clamp(56px,8.5vw,120px); line-height:0.9; letter-spacing:-0.03em; color:#fff;"><dfn>GTM Decay</dfn></span>
+        <span style="font-family:var(--f-mono); font-size:clamp(13px,1.4vw,17px); letter-spacing:0.02em; color:rgba(255,255,255,0.42); padding-bottom:16px;">/ˌjē-tē-ˈem di-ˈkā/</span>
+      </div>
+      <div data-reveal style="font-family:var(--f-mono); font-size:12px; letter-spacing:0.18em; text-transform:uppercase; color:#E8634A; margin-top:18px;">noun · revenue operations</div>
+      <div style="height:2px; background:#E8634A; width:100%; margin:32px 0 44px;"></div>
+      <div style="max-width:880px;">
+        <div data-reveal style="display:flex; gap:24px; margin-bottom:34px;">
+          <span style="font-family:var(--f-display); font-weight:500; font-size:28px; color:#E8634A; flex:none; line-height:1.2;">1.</span>
+          <p style="font-family:var(--f-body); font-size:clamp(18px,1.9vw,23px); line-height:1.58; color:#fff;">The gradual failure of go-to-market systems that keep running after the people who built them leave — sequences, scoring models, and integrations operating unattended, drifting from the reality they were designed for.</p>
+        </div>
+        <div data-reveal style="display:flex; gap:24px;">
+          <span style="font-family:var(--f-display); font-weight:500; font-size:28px; color:#E8634A; flex:none; line-height:1.2;">2.</span>
+          <p style="font-family:var(--f-body); font-size:clamp(18px,1.9vw,23px); line-height:1.58; color:#fff;">The compounding cost of ownership that was handed off but never reassigned.</p>
+        </div>
+        <div data-reveal style="border-left:2px solid rgba(232,99,74,0.5); padding-left:24px; margin-top:42px;">
+          <p style="font-family:var(--f-body); font-style:italic; font-size:clamp(16px,1.6vw,19px); line-height:1.58; color:rgba(255,255,255,0.55);">"I'm carrying a number that rides on systems I didn't build, can't audit, and no longer trust."</p>
+        </div>
+        <a data-reveal href="https://www.revshoppe.com/contact" class="rs-cta rs-cta--sm" style="margin-top:48px; box-shadow:0 16px 36px -16px rgba(232,99,74,0.65);">See if your GTM has it</a>
+      </div>
+      </article>
+    </div>
+  </section>
+
+  <div class="rs-connector"><svg width="14" height="92"><line x1="7" y1="0" x2="7" y2="92" stroke="rgba(255,255,255,0.16)" stroke-width="1.5" stroke-dasharray="2 9" stroke-linecap="round"/><circle cx="7" cy="46" r="3" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1.4"/></svg></div>
+
+  <!-- ══ 03 · CONSEQUENCES ═══════════════════════════════════════════ -->
+  <section id="consequences" aria-label="The revenue consequences of GTM Decay" data-sec style="position:relative; background:#15141C; padding:130px 56px;">
+    <div style="max-width:1180px; margin:0 auto;">
+      <h2 data-h2 data-reveal style="font-family:var(--f-display); font-weight:500; font-size:clamp(34px,5.2vw,80px); line-height:0.98; letter-spacing:-0.022em; color:#fff; max-width:16ch; margin:0 0 8px;">Your pipeline is already showing you the decay.</h2>
+
+      <!-- row 1 -->
+      <div data-metric-row data-reveal style="display:grid; grid-template-columns:300px 1fr; gap:56px; align-items:start; padding:52px 0 46px; border-top:1px solid rgba(255,255,255,0.1); margin-top:54px;">
+        <div>
+          <div data-bignum style="font-family:var(--f-display); font-weight:500; font-size:clamp(56px,6vw,104px); line-height:0.85; letter-spacing:-0.03em; color:#E8634A;">$900K</div>
+          <div style="font-family:var(--f-mono); font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:rgba(255,255,255,0.42); margin-top:16px; max-width:24ch; line-height:1.6;">In seller output absorbed this year. No line item on the P&amp;L.</div>
+        </div>
+        <div>
+          <h3 style="font-family:var(--f-display); font-weight:500; font-size:clamp(21px,2vw,28px); line-height:1.18; letter-spacing:-0.01em; color:#fff;">Ramp is longer than it used to be and you're paying for it on every hire.</h3>
+          <p style="font-family:var(--f-body); font-size:15.5px; line-height:1.72; color:rgba(255,255,255,0.58); margin-top:16px; max-width:62ch;">At a loaded cost of $275,000 per AE, sixty additional days of ramp represents $45,000 in output that never materializes, per hire. The ramp program running today was built for the tools, the buyer, and the sequencing logic from three years ago. None of those are the same.</p>
+        </div>
+      </div>
+
+      <!-- row 2 -->
+      <div data-metric-row data-reveal style="display:grid; grid-template-columns:300px 1fr; gap:56px; align-items:start; padding:46px 0; border-top:1px solid rgba(255,255,255,0.1);">
+        <div>
+          <div data-bignum style="font-family:var(--f-display); font-weight:500; font-size:clamp(56px,6vw,104px); line-height:0.85; letter-spacing:-0.03em; color:#E8634A;">70%</div>
+          <div style="font-family:var(--f-mono); font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:rgba(255,255,255,0.42); margin-top:16px; max-width:24ch; line-height:1.6;">Of your team can't replicate what your best reps built</div>
+        </div>
+        <div>
+          <h3 style="font-family:var(--f-display); font-weight:500; font-size:clamp(21px,2vw,28px); line-height:1.18; letter-spacing:-0.01em; color:#fff;">Your top performers are running Workflows the rest of your team can't replicate.</h3>
+          <p style="font-family:var(--f-body); font-size:15.5px; line-height:1.72; color:rgba(255,255,255,0.58); margin-top:16px; max-width:62ch;">Your top performers built their own workarounds. The newsletter they monitor for expansion signals. The LinkedIn searches they run manually every Monday morning. The account prioritization spreadsheet nobody else has access to. They're getting results because they've compensated for infrastructure that doesn't exist. The rest of your team is executing the same Workflows without the compensation layer those reps developed over years.</p>
+        </div>
+      </div>
+
+      <!-- row 3 -->
+      <div data-metric-row data-reveal style="display:grid; grid-template-columns:300px 1fr; gap:56px; align-items:start; padding:46px 0; border-top:1px solid rgba(255,255,255,0.1);">
+        <div>
+          <div data-bignum style="font-family:var(--f-display); font-weight:500; font-size:clamp(56px,6vw,104px); line-height:0.85; letter-spacing:-0.03em; color:#E8634A;">4.5×</div>
+          <div style="font-family:var(--f-mono); font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:rgba(255,255,255,0.42); margin-top:16px; max-width:24ch; line-height:1.6;">Pipeline coverage that still doesn't feel safe</div>
+        </div>
+        <div>
+          <h3 style="font-family:var(--f-display); font-weight:500; font-size:clamp(21px,2vw,28px); line-height:1.18; letter-spacing:-0.01em; color:#fff;">You need that much pipeline coverage because you can't identify what's real.</h3>
+          <p style="font-family:var(--f-body); font-size:15.5px; line-height:1.72; color:rgba(255,255,255,0.58); margin-top:16px; max-width:62ch;">The requirement has risen every cycle. 3x felt right, then 3.5x, now 4.5x still doesn't feel safe, because a meaningful portion of what's in the pipeline has never been real and everyone in the room knows it. The signals feeding the pipeline can't distinguish between an account that fits the ICP on paper and one that will actually buy. Those are different lists, and right now they're the same list.</p>
+        </div>
+      </div>
+
+      <!-- row 4 -->
+      <div data-metric-row data-reveal style="display:grid; grid-template-columns:300px 1fr; gap:56px; align-items:start; padding:46px 0 0; border-top:1px solid rgba(255,255,255,0.1);">
+        <div>
+          <div data-bignum style="font-family:var(--f-display); font-weight:500; font-size:clamp(56px,6vw,104px); line-height:0.85; letter-spacing:-0.03em; color:#E8634A;">?</div>
+          <div style="font-family:var(--f-mono); font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:rgba(255,255,255,0.42); margin-top:16px; max-width:24ch; line-height:1.6;">The return on Outreach, Salesforce, Gong, Clay. Unaccounted for.</div>
+        </div>
+        <div>
+          <h3 style="font-family:var(--f-display); font-weight:500; font-size:clamp(21px,2vw,28px); line-height:1.18; letter-spacing:-0.01em; color:#fff;">You can't tell your board what Outreach, Salesforce, Gong, or Clay is producing.</h3>
+          <p style="font-family:var(--f-body); font-size:15.5px; line-height:1.72; color:rgba(255,255,255,0.58); margin-top:16px; max-width:62ch;">How many sequences in Outreach are getting above a 1.2% reply rate? Which accounts in Clay are worth the enrichment cost? Is the Gong library actually informing how managers coach, or is it a recording archive nobody reviews? You can account for the spend. What you can't account for is what it's returning, and neither can anyone else in the room.</p>
+        </div>
+      </div>
+
+      <a data-reveal href="https://www.revshoppe.com/contact" class="rs-cta rs-cta--md" style="margin-top:48px;">Find out what it's costing you</a>
+    </div>
+  </section>
+
+  <!-- coral connector -->
+  <div class="rs-connector"><svg width="14" height="92"><line x1="7" y1="0" x2="7" y2="46" stroke="rgba(255,255,255,0.16)" stroke-width="1.5" stroke-dasharray="2 9" stroke-linecap="round"/><line x1="7" y1="46" x2="7" y2="92" stroke="#E8634A" stroke-width="1.5" stroke-linecap="round"/><circle cx="7" cy="46" r="3.4" fill="#E8634A"/></svg></div>
+
+  <!-- ══ 04 · GTM INFRASTRUCTURE ════════════════════════════════════ -->
+  <section id="infrastructure" aria-label="GTM Infrastructure — the four pillars" data-sec style="position:relative; background:#F1EDE6; padding:130px 56px;">
+    <div style="max-width:1180px; margin:0 auto;">
+      <h2 data-h2 data-reveal style="font-family:var(--f-display); font-weight:500; font-size:clamp(32px,4.6vw,68px); line-height:1.0; letter-spacing:-0.022em; color:#1A1820; max-width:18ch; margin:0 0 18px;">GTM Infrastructure relies on four pillars.</h2>
+      <p data-reveal style="font-family:var(--f-body); font-size:17px; line-height:1.72; color:#4B4956; max-width:64ch; margin:0 0 56px;">When these four are governed, a GTM Workflow produces consistent results. When any one of them degrades, it shows up as rep performance issues, pipeline holes, or forecast misses that resist every fix thrown at them. The fix being applied isn't addressing the pillar that broke.</p>
+
+      <div data-pillars style="display:grid; grid-template-columns:repeat(2,1fr); gap:14px;">
+        <!-- 01 Context -->
+        <div data-reveal style="background:#fff; border:1px solid rgba(26,24,32,0.10); border-radius:10px; padding:34px 36px; box-shadow:0 1px 2px rgba(0,0,0,0.04), 0 8px 22px rgba(0,0,0,0.05);">
+          <div style="display:flex; align-items:baseline; gap:16px; border-bottom:1px solid rgba(26,24,32,0.1); padding-bottom:18px; margin-bottom:18px;">
+            <span style="font-family:var(--f-display); font-weight:500; font-size:54px; line-height:0.8; letter-spacing:-0.03em; color:#E8634A;">01</span>
+            <span style="font-family:var(--f-mono); font-size:13px; letter-spacing:0.2em; text-transform:uppercase; color:#1A1820;">Context</span>
+          </div>
+          <p style="font-family:var(--f-body); font-size:15px; line-height:1.68; color:#4B4956; margin:0 0 14px;">Who your best buyer is, what they look like, what signals say they're ready to engage, and what the AI or the rep needs to know to run a Workflow correctly.</p>
+          <div style="font-family:var(--f-mono); font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:rgba(26,24,32,0.5);">ICP profiles · Battle cards · Signal logic</div>
+        </div>
+        <!-- 02 Data -->
+        <div data-reveal style="background:#fff; border:1px solid rgba(26,24,32,0.10); border-radius:10px; padding:34px 36px; box-shadow:0 1px 2px rgba(0,0,0,0.04), 0 8px 22px rgba(0,0,0,0.05);">
+          <div style="display:flex; align-items:baseline; gap:16px; border-bottom:1px solid rgba(26,24,32,0.1); padding-bottom:18px; margin-bottom:18px;">
+            <span style="font-family:var(--f-display); font-weight:500; font-size:54px; line-height:0.8; letter-spacing:-0.03em; color:#E8634A;">02</span>
+            <span style="font-family:var(--f-mono); font-size:13px; letter-spacing:0.2em; text-transform:uppercase; color:#1A1820;">Data</span>
+          </div>
+          <p style="font-family:var(--f-body); font-size:15px; line-height:1.68; color:#4B4956; margin:0 0 14px;">Clean, connected, and measurable. Contact records accurate enough to engage, and ERP or CRM data connected so performance can actually be tracked.</p>
+          <div style="font-family:var(--f-mono); font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:rgba(26,24,32,0.5);">The right inputs in the right places</div>
+        </div>
+        <!-- 03 Process -->
+        <div data-reveal style="background:#fff; border:1px solid rgba(26,24,32,0.10); border-radius:10px; padding:34px 36px; box-shadow:0 1px 2px rgba(0,0,0,0.04), 0 8px 22px rgba(0,0,0,0.05);">
+          <div style="display:flex; align-items:baseline; gap:16px; border-bottom:1px solid rgba(26,24,32,0.1); padding-bottom:18px; margin-bottom:18px;">
+            <span style="font-family:var(--f-display); font-weight:500; font-size:54px; line-height:0.8; letter-spacing:-0.03em; color:#E8634A;">03</span>
+            <span style="font-family:var(--f-mono); font-size:13px; letter-spacing:0.2em; text-transform:uppercase; color:#1A1820;">Process</span>
+          </div>
+          <p style="font-family:var(--f-body); font-size:15px; line-height:1.68; color:#4B4956; margin:0 0 14px;">How your team executes against the Workflow output and how humans and agents operate within it.</p>
+          <div style="font-family:var(--f-mono); font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:rgba(26,24,32,0.5);">Playbooks · Handoffs · Rep interaction · Review cadences</div>
+        </div>
+        <!-- 04 Technology -->
+        <div data-reveal style="background:#fff; border:1px solid rgba(26,24,32,0.10); border-radius:10px; padding:34px 36px; box-shadow:0 1px 2px rgba(0,0,0,0.04), 0 8px 22px rgba(0,0,0,0.05);">
+          <div style="display:flex; align-items:baseline; gap:16px; border-bottom:1px solid rgba(26,24,32,0.1); padding-bottom:18px; margin-bottom:18px;">
+            <span style="font-family:var(--f-display); font-weight:500; font-size:54px; line-height:0.8; letter-spacing:-0.03em; color:#E8634A;">04</span>
+            <span style="font-family:var(--f-mono); font-size:13px; letter-spacing:0.2em; text-transform:uppercase; color:#1A1820;">Technology</span>
+          </div>
+          <p style="font-family:var(--f-body); font-size:15px; line-height:1.68; color:#4B4956; margin:0 0 14px;">The specific tools each Workflow runs on, configured for that Workflow. Not your full tech stack. Last quarter, your organization spent an estimated $43,000 in Claude API tokens alone. You can't tell your board which workflows generated those calls, whether the outputs were used by reps, or whether any of it led to pipeline.</p>
+          <div style="font-family:var(--f-mono); font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:rgba(26,24,32,0.5);">The right technology, wired correctly, for each Workflow</div>
+        </div>
+      </div>
+
+      <a data-reveal href="https://www.revshoppe.com/contact" class="rs-cta rs-cta--sm" style="margin-top:30px; box-shadow:0 16px 36px -16px rgba(232,99,74,0.65);">See which pillars are breaking</a>
+    </div>
+  </section>
+
+  <div class="rs-connector"><svg width="14" height="92"><line x1="7" y1="0" x2="7" y2="92" stroke="#E8634A" stroke-width="1.6" stroke-linecap="round"/><circle cx="7" cy="46" r="3.6" fill="#E8634A"/></svg></div>
+
+  <!-- ══ 05 · GTM WORKFLOWS ══════════════════════════════════════════ -->
+  <section id="workflows" aria-label="GTM Workflows — what runs on the infrastructure" data-sec style="position:relative; background:#F6F3EE; padding:130px 56px;">
+    <div style="max-width:1180px; margin:0 auto;">
+      <h2 data-h2 data-reveal style="font-family:var(--f-display); font-weight:500; font-size:clamp(32px,4.6vw,68px); line-height:1.0; letter-spacing:-0.022em; color:#1A1820; max-width:20ch; margin:0 0 18px;">On that foundation, you run workflows. Not sequences.</h2>
+      <p data-reveal style="font-family:var(--f-body); font-size:17px; line-height:1.72; color:#4B4956; max-width:66ch; margin:0 0 14px;">A workflow is a triggered, end-to-end workflow — AI-powered, human-led, or hybrid — that runs on the GTM Infrastructure and produces one defined revenue outcome for one specific ICP × use case × geography.</p>
+      <p data-reveal style="font-family:var(--f-body); font-size:17px; line-height:1.72; color:#4B4956; max-width:66ch; margin:0 0 40px;">A sequence stamps the same message and forgets. A workflow reads the prospect's live moment, writes for it, and learns from what happens.</p>
+
+      <!-- circuit diagram -->
+      <svg viewBox="0 84 1180 252" style="width:100%; height:auto;">
+        <defs>
+          <marker id="wf-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="#E8634A"/>
+          </marker>
+        </defs>
+        <g stroke="#E8634A" stroke-width="2.4">
+          <line x1="134" y1="150" x2="261" y2="150" marker-end="url(#wf-arrow)"/>
+          <line x1="291" y1="150" x2="417" y2="150" marker-end="url(#wf-arrow)"/>
+          <line x1="447" y1="150" x2="566" y2="150" marker-end="url(#wf-arrow)"/>
+          <line x1="614" y1="150" x2="731" y2="150" marker-end="url(#wf-arrow)"/>
+          <line x1="761" y1="150" x2="887" y2="150" marker-end="url(#wf-arrow)"/>
+          <line x1="917" y1="150" x2="1044" y2="150" marker-end="url(#wf-arrow)"/>
+        </g>
+        <path d="M1060,150 H1132 a10,10 0 0 1 10,10 V286 a10,10 0 0 1 -10,10 H48 a10,10 0 0 1 -10,-10 V160 a10,10 0 0 1 10,-10 H113" fill="none" stroke="#E8634A" stroke-width="1.8" stroke-dasharray="2 7" stroke-linecap="round" marker-end="url(#wf-arrow)"/>
+        <rect x="430" y="287" width="320" height="20" fill="#F6F3EE"/>
+        <text x="590" y="300" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" letter-spacing="0.16em" fill="#E8634A">FEEDBACK</text>
+        <text x="590" y="320" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" letter-spacing="0.12em" fill="rgba(26,24,32,0.5)">EVERY RUN STARTS SHARPER THAN THE LAST</text>
+        <!-- nodes -->
+        <circle cx="120" cy="150" r="9" fill="#fff" stroke="#1A1820" stroke-width="2"/>
+        <text x="120" y="190" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="12" letter-spacing="0.12em" fill="#1A1820">TRIGGER</text>
+        <text x="120" y="207" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9.5" letter-spacing="0.06em" fill="rgba(26,24,32,0.5)">signal fires</text>
+        <circle cx="276" cy="150" r="9" fill="#fff" stroke="#1A1820" stroke-width="2"/>
+        <text x="276" y="190" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="12" letter-spacing="0.12em" fill="#1A1820">QUALIFY</text>
+        <text x="276" y="207" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9.5" letter-spacing="0.06em" fill="rgba(26,24,32,0.5)">ICP fit · score</text>
+        <circle cx="432" cy="150" r="9" fill="#fff" stroke="#1A1820" stroke-width="2"/>
+        <text x="432" y="190" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="12" letter-spacing="0.12em" fill="#1A1820">CONTEXT</text>
+        <text x="432" y="207" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9.5" letter-spacing="0.06em" fill="rgba(26,24,32,0.5)">news · stack · history</text>
+        <!-- GENERATE node — emphasized -->
+        <circle cx="590" cy="150" r="24" fill="#E8634A" opacity="0.14"/>
+        <circle cx="590" cy="150" r="13" fill="#E8634A"/>
+        <text x="590" y="192" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="12" letter-spacing="0.12em" fill="#1A1820">GENERATE</text>
+        <text x="590" y="209" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9.5" letter-spacing="0.06em" fill="#E8634A">Claude reads + writes</text>
+        <circle cx="747" cy="150" r="9" fill="#fff" stroke="#1A1820" stroke-width="2"/>
+        <text x="747" y="190" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="12" letter-spacing="0.12em" fill="#1A1820">APPROVE</text>
+        <text x="747" y="207" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9.5" letter-spacing="0.06em" fill="rgba(26,24,32,0.5)">human in the loop</text>
+        <circle cx="903" cy="150" r="9" fill="#fff" stroke="#1A1820" stroke-width="2"/>
+        <text x="903" y="190" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="12" letter-spacing="0.12em" fill="#1A1820">EXECUTE</text>
+        <text x="903" y="207" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9.5" letter-spacing="0.06em" fill="rgba(26,24,32,0.5)">send · log · update</text>
+        <circle cx="1060" cy="150" r="9" fill="#1A1820" stroke="#1A1820" stroke-width="2"/>
+        <text x="1060" y="190" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="12" letter-spacing="0.12em" fill="#1A1820">OUTCOME</text>
+        <text x="1060" y="207" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9.5" letter-spacing="0.06em" fill="rgba(26,24,32,0.5)">meeting · opp · renewal</text>
+      </svg>
+
+      <a data-reveal href="https://www.revshoppe.com/contact" class="rs-cta rs-cta--sm" style="margin-top:26px; box-shadow:0 16px 36px -16px rgba(232,99,74,0.5);">See a workflow built for your motion</a>
+    </div>
+  </section>
+
+  <div class="rs-connector"><svg width="14" height="92"><line x1="7" y1="0" x2="7" y2="92" stroke="#E8634A" stroke-width="1.6" stroke-linecap="round"/><circle cx="7" cy="46" r="3.6" fill="#E8634A"/></svg></div>
+
+  <!-- ══ 06 · LIFECYCLE ══════════════════════════════════════════════ -->
+  <section id="loop" aria-label="RevShoppe lifecycle: Diagnosis through rOS" data-sec style="position:relative; background:#100F16; padding:140px 56px;">
+    <div style="max-width:1180px; margin:0 auto;">
+      <h2 data-h2 data-reveal style="font-family:var(--f-display); font-weight:500; font-size:clamp(34px,5vw,76px); line-height:0.98; letter-spacing:-0.022em; color:#fff; max-width:22ch; margin:0 0 8px;">Your competitors have an advantage.&nbsp;<span style="color:#E8634A;">They run an operating system.</span></h2>
+
+      <div id="loop-stage" data-reveal style="position:relative; margin:64px 0 60px;">
+        <svg viewBox="0 0 1180 400" style="width:100%; height:auto; overflow:visible;">
+          <defs>
+            <marker id="loop-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0,0 L10,5 L0,10 z" fill="#E8634A"/>
+            </marker>
+            <filter id="loop-glow" x="-80%" y="-80%" width="260%" height="260%">
+              <feGaussianBlur stdDeviation="7"/>
+            </filter>
+          </defs>
+          <!-- guide edges (always visible, muted) -->
+          <g stroke="rgba(255,255,255,0.12)" stroke-width="1.6" fill="none">
+            <line x1="150" y1="270" x2="350" y2="270"/>
+            <line x1="385" y1="270" x2="585" y2="270"/>
+            <line x1="620" y1="270" x2="825" y2="270"/>
+            <line x1="858" y1="256" x2="1045" y2="160"/>
+            <path d="M1065,138 C1070,30 720,30 858,238"/>
+          </g>
+          <!-- coral draw edges (animated) -->
+          <g fill="none" stroke="#E8634A" stroke-width="2.2" stroke-linecap="round">
+            <line class="loop-edge" data-i="0" x1="150" y1="270" x2="350" y2="270" marker-end="url(#loop-arrow)" pathLength="100" stroke-dasharray="100" stroke-dashoffset="100"/>
+            <line class="loop-edge" data-i="1" x1="385" y1="270" x2="585" y2="270" marker-end="url(#loop-arrow)" pathLength="100" stroke-dasharray="100" stroke-dashoffset="100"/>
+            <line class="loop-edge" data-i="2" x1="620" y1="270" x2="825" y2="270" marker-end="url(#loop-arrow)" pathLength="100" stroke-dasharray="100" stroke-dashoffset="100"/>
+            <line class="loop-edge" data-i="3" x1="858" y1="256" x2="1045" y2="160" marker-end="url(#loop-arrow)" pathLength="100" stroke-dasharray="100" stroke-dashoffset="100"/>
+            <path class="loop-edge" data-i="4" d="M1065,138 C1070,30 720,30 858,238" marker-end="url(#loop-arrow)" pathLength="100" stroke-dasharray="100" stroke-dashoffset="100"/>
+          </g>
+          <!-- rOS label (top right) -->
+          <text class="nlab" x="1065" y="126" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="14" letter-spacing="0.04em" fill="rgba(255,255,255,0.4)">rOS</text>
+          <!-- node 0: DIAGNOSIS -->
+          <g class="loop-node" data-i="0">
+            <circle class="halo" cx="120" cy="270" r="24" fill="#E8634A" opacity="0" filter="url(#loop-glow)"/>
+            <circle class="ring" cx="120" cy="270" r="19" fill="#100F16" stroke="rgba(255,255,255,0.3)" stroke-width="2"/>
+            <circle class="dot"  cx="120" cy="270" r="7"  fill="#E8634A" opacity="0"/>
+            <text class="nlab" x="120" y="322" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="12" letter-spacing="0.1em" fill="rgba(255,255,255,0.4)">DIAGNOSIS</text>
+          </g>
+          <!-- node 1: GTM INFRASTRUCTURE -->
+          <g class="loop-node" data-i="1">
+            <circle class="halo" cx="367" cy="270" r="24" fill="#E8634A" opacity="0" filter="url(#loop-glow)"/>
+            <circle class="ring" cx="367" cy="270" r="19" fill="#100F16" stroke="rgba(255,255,255,0.3)" stroke-width="2"/>
+            <circle class="dot"  cx="367" cy="270" r="7"  fill="#E8634A" opacity="0"/>
+            <text class="nlab" x="367" y="322" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="12" letter-spacing="0.1em" fill="rgba(255,255,255,0.4)">GTM INFRASTRUCTURE</text>
+          </g>
+          <!-- node 2: GTM WORKFLOWS -->
+          <g class="loop-node" data-i="2">
+            <circle class="halo" cx="602" cy="270" r="24" fill="#E8634A" opacity="0" filter="url(#loop-glow)"/>
+            <circle class="ring" cx="602" cy="270" r="19" fill="#100F16" stroke="rgba(255,255,255,0.3)" stroke-width="2"/>
+            <circle class="dot"  cx="602" cy="270" r="7"  fill="#E8634A" opacity="0"/>
+            <text class="nlab" x="602" y="322" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="12" letter-spacing="0.1em" fill="rgba(255,255,255,0.4)">GTM WORKFLOWS</text>
+          </g>
+          <!-- node 3: GTM OPTIMIZATION -->
+          <g class="loop-node" data-i="3">
+            <circle class="halo" cx="842" cy="270" r="24" fill="#E8634A" opacity="0" filter="url(#loop-glow)"/>
+            <circle class="ring" cx="842" cy="270" r="19" fill="#100F16" stroke="rgba(255,255,255,0.3)" stroke-width="2"/>
+            <circle class="dot"  cx="842" cy="270" r="7"  fill="#E8634A" opacity="0"/>
+            <text class="nlab" x="842" y="322" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="12" letter-spacing="0.1em" fill="rgba(255,255,255,0.4)">GTM OPTIMIZATION</text>
+          </g>
+          <!-- node 4: rOS -->
+          <g class="loop-node" data-i="4">
+            <circle class="halo" cx="1065" cy="160" r="26" fill="#E8634A" opacity="0" filter="url(#loop-glow)"/>
+            <circle class="ring" cx="1065" cy="160" r="21" fill="#100F16" stroke="rgba(255,255,255,0.3)" stroke-width="2"/>
+            <circle class="dot"  cx="1065" cy="160" r="8"  fill="#E8634A" opacity="0"/>
+          </g>
+        </svg>
+      </div>
+
+      <!-- 5-column stage legend -->
+      <div data-5col style="display:grid; grid-template-columns:repeat(5,1fr); gap:1px; background:rgba(255,255,255,0.1); border-top:1px solid rgba(255,255,255,0.1); border-bottom:1px solid rgba(255,255,255,0.1);">
+        <div style="background:#100F16; padding:26px 22px 28px;">
+          <div style="font-family:var(--f-mono); font-size:10px; letter-spacing:0.16em; color:#E8634A; margin-bottom:14px;">01</div>
+          <div style="font-family:var(--f-display); font-weight:500; font-size:16px; letter-spacing:-0.01em; color:#fff; margin-bottom:9px;">Diagnosis</div>
+          <p style="font-family:var(--f-body); font-size:13px; line-height:1.6; color:rgba(255,255,255,0.55);">Surfaces the Revenue Consequences across the four pillars, and which to rebuild first.</p>
+        </div>
+        <div style="background:#100F16; padding:26px 22px 28px;">
+          <div style="font-family:var(--f-mono); font-size:10px; letter-spacing:0.16em; color:#E8634A; margin-bottom:14px;">02</div>
+          <div style="font-family:var(--f-display); font-weight:500; font-size:16px; letter-spacing:-0.01em; color:#fff; margin-bottom:9px;">Infrastructure</div>
+          <p style="font-family:var(--f-body); font-size:13px; line-height:1.6; color:rgba(255,255,255,0.55);">Establishes the four pillars so Workflows can run reliably.</p>
+        </div>
+        <div style="background:#100F16; padding:26px 22px 28px;">
+          <div style="font-family:var(--f-mono); font-size:10px; letter-spacing:0.16em; color:#E8634A; margin-bottom:14px;">03</div>
+          <div style="font-family:var(--f-display); font-weight:500; font-size:16px; letter-spacing:-0.01em; color:#fff; margin-bottom:9px;">Workflows</div>
+          <p style="font-family:var(--f-body); font-size:13px; line-height:1.6; color:rgba(255,255,255,0.55);">Signal-triggered, built for one ICP, one use case, one revenue outcome.</p>
+        </div>
+        <div style="background:#100F16; padding:26px 22px 28px;">
+          <div style="font-family:var(--f-mono); font-size:10px; letter-spacing:0.16em; color:#E8634A; margin-bottom:14px;">04</div>
+          <div style="font-family:var(--f-display); font-weight:500; font-size:16px; letter-spacing:-0.01em; color:#fff; margin-bottom:9px;">Optimization</div>
+          <p style="font-family:var(--f-body); font-size:13px; line-height:1.6; color:rgba(255,255,255,0.55);">Keeps Workflows current as the market shifts, the team changes, the data drifts.</p>
+        </div>
+        <div style="background:#15141C; padding:26px 22px 28px; box-shadow:inset 3px 0 0 #E8634A;">
+          <div style="font-family:var(--f-mono); font-size:10px; letter-spacing:0.16em; color:#E8634A; margin-bottom:14px;">05</div>
+          <div style="font-family:var(--f-display); font-weight:500; font-size:16px; letter-spacing:-0.01em; color:#fff; margin-bottom:9px;">rOS</div>
+          <p style="font-family:var(--f-body); font-size:13px; line-height:1.6; color:rgba(255,255,255,0.6);">Where it lands and stays. RevShoppe builds it, governs it, and owns it.</p>
+        </div>
+      </div>
+
+      <a data-reveal href="https://www.revshoppe.com/contact" class="rs-cta rs-cta--md" style="margin-top:40px;">Stop GTM Decay Now</a>
+    </div>
+  </section>
+
+  <div class="rs-connector"><svg width="14" height="92"><line x1="7" y1="0" x2="7" y2="92" stroke="#E8634A" stroke-width="1.6" stroke-linecap="round"/><circle cx="7" cy="46" r="3.6" fill="#E8634A"/></svg></div>
+
+  <!-- ══ 07 · rOS ════════════════════════════════════════════════════ -->
+  <section id="ros" aria-label="Revenue Operating System (rOS) — the governed state" data-sec style="position:relative; background:#100F16; padding:140px 56px;">
+    <div style="max-width:1180px; margin:0 auto;">
+      <h2 data-h2 data-reveal style="font-family:var(--f-display); font-weight:500; font-size:clamp(34px,5vw,76px); line-height:0.98; letter-spacing:-0.022em; color:#fff; max-width:20ch; margin:0 0 18px;">This is what an operating system <span style="color:#E8634A;">actually looks like.</span></h2>
+      <p data-reveal style="font-family:var(--f-body); font-size:17px; line-height:1.72; color:rgba(255,255,255,0.6); max-width:68ch; margin:0 0 56px;">Market leaders don't run sequences and hope. They run a Revenue Operating System: infrastructure underneath, a workflow for every motion on top, and the governance that keeps all of it current as the market moves. The signal gets seen, the research gets done, the right Workflow fires, before anyone thinks to ask. RevShoppe builds it and runs it.</p>
+
+      <div data-reveal>
+        <svg viewBox="0 0 1100 470" style="width:100%; height:auto;">
+          <!-- governance top -->
+          <text x="585" y="40" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" letter-spacing="0.18em" fill="#E8634A">GOVERNANCE · REVSHOPPE OPERATES</text>
+          <g stroke="#E8634A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round" fill="none">
+            <path d="M470,116 L470,165 L510,205"/>
+            <path d="M585,116 L585,205"/>
+            <path d="M700,116 L700,165 L660,205"/>
+          </g>
+          <g font-family="IBM Plex Mono, monospace" font-size="10" letter-spacing="0.08em" fill="rgba(255,255,255,0.7)" text-anchor="middle">
+            <circle cx="470" cy="116" r="8" fill="#100F16"/><circle cx="470" cy="116" r="4.5" fill="#E8634A"/>
+            <text x="470" y="100">CENTER OF EXC.</text>
+            <circle cx="585" cy="116" r="8" fill="#100F16"/><circle cx="585" cy="116" r="4.5" fill="#E8634A"/>
+            <text x="585" y="100">RHYTHM OF REV.</text>
+            <circle cx="700" cy="116" r="8" fill="#100F16"/><circle cx="700" cy="116" r="4.5" fill="#E8634A"/>
+            <text x="700" y="100">WF GOVERNANCE</text>
+          </g>
+          <!-- GTM Infrastructure left -->
+          <text x="120" y="170" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" letter-spacing="0.14em" fill="rgba(255,255,255,0.45)">GTM INFRASTRUCTURE</text>
+          <g stroke="rgba(255,255,255,0.5)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" fill="none">
+            <path d="M120,230 L200,230 L200,300"/>
+            <path d="M120,277 L200,277"/>
+            <path d="M120,325 L200,325 L200,300"/>
+            <path d="M120,372 L200,372 L200,300"/>
+            <path d="M200,300 L320,300"/>
+          </g>
+          <g font-family="IBM Plex Mono, monospace" font-size="9.5" letter-spacing="0.06em" fill="rgba(255,255,255,0.62)">
+            <circle cx="120" cy="230" r="7" fill="#100F16"/><circle cx="120" cy="230" r="4" fill="rgba(255,255,255,0.7)"/>
+            <text x="108" y="234" text-anchor="end">CONTEXT</text>
+            <circle cx="120" cy="277" r="7" fill="#100F16"/><circle cx="120" cy="277" r="4" fill="rgba(255,255,255,0.7)"/>
+            <text x="108" y="281" text-anchor="end">DATA</text>
+            <circle cx="120" cy="325" r="7" fill="#100F16"/><circle cx="120" cy="325" r="4" fill="rgba(255,255,255,0.7)"/>
+            <text x="108" y="329" text-anchor="end">PROCESS</text>
+            <circle cx="120" cy="372" r="7" fill="#100F16"/><circle cx="120" cy="372" r="4" fill="rgba(255,255,255,0.7)"/>
+            <text x="108" y="376" text-anchor="end">TECHNOLOGY</text>
+          </g>
+          <!-- Workflows -->
+          <text x="320" y="220" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" letter-spacing="0.14em" fill="rgba(255,255,255,0.45)">WORKFLOWS</text>
+          <g stroke="#E8634A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round" fill="none">
+            <path d="M320,255 L380,255 L380,300"/>
+            <path d="M320,300 L380,300"/>
+            <path d="M320,345 L380,345 L380,300"/>
+            <path d="M380,300 L465,300"/>
+          </g>
+          <g>
+            <circle cx="320" cy="255" r="7.5" fill="#100F16"/><circle cx="320" cy="255" r="4.5" fill="#E8634A"/>
+            <circle cx="320" cy="300" r="7.5" fill="#100F16"/><circle cx="320" cy="300" r="4.5" fill="#E8634A"/>
+            <circle cx="320" cy="345" r="7.5" fill="#100F16"/><circle cx="320" cy="345" r="4.5" fill="#E8634A"/>
+          </g>
+          <!-- rOS chip -->
+          <rect x="465" y="210" width="240" height="180" rx="16" fill="none" stroke="rgba(232,99,74,0.25)" stroke-width="8"/>
+          <rect x="465" y="210" width="240" height="180" rx="16" fill="#15141C" stroke="#E8634A" stroke-width="2"/>
+          <g transform="translate(538,236) scale(0.92)">
+            <polygon points="55,8 22,68 47,68 40,122 80,57 55,57" fill="none" stroke="#E8634A" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>
+            <circle cx="55" cy="8"   r="4.5" fill="#E8634A"/>
+            <circle cx="22" cy="68"  r="4.5" fill="#E8634A"/>
+            <circle cx="40" cy="122" r="4.5" fill="#E8634A"/>
+            <circle cx="80" cy="57"  r="4.5" fill="#E8634A"/>
+          </g>
+          <text x="585" y="375" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="13" letter-spacing="0.22em" fill="#fff">rOS</text>
+          <!-- Outputs right -->
+          <text x="900" y="200" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" letter-spacing="0.14em" fill="#E8634A">CAPTURED</text>
+          <g stroke="#E8634A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round" fill="none">
+            <path d="M705,255 L900,255"/>
+            <path d="M705,300 L900,300"/>
+            <path d="M705,345 L900,345"/>
+          </g>
+          <g font-family="IBM Plex Mono, monospace" font-size="10" letter-spacing="0.08em" fill="rgba(255,255,255,0.78)">
+            <circle cx="900" cy="255" r="8" fill="#100F16"/><circle cx="900" cy="255" r="4.5" fill="#E8634A"/>
+            <text x="916" y="259" text-anchor="start">MEETINGS</text>
+            <circle cx="900" cy="300" r="8" fill="#100F16"/><circle cx="900" cy="300" r="4.5" fill="#E8634A"/>
+            <text x="916" y="304" text-anchor="start">PIPELINE</text>
+            <circle cx="900" cy="345" r="8" fill="#100F16"/><circle cx="900" cy="345" r="4.5" fill="#E8634A"/>
+            <text x="916" y="349" text-anchor="start">RENEWALS</text>
+          </g>
+        </svg>
+      </div>
+
+      <a data-reveal href="https://www.revshoppe.com/contact" class="rs-cta rs-cta--md" style="margin-top:28px;">Stop GTM Decay Now</a>
+    </div>
+  </section>
+
+  <div class="rs-connector"><svg width="14" height="92"><line x1="7" y1="0" x2="7" y2="92" stroke="#E8634A" stroke-width="1.6" stroke-linecap="round"/><circle cx="7" cy="46" r="3.6" fill="#E8634A"/></svg></div>
+
+  <!-- ══ 08 · PROOF ══════════════════════════════════════════════════ -->
+  <!-- ⚠️ Client descriptors below are ILLUSTRATIVE PLACEHOLDERS — replace with real anonymized engagement descriptors before launch. Numbers are real. -->
+  <section id="proof" aria-label="Proof — RevShoppe client outcomes" data-sec style="position:relative; background:#FAFAF9; padding:130px 56px;">
+    <div style="max-width:1180px; margin:0 auto;">
+      <h2 data-h2 data-reveal style="font-family:var(--f-display); font-weight:500; font-size:clamp(34px,5vw,72px); line-height:0.98; letter-spacing:-0.022em; color:#1A1820; max-width:18ch; margin:0 0 10px;">It isn't theoretical.</h2>
+      <p data-reveal style="font-family:var(--f-body); font-size:17px; line-height:1.7; color:#4B4956; max-width:62ch; margin:0 0 12px;">What an rOS and governed workflows produced inside real revenue orgs.</p>
+      <div style="font-family:var(--f-mono); font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:rgba(26,24,32,0.4); margin-bottom:40px;">Identity confidential — NDA applies to all client engagements</div>
+
+      <div data-3col style="display:grid; grid-template-columns:repeat(3,1fr); gap:14px;">
+        <div data-reveal style="background:#fff; border:1px solid rgba(26,24,32,0.1); border-left:3px solid #E8634A; border-radius:10px; padding:28px 26px; box-shadow:0 1px 2px rgba(0,0,0,.04),0 8px 22px rgba(0,0,0,.05);">
+          <div style="font-family:var(--f-display); font-weight:500; font-size:clamp(48px,5vw,64px); line-height:0.85; letter-spacing:-0.03em; color:#1A1820;">2.1×</div>
+          <div style="font-family:var(--f-body); font-size:14.5px; color:#4B4956; margin-top:16px; line-height:1.5;">engagement on workflow-driven outbound</div>
+          <div style="font-family:var(--f-mono); font-size:9.5px; letter-spacing:0.1em; text-transform:uppercase; color:#9b988f; margin-top:16px;">Series C fintech · 40-person org</div>
+        </div>
+        <div data-reveal style="background:#fff; border:1px solid rgba(26,24,32,0.1); border-left:3px solid #E8634A; border-radius:10px; padding:28px 26px; box-shadow:0 1px 2px rgba(0,0,0,.04),0 8px 22px rgba(0,0,0,.05);">
+          <div style="font-family:var(--f-display); font-weight:500; font-size:clamp(48px,5vw,64px); line-height:0.85; letter-spacing:-0.03em; color:#1A1820;">+34%</div>
+          <div style="font-family:var(--f-body); font-size:14.5px; color:#4B4956; margin-top:16px; line-height:1.5;">qualified pipeline within two quarters</div>
+          <div style="font-family:var(--f-mono); font-size:9.5px; letter-spacing:0.1em; text-transform:uppercase; color:#9b988f; margin-top:16px;">Enterprise SaaS · 1,200-person org</div>
+        </div>
+        <div data-reveal style="background:#fff; border:1px solid rgba(26,24,32,0.1); border-left:3px solid #E8634A; border-radius:10px; padding:28px 26px; box-shadow:0 1px 2px rgba(0,0,0,.04),0 8px 22px rgba(0,0,0,.05);">
+          <div style="font-family:var(--f-display); font-weight:500; font-size:clamp(48px,5vw,64px); line-height:0.85; letter-spacing:-0.03em; color:#1A1820;">+61%</div>
+          <div style="font-family:var(--f-body); font-size:14.5px; color:#4B4956; margin-top:16px; line-height:1.5;">SQLs from the same headcount</div>
+          <div style="font-family:var(--f-mono); font-size:9.5px; letter-spacing:0.1em; text-transform:uppercase; color:#9b988f; margin-top:16px;">PLG infrastructure · mid-market</div>
+        </div>
+      </div>
+
+      <div data-2col style="display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:14px;">
+        <div data-reveal style="background:#1A1820; border-radius:10px; padding:26px 28px; display:flex; align-items:baseline; gap:18px;">
+          <div style="font-family:var(--f-display); font-weight:500; font-size:clamp(38px,4vw,48px); line-height:0.85; letter-spacing:-0.03em; color:#E8634A;">21 days</div>
+          <div style="font-family:var(--f-body); font-size:14.5px; color:rgba(255,255,255,0.7); line-height:1.5;">cut from sales cycle</div>
+        </div>
+        <div data-reveal style="background:#1A1820; border-radius:10px; padding:26px 28px; display:flex; align-items:baseline; gap:18px;">
+          <div style="font-family:var(--f-display); font-weight:500; font-size:clamp(38px,4vw,48px); line-height:0.85; letter-spacing:-0.03em; color:#E8634A;">9 hrs</div>
+          <div style="font-family:var(--f-body); font-size:14.5px; color:rgba(255,255,255,0.7); line-height:1.5;">per rep per week recovered</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="rs-connector"><svg width="14" height="92"><line x1="7" y1="0" x2="7" y2="92" stroke="#E8634A" stroke-width="1.6" stroke-linecap="round"/><circle cx="7" cy="46" r="3.6" fill="#E8634A"/></svg></div>
+
+  <!-- ══ 09 · GUARANTEE ══════════════════════════════════════════════ -->
+  <section id="guarantee" aria-label="The RevShoppe guarantee — we govern it, not you" data-sec style="position:relative; background:#100F16; padding:150px 56px 160px; overflow:hidden;">
+    <div style="max-width:1180px; margin:0 auto; position:relative; z-index:3;">
+      <div data-2col style="display:grid; grid-template-columns:0.95fr 1.05fr; gap:64px; align-items:center;">
+        <div>
+          <h2 data-h1 data-reveal style="font-family:var(--f-display); font-weight:500; font-size:clamp(44px,7vw,108px); line-height:0.92; letter-spacing:-0.03em; color:#fff; max-width:12ch;">We don't hand it off.</h2>
+          <p data-reveal style="font-family:var(--f-body); font-size:17px; line-height:1.74; color:rgba(255,255,255,0.58); max-width:52ch; margin-top:30px;">Every vendor delivers and leaves. Performance peaks at handoff, then decays the moment no one owns it. RevShoppe stays in the optimization rhythm, catching a workflow's drop before it costs you a quarter, so the line keeps climbing instead of bending back into decay.</p>
+          <a data-reveal href="https://www.revshoppe.com/contact" class="rs-cta rs-cta--lg" style="margin-top:44px;">Stop GTM Decay Now</a>
+        </div>
+        <div data-reveal style="border:1px solid rgba(255,255,255,0.1); border-radius:12px; padding:30px 32px 20px; background:#15141C;">
+          <svg viewBox="0 0 560 340" style="width:100%; height:auto;">
+            <line x1="50" y1="290" x2="540" y2="290" stroke="rgba(255,255,255,0.14)" stroke-width="1"/>
+            <line x1="50" y1="40"  x2="50"  y2="290" stroke="rgba(255,255,255,0.14)" stroke-width="1"/>
+            <line x1="255" y1="40" x2="255" y2="290" stroke="rgba(255,255,255,0.16)" stroke-width="1" stroke-dasharray="3 6"/>
+            <text x="255" y="30" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10" letter-spacing="0.1em" fill="rgba(255,255,255,0.5)">VENDOR EXITS</text>
+            <!-- governed trace -->
+            <path d="M75,250 L150,250 L150,190 L255,150 L360,120 L470,80 L520,60" fill="none" stroke="#E8634A" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+            <!-- handed off trace -->
+            <path d="M75,250 L150,250 L150,190 L255,150 L340,180 L440,235 L520,262" fill="none" stroke="rgba(255,255,255,0.45)" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="2 7"/>
+            <circle cx="255" cy="150" r="8" fill="#15141C"/><circle cx="255" cy="150" r="4.5" fill="#E8634A"/>
+            <circle cx="520" cy="60"  r="8" fill="#15141C"/><circle cx="520" cy="60"  r="5"   fill="#E8634A"/>
+            <circle cx="520" cy="262" r="8" fill="#15141C"/><circle cx="520" cy="262" r="4.5" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1.6"/>
+            <text x="512" y="48"  text-anchor="end" font-family="IBM Plex Mono, monospace" font-size="11" letter-spacing="0.08em" fill="#E8634A">GOVERNED</text>
+            <text x="512" y="284" text-anchor="end" font-family="IBM Plex Mono, monospace" font-size="11" letter-spacing="0.08em" fill="rgba(255,255,255,0.5)">HANDED OFF</text>
+            <text x="70"  y="312" font-family="IBM Plex Mono, monospace" font-size="10" letter-spacing="0.1em" fill="rgba(255,255,255,0.4)">BUILD</text>
+            <text x="530" y="312" text-anchor="end" font-family="IBM Plex Mono, monospace" font-size="10" letter-spacing="0.1em" fill="rgba(255,255,255,0.4)">12 MONTHS</text>
+          </svg>
+          <div style="font-family:var(--f-mono); font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:rgba(255,255,255,0.42); text-align:center; margin-top:6px;">Workflow performance over time</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AEO: machine-readable entity summary — visually hidden, crawlable -->
+  <div style="position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden;" aria-hidden="true">
+    <h2>What is GTM Decay?</h2>
+    <p>GTM Decay is the gradual failure of go-to-market systems — sequences, scoring models, and integrations — that keep running after the people who built them leave. They operate unattended, drifting from the market reality they were designed for, compounding in cost over time. Ownership was handed off, but never reassigned.</p>
+    <h2>What are the four pillars of GTM Infrastructure?</h2>
+    <p>Context: ICP profiles, battle cards, and buying signal logic. Data: clean, connected, measurable contact records and CRM data. Process: playbooks, handoffs, rep interaction patterns, and review cadences. Technology: the specific tools each workflow runs on, configured correctly for that workflow.</p>
+    <h2>What is a Revenue Operating System (rOS)?</h2>
+    <p>A Revenue Operating System (rOS) is the governed state of GTM operations — the opposite of GTM Decay. Built and governed by RevShoppe, it establishes the four GTM Infrastructure pillars, runs AI-powered workflows built for specific ICP and use case combinations, and stays in an ongoing optimization rhythm so GTM Decay cannot return.</p>
+    <h2>What makes a GTM Workflow different from a sequence?</h2>
+    <p>A sequence stamps the same message and forgets. A GTM workflow is a triggered, end-to-end process that reads buying signals, qualifies fit, gathers live context, generates a relevant output via Claude, routes to a human for approval, executes, and logs the outcome. Every run starts sharper than the last.</p>
+    <h2>What results does RevShoppe produce?</h2>
+    <p>RevShoppe engagements have produced: 2.1x engagement on workflow-driven outbound, +34% qualified pipeline within two quarters, +61% SQLs from the same headcount, 21 days cut from average sales cycle, and 9 hours per rep per week recovered.</p>
+    <h2>Why doesn't RevShoppe hand off after building?</h2>
+    <p>Performance peaks at vendor handoff, then decays the moment no one owns it. RevShoppe stays in the optimization rhythm after build — monitoring workflow performance, keeping infrastructure current, and ensuring the Revenue Operating System compounds rather than decays.</p>
+  </div>
+
+</div><!-- /.rs-home -->
+
+<!-- ══ CCR POPUP ══════════════════════════════════════════════════════ -->
+<div id="ccr-popup" role="dialog" aria-label="Get your free Conversation Catalist Report" style="position:fixed; right:24px; bottom:24px; z-index:60; width:360px; max-width:calc(100vw - 32px); background:#1A1922; border:1px solid rgba(255,255,255,0.12); border-radius:12px; padding:26px 26px 24px; box-shadow:0 30px 70px -25px rgba(0,0,0,0.82); transform:translateY(160%); opacity:0; pointer-events:none; transition:transform .55s cubic-bezier(.2,.7,.2,1), opacity .4s ease;">
+  <button id="ccr-close" aria-label="Dismiss" style="position:absolute; top:11px; right:13px; width:28px; height:28px; display:flex; align-items:center; justify-content:center; background:none; border:none; color:rgba(255,255,255,0.45); font-size:20px; line-height:1; cursor:pointer; transition:color .15s ease;">×</button>
+  <div style="font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:0.2em; text-transform:uppercase; color:#E8634A; margin-bottom:12px;">Catalist Signals</div>
+  <div style="font-family:'RocWideMedium','Archivo',sans-serif; font-weight:500; font-size:21px; line-height:1.16; color:#fff; margin-bottom:10px;">See who's actually ready to buy.</div>
+  <p style="font-family:'Montserrat',sans-serif; font-size:13.5px; line-height:1.6; color:rgba(255,255,255,0.58); margin:0 0 20px;">Get a free Conversation Catalist Report — the real buying triggers surfacing in your market, not intent data.</p>
+  <a href="https://www.revshoppe.com/solutions/catalist-signals" class="rs-cta" style="font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:0.1em; text-transform:uppercase; color:#fff; background:#E8634A; padding:13px 22px; border-radius:4px; text-decoration:none; display:inline-flex; align-items:center; transition:background .18s, transform .18s;">Get your free CCR</a>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ── Scroll reveal ─────────────────────────────────── */
+  var reveals = document.querySelectorAll('.rs-home [data-reveal]');
+  var revealObserver = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (!entry.isIntersecting) return;
+      var el = entry.target;
+      var delay = parseInt(el.getAttribute('data-reveal-delay') || '0', 10);
+      setTimeout(function () { el.classList.add('rs-visible'); }, delay);
+      revealObserver.unobserve(el);
+    });
+  }, { threshold: 0.08 });
+  reveals.forEach(function (el) { revealObserver.observe(el); });
+
+  /* ── Decay canvas ──────────────────────────────────── */
+  var regenTimer;
+  function generateDecayTexture() {
+    var host = document.getElementById('rs-decay-canvas');
+    if (!host) return;
+    var W = Math.min(Math.round(host.offsetWidth  || window.innerWidth  || 1440), 2200);
+    var H = Math.min(Math.round(host.offsetHeight || window.innerHeight || 900),  1500);
+    if (W < 2 || H < 2) return;
+    var canvas = document.createElement('canvas');
+    canvas.width  = W;
+    canvas.height = H;
+    canvas.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;display:block;';
+    var ctx = canvas.getContext('2d');
+    var img = ctx.createImageData(W, H);
+    var data = img.data;
+    var cx = W * 0.5, cy = H * 0.5;
+    for (var y = 0; y < H; y++) {
+      for (var x = 0; x < W; x++) {
+        var dx = (x - cx) / cx, dy = (y - cy) / cy;
+        var dist = Math.sqrt(dx * dx + dy * dy) / 1.414;
+        if (dist > 1) dist = 1;
+        var edge    = Math.pow(dist, 2.6);
+        var density = 0.018 + edge * 0.22;
+        if (Math.random() >= density) continue;
+        var i    = (y * W + x) * 4;
+        var dark = Math.random() < 0.4;
+        var lum  = dark ? 0 : 255;
+        var a    = (dark ? 5 : 3) + Math.random() * (4 + edge * 15);
+        data[i] = lum; data[i+1] = lum; data[i+2] = lum; data[i+3] = a;
+      }
+    }
+    ctx.putImageData(img, 0, 0);
+    host.innerHTML = '';
+    host.appendChild(canvas);
+  }
+  generateDecayTexture();
+  window.addEventListener('resize', function () {
+    clearTimeout(regenTimer);
+    regenTimer = setTimeout(generateDecayTexture, 220);
+  });
+
+  /* ── Lifecycle loop animation ──────────────────────── */
+  var loopPlayed = false;
+  var pollInterval, fallbackTimer;
+
+  function activateNode(g) {
+    var ring = g.querySelector('.ring');
+    var dot  = g.querySelector('.dot');
+    var halo = g.querySelector('.halo');
+    var labs = g.querySelectorAll('.nlab');
+    if (ring) { ring.style.transition = 'stroke 0.4s ease'; ring.style.stroke = '#E8634A'; }
+    if (halo) { halo.style.transition = 'opacity 0.5s ease'; halo.style.opacity = '0.4'; }
+    if (dot)  {
+      dot.style.transition      = 'opacity 0.4s ease';
+      dot.style.opacity         = '1';
+      dot.style.transformOrigin = 'center';
+      dot.style.transformBox    = 'fill-box';
+      dot.style.animation       = 'rs-pulse 0.55s ease';
+    }
+    labs.forEach(function (lab) { lab.style.transition = 'fill 0.4s ease'; lab.style.fill = '#fff'; });
+  }
+
+  function drawEdge(el) {
+    el.style.transition       = 'stroke-dashoffset 0.55s ease';
+    el.style.strokeDashoffset = '0';
+  }
+
+  function playLoop() {
+    if (loopPlayed) return;
+    loopPlayed = true;
+    clearInterval(pollInterval);
+    clearTimeout(fallbackTimer);
+    var stage = document.getElementById('loop-stage');
+    if (!stage) return;
+    var nodes = Array.from(stage.querySelectorAll('.loop-node')).sort(function (a, b) { return +a.dataset.i - +b.dataset.i; });
+    var edges = Array.from(stage.querySelectorAll('.loop-edge')).sort(function (a, b) { return +a.dataset.i - +b.dataset.i; });
+    var T = 480;
+    nodes.forEach(function (n) { setTimeout(function () { activateNode(n); }, 200 + (+n.dataset.i) * T); });
+    edges.forEach(function (e) {
+      var i     = +e.dataset.i;
+      var delay = 200 + (i < 4 ? i * T + T * 0.55 : 5 * T);
+      setTimeout(function () { drawEdge(e); }, delay);
+    });
+    /* re-pulse optimization node */
+    setTimeout(function () {
+      var opt = nodes.find(function (n) { return +n.dataset.i === 3; });
+      if (!opt) return;
+      var dot  = opt.querySelector('.dot');
+      var halo = opt.querySelector('.halo');
+      if (dot) { dot.style.animation = 'none'; void dot.getBoundingClientRect(); dot.style.animation = 'rs-pulse 0.7s ease'; }
+      if (halo) { halo.style.opacity = '0.6'; setTimeout(function () { halo.style.opacity = '0.4'; }, 400); }
+    }, 200 + 5 * T + 560);
+  }
+
+  function pollLoop() {
+    if (loopPlayed) return;
+    var s = document.getElementById('loop-stage');
+    if (!s) return;
+    var vh = window.innerHeight || 800;
+    var r  = s.getBoundingClientRect();
+    if (r.top < vh * 0.78 && r.bottom > 0) { playLoop(); }
+  }
+
+  pollInterval  = setInterval(pollLoop, 240);
+  fallbackTimer = setTimeout(playLoop, 5200);
+  pollLoop();
+  window.addEventListener('scroll', pollLoop, { passive: true });
+})();
+
+  /* ── CCR popup ─────────────────────────────────────── */
+  (function () {
+    var pop  = document.getElementById('ccr-popup');
+    var btn  = document.getElementById('ccr-close');
+    if (!pop || !btn) return;
+
+    var KEY = 'rs_ccr_popup_dismissed';
+    try { if (localStorage.getItem(KEY) === '1') return; } catch (e) {}
+
+    var reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reducedMotion) {
+      pop.style.transition = 'opacity 0.4s ease';
+      pop.style.transform  = 'none';
+    }
+
+    var shown = false, io = null, onScroll = null;
+
+    function cleanup() {
+      if (io)       { io.disconnect(); io = null; }
+      if (onScroll) {
+        window.removeEventListener('scroll', onScroll);
+        document.removeEventListener('scroll', onScroll, true);
+        onScroll = null;
+      }
+    }
+
+    function reveal() {
+      if (shown) return;
+      shown = true;
+      pop.style.transform   = 'translateY(0)';
+      pop.style.opacity     = '1';
+      pop.style.pointerEvents = 'auto';
+      cleanup();
+    }
+
+    btn.addEventListener('click', function () {
+      shown = true;
+      pop.style.transform   = reducedMotion ? 'none' : 'translateY(160%)';
+      pop.style.opacity     = '0';
+      pop.style.pointerEvents = 'none';
+      try { localStorage.setItem(KEY, '1'); } catch (e) {}
+      cleanup();
+      /* remove from DOM after transition */
+      setTimeout(function () { if (pop.parentNode) pop.parentNode.removeChild(pop); }, 600);
+    });
+
+    /* Trigger 1: IntersectionObserver on #proof sentinel */
+    var sentinel = document.getElementById('proof');
+    if (sentinel && 'IntersectionObserver' in window) {
+      io = new IntersectionObserver(function (entries) {
+        if (entries.some(function (e) { return e.isIntersecting; })) reveal();
+      }, { threshold: 0 });
+      io.observe(sentinel);
+    }
+
+    /* Trigger 2: scroll-fraction fallback (≥ 50%) */
+    onScroll = function () {
+      var se  = document.scrollingElement || document.documentElement;
+      var max = (se.scrollHeight || document.body.scrollHeight) - (se.clientHeight || window.innerHeight);
+      var y   = se.scrollTop || window.scrollY || 0;
+      if (max > 0 && y / max >= 0.5) reveal();
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    document.addEventListener('scroll', onScroll, { passive: true, capture: true });
+  })();
+
+</script>
+</body>
+</html>
