@@ -61,19 +61,20 @@ nav {
 .nav-item:hover > a::after, .nav-item:hover > span::after { transform: scaleX(1); }
 .dropdown {
   position: absolute; top: calc(100% + 1px); left: 0;
-  background: #2A2838; border: 1px solid rgba(255,255,255,0.07);
+  background: rgba(245,243,239,0.96); border: 1px solid rgba(0,0,0,0.08);
   border-top: 2px solid var(--accent); border-radius: 0 4px 4px 4px;
   padding: 10px 0 12px; display: none; z-index: 200;
-  box-shadow: 0 20px 48px rgba(0,0,0,0.4); min-width: 290px;
+  box-shadow: 0 20px 48px rgba(0,0,0,0.18), 0 4px 12px rgba(0,0,0,0.1); min-width: 290px;
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
 }
 .nav-item:hover .dropdown { display: block; }
-.dd-section { font-family: "IBM Plex Mono", monospace; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.2); padding: 10px 20px 5px; display: block; }
+.dd-section { font-family: "IBM Plex Mono", monospace; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(0,0,0,0.35); padding: 10px 20px 5px; display: block; }
 .dd-section:first-child { padding-top: 6px; }
 .dd-link { display: flex; flex-direction: column; padding: 9px 20px; text-decoration: none; transition: background 0.12s; border-radius: 2px; margin: 0 6px; }
-.dd-link:hover { background: rgba(255,255,255,0.05); }
-.dd-name { font-family: "Montserrat", sans-serif; font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.85); margin-bottom: 2px; }
-.dd-desc { font-family: "Montserrat", sans-serif; font-size: 11px; color: rgba(255,255,255,0.3); line-height: 1.4; }
-.dd-divider { height: 1px; background: rgba(255,255,255,0.05); margin: 8px 0; }
+.dd-link:hover { background: rgba(0,0,0,0.05); }
+.dd-name { font-family: "Montserrat", sans-serif; font-size: 13px; font-weight: 500; color: rgba(0,0,0,0.82); margin-bottom: 2px; }
+.dd-desc { font-family: "Montserrat", sans-serif; font-size: 11px; color: rgba(0,0,0,0.45); line-height: 1.4; }
+.dd-divider { height: 1px; background: rgba(0,0,0,0.07); margin: 8px 0; }
 .nav-right { display: flex; align-items: center; }
 .nav-cta {
   font-family: "IBM Plex Mono", monospace; font-size: 11px; font-weight: 500;
