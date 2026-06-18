@@ -1,108 +1,361 @@
 <!DOCTYPE html>
+<!-- WEBFLOW PAGE SETTINGS
+     Title:       Revenue Operating System | RevShoppe
+     Description: rOS is the ongoing governance layer that keeps every GTM Workflow current, your team capable, and your commercial motion compounding — instead of decaying the moment the engagement closes.
+     Slug:        /solutions/ros
+-->
 <html lang="en">
 <head>
-<meta charset="UTF-8">
+<meta charset="utf-8">
 <meta name="rs-page" content="revenue-operating-system">
-<title>Revenue Operating System | RevShoppe</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
-.ros-bg{background:#1A1825;min-height:100vh;font-family:'Montserrat',sans-serif;color:#fff;}
-.ros-wrap{max-width:760px;margin:0 auto;padding:120px 48px 80px;}
-.ros-tag{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:#E8634A;margin-bottom:24px;display:block;}
-.ros-h1{font-size:clamp(36px,5vw,60px);font-weight:700;line-height:1.1;margin:0 0 32px;letter-spacing:-0.02em;}
-.ros-h1 .accent{color:#E8634A;}
-.ros-body{font-size:18px;line-height:1.7;color:rgba(255,255,255,0.72);margin-bottom:32px;max-width:600px;}
-.ros-components{display:grid;gap:16px;margin-bottom:56px;}
-.ros-item{display:grid;grid-template-columns:28px 1fr;gap:16px;align-items:start;padding:20px;border:1px solid rgba(255,255,255,0.08);border-radius:8px;background:rgba(255,255,255,0.02);}
-.ros-num{font-family:'IBM Plex Mono',monospace;font-size:10px;color:#E8634A;padding-top:2px;}
-.ros-item-name{font-size:15px;font-weight:600;margin-bottom:4px;}
-.ros-item-desc{font-size:14px;color:rgba(255,255,255,0.55);line-height:1.6;}
-.ros-divider{height:1px;background:rgba(255,255,255,0.08);margin:48px 0;}
-.ros-coming{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:16px;}
-.ros-cta-body{font-size:16px;color:rgba(255,255,255,0.6);line-height:1.6;margin-bottom:28px;}
-.ros-btn{display:inline-block;background:#E8634A;color:#fff;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;padding:14px 28px;border-radius:6px;}
-@media(max-width:600px){.ros-wrap{padding:100px 24px 64px;}}
+.rs-ros *, .rs-ros *::before, .rs-ros *::after { box-sizing: border-box; margin: 0; padding: 0; }
+.rs-ros img, .rs-ros svg { display: block; }
+.rs-ros a { color: inherit; text-decoration: none; }
+.rs-ros {
+  font-family: "Montserrat", sans-serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  --f-display: "RocWideMedium", "Archivo", sans-serif;
+  --f-body:    "Montserrat", sans-serif;
+  --f-mono:    "IBM Plex Mono", monospace;
+  --coral:     #E8634A;
+  --coral-h:   #F0745C;
+  --dark:      #15141C;
+  --dark-r:    #1A1922;
+  --ink:       #1A1820;
+  --gray:      #4B4956;
+  --warm:      #F1EDE6;
+  --warm2:     #F6F3EE;
+  --owhite:    #FAFAF9;
+  --hl:        rgba(26,24,32,0.10);
+  --hd:        rgba(255,255,255,0.10);
+}
+.rs-ros ::selection { background: rgba(232,99,74,0.3); color: inherit; }
 
-.uc-form-wrap{margin-top:40px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:32px;}
-.uc-form-wrap h3{font-size:18px;font-weight:600;margin-bottom:20px;color:#fff;line-height:1.3;}
-.uc-field{display:block;width:100%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.12);border-radius:6px;padding:14px 16px;color:#fff;font-family:'Montserrat',sans-serif;font-size:14px;margin-bottom:14px;box-sizing:border-box;transition:border-color 0.2s;}
-.uc-field::placeholder{color:rgba(255,255,255,0.32);}
-.uc-field:focus{outline:none;border-color:#E8634A;}
-.uc-btn{display:block;width:100%;background:#E8634A;color:#fff;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;border:none;border-radius:6px;padding:14px 24px;cursor:pointer;transition:opacity 0.2s;}
-.uc-btn:hover{opacity:0.88;}
-.uc-fine{margin-top:12px;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.28);text-align:center;}
+/* ── Connector ── */
+.rs-ros .ros-conn { position:relative; height:0; z-index:6; }
+.rs-ros .ros-conn svg { position:absolute; left:50%; top:-46px; transform:translateX(-50%); }
+
+/* ── Scroll reveal ── */
+.rs-ros [data-rv] { opacity:0; transform:translateY(16px); transition:opacity 0.4s ease, transform 0.4s ease; }
+.rs-ros [data-rv].rs-vis { opacity:1; transform:translateY(0); }
+.rs-ros [data-rv-d1] { transition-delay:0.08s; }
+.rs-ros [data-rv-d2] { transition-delay:0.16s; }
+
+/* ── Buttons ── */
+.rs-ros .ros-btn {
+  display:inline-flex; align-items:center; justify-content:center; gap:10px;
+  font-family:var(--f-mono); text-transform:uppercase; letter-spacing:0.1em;
+  border-radius:4px; transition:background .18s, transform .18s;
+}
+.rs-ros .ros-btn-coral { font-size:13px; padding:18px 32px; background:var(--coral); color:#fff; }
+.rs-ros .ros-btn-coral:hover { background:var(--coral-h); transform:translateY(-2px); }
+.rs-ros .ros-btn-lg { font-size:14px; padding:21px 38px; box-shadow:0 24px 50px -22px rgba(232,99,74,0.8); }
+
+/* ── Form card ── */
+.rs-ros .ros-form-card {
+  background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.10);
+  border-radius:10px; padding:32px; flex-shrink:0; width:340px;
+}
+.rs-ros .ros-field {
+  display:block; width:100%; background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.10); border-radius:6px;
+  padding:14px 16px; color:#fff; font-family:var(--f-body); font-size:14px;
+  margin-bottom:12px; transition:border-color 0.2s;
+}
+.rs-ros .ros-field::placeholder { color:rgba(255,255,255,0.32); }
+.rs-ros .ros-field:focus { outline:none; border-color:var(--coral); }
+.rs-ros .ros-form-card .ros-btn { width:100%; justify-content:center; }
+
+/* ── Components ── */
+.rs-ros .ros-comp-grid { display:grid; gap:14px; margin-top:56px; }
+.rs-ros .ros-comp {
+  background:#fff; border:1px solid var(--hl); border-radius:10px;
+  padding:40px 44px; box-shadow:0 1px 2px rgba(0,0,0,0.04), 0 8px 22px rgba(0,0,0,0.05);
+  display:grid; grid-template-columns:80px 1fr; gap:32px; align-items:start;
+}
+.rs-ros .ros-comp-num {
+  font-family:var(--f-display); font-weight:500; font-size:54px;
+  line-height:0.8; letter-spacing:-0.03em; color:var(--coral);
+}
+.rs-ros .ros-comp-name {
+  font-family:var(--f-display); font-weight:500; font-size:24px;
+  letter-spacing:-0.01em; color:var(--ink); margin-bottom:14px;
+}
+.rs-ros .ros-comp-desc {
+  font-family:var(--f-body); font-size:16px; line-height:1.72;
+  font-weight:300; color:var(--gray); margin-bottom:20px;
+}
+.rs-ros .ros-comp-tags { display:flex; flex-wrap:wrap; gap:8px; }
+.rs-ros .ros-tag {
+  font-family:var(--f-mono); font-size:10px; letter-spacing:0.14em;
+  text-transform:uppercase; color:rgba(26,24,32,0.45);
+  border:1px solid var(--hl); padding:4px 10px; border-radius:3px;
+}
+
+/* ── Responsive ── */
+@media (max-width:900px) {
+  .rs-ros [data-sec]       { padding:88px 24px !important; }
+  .rs-ros [data-hl]        { flex-direction:column !important; }
+  .rs-ros .ros-form-card   { width:100% !important; }
+  .rs-ros .ros-comp        { grid-template-columns:1fr !important; gap:16px !important; padding:28px 24px !important; }
+  .rs-ros .ros-comp-num    { font-size:40px !important; }
+}
 </style>
 </head>
 <body>
-<div class="ros-bg">
-  <div class="ros-wrap">
-    <span class="ros-tag">Solutions · Revenue Operating System</span>
-    <h1 class="ros-h1">What comes after<br><span class="accent">the workflows are running.</span></h1>
-    <p class="ros-body">Most firms help you build. RevShoppe stays to govern. The Revenue Operating System is the ongoing layer that keeps every GTM Workflow current, your team capable, and your commercial motion compounding — instead of decaying the moment the engagement closes.</p>
-    <p class="ros-body">rOS has three components.</p>
+<div class="rs-ros">
 
-    <div class="ros-components">
-      <div class="ros-item">
-        <div class="ros-num">01</div>
-        <div>
-          <div class="ros-item-name">Rhythm of Revenue</div>
-          <div class="ros-item-desc">The operating cadence that keeps your commercial system current. Weekly workflow reviews, signal set updates, performance readouts, and the decision-making structure that prevents your infrastructure from drifting.</div>
-        </div>
+<!-- ══ 01 · HERO ═══════════════════════════════════════════════════ -->
+<section data-sec style="position:relative; background:#15141C; padding:150px 56px 120px; min-height:80vh; display:flex; align-items:center; overflow:hidden;">
+  <!-- bolt watermark -->
+  <svg style="position:absolute; right:-40px; bottom:-60px; width:380px; height:auto; pointer-events:none; opacity:0.025;" viewBox="8 -6 86 142" fill="none">
+    <polygon points="55,8 22,68 47,68 40,122 80,57 55,57" stroke="#fff" stroke-width="6" stroke-linejoin="round" stroke-linecap="round" fill="none"/>
+    <circle cx="55" cy="8"   r="4" fill="#fff"/>
+    <circle cx="22" cy="68"  r="4" fill="#fff"/>
+    <circle cx="40" cy="122" r="4" fill="#fff"/>
+    <circle cx="80" cy="57"  r="4" fill="#fff"/>
+  </svg>
+  <div style="max-width:1180px; margin:0 auto; width:100%; position:relative; z-index:2;">
+    <div data-hl style="display:flex; gap:64px; align-items:center;">
+      <div style="flex:1; min-width:0;">
+        <div data-rv style="font-family:var(--f-mono); font-size:12px; letter-spacing:0.24em; text-transform:uppercase; color:#E8634A; margin-bottom:28px;">Solutions · rOS</div>
+        <h1 data-rv style="font-family:var(--f-display); font-weight:500; font-size:clamp(46px,8.2vw,128px); line-height:0.94; letter-spacing:-0.025em; color:#fff; max-width:16ch; margin:0 0 36px;">Your competitors didn't hire better people.</h1>
+        <p data-rv style="font-family:var(--f-body); font-size:clamp(16px,1.5vw,20px); line-height:1.65; font-weight:300; color:rgba(255,255,255,0.58); max-width:52ch; margin:0;">They stopped letting the system decay after delivery. rOS is the ongoing governance layer — Rhythm of Revenue, Center of Excellence, Workflow Governance — that keeps every GTM Workflow current, your team capable, and performance compounding instead of reverting.</p>
       </div>
-      <div class="ros-item">
-        <div class="ros-num">02</div>
-        <div>
-          <div class="ros-item-name">Center of Excellence</div>
-          <div class="ros-item-desc">The human capability layer. Rep enablement, manager QA, onboarding for new hires, and the internal knowledge base that makes RevShoppe's work transferable — so your team can run the system without us in every meeting.</div>
-        </div>
+      <div id="ros-hero-form-card" class="ros-form-card" data-rv>
+        <div style="font-family:var(--f-mono); font-size:11px; letter-spacing:0.22em; text-transform:uppercase; color:#E8634A; margin-bottom:16px;">Book a Call</div>
+        <div style="font-family:var(--f-display); font-weight:500; font-size:22px; letter-spacing:-0.01em; color:#fff; line-height:1.18; margin-bottom:22px;">Keep the system from decaying.</div>
+        <form id="ros-hero-form">
+          <input class="ros-field" type="email" name="email" placeholder="Work email" required>
+          <button type="submit" class="ros-btn ros-btn-coral">Start Governing →</button>
+        </form>
+        <div style="font-family:var(--f-mono); font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:rgba(255,255,255,0.28); text-align:center; margin-top:14px;">We'll be in touch within one business day.</div>
       </div>
-      <div class="ros-item">
-        <div class="ros-num">03</div>
-        <div>
-          <div class="ros-item-name">Workflow Optimization</div>
-          <div class="ros-item-desc">Continuous improvement of running workflows. New signal sources, updated context layers, conversion analysis, and new workflows added as your commercial motion expands.</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="ros-divider"></div>
-
-    <p class="ros-coming">Full page coming soon</p>
-    <p class="ros-cta-body">The rOS page is in progress. If you have workflows running and you're thinking about what governance looks like at scale, this is the conversation to start now — not after you've drifted.</p>
-    <div class="uc-form-wrap">
-      <h3>Get notified when the Revenue Operating System page is live.</h3>
-      <form id="uc-form">
-        <input class="uc-field" type="email" name="email" placeholder="Work email" required>
-        <button class="uc-btn" type="submit">Notify me →</button>
-      </form>
-      <p class="uc-fine">No spam. One email when the page goes live.</p>
     </div>
   </div>
-</div>
+</section>
+
+<!-- connector: dark → dark -->
+<div class="ros-conn"><svg width="14" height="92"><line x1="7" y1="0" x2="7" y2="92" stroke="#E8634A" stroke-width="1.6" stroke-linecap="round"/><circle cx="7" cy="46" r="3.6" fill="#E8634A"/></svg></div>
+
+<!-- ══ 02 · THE DECAY ══════════════════════════════════════════════ -->
+<section data-sec style="position:relative; background:#1A1922; padding:130px 56px; overflow:hidden;">
+  <div style="max-width:1180px; margin:0 auto; position:relative; z-index:2;">
+    <div data-rv style="font-family:var(--f-mono); font-size:12px; letter-spacing:0.24em; text-transform:uppercase; color:#E8634A; margin-bottom:24px;">What Happens After Delivery</div>
+    <h2 data-rv style="font-family:var(--f-display); font-weight:500; font-size:clamp(32px,4.8vw,72px); line-height:0.98; letter-spacing:-0.022em; color:#fff; max-width:22ch; margin:0 0 24px;">Every vendor delivers. Most leave. Performance tells the rest.</h2>
+    <p data-rv style="font-family:var(--f-body); font-size:17px; line-height:1.72; font-weight:300; color:rgba(255,255,255,0.55); max-width:62ch; margin:0 0 64px;">Six months after a GTM engagement closes, one of two things is happening. The team that stayed governed is compounding — workflows getting sharper, signal sets updated, reps trained on what's changed. The team that got handed off is watching the same decay patterns come back. Not because the build was wrong. Because nobody owns keeping it current.</p>
+
+    <!-- Performance divergence chart -->
+    <div data-rv style="border:1px solid rgba(255,255,255,0.08); border-radius:12px; overflow:hidden; background:rgba(255,255,255,0.02);">
+      <div style="background:rgba(255,255,255,0.03); padding:16px 32px; border-bottom:1px solid rgba(255,255,255,0.06); display:flex; justify-content:space-between; align-items:center;">
+        <span style="font-family:var(--f-mono); font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:rgba(255,255,255,0.4);">GTM Performance Over Time</span>
+        <span style="font-family:var(--f-mono); font-size:9px; letter-spacing:0.1em; text-transform:uppercase; background:rgba(232,99,74,0.1); border:1px solid rgba(232,99,74,0.25); color:#E8634A; padding:4px 14px; border-radius:100px;">Post-Delivery</span>
+      </div>
+      <div style="padding:40px 32px 32px;">
+        <svg viewBox="0 0 900 320" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <linearGradient id="ros-coral-fill" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#E8634A" stop-opacity="0.18"/>
+              <stop offset="1" stop-color="#E8634A" stop-opacity="0"/>
+            </linearGradient>
+            <linearGradient id="ros-gray-fill" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#fff" stop-opacity="0.06"/>
+              <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+
+          <!-- Grid lines -->
+          <g stroke="rgba(255,255,255,0.05)" stroke-width="1">
+            <line x1="60" y1="40"  x2="860" y2="40"/>
+            <line x1="60" y1="100" x2="860" y2="100"/>
+            <line x1="60" y1="160" x2="860" y2="160"/>
+            <line x1="60" y1="220" x2="860" y2="220"/>
+            <line x1="60" y1="260" x2="860" y2="260"/>
+          </g>
+
+          <!-- Quarter markers -->
+          <g font-family="IBM Plex Mono, monospace" font-size="10" fill="rgba(255,255,255,0.3)" text-anchor="middle" letter-spacing="1">
+            <text x="180" y="295">Q1</text>
+            <text x="320" y="295">Q2</text>
+            <text x="460" y="295">Q3</text>
+            <text x="600" y="295">Q4</text>
+            <text x="740" y="295">Q5</text>
+            <text x="860" y="295">Q6</text>
+          </g>
+
+          <!-- Vendor exit marker -->
+          <line x1="390" y1="30" x2="390" y2="270" stroke="rgba(255,255,255,0.15)" stroke-width="1" stroke-dasharray="4 4"/>
+          <rect x="320" y="10" width="140" height="22" rx="3" fill="rgba(255,255,255,0.06)"/>
+          <text x="390" y="25" font-family="IBM Plex Mono, monospace" font-size="9.5" fill="rgba(255,255,255,0.45)" text-anchor="middle" letter-spacing="1.5">VENDOR EXIT</text>
+
+          <!-- Handed-off trace (decaying) — fill -->
+          <path d="M 60 220 C 120 210, 180 185, 240 170 C 270 163, 300 158, 320 155 L 390 148 C 430 148, 460 158, 510 172 C 560 188, 620 210, 680 228 C 740 246, 800 256, 860 262 L 860 270 L 60 270 Z"
+                fill="url(#ros-gray-fill)"/>
+          <!-- Handed-off trace (decaying) — line -->
+          <path d="M 60 220 C 120 210, 180 185, 240 170 C 270 163, 300 158, 320 155 L 390 148 C 430 148, 460 158, 510 172 C 560 188, 620 210, 680 228 C 740 246, 800 256, 860 262"
+                fill="none" stroke="rgba(255,255,255,0.28)" stroke-width="2" stroke-dasharray="6 4"/>
+
+          <!-- Governed trace (compounding) — fill -->
+          <path d="M 60 220 C 120 210, 180 185, 240 170 C 270 163, 300 158, 320 155 L 390 148 C 430 138, 470 122, 520 106 C 570 90, 630 72, 700 58 C 760 46, 820 40, 860 38 L 860 270 L 60 270 Z"
+                fill="url(#ros-coral-fill)"/>
+          <!-- Governed trace (compounding) — line -->
+          <path d="M 60 220 C 120 210, 180 185, 240 170 C 270 163, 300 158, 320 155 L 390 148 C 430 138, 470 122, 520 106 C 570 90, 630 72, 700 58 C 760 46, 820 40, 860 38"
+                fill="none" stroke="#E8634A" stroke-width="2.5"/>
+
+          <!-- Labels -->
+          <g font-family="IBM Plex Mono, monospace" font-size="10" letter-spacing="1">
+            <text x="876" y="42"  fill="#E8634A">rOS</text>
+            <text x="876" y="266" fill="rgba(255,255,255,0.35)">None</text>
+          </g>
+
+          <!-- Endpoint dots -->
+          <circle cx="860" cy="38"  r="5" fill="#E8634A"/>
+          <circle cx="860" cy="262" r="5" fill="rgba(255,255,255,0.3)"/>
+        </svg>
+
+        <!-- Legend -->
+        <div style="display:flex; gap:32px; margin-top:24px; padding-top:20px; border-top:1px solid rgba(255,255,255,0.06);">
+          <div style="display:flex; align-items:center; gap:10px;">
+            <div style="width:28px; height:2.5px; background:#E8634A; border-radius:2px;"></div>
+            <span style="font-family:var(--f-mono); font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:rgba(255,255,255,0.55);">Governed by rOS</span>
+          </div>
+          <div style="display:flex; align-items:center; gap:10px;">
+            <div style="width:28px; height:2px; background:rgba(255,255,255,0.3); border-radius:2px; background-image:repeating-linear-gradient(90deg,rgba(255,255,255,0.3) 0,rgba(255,255,255,0.3) 6px,transparent 6px,transparent 10px);"></div>
+            <span style="font-family:var(--f-mono); font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:rgba(255,255,255,0.35);">Handed off, no governance</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- connector: dark → warm -->
+<div class="ros-conn"><svg width="14" height="92"><line x1="7" y1="0" x2="7" y2="46" stroke="rgba(255,255,255,0.16)" stroke-width="1.5" stroke-dasharray="2 9" stroke-linecap="round"/><line x1="7" y1="46" x2="7" y2="92" stroke="#E8634A" stroke-width="1.6" stroke-linecap="round"/><circle cx="7" cy="46" r="3.4" fill="#E8634A"/></svg></div>
+
+<!-- ══ 03 · THREE COMPONENTS ════════════════════════════════════════ -->
+<section data-sec style="position:relative; background:#F1EDE6; padding:130px 56px;">
+  <div style="max-width:1180px; margin:0 auto;">
+    <div data-rv style="font-family:var(--f-mono); font-size:12px; letter-spacing:0.24em; text-transform:uppercase; color:#E8634A; margin-bottom:24px;">How rOS Works</div>
+    <h2 data-rv style="font-family:var(--f-display); font-weight:500; font-size:clamp(32px,4.8vw,72px); line-height:0.98; letter-spacing:-0.022em; color:#1A1820; max-width:22ch; margin:0 0 18px;">Three components. One system that doesn't quit.</h2>
+    <p data-rv style="font-family:var(--f-body); font-size:17px; line-height:1.72; font-weight:300; color:#4B4956; max-width:62ch; margin:0 0 8px;">Most GTM engagements end at delivery. rOS is designed to run after the build — continuously updating the machine that makes every Workflow work.</p>
+
+    <div class="ros-comp-grid">
+
+      <!-- 01 Rhythm of Revenue -->
+      <div class="ros-comp" data-rv>
+        <div class="ros-comp-num">01</div>
+        <div>
+          <div class="ros-comp-name">Rhythm of Revenue</div>
+          <p class="ros-comp-desc">The operating cadence that keeps your commercial system from drifting. Weekly workflow reviews. Signal set updates when buying behavior shifts. Performance readouts that surface what's working and what isn't. And the decision-making structure that makes sure the team acts on what they see — instead of noting it and moving on.</p>
+          <div class="ros-comp-tags">
+            <span class="ros-tag">Weekly Reviews</span>
+            <span class="ros-tag">Signal Updates</span>
+            <span class="ros-tag">Performance Readouts</span>
+            <span class="ros-tag">Decision Structure</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 02 Center of Excellence -->
+      <div class="ros-comp" data-rv data-rv-d1>
+        <div class="ros-comp-num">02</div>
+        <div>
+          <div class="ros-comp-name">Center of Excellence</div>
+          <p class="ros-comp-desc">The human capability layer. Rep enablement so the team knows how to run what was built. Manager QA so the Workflows don't degrade in execution. Onboarding for new hires so the system isn't explained in a Slack DM on their first week. And an internal knowledge base that makes RevShoppe's work transferable — so your team can run the system without us in every meeting.</p>
+          <div class="ros-comp-tags">
+            <span class="ros-tag">Rep Enablement</span>
+            <span class="ros-tag">Manager QA</span>
+            <span class="ros-tag">Onboarding</span>
+            <span class="ros-tag">Internal Knowledge Base</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 03 Workflow Governance -->
+      <div class="ros-comp" data-rv data-rv-d2>
+        <div class="ros-comp-num">03</div>
+        <div>
+          <div class="ros-comp-name">Workflow Governance</div>
+          <p class="ros-comp-desc">The rules engine. Which Workflows fire, under what conditions, with what approval gates. What gets changed, by whom, on what cadence. New signal sources added as they emerge. Context layers updated when the market shifts. New Workflows built as your commercial motion expands. Without this, the system you built in Q1 is running on stale assumptions by Q3.</p>
+          <div class="ros-comp-tags">
+            <span class="ros-tag">Firing Conditions</span>
+            <span class="ros-tag">Approval Gates</span>
+            <span class="ros-tag">Context Updates</span>
+            <span class="ros-tag">New Workflow Builds</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <a data-rv href="https://www.revshoppe.com/contact" class="ros-btn ros-btn-coral" style="margin-top:48px; box-shadow:0 16px 36px -16px rgba(232,99,74,0.65);">Book a Call</a>
+  </div>
+</section>
+
+<!-- connector: warm → dark -->
+<div class="ros-conn"><svg width="14" height="92"><line x1="7" y1="0" x2="7" y2="46" stroke="rgba(26,24,32,0.12)" stroke-width="1.5" stroke-dasharray="2 9" stroke-linecap="round"/><line x1="7" y1="46" x2="7" y2="92" stroke="#E8634A" stroke-width="1.6" stroke-linecap="round"/><circle cx="7" cy="46" r="3.4" fill="#E8634A"/></svg></div>
+
+<!-- ══ 04 · FINAL CTA ══════════════════════════════════════════════ -->
+<section data-sec style="position:relative; background:#15141C; padding:150px 56px; overflow:hidden;">
+  <!-- bolt watermark -->
+  <svg style="position:absolute; left:-60px; bottom:-40px; width:440px; height:auto; pointer-events:none; opacity:0.025;" viewBox="8 -6 86 142" fill="none">
+    <polygon points="55,8 22,68 47,68 40,122 80,57 55,57" stroke="#fff" stroke-width="6" stroke-linejoin="round" stroke-linecap="round" fill="none"/>
+    <circle cx="55" cy="8"   r="4" fill="#fff"/>
+    <circle cx="22" cy="68"  r="4" fill="#fff"/>
+    <circle cx="40" cy="122" r="4" fill="#fff"/>
+    <circle cx="80" cy="57"  r="4" fill="#fff"/>
+  </svg>
+  <div style="max-width:1180px; margin:0 auto; position:relative; z-index:2;">
+    <div data-rv style="font-family:var(--f-mono); font-size:12px; letter-spacing:0.24em; text-transform:uppercase; color:#E8634A; margin-bottom:24px;">Solutions · rOS</div>
+    <h2 data-rv style="font-family:var(--f-display); font-weight:500; font-size:clamp(44px,6vw,88px); line-height:0.94; letter-spacing:-0.025em; color:#fff; max-width:16ch; margin:0 0 28px;">The workflows are running. Now keep them.</h2>
+    <p data-rv style="font-family:var(--f-body); font-size:clamp(16px,1.5vw,20px); line-height:1.65; font-weight:300; color:rgba(255,255,255,0.55); max-width:50ch; margin:0 0 48px;">rOS is the difference between a GTM build that compounds and one that becomes a case study in what you used to do. If you have workflows running and you're thinking about what governance looks like, this is the conversation to start now.</p>
+    <a data-rv href="https://www.revshoppe.com/contact" class="ros-btn ros-btn-coral ros-btn-lg">Book a Call</a>
+  </div>
+</section>
+
+</div><!-- .rs-ros -->
+
 <script>
 (function(){
-  var ucForm = document.getElementById('uc-form');
-  if (ucForm) {
-    ucForm.addEventListener('submit', function(e) {
+  /* Scroll reveal */
+  if(window.IntersectionObserver){
+    var obs = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('rs-vis'); obs.unobserve(e.target); } });
+    },{threshold:0.1});
+    document.querySelectorAll('.rs-ros [data-rv]').forEach(function(el){ obs.observe(el); });
+  }
+
+  /* Hero form → HubSpot */
+  function bindForm(){
+    var form = document.getElementById('ros-hero-form');
+    if(!form){ requestAnimationFrame(bindForm); return; }
+    form.addEventListener('submit', function(e){
       e.preventDefault();
-      var email = ucForm.querySelector('input[type="email"]').value;
-      var ctx = { pageUri: window.location.href, pageName: document.title };
+      var email = form.querySelector('input[type="email"]').value;
+      var ctx = { pageUri: window.location.href, pageName: 'Revenue Operating System' };
       var hutk = (document.cookie.match(/hubspotutk=([^;]+)/) || [])[1];
-      if (hutk) ctx.hutk = hutk;
+      if(hutk) ctx.hutk = hutk;
       fetch('https://api.hsforms.com/submissions/v3/integration/submit/5046646/b17af1ad-180f-4b22-a3fd-97a321b8d6c3', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ fields: [{ name: 'email', value: email }], context: ctx })
-      }).then(function(res) {
-        if (res.ok) {
-          ucForm.closest('.uc-form-wrap').innerHTML = '<p style="font-family:\'IBM Plex Mono\',monospace;font-size:13px;line-height:1.7;color:rgba(255,255,255,0.8);">Got it. We\'ll be in touch within one business day.</p>';
+      }).then(function(res){
+        var card = document.getElementById('ros-hero-form-card');
+        if(res.ok){
+          if(card) card.innerHTML = '<p style="font-family:\'IBM Plex Mono\',monospace;font-size:13px;line-height:1.75;color:rgba(255,255,255,0.8);">Got it. We\'ll be in touch within one business day.</p>';
         } else {
           window.location.href = '/contact' + (email ? '?email=' + encodeURIComponent(email) : '');
         }
-      }).catch(function() {
+      }).catch(function(){
         window.location.href = '/contact' + (email ? '?email=' + encodeURIComponent(email) : '');
       });
     });
   }
+  bindForm();
 })();
 </script>
 </body>
