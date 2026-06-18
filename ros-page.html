@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- WEBFLOW PAGE SETTINGS
      Title:       Revenue Operating System | RevShoppe
-     Description: rOS is the ongoing governance layer that keeps every GTM Workflow current, your team capable, and your commercial motion compounding — instead of decaying the moment the engagement closes.
+     Description: rOS is the governed state of GTM operations — Infrastructure underneath, Workflows on top, and the governance that keeps both current as the market shifts, the team changes, and the data drifts.
      Slug:        /solutions/ros
 -->
 <html lang="en">
@@ -35,17 +35,18 @@
 }
 .rs-ros ::selection { background: rgba(232,99,74,0.3); color: inherit; }
 
-/* ── Connector ── */
+/* Connector */
 .rs-ros .ros-conn { position:relative; height:0; z-index:6; }
 .rs-ros .ros-conn svg { position:absolute; left:50%; top:-46px; transform:translateX(-50%); }
 
-/* ── Scroll reveal ── */
+/* Scroll reveal */
 .rs-ros [data-rv] { opacity:0; transform:translateY(16px); transition:opacity 0.4s ease, transform 0.4s ease; }
 .rs-ros [data-rv].rs-vis { opacity:1; transform:translateY(0); }
 .rs-ros [data-rv-d1] { transition-delay:0.08s; }
 .rs-ros [data-rv-d2] { transition-delay:0.16s; }
+.rs-ros [data-rv-d3] { transition-delay:0.24s; }
 
-/* ── Buttons ── */
+/* Buttons */
 .rs-ros .ros-btn {
   display:inline-flex; align-items:center; justify-content:center; gap:10px;
   font-family:var(--f-mono); text-transform:uppercase; letter-spacing:0.1em;
@@ -55,7 +56,7 @@
 .rs-ros .ros-btn-coral:hover { background:var(--coral-h); transform:translateY(-2px); }
 .rs-ros .ros-btn-lg { font-size:14px; padding:21px 38px; box-shadow:0 24px 50px -22px rgba(232,99,74,0.8); }
 
-/* ── Form card ── */
+/* Hero form */
 .rs-ros .ros-form-card {
   background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.10);
   border-radius:10px; padding:32px; flex-shrink:0; width:340px;
@@ -70,7 +71,53 @@
 .rs-ros .ros-field:focus { outline:none; border-color:var(--coral); }
 .rs-ros .ros-form-card .ros-btn { width:100%; justify-content:center; }
 
-/* ── Components ── */
+/* Sec 02: Three layers */
+.rs-ros .ros-layer-grid {
+  display:grid; grid-template-columns:repeat(3,1fr); gap:0;
+  margin-top:56px; border-radius:10px; overflow:hidden;
+  border:1px solid rgba(255,255,255,0.08);
+}
+.rs-ros .ros-layer {
+  background:rgba(255,255,255,0.03); padding:40px 36px;
+  border-right:1px solid rgba(255,255,255,0.06);
+}
+.rs-ros .ros-layer:last-child { border-right:none; }
+.rs-ros .ros-layer-label {
+  font-family:var(--f-mono); font-size:10px; letter-spacing:0.18em;
+  text-transform:uppercase; color:var(--coral); margin-bottom:16px;
+}
+.rs-ros .ros-layer-name {
+  font-family:var(--f-display); font-weight:500; font-size:22px;
+  letter-spacing:-0.01em; color:#fff; margin-bottom:14px; line-height:1.15;
+}
+.rs-ros .ros-layer-desc {
+  font-family:var(--f-body); font-size:15px; line-height:1.72;
+  font-weight:300; color:rgba(255,255,255,0.48);
+}
+.rs-ros .ros-layer-active { background:rgba(232,99,74,0.06); }
+.rs-ros .ros-layer-active .ros-layer-desc { color:rgba(255,255,255,0.62); }
+
+/* Sec 03: Four pillars */
+.rs-ros .ros-pillar-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:14px; margin-top:56px; }
+.rs-ros .ros-pillar {
+  background:#fff; border:1px solid var(--hl); border-radius:10px;
+  padding:36px 40px;
+  box-shadow:0 1px 2px rgba(0,0,0,0.04), 0 8px 22px rgba(0,0,0,0.05);
+}
+.rs-ros .ros-pillar-decay {
+  font-family:var(--f-mono); font-size:10px; letter-spacing:0.14em;
+  text-transform:uppercase; color:var(--coral); margin-bottom:10px;
+}
+.rs-ros .ros-pillar-name {
+  font-family:var(--f-display); font-weight:500; font-size:20px;
+  letter-spacing:-0.01em; color:var(--ink); margin-bottom:14px;
+}
+.rs-ros .ros-pillar-desc {
+  font-family:var(--f-body); font-size:15px; line-height:1.72;
+  font-weight:300; color:var(--gray);
+}
+
+/* Sec 04: Governance mechanisms */
 .rs-ros .ros-comp-grid { display:grid; gap:14px; margin-top:56px; }
 .rs-ros .ros-comp {
   background:#fff; border:1px solid var(--hl); border-radius:10px;
@@ -96,22 +143,54 @@
   border:1px solid var(--hl); padding:4px 10px; border-radius:3px;
 }
 
-/* ── Responsive ── */
+/* Sec 06: Cadence */
+.rs-ros .ros-cadence-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:14px; margin-top:56px; }
+.rs-ros .ros-cadence-card {
+  background:#fff; border:1px solid var(--hl); border-radius:10px;
+  padding:36px 40px;
+  box-shadow:0 1px 2px rgba(0,0,0,0.04), 0 8px 22px rgba(0,0,0,0.05);
+}
+.rs-ros .ros-cadence-label {
+  font-family:var(--f-mono); font-size:10px; letter-spacing:0.18em;
+  text-transform:uppercase; color:var(--coral); margin-bottom:12px;
+}
+.rs-ros .ros-cadence-name {
+  font-family:var(--f-display); font-weight:500; font-size:20px;
+  letter-spacing:-0.01em; color:var(--ink); margin-bottom:20px;
+}
+.rs-ros .ros-cadence-items { list-style:none; display:flex; flex-direction:column; gap:12px; }
+.rs-ros .ros-cadence-item {
+  font-family:var(--f-body); font-size:14px; line-height:1.68;
+  font-weight:300; color:var(--gray); padding-left:16px; position:relative;
+}
+.rs-ros .ros-cadence-item::before {
+  content:""; position:absolute; left:0; top:8px;
+  width:5px; height:5px; border-radius:50%; background:var(--coral);
+}
+.rs-ros .ros-cadence-full { grid-column:1/-1; }
+.rs-ros .ros-cadence-2col { display:grid; grid-template-columns:repeat(2,1fr); gap:12px 48px; }
+
+/* Responsive */
 @media (max-width:900px) {
-  .rs-ros [data-sec]       { padding:88px 24px !important; }
-  .rs-ros [data-hl]        { flex-direction:column !important; }
-  .rs-ros .ros-form-card   { width:100% !important; }
-  .rs-ros .ros-comp        { grid-template-columns:1fr !important; gap:16px !important; padding:28px 24px !important; }
-  .rs-ros .ros-comp-num    { font-size:40px !important; }
+  .rs-ros [data-sec]             { padding:88px 24px !important; }
+  .rs-ros [data-hl]              { flex-direction:column !important; }
+  .rs-ros .ros-form-card         { width:100% !important; }
+  .rs-ros .ros-layer-grid        { grid-template-columns:1fr !important; }
+  .rs-ros .ros-layer             { border-right:none !important; border-bottom:1px solid rgba(255,255,255,0.06) !important; }
+  .rs-ros .ros-layer:last-child  { border-bottom:none !important; }
+  .rs-ros .ros-pillar-grid       { grid-template-columns:1fr !important; }
+  .rs-ros .ros-comp              { grid-template-columns:1fr !important; gap:16px !important; padding:28px 24px !important; }
+  .rs-ros .ros-comp-num          { font-size:40px !important; }
+  .rs-ros .ros-cadence-grid      { grid-template-columns:1fr !important; }
+  .rs-ros .ros-cadence-2col      { grid-template-columns:1fr !important; }
 }
 </style>
 </head>
 <body>
 <div class="rs-ros">
 
-<!-- ══ 01 · HERO ═══════════════════════════════════════════════════ -->
+<!-- 01 HERO -->
 <section data-sec style="position:relative; background:#15141C; padding:150px 56px 120px; min-height:80vh; display:flex; align-items:center; overflow:hidden;">
-  <!-- bolt watermark -->
   <svg style="position:absolute; right:-40px; bottom:-60px; width:380px; height:auto; pointer-events:none; opacity:0.025;" viewBox="8 -6 86 142" fill="none">
     <polygon points="55,8 22,68 47,68 40,122 80,57 55,57" stroke="#fff" stroke-width="6" stroke-linejoin="round" stroke-linecap="round" fill="none"/>
     <circle cx="55" cy="8"   r="4" fill="#fff"/>
@@ -122,16 +201,16 @@
   <div style="max-width:1180px; margin:0 auto; width:100%; position:relative; z-index:2;">
     <div data-hl style="display:flex; gap:64px; align-items:center;">
       <div style="flex:1; min-width:0;">
-        <div data-rv style="font-family:var(--f-mono); font-size:12px; letter-spacing:0.24em; text-transform:uppercase; color:#E8634A; margin-bottom:28px;">Solutions · rOS</div>
-        <h1 data-rv style="font-family:var(--f-display); font-weight:500; font-size:clamp(46px,6.5vw,96px); line-height:0.94; letter-spacing:-0.025em; color:#fff; max-width:16ch; margin:0 0 36px;">Your competitors didn't hire better people.</h1>
-        <p data-rv style="font-family:var(--f-body); font-size:clamp(16px,1.5vw,20px); line-height:1.65; font-weight:300; color:rgba(255,255,255,0.58); max-width:52ch; margin:0;">They stopped letting the system decay after delivery. rOS is the ongoing governance layer — Rhythm of Revenue, Center of Excellence, Workflow Governance — that keeps every GTM Workflow current, your team capable, and performance compounding instead of reverting.</p>
+        <div data-rv style="font-family:var(--f-mono); font-size:12px; letter-spacing:0.24em; text-transform:uppercase; color:#E8634A; margin-bottom:28px;">Solutions &middot; rOS</div>
+        <h1 data-rv style="font-family:var(--f-display); font-weight:500; font-size:clamp(46px,8.2vw,128px); line-height:0.94; letter-spacing:-0.025em; color:#fff; max-width:16ch; margin:0 0 36px;">Your competitors didn't hire better people.</h1>
+        <p data-rv style="font-family:var(--f-body); font-size:clamp(16px,1.5vw,20px); line-height:1.65; font-weight:300; color:rgba(255,255,255,0.58); max-width:52ch; margin:0;">They built the machine, then they kept it running. rOS is the governance layer that sits behind every GTM Workflow RevShoppe builds, making sure the motion stays current as the market shifts, the team changes, and the data drifts.</p>
       </div>
       <div id="ros-hero-form-card" class="ros-form-card" data-rv>
         <div style="font-family:var(--f-mono); font-size:11px; letter-spacing:0.22em; text-transform:uppercase; color:#E8634A; margin-bottom:16px;">Book a Call</div>
         <div style="font-family:var(--f-display); font-weight:500; font-size:22px; letter-spacing:-0.01em; color:#fff; line-height:1.18; margin-bottom:22px;">Keep the system from decaying.</div>
         <form id="ros-hero-form">
           <input class="ros-field" type="email" name="email" placeholder="Work email" required>
-          <button type="submit" class="ros-btn ros-btn-coral">Start Governing →</button>
+          <button type="submit" class="ros-btn ros-btn-coral">Start Governing &#8594;</button>
         </form>
         <div style="font-family:var(--f-mono); font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:rgba(255,255,255,0.28); text-align:center; margin-top:14px;">We'll be in touch within one business day.</div>
       </div>
@@ -139,17 +218,139 @@
   </div>
 </section>
 
-<!-- connector: dark → dark -->
+<!-- connector dark-dark -->
 <div class="ros-conn"><svg width="14" height="92"><line x1="7" y1="0" x2="7" y2="92" stroke="#E8634A" stroke-width="1.6" stroke-linecap="round"/><circle cx="7" cy="46" r="3.6" fill="#E8634A"/></svg></div>
 
-<!-- ══ 02 · THE DECAY ══════════════════════════════════════════════ -->
+<!-- 02 WHAT rOS IS -->
+<section data-sec style="position:relative; background:#1A1922; padding:130px 56px; overflow:hidden;">
+  <div style="max-width:1180px; margin:0 auto; position:relative; z-index:2;">
+    <div data-rv style="font-family:var(--f-mono); font-size:12px; letter-spacing:0.24em; text-transform:uppercase; color:#E8634A; margin-bottom:24px;">The System</div>
+    <h2 data-rv style="font-family:var(--f-display); font-weight:500; font-size:clamp(32px,4.8vw,72px); line-height:0.98; letter-spacing:-0.022em; color:#fff; max-width:22ch; margin:0 0 28px;">Governance is the difference between the line that compounds and the line that reverts.</h2>
+    <div data-rv style="font-family:var(--f-body); font-size:17px; line-height:1.72; font-weight:300; color:rgba(255,255,255,0.55); max-width:64ch;">
+      <p style="margin:0 0 20px;">Every RevShoppe engagement follows the same arc. GTM Diagnosis surfaces which workflows to build and where the infrastructure breaks. GTM Infrastructure builds the four-pillar foundation every workflow depends on. GTM Workflows build the AI-powered motions that turn that foundation into pipeline. And then most firms hand it back.</p>
+      <p style="margin:0 0 20px;">The handoff model assumes the system can sustain itself once the engagement closes. It can't. Context becomes stale as the market moves, data drifts as records age, process degrades as the team turns over, and technology misconfigures as platforms change. GTM Decay doesn't wait for a workflow to fail. It starts in the pillars, quietly, before anyone names it.</p>
+      <p style="margin:0;">rOS is RevShoppe staying in the loop after the build. It's the operating system that governs the infrastructure underneath the workflows and the workflows running on top, not as a quarterly check-in but as the permanent layer that makes everything else hold.</p>
+    </div>
+
+    <div class="ros-layer-grid" data-rv>
+      <div class="ros-layer">
+        <div class="ros-layer-label">Layer 01</div>
+        <div class="ros-layer-name">GTM Infrastructure</div>
+        <p class="ros-layer-desc">The foundation. Context, Data, Process, Technology built before a single workflow fires. What RevShoppe constructs and what rOS maintains permanently. A break in any pillar is where decay starts.</p>
+      </div>
+      <div class="ros-layer">
+        <div class="ros-layer-label">Layer 02</div>
+        <div class="ros-layer-name">GTM Workflows</div>
+        <p class="ros-layer-desc">The motion. AI-powered, signal-triggered loops running on the infrastructure. Each one designed so the current doesn't stop. rOS keeps every active workflow current and adds new ones as the commercial motion expands.</p>
+      </div>
+      <div class="ros-layer ros-layer-active">
+        <div class="ros-layer-label">Layer 03</div>
+        <div class="ros-layer-name">Governance</div>
+        <p class="ros-layer-desc">The layer that owns both. It catches pillar degradation before it reaches the workflows. It catches workflow drift before it reaches the pipeline. It's the part of the engagement that stays.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- connector dark-warm -->
+<div class="ros-conn"><svg width="14" height="92"><line x1="7" y1="0" x2="7" y2="46" stroke="rgba(255,255,255,0.16)" stroke-width="1.5" stroke-dasharray="2 9" stroke-linecap="round"/><line x1="7" y1="46" x2="7" y2="92" stroke="#E8634A" stroke-width="1.6" stroke-linecap="round"/><circle cx="7" cy="46" r="3.4" fill="#E8634A"/></svg></div>
+
+<!-- 03 FOUR PILLARS -->
+<section data-sec style="position:relative; background:#F1EDE6; padding:130px 56px;">
+  <div style="max-width:1180px; margin:0 auto;">
+    <div data-rv style="font-family:var(--f-mono); font-size:12px; letter-spacing:0.24em; text-transform:uppercase; color:#E8634A; margin-bottom:24px;">Where Decay Starts</div>
+    <h2 data-rv style="font-family:var(--f-display); font-weight:500; font-size:clamp(32px,4.8vw,72px); line-height:0.98; letter-spacing:-0.022em; color:#1A1820; max-width:24ch; margin:0 0 24px;">GTM Decay doesn't start in your workflows. It starts in the pillars they run on.</h2>
+    <p data-rv style="font-family:var(--f-body); font-size:17px; line-height:1.72; font-weight:300; color:#4B4956; max-width:62ch; margin:0 0 8px;">Most revenue teams lose pipeline and name the symptom. The sequences aren't landing. The reps aren't converting. The forecast is wrong again. What they're usually diagnosing is the output of infrastructure that degraded weeks or months earlier. In the first quarter after handoff, most systems still look functional. By the second, something's off but nobody can name it. By the third, the pipeline tells the story clearly enough that someone runs the retrospective. By then the decay has been compounding long enough to cost a quarter that won't come back.</p>
+
+    <div class="ros-pillar-grid">
+      <div class="ros-pillar" data-rv>
+        <div class="ros-pillar-decay">Degrades as the market moves</div>
+        <div class="ros-pillar-name">Context</div>
+        <p class="ros-pillar-desc">ICP profiles, battle cards, and signal definitions reflect the market you were selling into when the workflow was built. As competitors move, buyers change roles, and trigger events shift in relevance, the context feeding your workflows falls out of sync with what's actually happening. Context degradation is almost always invisible until the workflow generates output that doesn't match what reps are hearing on calls.</p>
+      </div>
+      <div class="ros-pillar" data-rv data-rv-d1>
+        <div class="ros-pillar-decay">Degrades as records age</div>
+        <div class="ros-pillar-name">Data</div>
+        <p class="ros-pillar-desc">Contact and company records drift at a rate that erodes clean-at-build-time accuracy faster than most teams track. Job changes, org restructures, wrong territory routing. The workflow fires on what the data says, not what's true. The rep gets the wrong name, title, or account. Nobody flags it as a system problem. It looks like a sequencing problem, or a rep problem, and it compounds for weeks before anyone looks upstream.</p>
+      </div>
+      <div class="ros-pillar" data-rv data-rv-d1>
+        <div class="ros-pillar-decay">Degrades as headcount changes</div>
+        <div class="ros-pillar-name">Process</div>
+        <p class="ros-pillar-desc">Playbooks don't maintain themselves when headcount changes. When two SDRs turn over, the institutional knowledge about why the workflow runs the way it runs leaves with them. New reps improvise. Execution drifts from design. The workflow still fires. It just doesn't run the way it was built to run. And because the outputs still look approximately correct, nobody catches it until performance falls far enough to investigate.</p>
+      </div>
+      <div class="ros-pillar" data-rv data-rv-d2>
+        <div class="ros-pillar-decay">Degrades as platforms change</div>
+        <div class="ros-pillar-name">Technology</div>
+        <p class="ros-pillar-desc">Platform migrations, admin changes, new integrations — the technology layer of any active workflow gets touched more frequently than anyone tracks. A routing condition changes. A sequence step breaks. A signal source gets reconfigured during a platform update. Nobody ties the pipeline drop to the change that happened six weeks earlier. Technology degradation is the hardest to catch because it's invisible to everyone except the person who made the change, and they usually don't know what they broke.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- connector warm-white -->
+<div class="ros-conn"><svg width="14" height="92"><line x1="7" y1="0" x2="7" y2="46" stroke="rgba(26,24,32,0.12)" stroke-width="1.5" stroke-dasharray="2 9" stroke-linecap="round"/><line x1="7" y1="46" x2="7" y2="92" stroke="#E8634A" stroke-width="1.6" stroke-linecap="round"/><circle cx="7" cy="46" r="3.4" fill="#E8634A"/></svg></div>
+
+<!-- 04 THREE MECHANISMS -->
+<section data-sec style="position:relative; background:#FAFAF9; padding:130px 56px;">
+  <div style="max-width:1180px; margin:0 auto;">
+    <div data-rv style="font-family:var(--f-mono); font-size:12px; letter-spacing:0.24em; text-transform:uppercase; color:#E8634A; margin-bottom:24px;">How rOS Works</div>
+    <h2 data-rv style="font-family:var(--f-display); font-weight:500; font-size:clamp(32px,4.8vw,72px); line-height:0.98; letter-spacing:-0.022em; color:#1A1820; max-width:22ch; margin:0 0 24px;">Governance isn't a quarterly check-in. It's a set of functions, running continuously, that each own a different failure mode.</h2>
+    <p data-rv style="font-family:var(--f-body); font-size:17px; line-height:1.72; font-weight:300; color:#4B4956; max-width:62ch; margin:0 0 8px;">Most GTM engagements end at delivery with well-built workflows and no mechanism to keep them current. Reps who aren't trained on what was built execute around it. Workflows that aren't reviewed regularly run on stale assumptions. Systems without active ownership drift the moment something in the environment changes. rOS runs three mechanisms in parallel, each owning a different part of that problem.</p>
+
+    <div class="ros-comp-grid">
+      <div class="ros-comp" data-rv>
+        <div class="ros-comp-num">01</div>
+        <div>
+          <div class="ros-comp-name">Center of Excellence</div>
+          <p class="ros-comp-desc">The human capability layer. Rep enablement so the team knows how to run what was built. Manager QA so workflows don't degrade in execution. Onboarding for new hires so the system isn't explained in a Slack message on someone's first week. And an internal knowledge base that makes RevShoppe's work transferable, so your team can operate the system without RevShoppe in every meeting. The Center of Excellence doesn't build capability once and move on. It maintains it as the team changes.</p>
+          <div class="ros-comp-tags">
+            <span class="ros-tag">Rep Enablement</span>
+            <span class="ros-tag">Manager QA</span>
+            <span class="ros-tag">Hire Onboarding</span>
+            <span class="ros-tag">Knowledge Base</span>
+          </div>
+        </div>
+      </div>
+      <div class="ros-comp" data-rv data-rv-d1>
+        <div class="ros-comp-num">02</div>
+        <div>
+          <div class="ros-comp-name">Rhythm of Revenue</div>
+          <p class="ros-comp-desc">The operating cadence that keeps the commercial system from drifting. Weekly workflow reviews. Signal set updates when buying behavior shifts. Performance readouts that surface what's working and what isn't early enough to act on it. And the decision structure that ensures the team acts on what they see, instead of noting it in a meeting and running the same broken motion for another month.</p>
+          <div class="ros-comp-tags">
+            <span class="ros-tag">Weekly Reviews</span>
+            <span class="ros-tag">Signal Updates</span>
+            <span class="ros-tag">Performance Readouts</span>
+            <span class="ros-tag">Decision Structure</span>
+          </div>
+        </div>
+      </div>
+      <div class="ros-comp" data-rv data-rv-d2>
+        <div class="ros-comp-num">03</div>
+        <div>
+          <div class="ros-comp-name">Workflow Governance</div>
+          <p class="ros-comp-desc">Active ownership of every GTM Workflow in production. Which workflows fire, under what conditions, with what approval gates. What gets changed, by whom, on what cadence. New signal sources added as they emerge. Context layers updated when the market shifts. New workflows built as the commercial motion expands. Without Workflow Governance, the system built in Q1 is running on stale assumptions by Q3 while nobody's watching.</p>
+          <div class="ros-comp-tags">
+            <span class="ros-tag">Firing Conditions</span>
+            <span class="ros-tag">Approval Gates</span>
+            <span class="ros-tag">Context Updates</span>
+            <span class="ros-tag">New Workflow Builds</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- connector white-dark -->
+<div class="ros-conn"><svg width="14" height="92"><line x1="7" y1="0" x2="7" y2="46" stroke="rgba(26,24,32,0.12)" stroke-width="1.5" stroke-dasharray="2 9" stroke-linecap="round"/><line x1="7" y1="46" x2="7" y2="92" stroke="#E8634A" stroke-width="1.6" stroke-linecap="round"/><circle cx="7" cy="46" r="3.4" fill="#E8634A"/></svg></div>
+
+<!-- 05 WHY YOU CAN'T HAND IT OFF -->
 <section data-sec style="position:relative; background:#1A1922; padding:130px 56px; overflow:hidden;">
   <div style="max-width:1180px; margin:0 auto; position:relative; z-index:2;">
     <div data-rv style="font-family:var(--f-mono); font-size:12px; letter-spacing:0.24em; text-transform:uppercase; color:#E8634A; margin-bottom:24px;">What Happens After Delivery</div>
-    <h2 data-rv style="font-family:var(--f-display); font-weight:500; font-size:clamp(32px,4.8vw,72px); line-height:0.98; letter-spacing:-0.022em; color:#fff; max-width:22ch; margin:0 0 24px;">Every vendor delivers. Most leave. Performance tells the rest.</h2>
-    <p data-rv style="font-family:var(--f-body); font-size:17px; line-height:1.72; font-weight:300; color:rgba(255,255,255,0.55); max-width:62ch; margin:0 0 64px;">Six months after a GTM engagement closes, one of two things is happening. The team that stayed governed is compounding — workflows getting sharper, signal sets updated, reps trained on what's changed. The team that got handed off is watching the same decay patterns come back. Not because the build was wrong. Because nobody owns keeping it current.</p>
+    <h2 data-rv style="font-family:var(--f-display); font-weight:500; font-size:clamp(32px,4.8vw,72px); line-height:0.98; letter-spacing:-0.022em; color:#fff; max-width:22ch; margin:0 0 24px;">Every vendor delivers and leaves. Six months later, the chart shows what that decision cost.</h2>
+    <p data-rv style="font-family:var(--f-body); font-size:17px; line-height:1.72; font-weight:300; color:rgba(255,255,255,0.55); max-width:62ch; margin:0 0 64px;">Most teams don't know the decay has started until it shows in the pipeline. Reply rates slip a little. Meetings slow slightly. The forecast that was close in Q1 is consistently wrong by Q3. By the time anyone runs the analysis, the drop has been compounding for months. Keeping any GTM system current requires someone permanently in the loop, and the handoff model has no mechanism for that.</p>
 
-    <!-- Performance divergence chart -->
     <div data-rv style="border:1px solid rgba(255,255,255,0.08); border-radius:12px; overflow:hidden; background:rgba(255,255,255,0.02);">
       <div style="background:rgba(255,255,255,0.03); padding:16px 32px; border-bottom:1px solid rgba(255,255,255,0.06); display:flex; justify-content:space-between; align-items:center;">
         <span style="font-family:var(--f-mono); font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:rgba(255,255,255,0.4);">GTM Performance Over Time</span>
@@ -167,8 +368,6 @@
               <stop offset="1" stop-color="#fff" stop-opacity="0"/>
             </linearGradient>
           </defs>
-
-          <!-- Grid lines -->
           <g stroke="rgba(255,255,255,0.05)" stroke-width="1">
             <line x1="60" y1="40"  x2="860" y2="40"/>
             <line x1="60" y1="100" x2="860" y2="100"/>
@@ -176,8 +375,6 @@
             <line x1="60" y1="220" x2="860" y2="220"/>
             <line x1="60" y1="260" x2="860" y2="260"/>
           </g>
-
-          <!-- Quarter markers -->
           <g font-family="IBM Plex Mono, monospace" font-size="10" fill="rgba(255,255,255,0.3)" text-anchor="middle" letter-spacing="1">
             <text x="180" y="295">Q1</text>
             <text x="320" y="295">Q2</text>
@@ -186,122 +383,92 @@
             <text x="740" y="295">Q5</text>
             <text x="860" y="295">Q6</text>
           </g>
-
-          <!-- Vendor exit marker -->
           <line x1="390" y1="30" x2="390" y2="270" stroke="rgba(255,255,255,0.15)" stroke-width="1" stroke-dasharray="4 4"/>
           <rect x="320" y="10" width="140" height="22" rx="3" fill="rgba(255,255,255,0.06)"/>
           <text x="390" y="25" font-family="IBM Plex Mono, monospace" font-size="9.5" fill="rgba(255,255,255,0.45)" text-anchor="middle" letter-spacing="1.5">VENDOR EXIT</text>
-
-          <!-- Handed-off trace (decaying) — fill -->
-          <path d="M 60 220 C 120 210, 180 185, 240 170 C 270 163, 300 158, 320 155 L 390 148 C 430 148, 460 158, 510 172 C 560 188, 620 210, 680 228 C 740 246, 800 256, 860 262 L 860 270 L 60 270 Z"
-                fill="url(#ros-gray-fill)"/>
-          <!-- Handed-off trace (decaying) — line -->
-          <path d="M 60 220 C 120 210, 180 185, 240 170 C 270 163, 300 158, 320 155 L 390 148 C 430 148, 460 158, 510 172 C 560 188, 620 210, 680 228 C 740 246, 800 256, 860 262"
-                fill="none" stroke="rgba(255,255,255,0.28)" stroke-width="2" stroke-dasharray="6 4"/>
-
-          <!-- Governed trace (compounding) — fill -->
-          <path d="M 60 220 C 120 210, 180 185, 240 170 C 270 163, 300 158, 320 155 L 390 148 C 430 138, 470 122, 520 106 C 570 90, 630 72, 700 58 C 760 46, 820 40, 860 38 L 860 270 L 60 270 Z"
-                fill="url(#ros-coral-fill)"/>
-          <!-- Governed trace (compounding) — line -->
-          <path d="M 60 220 C 120 210, 180 185, 240 170 C 270 163, 300 158, 320 155 L 390 148 C 430 138, 470 122, 520 106 C 570 90, 630 72, 700 58 C 760 46, 820 40, 860 38"
-                fill="none" stroke="#E8634A" stroke-width="2.5"/>
-
-          <!-- Labels -->
+          <path d="M 60 220 C 120 210, 180 185, 240 170 C 270 163, 300 158, 320 155 L 390 148 C 430 148, 460 158, 510 172 C 560 188, 620 210, 680 228 C 740 246, 800 256, 860 262 L 860 270 L 60 270 Z" fill="url(#ros-gray-fill)"/>
+          <path d="M 60 220 C 120 210, 180 185, 240 170 C 270 163, 300 158, 320 155 L 390 148 C 430 148, 460 158, 510 172 C 560 188, 620 210, 680 228 C 740 246, 800 256, 860 262" fill="none" stroke="rgba(255,255,255,0.28)" stroke-width="2" stroke-dasharray="6 4"/>
+          <path d="M 60 220 C 120 210, 180 185, 240 170 C 270 163, 300 158, 320 155 L 390 148 C 430 138, 470 122, 520 106 C 570 90, 630 72, 700 58 C 760 46, 820 40, 860 38 L 860 270 L 60 270 Z" fill="url(#ros-coral-fill)"/>
+          <path d="M 60 220 C 120 210, 180 185, 240 170 C 270 163, 300 158, 320 155 L 390 148 C 430 138, 470 122, 520 106 C 570 90, 630 72, 700 58 C 760 46, 820 40, 860 38" fill="none" stroke="#E8634A" stroke-width="2.5"/>
           <g font-family="IBM Plex Mono, monospace" font-size="10" letter-spacing="1">
             <text x="876" y="42"  fill="#E8634A">rOS</text>
             <text x="876" y="266" fill="rgba(255,255,255,0.35)">None</text>
           </g>
-
-          <!-- Endpoint dots -->
           <circle cx="860" cy="38"  r="5" fill="#E8634A"/>
           <circle cx="860" cy="262" r="5" fill="rgba(255,255,255,0.3)"/>
         </svg>
-
-        <!-- Legend -->
         <div style="display:flex; gap:32px; margin-top:24px; padding-top:20px; border-top:1px solid rgba(255,255,255,0.06);">
           <div style="display:flex; align-items:center; gap:10px;">
             <div style="width:28px; height:2.5px; background:#E8634A; border-radius:2px;"></div>
             <span style="font-family:var(--f-mono); font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:rgba(255,255,255,0.55);">Governed by rOS</span>
           </div>
           <div style="display:flex; align-items:center; gap:10px;">
-            <div style="width:28px; height:2px; background:rgba(255,255,255,0.3); border-radius:2px; background-image:repeating-linear-gradient(90deg,rgba(255,255,255,0.3) 0,rgba(255,255,255,0.3) 6px,transparent 6px,transparent 10px);"></div>
+            <div style="width:28px; height:2px; border-radius:2px; background-image:repeating-linear-gradient(90deg,rgba(255,255,255,0.3) 0,rgba(255,255,255,0.3) 6px,transparent 6px,transparent 10px);"></div>
             <span style="font-family:var(--f-mono); font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:rgba(255,255,255,0.35);">Handed off, no governance</span>
           </div>
         </div>
       </div>
     </div>
+
+    <p data-rv style="font-family:var(--f-body); font-size:17px; line-height:1.72; font-weight:300; color:rgba(255,255,255,0.5); max-width:62ch; margin:48px 0 0;">The governed line compounds because every workflow update, signal adjustment, and context refresh makes the next run more accurate than the last. The handed-off line decays because every environmental change that goes unaddressed adds friction to a system that was designed to run without it. Handing back a loop doesn't transfer the loop. It breaks it.</p>
   </div>
 </section>
 
-<!-- connector: dark → warm -->
+<!-- connector dark-warm -->
 <div class="ros-conn"><svg width="14" height="92"><line x1="7" y1="0" x2="7" y2="46" stroke="rgba(255,255,255,0.16)" stroke-width="1.5" stroke-dasharray="2 9" stroke-linecap="round"/><line x1="7" y1="46" x2="7" y2="92" stroke="#E8634A" stroke-width="1.6" stroke-linecap="round"/><circle cx="7" cy="46" r="3.4" fill="#E8634A"/></svg></div>
 
-<!-- ══ 03 · THREE COMPONENTS ════════════════════════════════════════ -->
+<!-- 06 WHAT REVSHOPPE ACTUALLY DOES -->
 <section data-sec style="position:relative; background:#F1EDE6; padding:130px 56px;">
   <div style="max-width:1180px; margin:0 auto;">
-    <div data-rv style="font-family:var(--f-mono); font-size:12px; letter-spacing:0.24em; text-transform:uppercase; color:#E8634A; margin-bottom:24px;">How rOS Works</div>
-    <h2 data-rv style="font-family:var(--f-display); font-weight:500; font-size:clamp(32px,4.8vw,72px); line-height:0.98; letter-spacing:-0.022em; color:#1A1820; max-width:22ch; margin:0 0 18px;">Three components. One system that doesn't quit.</h2>
-    <p data-rv style="font-family:var(--f-body); font-size:17px; line-height:1.72; font-weight:300; color:#4B4956; max-width:62ch; margin:0 0 8px;">Most GTM engagements end at delivery. rOS is designed to run after the build — continuously updating the machine that makes every Workflow work.</p>
+    <div data-rv style="font-family:var(--f-mono); font-size:12px; letter-spacing:0.24em; text-transform:uppercase; color:#E8634A; margin-bottom:24px;">The Work</div>
+    <h2 data-rv style="font-family:var(--f-display); font-weight:500; font-size:clamp(32px,4.8vw,72px); line-height:0.98; letter-spacing:-0.022em; color:#1A1820; max-width:22ch; margin:0 0 24px;">What governance actually looks like, quarter by quarter.</h2>
+    <p data-rv style="font-family:var(--f-body); font-size:17px; line-height:1.72; font-weight:300; color:#4B4956; max-width:62ch; margin:0 0 8px;">Not partnership language. Not "we'll be available if you need us." The following is what rOS covers — the specific functions RevShoppe owns, on a defined cadence, so the commercial motion doesn't have to depend on someone noticing a problem before it reaches the pipeline.</p>
 
-    <div class="ros-comp-grid">
-
-      <!-- 01 Rhythm of Revenue -->
-      <div class="ros-comp" data-rv>
-        <div class="ros-comp-num">01</div>
-        <div>
-          <div class="ros-comp-name">Rhythm of Revenue</div>
-          <p class="ros-comp-desc">The operating cadence that keeps your commercial system from drifting. Weekly workflow reviews. Signal set updates when buying behavior shifts. Performance readouts that surface what's working and what isn't. And the decision-making structure that makes sure the team acts on what they see — instead of noting it and moving on.</p>
-          <div class="ros-comp-tags">
-            <span class="ros-tag">Weekly Reviews</span>
-            <span class="ros-tag">Signal Updates</span>
-            <span class="ros-tag">Performance Readouts</span>
-            <span class="ros-tag">Decision Structure</span>
-          </div>
-        </div>
+    <div class="ros-cadence-grid">
+      <div class="ros-cadence-card" data-rv>
+        <div class="ros-cadence-label">Cadence</div>
+        <div class="ros-cadence-name">Weekly</div>
+        <ul class="ros-cadence-items">
+          <li class="ros-cadence-item">Workflow performance review — which workflows are firing, what's converting, where the drop-off is and what it's pointing to</li>
+          <li class="ros-cadence-item">Signal source health check — are the triggers accurate, are the weights still calibrated to current buying behavior</li>
+          <li class="ros-cadence-item">Rep feedback capture — what the execution layer is surfacing that the data layer hasn't caught yet</li>
+        </ul>
       </div>
-
-      <!-- 02 Center of Excellence -->
-      <div class="ros-comp" data-rv data-rv-d1>
-        <div class="ros-comp-num">02</div>
-        <div>
-          <div class="ros-comp-name">Center of Excellence</div>
-          <p class="ros-comp-desc">The human capability layer. Rep enablement so the team knows how to run what was built. Manager QA so the Workflows don't degrade in execution. Onboarding for new hires so the system isn't explained in a Slack DM on their first week. And an internal knowledge base that makes RevShoppe's work transferable — so your team can run the system without us in every meeting.</p>
-          <div class="ros-comp-tags">
-            <span class="ros-tag">Rep Enablement</span>
-            <span class="ros-tag">Manager QA</span>
-            <span class="ros-tag">Onboarding</span>
-            <span class="ros-tag">Internal Knowledge Base</span>
-          </div>
-        </div>
+      <div class="ros-cadence-card" data-rv data-rv-d1>
+        <div class="ros-cadence-label">Cadence</div>
+        <div class="ros-cadence-name">Monthly</div>
+        <ul class="ros-cadence-items">
+          <li class="ros-cadence-item">Context audit — ICP profiles, battle cards, and signal definitions reviewed against current market reality</li>
+          <li class="ros-cadence-item">Workflow optimization — sequence design, prompt architecture, and routing logic updated based on the month's performance data</li>
+          <li class="ros-cadence-item">New hire integration — any rep or manager who joined in the last thirty days brought into the system correctly</li>
+        </ul>
       </div>
-
-      <!-- 03 Workflow Governance -->
-      <div class="ros-comp" data-rv data-rv-d2>
-        <div class="ros-comp-num">03</div>
-        <div>
-          <div class="ros-comp-name">Workflow Governance</div>
-          <p class="ros-comp-desc">The rules engine. Which Workflows fire, under what conditions, with what approval gates. What gets changed, by whom, on what cadence. New signal sources added as they emerge. Context layers updated when the market shifts. New Workflows built as your commercial motion expands. Without this, the system you built in Q1 is running on stale assumptions by Q3.</p>
-          <div class="ros-comp-tags">
-            <span class="ros-tag">Firing Conditions</span>
-            <span class="ros-tag">Approval Gates</span>
-            <span class="ros-tag">Context Updates</span>
-            <span class="ros-tag">New Workflow Builds</span>
-          </div>
-        </div>
+      <div class="ros-cadence-card" data-rv data-rv-d1>
+        <div class="ros-cadence-label">Cadence</div>
+        <div class="ros-cadence-name">Quarterly</div>
+        <ul class="ros-cadence-items">
+          <li class="ros-cadence-item">Full pillar review — all four pillars assessed against current state, prioritized remediation list built</li>
+          <li class="ros-cadence-item">Workflow roadmap — which new workflows to scope next, based on Diagnosis signals and where the commercial motion is expanding</li>
+          <li class="ros-cadence-item">Performance readout — what the system produced, what changed in the quarter, what Q+1 looks like</li>
+        </ul>
       </div>
-
+      <div class="ros-cadence-card ros-cadence-full" data-rv data-rv-d2>
+        <div class="ros-cadence-label">Always On</div>
+        <div class="ros-cadence-name">Continuously</div>
+        <ul class="ros-cadence-items ros-cadence-2col">
+          <li class="ros-cadence-item">Workflow Governance — no change touches a live workflow without RevShoppe in the loop</li>
+          <li class="ros-cadence-item">Technology monitoring — platform changes tracked so configuration drift gets caught before it affects pipeline</li>
+        </ul>
+      </div>
     </div>
-
-    <a data-rv href="https://www.revshoppe.com/contact" class="ros-btn ros-btn-coral" style="margin-top:48px; box-shadow:0 16px 36px -16px rgba(232,99,74,0.65);">Book a Call</a>
   </div>
 </section>
 
-<!-- connector: warm → dark -->
+<!-- connector warm-dark -->
 <div class="ros-conn"><svg width="14" height="92"><line x1="7" y1="0" x2="7" y2="46" stroke="rgba(26,24,32,0.12)" stroke-width="1.5" stroke-dasharray="2 9" stroke-linecap="round"/><line x1="7" y1="46" x2="7" y2="92" stroke="#E8634A" stroke-width="1.6" stroke-linecap="round"/><circle cx="7" cy="46" r="3.4" fill="#E8634A"/></svg></div>
 
-<!-- ══ 04 · FINAL CTA ══════════════════════════════════════════════ -->
+<!-- 07 CTA -->
 <section data-sec style="position:relative; background:#15141C; padding:150px 56px; overflow:hidden;">
-  <!-- bolt watermark -->
   <svg style="position:absolute; left:-60px; bottom:-40px; width:440px; height:auto; pointer-events:none; opacity:0.025;" viewBox="8 -6 86 142" fill="none">
     <polygon points="55,8 22,68 47,68 40,122 80,57 55,57" stroke="#fff" stroke-width="6" stroke-linejoin="round" stroke-linecap="round" fill="none"/>
     <circle cx="55" cy="8"   r="4" fill="#fff"/>
@@ -310,9 +477,9 @@
     <circle cx="80" cy="57"  r="4" fill="#fff"/>
   </svg>
   <div style="max-width:1180px; margin:0 auto; position:relative; z-index:2;">
-    <div data-rv style="font-family:var(--f-mono); font-size:12px; letter-spacing:0.24em; text-transform:uppercase; color:#E8634A; margin-bottom:24px;">Solutions · rOS</div>
-    <h2 data-rv style="font-family:var(--f-display); font-weight:500; font-size:clamp(44px,6vw,88px); line-height:0.94; letter-spacing:-0.025em; color:#fff; max-width:16ch; margin:0 0 28px;">The workflows are running. Now keep them.</h2>
-    <p data-rv style="font-family:var(--f-body); font-size:clamp(16px,1.5vw,20px); line-height:1.65; font-weight:300; color:rgba(255,255,255,0.55); max-width:50ch; margin:0 0 48px;">rOS is the difference between a GTM build that compounds and one that becomes a case study in what you used to do. If you have workflows running and you're thinking about what governance looks like, this is the conversation to start now.</p>
+    <div data-rv style="font-family:var(--f-mono); font-size:12px; letter-spacing:0.24em; text-transform:uppercase; color:#E8634A; margin-bottom:24px;">Solutions &middot; rOS</div>
+    <h2 data-rv style="font-family:var(--f-display); font-weight:500; font-size:clamp(44px,6vw,88px); line-height:0.94; letter-spacing:-0.025em; color:#fff; max-width:16ch; margin:0 0 28px;">Where it lands and stays.</h2>
+    <p data-rv style="font-family:var(--f-body); font-size:clamp(16px,1.5vw,20px); line-height:1.65; font-weight:300; color:rgba(255,255,255,0.55); max-width:50ch; margin:0 0 48px;">The homepage says RevShoppe doesn't hand it back. rOS is what that guarantee looks like in practice. A governed operating system running continuously behind every workflow, catching decay in the pillars before it reaches the motion and drift in the motion before it reaches the pipeline. If your GTM Workflows are live and you're thinking about what ownership looks like after the build, the answer is that the build doesn't end.</p>
     <a data-rv href="https://www.revshoppe.com/contact" class="ros-btn ros-btn-coral ros-btn-lg">Book a Call</a>
   </div>
 </section>
@@ -321,15 +488,12 @@
 
 <script>
 (function(){
-  /* Scroll reveal */
   if(window.IntersectionObserver){
     var obs = new IntersectionObserver(function(entries){
       entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('rs-vis'); obs.unobserve(e.target); } });
     },{threshold:0.1});
     document.querySelectorAll('.rs-ros [data-rv]').forEach(function(el){ obs.observe(el); });
   }
-
-  /* Hero form → HubSpot */
   function bindForm(){
     var form = document.getElementById('ros-hero-form');
     if(!form){ requestAnimationFrame(bindForm); return; }
