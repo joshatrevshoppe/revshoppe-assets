@@ -6,7 +6,8 @@
 
 <!-- ═══ GRID SECTION — DARK ═══ -->
 <section class="cp-section cp-tex-dark">
-  <div class="cp-inner">
+  <div id="rs-decay-canvas" style="position:absolute;inset:0;pointer-events:none;overflow:hidden;"></div>
+  <div class="cp-inner" style="position:relative;z-index:2;">
     <div class="cp-header">
       <span class="cp-eyebrow">Our Work</span>
       <h1 class="cp-h1">Results for Every Industry</h1>
@@ -41,10 +42,6 @@
 /* Dark bg with tight linen knit texture — same 3-layer pattern as homepage marquee, inverted for dark */
 #rs-clients-page .cp-tex-dark {
   background-color: #15141C;
-  background-image:
-    repeating-linear-gradient(17deg,  transparent 0px, transparent 2px, rgba(255,255,255,0.032) 2px, rgba(255,255,255,0.032) 3px),
-    repeating-linear-gradient(103deg, transparent 0px, transparent 3px, rgba(255,255,255,0.022) 3px, rgba(255,255,255,0.022) 4px),
-    repeating-linear-gradient(197deg, transparent 0px, transparent 4px, rgba(255,255,255,0.016) 4px, rgba(255,255,255,0.016) 5px);
   position: relative;
   z-index: 2;
   box-shadow:
@@ -335,5 +332,47 @@
     nav.style.transform = y > foldBottom ? 'translateY(-100%)' : 'translateY(0)';
   }
   window.addEventListener('scroll', handleNavScroll, { passive: true });
+})();
+
+/* ── Decay canvas (dark section only) ── */
+(function () {
+  var host = document.getElementById('rs-decay-canvas');
+  if (!host) return;
+  var regenTimer;
+  function gen() {
+    var W = Math.min(Math.round(host.offsetWidth  || 1440), 2200);
+    var H = Math.min(Math.round(host.offsetHeight || 900),  8000);
+    if (W < 2 || H < 2) return;
+    var canvas = document.createElement('canvas');
+    canvas.width = W; canvas.height = H;
+    canvas.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;display:block;';
+    var ctx = canvas.getContext('2d');
+    var img = ctx.createImageData(W, H);
+    var data = img.data;
+    var cx = W * 0.5, cy = H * 0.5;
+    for (var y = 0; y < H; y++) {
+      for (var x = 0; x < W; x++) {
+        var dx = (x - cx) / cx, dy = (y - cy) / cy;
+        var dist = Math.sqrt(dx * dx + dy * dy) / 1.414;
+        if (dist > 1) dist = 1;
+        var edge    = Math.pow(dist, 2.6);
+        var density = 0.018 + edge * 0.22;
+        if (Math.random() >= density) continue;
+        var i    = (y * W + x) * 4;
+        var dark = Math.random() < 0.4;
+        var lum  = dark ? 0 : 255;
+        var a    = (dark ? 5 : 3) + Math.random() * (4 + edge * 15);
+        data[i] = lum; data[i+1] = lum; data[i+2] = lum; data[i+3] = a;
+      }
+    }
+    ctx.putImageData(img, 0, 0);
+    host.innerHTML = '';
+    host.appendChild(canvas);
+  }
+  setTimeout(gen, 60);
+  window.addEventListener('resize', function () {
+    clearTimeout(regenTimer);
+    regenTimer = setTimeout(gen, 220);
+  });
 })();
 </script>
