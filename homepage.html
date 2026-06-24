@@ -857,50 +857,6 @@ body { margin: 0 !important; padding: 0 !important; background: #15141C; }
   fallbackTimer = setTimeout(playLoop, 5200);
   pollLoop();
   window.addEventListener('scroll', pollLoop, { passive: true });
-
-  /* ── rOS node easter egg: click to fast-forward ─────── */
-  (function() {
-    var stage = document.getElementById('loop-stage');
-    if (!stage) return;
-    var rosNode = stage.querySelector('.loop-node[data-i="4"]');
-    if (!rosNode) return;
-    rosNode.style.cursor = 'pointer';
-    var ff = false;
-    rosNode.addEventListener('click', function() {
-      if (ff) return;
-      ff = true;
-      var nodes = Array.from(stage.querySelectorAll('.loop-node')).sort(function(a,b){return +a.dataset.i - +b.dataset.i;});
-      var edges = Array.from(stage.querySelectorAll('.loop-edge')).sort(function(a,b){return +a.dataset.i - +b.dataset.i;});
-      nodes.forEach(function(g) {
-        var ring=g.querySelector('.ring'),dot=g.querySelector('.dot'),halo=g.querySelector('.halo'),labs=g.querySelectorAll('.nlab');
-        if(ring){ring.style.transition='none';ring.style.stroke='rgba(255,255,255,0.3)';}
-        if(halo){halo.style.transition='none';halo.style.opacity='0';}
-        if(dot){dot.style.transition='none';dot.style.opacity='0';dot.style.animation='none';}
-        labs.forEach(function(l){l.style.transition='none';l.style.fill='rgba(255,255,255,0.4)';});
-      });
-      edges.forEach(function(e){e.style.transition='none';e.style.strokeDashoffset='100';});
-      var T = 55;
-      nodes.forEach(function(n) {
-        setTimeout(function() {
-          var ring=n.querySelector('.ring'),dot=n.querySelector('.dot'),halo=n.querySelector('.halo'),labs=n.querySelectorAll('.nlab');
-          if(ring){ring.style.transition='stroke 0.1s';ring.style.stroke='#E8634A';}
-          if(halo){halo.style.transition='opacity 0.12s';halo.style.opacity='0.4';}
-          if(dot){dot.style.transition='opacity 0.1s';dot.style.opacity='1';}
-          labs.forEach(function(l){l.style.transition='fill 0.1s';l.style.fill='#fff';});
-        }, 30 + (+n.dataset.i) * T);
-      });
-      edges.forEach(function(e) {
-        var i = +e.dataset.i;
-        setTimeout(function(){e.style.transition='stroke-dashoffset 0.15s ease';e.style.strokeDashoffset='0';}, 30 + (i < 4 ? i*T+30 : 5*T));
-      });
-      setTimeout(function() {
-        var dot=rosNode.querySelector('.dot'),halo=rosNode.querySelector('.halo');
-        if(dot){dot.style.animation='rs-pulse 0.55s ease';}
-        if(halo){halo.style.opacity='0.8';setTimeout(function(){halo.style.opacity='0.4';},300);}
-        setTimeout(function(){ff=false;},1200);
-      }, 30 + 5*T + 80);
-    });
-  })();
 })();
 
   /* ── Marquee ─────────────────────────────────────── */
