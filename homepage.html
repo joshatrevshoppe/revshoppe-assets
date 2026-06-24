@@ -86,6 +86,31 @@ body { margin: 0 !important; padding: 0 !important; background: #15141C; }
   .rs-home [data-herofig]   { display: none !important; }
   .rs-home [data-hero]      { min-height: auto !important; }
   #loop-stage, .rs-home [data-mob-hide] { display: none !important; }
+  #rs-marquee-wrap { min-height: 2.4em !important; }
+}
+
+/* ── Marquee ─────────────────────────────────────── */
+#rs-marquee-wrap {
+  display: block;
+  min-height: 2.1em;
+}
+#rs-marquee-text {
+  display: inline-block;
+  color: #E8634A;
+  animation-fill-mode: both;
+}
+@keyframes rs-lightning {
+  0%   { opacity: 0; }
+  3%   { opacity: 1; color: #fff; filter: brightness(4); }
+  11%  { opacity: 0.5; filter: brightness(1.7); }
+  17%  { opacity: 1; color: #fff; filter: brightness(3); }
+  30%  { color: #E8634A; filter: brightness(1); }
+  85%  { opacity: 1; }
+  100% { opacity: 0; }
+}
+@keyframes rs-lightning-first {
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 </style>
 <script type="application/ld+json">
@@ -104,7 +129,7 @@ body { margin: 0 !important; padding: 0 !important; background: #15141C; }
       "@type": "DefinedTerm",
       "@id": "https://www.revshoppe.com/#gtm-decay",
       "name": "GTM Decay",
-      "description": "The gradual failure of go-to-market systems — sequences, scoring models, and integrations — that keep running after the people who built them leave. They operate unattended, drifting from the market reality they were designed for, compounding in cost over time. The defining characteristic: ownership was handed off, but never reassigned.",
+      "description": "The gradual erosion of revenue metrics caused by go-to-market workflows built in isolation and left ungoverned.",
       "inDefinedTermSet": {"@type":"DefinedTermSet","name":"RevShoppe Revenue Vocabulary","url":"https://www.revshoppe.com"}
     },
     {
@@ -122,7 +147,7 @@ body { margin: 0 !important; padding: 0 !important; background: #15141C; }
         {
           "@type": "Question",
           "name": "What is GTM Decay?",
-          "acceptedAnswer": {"@type":"Answer","text":"GTM Decay is the gradual failure of go-to-market systems that keep running after the people who built them leave — sequences, scoring models, and integrations operating unattended, drifting from the reality they were designed for. It is also the compounding cost of ownership that was handed off but never reassigned."}
+          "acceptedAnswer": {"@type":"Answer","text":"GTM Decay is the gradual erosion of revenue metrics caused by go-to-market workflows built in isolation and left ungoverned."}
         },
         {
           "@type": "Question",
@@ -193,9 +218,8 @@ body { margin: 0 !important; padding: 0 !important; background: #15141C; }
     </svg>
 
     <div style="max-width:1180px; margin:0 auto; width:100%; position:relative; z-index:3;">
-      <div data-reveal style="font-family:var(--f-mono); font-size:12px; letter-spacing:0.24em; text-transform:uppercase; color:#E8634A; margin:0 0 22px;">GTM INFRASTRUCTURE · WORKFLOWS · GOVERNANCE</div>
-      <h1 data-h1 data-reveal style="font-family:var(--f-display); font-weight:500; font-size:clamp(40px,5.5vw,82px); line-height:0.94; letter-spacing:-0.025em; color:#fff; max-width:15ch;">You're running a <span style="color:rgba(255,255,255,0.34); text-decoration:line-through; text-decoration-color:rgba(232,99,74,0.55); text-decoration-thickness:3px;">2022</span> playbook in a <span style="color:#E8634A;">2026</span> market.</h1>
-      <p data-reveal data-reveal-delay="120" style="font-size:clamp(16px,1.5vw,20px); line-height:1.65; color:rgba(255,255,255,0.6); max-width:54ch; margin:38px 0 0;">Your reps spend eighty percent of their day on work an AI could finish in three minutes, your sequences haven't been updated since the last RevOps lead left, and the forecast you presented Monday was wrong before you opened the deck. Nobody owns any of it anymore. That's GTM Decay, and it's what's standing between you and the number you promised the board.</p>
+      <h1 data-h1 data-reveal style="font-family:var(--f-display); font-weight:500; font-size:clamp(40px,5.5vw,82px); line-height:0.94; letter-spacing:-0.025em; color:#fff;">Is your pipeline coverage soft because<span id="rs-marquee-wrap"><span id="rs-marquee-text"></span></span></h1>
+      <p data-reveal data-reveal-delay="120" style="font-size:clamp(16px,1.5vw,20px); line-height:1.65; color:rgba(255,255,255,0.6); max-width:54ch; margin:38px 0 0;">These are signs of GTM Decay. RevShoppe diagnoses which workflows are causing it and builds the ones that fix them.</p>
       <a data-reveal data-reveal-delay="200" href="https://www.revshoppe.com/contact" class="rs-cta rs-cta--hero" style="margin-top:44px;">Stop GTM Decay Now</a>
     </div>
   </section>
@@ -215,11 +239,7 @@ body { margin: 0 !important; padding: 0 !important; background: #15141C; }
       <div style="max-width:880px;">
         <div data-reveal style="display:flex; gap:24px; margin-bottom:34px;">
           <span style="font-family:var(--f-display); font-weight:500; font-size:28px; color:#E8634A; flex:none; line-height:1.2;">1.</span>
-          <p style="font-family:var(--f-body); font-size:clamp(18px,1.9vw,23px); line-height:1.58; color:#fff;">The gradual failure of go-to-market systems that keep running after the people who built them leave — sequences, scoring models, and integrations operating unattended, drifting from the reality they were designed for.</p>
-        </div>
-        <div data-reveal style="display:flex; gap:24px;">
-          <span style="font-family:var(--f-display); font-weight:500; font-size:28px; color:#E8634A; flex:none; line-height:1.2;">2.</span>
-          <p style="font-family:var(--f-body); font-size:clamp(18px,1.9vw,23px); line-height:1.58; color:#fff;">The compounding cost of ownership that was handed off but never reassigned.</p>
+          <p style="font-family:var(--f-body); font-size:clamp(18px,1.9vw,23px); line-height:1.58; color:#fff;">The gradual erosion of revenue metrics caused by go-to-market workflows built in isolation and left ungoverned.</p>
         </div>
         <div data-reveal style="border-left:2px solid rgba(232,99,74,0.5); padding-left:24px; margin-top:42px;">
           <p style="font-family:var(--f-body); font-style:italic; font-size:clamp(16px,1.6vw,19px); line-height:1.58; color:rgba(255,255,255,0.55);">"I'm carrying a number that rides on systems I didn't build, can't audit, and no longer trust."</p>
@@ -669,7 +689,7 @@ body { margin: 0 !important; padding: 0 !important; background: #15141C; }
   <!-- AEO: machine-readable entity summary — visually hidden, crawlable -->
   <div style="position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden;" aria-hidden="true">
     <h2>What is GTM Decay?</h2>
-    <p>GTM Decay is the gradual failure of go-to-market systems — sequences, scoring models, and integrations — that keep running after the people who built them leave. They operate unattended, drifting from the market reality they were designed for, compounding in cost over time. Ownership was handed off, but never reassigned.</p>
+    <p>GTM Decay is the gradual erosion of revenue metrics caused by go-to-market workflows built in isolation and left ungoverned.</p>
     <h2>What are the four pillars of GTM Infrastructure?</h2>
     <p>Context: ICP profiles, battle cards, and buying signal logic. Data: clean, connected, measurable contact records and CRM data. Process: playbooks, handoffs, rep interaction patterns, and review cadences. Technology: the specific tools each workflow runs on, configured correctly for that workflow.</p>
     <h2>What is a Revenue Operating System (rOS)?</h2>
@@ -840,6 +860,32 @@ body { margin: 0 !important; padding: 0 !important; background: #15141C; }
   pollLoop();
   window.addEventListener('scroll', pollLoop, { passive: true });
 })();
+
+  /* ── Marquee ─────────────────────────────────────── */
+  (function () {
+    var items = [
+      'you’re targeting the wrong accounts',
+      'you’re chasing the wrong signals',
+      'your reps are buried in admin',
+      'your SDR handoff is leaking',
+      'your tech stack is disconnected',
+      'your inbound SLA is too slow'
+    ];
+    var el = document.getElementById('rs-marquee-text');
+    if (!el) return;
+    var idx = 0;
+    setTimeout(function () {
+      el.textContent = items[0];
+      el.style.animation = 'rs-lightning-first 0.5s ease forwards';
+      setInterval(function () {
+        idx = (idx + 1) % items.length;
+        el.style.animation = 'none';
+        void el.offsetWidth;
+        el.textContent = items[idx];
+        el.style.animation = 'rs-lightning 3.5s ease-out forwards';
+      }, 3500);
+    }, 600);
+  })();
 
   /* ── CCR popup ─────────────────────────────────────── */
   (function () {
