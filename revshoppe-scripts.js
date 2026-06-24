@@ -125,6 +125,42 @@ logoLink.addEventListener('click', function(e) {
     });
   }
 
+  /* ── Stat triple-click easter egg ───────────────────── */
+  (function() {
+    var seqs = {
+      '$900K': ['$1.1M','$1.4M','$1.8M','$2.3M','$2.9M'],
+      '70%':   ['74%','79%','85%','91%','97%'],
+      '4.5×':  ['5.8×','7.2×','9.1×','11.2×','13.8×'],
+      '?':     ['?!','∞','?!','∅','∞']
+    };
+    document.querySelectorAll('[data-bignum]').forEach(function(el) {
+      var clicks = 0, timer = null, active = false;
+      el.style.cursor = 'pointer';
+      el.addEventListener('click', function() {
+        if (active) return;
+        clicks++;
+        clearTimeout(timer);
+        if (clicks < 3) { timer = setTimeout(function() { clicks = 0; }, 600); return; }
+        clicks = 0;
+        active = true;
+        var orig = el.textContent.trim();
+        var seq = seqs[orig];
+        if (!seq) { active = false; return; }
+        var i = 0;
+        var iv = setInterval(function() {
+          if (i < seq.length) {
+            el.textContent = seq[i++];
+          } else {
+            clearInterval(iv);
+            el.textContent = 'CRITICAL';
+            el.style.color = '#fff';
+            setTimeout(function() { el.textContent = orig; el.style.color = '#E8634A'; active = false; }, 700);
+          }
+        }, 100);
+      });
+    });
+  })();
+
   window.triggerChaos = function() {
     if (document.getElementById('rs-cx')) return;
     var f = document.createElement('div');
