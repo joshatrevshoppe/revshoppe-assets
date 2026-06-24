@@ -86,13 +86,14 @@ body { margin: 0 !important; padding: 0 !important; background: #15141C; }
   .rs-home [data-herofig]   { display: none !important; }
   .rs-home [data-hero]      { min-height: auto !important; }
   #loop-stage, .rs-home [data-mob-hide] { display: none !important; }
-  #rs-marquee-wrap { min-height: 2.4em !important; }
+  #rs-marquee-wrap { min-height: 1em !important; }
 }
 
 /* ── Marquee ─────────────────────────────────────── */
 #rs-marquee-wrap {
   display: block;
-  min-height: 2.1em;
+  min-height: 1em;
+  overflow: hidden;
 }
 #rs-marquee-text {
   display: inline-block;
@@ -218,7 +219,7 @@ body { margin: 0 !important; padding: 0 !important; background: #15141C; }
     </svg>
 
     <div style="max-width:1180px; margin:0 auto; width:100%; position:relative; z-index:3;">
-      <h1 data-h1 data-reveal style="font-family:var(--f-display); font-weight:500; font-size:clamp(40px,5.5vw,82px); line-height:0.94; letter-spacing:-0.025em; color:#fff;">Is your pipeline coverage soft because<span id="rs-marquee-wrap"><span id="rs-marquee-text"></span></span></h1>
+      <h1 data-h1 data-reveal style="font-family:var(--f-display); font-weight:500; font-size:clamp(34px,4.2vw,66px); line-height:0.94; letter-spacing:-0.025em; color:#fff;">Is your pipeline coverage soft because<span id="rs-marquee-wrap"><span id="rs-marquee-text"></span></span></h1>
       <p data-reveal data-reveal-delay="120" style="font-size:clamp(16px,1.5vw,20px); line-height:1.65; color:rgba(255,255,255,0.6); max-width:54ch; margin:38px 0 0;">These are signs of GTM Decay. RevShoppe diagnoses which workflows are causing it and builds the ones that fix them.</p>
       <a data-reveal data-reveal-delay="200" href="https://www.revshoppe.com/contact" class="rs-cta rs-cta--hero" style="margin-top:44px;">Stop GTM Decay Now</a>
     </div>
@@ -242,7 +243,7 @@ body { margin: 0 !important; padding: 0 !important; background: #15141C; }
           <p style="font-family:var(--f-body); font-size:clamp(18px,1.9vw,23px); line-height:1.58; color:#fff;">The gradual erosion of revenue metrics caused by go-to-market workflows built in isolation and left ungoverned.</p>
         </div>
         <div data-reveal style="border-left:2px solid rgba(232,99,74,0.5); padding-left:24px; margin-top:42px;">
-          <p style="font-family:var(--f-body); font-style:italic; font-size:clamp(16px,1.6vw,19px); line-height:1.58; color:rgba(255,255,255,0.55);">"I'm carrying a number that rides on systems I didn't build, can't audit, and no longer trust."</p>
+          <p style="font-family:var(--f-body); font-style:italic; font-size:clamp(16px,1.6vw,19px); line-height:1.58; color:rgba(255,255,255,0.55);">"The number keeps coming in short and I can't point to exactly why."</p>
         </div>
         <a data-reveal href="https://www.revshoppe.com/contact" class="rs-cta rs-cta--sm" style="margin-top:48px; box-shadow:0 16px 36px -16px rgba(232,99,74,0.65);">See if your GTM has it</a>
       </div>
@@ -864,27 +865,51 @@ body { margin: 0 !important; padding: 0 !important; background: #15141C; }
   /* ── Marquee ─────────────────────────────────────── */
   (function () {
     var items = [
-      'you’re targeting the wrong accounts',
-      'you’re chasing the wrong signals',
-      'your reps are buried in admin',
-      'your SDR handoff is leaking',
-      'your tech stack is disconnected',
-      'your inbound SLA is too slow'
+      ‘you’re targeting the wrong accounts?’,
+      ‘you’re chasing the wrong signals?’,
+      ‘your reps are buried in admin?’,
+      ‘your SDR handoff is leaking?’,
+      ‘your tech stack is disconnected?’,
+      ‘your inbound SLA is too slow?’
     ];
-    var el = document.getElementById('rs-marquee-text');
-    if (!el) return;
+    var wrap = document.getElementById(‘rs-marquee-wrap’);
+    var el   = document.getElementById(‘rs-marquee-text’);
+    if (!wrap || !el) return;
     var idx = 0;
-    setTimeout(function () {
-      el.textContent = items[0];
-      el.style.animation = 'rs-lightning-first 0.5s ease forwards';
-      setInterval(function () {
-        idx = (idx + 1) % items.length;
-        el.style.animation = 'none';
-        void el.offsetWidth;
-        el.textContent = items[idx];
-        el.style.animation = 'rs-lightning 3.5s ease-out forwards';
-      }, 3500);
-    }, 600);
+
+    function lockHeight() {
+      el.style.cssText = ‘display:inline-block; color:#E8634A; opacity:1; animation:none;’;
+      var maxH = 0;
+      items.forEach(function (text) {
+        el.textContent = text;
+        var h = el.offsetHeight;
+        if (h > maxH) maxH = h;
+      });
+      el.textContent = ‘’;
+      el.style.cssText = ‘display:inline-block; color:#E8634A; animation-fill-mode:both;’;
+      wrap.style.height = maxH + ‘px’;
+      startMarquee();
+    }
+
+    function startMarquee() {
+      setTimeout(function () {
+        el.textContent = items[0];
+        el.style.animation = ‘rs-lightning-first 0.5s ease forwards’;
+        setInterval(function () {
+          idx = (idx + 1) % items.length;
+          el.style.animation = ‘none’;
+          void el.offsetWidth;
+          el.textContent = items[idx];
+          el.style.animation = ‘rs-lightning 3.5s ease-out forwards’;
+        }, 3500);
+      }, 600);
+    }
+
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(lockHeight);
+    } else {
+      setTimeout(lockHeight, 300);
+    }
   })();
 
   /* ── CCR popup ─────────────────────────────────────── */
