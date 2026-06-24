@@ -864,42 +864,42 @@ body { margin: 0 !important; padding: 0 !important; background: #15141C; }
   /* ── Marquee ─────────────────────────────────────── */
   (function () {
     var items = [
-      "you’re targeting the wrong accounts?",
-      "you’re chasing the wrong signals?",
+      "you're targeting the wrong accounts?",
+      "you're chasing the wrong signals?",
       "your reps are buried in admin?",
       "your SDR handoff is leaking?",
       "your tech stack is disconnected?",
       "your inbound SLA is too slow?"
     ];
-    var wrap = document.getElementById(‘rs-marquee-wrap’);
-    var el   = document.getElementById(‘rs-marquee-text’);
+    var wrap = document.getElementById('rs-marquee-wrap');
+    var el   = document.getElementById('rs-marquee-text');
     if (!wrap || !el) return;
     var idx = 0;
 
     function lockHeight() {
-      el.style.cssText = ‘display:inline-block; color:#E8634A; opacity:1; animation:none;’;
+      el.style.cssText = 'display:inline-block; color:#E8634A; opacity:1; animation:none;';
       var maxH = 0;
       items.forEach(function (text) {
         el.textContent = text;
         var h = el.offsetHeight;
         if (h > maxH) maxH = h;
       });
-      el.textContent = ‘’;
-      el.style.cssText = ‘display:inline-block; color:#E8634A; animation-fill-mode:both;’;
-      wrap.style.height = maxH + ‘px’;
+      el.textContent = '';
+      el.style.cssText = 'display:inline-block; color:#E8634A; animation-fill-mode:both;';
+      wrap.style.height = maxH + 'px';
       startMarquee();
     }
 
     function startMarquee() {
       setTimeout(function () {
         el.textContent = items[0];
-        el.style.animation = ‘rs-lightning-first 0.5s ease forwards’;
+        el.style.animation = 'rs-lightning-first 0.5s ease forwards';
         setInterval(function () {
           idx = (idx + 1) % items.length;
-          el.style.animation = ‘none’;
+          el.style.animation = 'none';
           void el.offsetWidth;
           el.textContent = items[idx];
-          el.style.animation = ‘rs-lightning 3.5s ease-out forwards’;
+          el.style.animation = 'rs-lightning 3.5s ease-out forwards';
         }, 3500);
       }, 600);
     }
