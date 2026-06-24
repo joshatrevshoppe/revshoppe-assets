@@ -125,111 +125,32 @@ logoLink.addEventListener('click', function(e) {
     });
   }
 
-  document.addEventListener('fullscreenchange', function() {
-    if (document.fullscreenElement) { triggerDiagnosis(); }
-  });
-  document.addEventListener('webkitfullscreenchange', function() {
-    if (document.webkitFullscreenElement) { triggerDiagnosis(); }
-  });
-
-  window.triggerDiagnosis = function triggerDiagnosis() {
-    var rain = document.createElement('canvas');
-    rain.style.cssText = 'position:fixed;inset:0;z-index:9998;background:#000;opacity:0;transition:opacity 0.2s ease;';
-    document.body.appendChild(rain);
-    var ctx = rain.getContext('2d');
-    rain.width = window.innerWidth;
-    rain.height = window.innerHeight;
-    var cols = Math.floor(rain.width / 16);
-    var drops = Array(cols).fill(0).map(function() { return Math.random() * -50; });
-    var chars = '01';
-    var frameCount = 0;
-    var maxFrames = 95;
-    requestAnimationFrame(function() { rain.style.opacity = '1'; });
-    function drawRain() {
-      frameCount++;
-      var fade = frameCount < maxFrames * 0.85 ? 0.05 : 0.2;
-      ctx.fillStyle = 'rgba(0,0,0,' + fade + ')';
-      ctx.fillRect(0, 0, rain.width, rain.height);
-      ctx.font = '14px "IBM Plex Mono", monospace';
-      drops.forEach(function(y, i) {
-        var char = chars[Math.floor(Math.random() * chars.length)];
-        var x = i * 16;
-        ctx.fillStyle = '#E8634A';
-        ctx.fillText(char, x, y * 16);
-        ctx.fillStyle = 'rgba(232,99,74,0.25)';
-        for (var t = 1; t < 4; t++) {
-          ctx.fillText(chars[Math.floor(Math.random() * chars.length)], x, (y - t) * 16);
-        }
-        if (y * 16 > rain.height && Math.random() > 0.97) drops[i] = 0;
-        drops[i] += 0.75;
-      });
-      if (frameCount < maxFrames) {
-        setTimeout(drawRain, 40);
-      } else {
-        rain.style.transition = 'opacity 0.4s ease';
-        rain.style.opacity = '0';
-        setTimeout(function() { rain.remove(); buildAndShowOverlay(); }, 400);
+  window.triggerChaos = function() {
+    if (document.getElementById('rs-cx')) return;
+    var f = document.createElement('div');
+    f.id = 'rs-cx';
+    f.style.cssText = 'position:fixed;inset:0;z-index:9998;background:#E8634A;opacity:0;pointer-events:none;';
+    document.body.appendChild(f);
+    var seq = [0.85, 0, 0.65, 0, 0.9, 0, 0.45, 0], si = 0;
+    (function flick() {
+      if (si >= seq.length) {
+        f.style.opacity = 0;
+        var toast = document.createElement('div');
+        toast.style.cssText = 'position:fixed;top:0;left:0;right:0;z-index:9999;background:#100F16;border-bottom:1px solid rgba(232,99,74,0.4);padding:16px 32px;display:flex;align-items:center;justify-content:space-between;transform:translateY(-100%);transition:transform .35s cubic-bezier(.2,.7,.2,1);pointer-events:none;';
+        toast.innerHTML = '<span style="font-family:\'IBM Plex Mono\',monospace;font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:#E8634A;">GTM Decay Detected</span><span style="font-family:\'IBM Plex Mono\',monospace;font-size:10px;color:rgba(255,255,255,.28);letter-spacing:.1em;">You already knew.</span>';
+        document.body.appendChild(toast);
+        requestAnimationFrame(function() {
+          toast.style.transform = 'translateY(0)';
+          setTimeout(function() {
+            toast.style.transform = 'translateY(-100%)';
+            setTimeout(function() { toast.remove(); f.remove(); }, 350);
+          }, 2800);
+        });
+        return;
       }
-    }
-    drawRain();
-
-    function buildAndShowOverlay() {
-      var overlay = document.createElement('div');
-      overlay.id = 'gtm-diagnosis-overlay';
-      overlay.style.cssText = 'position:fixed;inset:0;background:rgba(250,250,249,0.98);z-index:9999;cursor:default;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:"IBM Plex Mono",monospace;color:#111;padding:48px;overflow:auto;opacity:0;transition:opacity 0.4s ease;';
-      var w = window.innerWidth, h = window.innerHeight;
-      var ua = navigator.userAgent;
-      var device = /Mobile|iPhone|Android/i.test(ua) ? 'Mobile' : 'Desktop';
-      var browser = /Chrome/i.test(ua) ? 'Chrome' : /Safari/i.test(ua) ? 'Safari' : /Firefox/i.test(ua) ? 'Firefox' : /Edge/i.test(ua) ? 'Edge' : 'Unknown';
-      var scrollPct = Math.round((window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100) || 0;
-      var score = Math.floor(Math.random() * 30 + 55);
-      var findings = [
-        { pillar: 'Context', val: Math.floor(Math.random()*40+20)+'%', label: 'Signal-to-noise ratio', status: 'CRITICAL' },
-        { pillar: 'Data', val: Math.floor(Math.random()*60+20)+'%', label: 'CRM record completeness', status: 'AT RISK' },
-        { pillar: 'People', val: (Math.random()*2+0.8).toFixed(2)+'×', label: 'Activity-to-pipeline ratio', status: 'BELOW MEDIAN' },
-        { pillar: 'Technology', val: Math.floor(Math.random()*5+8)+'', label: 'Tools in stack', status: 'UNCONNECTED' },
-      ];
-      var html = '<div style="max-width:680px;width:100%;">';
-      html += '<div style="font-size:9px;letter-spacing:0.2em;color:#E8634A;margin-bottom:24px;">REVSHOPPE · GTM DIAGNOSIS · LIVE SESSION SCAN</div>';
-      html += '<div style="font-size:clamp(18px,3vw,28px);font-family:RocWideMedium,sans-serif;color:#111;margin-bottom:8px;">GTM Diagnosis Complete.</div>';
-      html += '<div style="font-size:13px;color:rgba(0,0,0,0.4);margin-bottom:40px;">Based on your current session. Results are approximate.</div>';
-      html += '<div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:1px;background:rgba(0,0,0,0.05);margin-bottom:32px;border-radius:8px;overflow:hidden;">';
-      [{l:'Device',v:device},{l:'Browser',v:browser},{l:'Viewport',v:w+'×'+h},{l:'Page Read',v:scrollPct+'%'}].forEach(function(s) {
-        html += '<div style="background:rgba(0,0,0,0.03);padding:16px 20px;"><div style="font-size:8px;letter-spacing:0.14em;color:rgba(0,0,0,0.35);text-transform:uppercase;margin-bottom:6px;">'+s.l+'</div><div style="font-size:15px;color:#111;">'+s.v+'</div></div>';
-      });
-      html += '</div><div style="display:flex;flex-direction:column;gap:1px;margin-bottom:32px;">';
-      findings.forEach(function(f) {
-        html += '<div style="display:flex;align-items:center;background:rgba(0,0,0,0.03);padding:14px 20px;border-radius:4px;"><div style="font-size:8px;letter-spacing:0.14em;color:rgba(232,99,74,0.7);text-transform:uppercase;width:90px;flex-shrink:0;">'+f.pillar+'</div><div style="flex:1;font-size:12px;color:rgba(0,0,0,0.5);">'+f.label+'</div><div style="font-size:16px;color:#111;margin:0 20px;">'+f.val+'</div><div style="font-size:8px;letter-spacing:0.1em;color:rgba(232,99,74,0.9);border:1px solid rgba(232,99,74,0.3);padding:3px 8px;border-radius:100px;">'+f.status+'</div></div>';
-      });
-      html += '</div><div style="display:flex;align-items:center;justify-content:space-between;border-top:1px solid rgba(0,0,0,0.08);padding-top:24px;">';
-      html += '<div style="font-size:9px;letter-spacing:0.14em;color:rgba(0,0,0,0.25);text-transform:uppercase;">System operating at '+score+'% of potential</div>';
-      html += '<a href="https://revshoppe.com/contact" style="background:#E8634A;color:#fff;text-decoration:none;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;padding:12px 24px;border-radius:6px;">Book a Real One →</a>';
-      html += '</div><div style="text-align:center;margin-top:28px;font-size:9px;color:rgba(0,0,0,0.2);letter-spacing:0.1em;">PRESS ESC OR CLICK ANYWHERE TO CLOSE</div></div>';
-      overlay.innerHTML = html;
-      document.body.appendChild(overlay);
-      requestAnimationFrame(function() { overlay.style.opacity = '1'; });
-      function close() { overlay.style.opacity = '0'; setTimeout(function() { overlay.remove(); }, 400); }
-      overlay.addEventListener('click', function(e) { if (e.target.closest('a')) return; close(); });
-      document.addEventListener('keydown', function esc(e) { if (e.key === 'Escape') { close(); document.removeEventListener('keydown', esc); } });
-    }
+      f.style.opacity = seq[si++];
+      setTimeout(flick, 80);
+    })();
   };
-
-  window.gtmDiagnosisStart = Date.now();
-
-  var konami = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
-  var konamiIdx = 0;
-  document.addEventListener('keydown', function(e) {
-    if (e.key === konami[konamiIdx]) {
-      konamiIdx++;
-      if (konamiIdx === konami.length) { konamiIdx = 0; triggerDiagnosis(); }
-    } else { konamiIdx = 0; }
-  });
-
-  (function() {
-    var greenDot = document.getElementById('readout-fullscreen-btn');
-    if (greenDot) {
-      greenDot.addEventListener('click', function() { triggerDiagnosis(); });
-    }
-  })();
 
 })();
