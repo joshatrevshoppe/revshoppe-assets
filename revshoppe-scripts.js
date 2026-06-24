@@ -63,68 +63,6 @@
     }, 1200);
   }
 
-  var logoLink = document.querySelector('a.logo');
-  var clickCount = 0;
-  var clickTimer = null;
-
-  if (logoLink && window.location.pathname === '/') {
-logoLink.addEventListener('click', function(e) {
-      e.preventDefault();
-      clickCount++;
-      clearTimeout(clickTimer);
-      if (clickCount < 3) {
-        clickTimer = setTimeout(function() {
-          clickCount = 0;
-          window.location.href = logoLink.href;
-        }, 600);
-        return;
-      }
-
-      if (clickCount >= 3) {
-        clickCount = 0;
-        clearTimeout(clickTimer);
-        var boltImg = logoLink.querySelector('img');
-        var tagline = document.querySelector('.ft-tagline');
-
-        if (boltImg) {
-          boltImg.style.transition = 'filter 0.15s ease, transform 0.15s ease';
-          var flashes = 0;
-          var flash = setInterval(function() {
-            flashes++;
-            boltImg.style.filter = flashes % 2 === 0
-              ? 'brightness(1) drop-shadow(0 0 8px #E8634A)'
-              : 'brightness(2) drop-shadow(0 0 16px #fff)';
-            boltImg.style.transform = flashes % 2 === 0 ? 'scale(1.1)' : 'scale(1)';
-            if (flashes >= 6) {
-              clearInterval(flash);
-              boltImg.style.filter = '';
-              boltImg.style.transform = '';
-            }
-          }, 100);
-        }
-
-        if (tagline) {
-          var orig = tagline.textContent;
-          tagline.style.transition = 'opacity 0.3s ease, color 0.3s ease';
-          tagline.style.opacity = '0';
-          setTimeout(function() {
-            tagline.textContent = 'Charged.';
-            tagline.style.color = '#E8634A';
-            tagline.style.opacity = '1';
-            setTimeout(function() {
-              tagline.style.opacity = '0';
-              setTimeout(function() {
-                tagline.textContent = orig;
-                tagline.style.color = '';
-                tagline.style.opacity = '1';
-              }, 400);
-            }, 2500);
-          }, 300);
-        }
-      }
-    });
-  }
-
   /* ── Stat triple-click easter egg ───────────────────── */
   (function() {
     var seqs = {
