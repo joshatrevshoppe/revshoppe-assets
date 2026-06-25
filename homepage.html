@@ -1003,9 +1003,6 @@ body { margin: 0 !important; padding: 0 !important; background: #15141C; }
       '4.5×': ['5.8×','7.2×','9.1×','11.2×','13.8×'],
       '?':     ['?!','∞','?!','∅','∞']
     };
-    var style = document.createElement('style');
-    style.textContent = '[data-bignum]{cursor:pointer}';
-    document.head.appendChild(style);
     var state = {};
     document.addEventListener('click', function(e) {
       var el = e.target.closest ? e.target.closest('[data-bignum]') : null;
@@ -1082,9 +1079,6 @@ body { margin: 0 !important; padding: 0 !important; background: #15141C; }
         setTimeout(function(){ff=false;},1200);
       }, 30+5*T+80);
     });
-    var style = document.createElement('style');
-    style.textContent = '.loop-node[data-i="4"]{cursor:pointer}';
-    document.head.appendChild(style);
   })();
 
 </script>
