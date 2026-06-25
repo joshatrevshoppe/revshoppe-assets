@@ -999,89 +999,139 @@ body { margin: 0 !important; padding: 0 !important; background: #15141C; }
     window.addEventListener('scroll', handleNavScroll, { passive: true });
   })();
 
-  /* ── Stat triple-click easter egg ───────────────────── */
+  /* ── Stat triple-click → The Readout (Diagnosis) ───────── */
   (function() {
-    var seqs = {
-      '$900K': ['$1.1M','$1.4M','$1.8M','$2.3M','$2.9M'],
-      '70%':   ['74%','79%','85%','91%','97%'],
-      '4.5×': ['5.8×','7.2×','9.1×','11.2×','13.8×'],
-      '?':     ['?!','∞','?!','∅','∞']
-    };
-    var state = {};
+    var n = 0, t = null, on = false;
     document.addEventListener('click', function(e) {
       var el = e.target.closest ? e.target.closest('[data-bignum]') : null;
       if (!el) return;
-      var key = el.getAttribute('data-seq') || el.textContent.trim();
-      if (!state[key]) state[key] = { n: 0, t: null, on: false };
-      var s = state[key];
-      if (s.on) return;
-      s.n++;
-      clearTimeout(s.t);
-      if (s.n < 3) { s.t = setTimeout(function() { s.n = 0; }, 600); return; }
-      s.n = 0; s.on = true;
-      var seq = seqs[key];
-      if (!seq) { s.on = false; return; }
-      var orig = el.textContent.trim();
-      var i = 0;
-      var iv = setInterval(function() {
-        if (i < seq.length) { el.textContent = seq[i++]; }
-        else {
-          clearInterval(iv);
-          el.textContent = 'CRITICAL';
-          el.style.color = '#fff';
-          setTimeout(function() { el.textContent = orig; el.style.color = '#E8634A'; s.on = false; }, 700);
+      if (on) return;
+      n++;
+      clearTimeout(t);
+      if (n < 3) { t = setTimeout(function() { n = 0; }, 600); return; }
+      n = 0; on = true;
+
+      var panel = document.createElement('div');
+      panel.id = 'rs-readout';
+      panel.style.cssText = 'position:fixed;bottom:0;left:0;right:0;z-index:9999;background:#0D0C14;border-top:2px solid rgba(232,99,74,0.55);padding:32px 48px 36px;transform:translateY(100%);transition:transform 0.4s cubic-bezier(0.2,0.8,0.2,1);font-family:"IBM Plex Mono",monospace;';
+      var closeBtn = document.createElement('button');
+      closeBtn.innerHTML = '&times;';
+      closeBtn.style.cssText = 'position:absolute;top:14px;right:20px;background:none;border:none;color:rgba(255,255,255,0.22);font-size:22px;cursor:pointer;line-height:1;padding:0;';
+      panel.appendChild(closeBtn);
+      var pre = document.createElement('div');
+      panel.appendChild(pre);
+      document.body.appendChild(panel);
+      requestAnimationFrame(function() { panel.style.transform = 'translateY(0)'; });
+
+      var lines = [
+        { text: '> Scanning commercial motion...' },
+        { text: '> GTM Decay index:', hi: ' CRITICAL' },
+        { text: '> Revenue at risk:', hi: ' $900K+' },
+        { text: '> Rep output lost:', hi: ' 70%' },
+        { text: '> Recommended:', hi: ' GTM Diagnosis' },
+        { link: '/solutions/gtm-diagnosis', text: '> Schedule your Diagnosis →' }
+      ];
+
+      var autoTimer, lineTimer, i = 0;
+      function nextLine() {
+        if (i >= lines.length) { autoTimer = setTimeout(dismiss, 3500); return; }
+        var l = lines[i++];
+        var row = document.createElement('div');
+        row.style.cssText = 'font-size:12px;line-height:2;letter-spacing:0.07em;color:rgba(255,255,255,0.55);';
+        if (l.link) {
+          var a = document.createElement('a');
+          a.href = l.link; a.textContent = l.text;
+          a.style.cssText = 'color:#E8634A;text-decoration:none;border-bottom:1px solid rgba(232,99,74,0.35);';
+          row.appendChild(a);
+        } else if (l.hi) {
+          var s1 = document.createElement('span'); s1.textContent = l.text;
+          var s2 = document.createElement('span'); s2.textContent = l.hi; s2.style.color = '#E8634A';
+          row.appendChild(s1); row.appendChild(s2);
+        } else {
+          row.textContent = l.text;
         }
-      }, 100);
+        pre.appendChild(row);
+        lineTimer = setTimeout(nextLine, i === 1 ? 550 : 340);
+      }
+      lineTimer = setTimeout(nextLine, 180);
+
+      function dismiss() {
+        clearTimeout(autoTimer); clearTimeout(lineTimer);
+        panel.style.transform = 'translateY(100%)';
+        setTimeout(function() { if (panel.parentNode) panel.parentNode.removeChild(panel); on = false; }, 420);
+      }
+      closeBtn.addEventListener('click', dismiss);
     });
   })();
 
-  /* ── rOS node fast-forward easter egg ───────────────── */
+  /* ── rOS node → Loop Takeover (chaos → order) ───────── */
   (function() {
-    var ff = false;
+    var running = false;
     document.addEventListener('click', function(e) {
-      var target = e.target;
-      var rosNode = null;
+      var target = e.target, rosNode = null;
       while (target && target !== document) {
         if (target.classList && target.classList.contains('loop-node') && target.getAttribute('data-i') === '4') {
           rosNode = target; break;
         }
         target = target.parentNode;
       }
-      if (!rosNode) return;
-      if (ff) return;
+      if (!rosNode || running) return;
       var stage = document.getElementById('loop-stage');
       if (!stage) return;
-      ff = true;
-      var nodes = Array.from(stage.querySelectorAll('.loop-node')).sort(function(a,b){return +a.getAttribute('data-i') - +b.getAttribute('data-i');});
-      var edges = Array.from(stage.querySelectorAll('.loop-edge')).sort(function(a,b){return +a.getAttribute('data-i') - +b.getAttribute('data-i');});
-      nodes.forEach(function(g) {
-        var ring=g.querySelector('.ring'),dot=g.querySelector('.dot'),halo=g.querySelector('.halo'),labs=g.querySelectorAll('.nlab');
-        if(ring){ring.style.transition='none';ring.style.stroke='rgba(255,255,255,0.3)';}
-        if(halo){halo.style.transition='none';halo.style.opacity='0';}
-        if(dot){dot.style.transition='none';dot.style.opacity='0';dot.style.animation='none';}
-        labs.forEach(function(l){l.style.transition='none';l.style.fill='rgba(255,255,255,0.4)';});
-      });
-      edges.forEach(function(edge){edge.style.transition='none';edge.style.strokeDashoffset='100';});
-      var T = 55;
-      nodes.forEach(function(n) {
-        setTimeout(function() {
-          var ring=n.querySelector('.ring'),dot=n.querySelector('.dot'),halo=n.querySelector('.halo'),labs=n.querySelectorAll('.nlab');
-          if(ring){ring.style.transition='stroke 0.1s';ring.style.stroke='#E8634A';}
-          if(halo){halo.style.transition='opacity 0.12s';halo.style.opacity='0.4';}
-          if(dot){dot.style.transition='opacity 0.1s';dot.style.opacity='1';}
-          labs.forEach(function(l){l.style.transition='fill 0.1s';l.style.fill='#fff';});
-        }, 30 + (+n.getAttribute('data-i')) * T);
-      });
-      edges.forEach(function(edge) {
-        var i = +edge.getAttribute('data-i');
-        setTimeout(function(){edge.style.transition='stroke-dashoffset 0.15s ease';edge.style.strokeDashoffset='0';}, 30+(i<4?i*T+30:5*T));
-      });
+      running = true;
+
+      var nodes = Array.from(stage.querySelectorAll('.loop-node')).sort(function(a,b){return +a.getAttribute('data-i')-+b.getAttribute('data-i');});
+      var edges = Array.from(stage.querySelectorAll('.loop-edge')).sort(function(a,b){return +a.getAttribute('data-i')-+b.getAttribute('data-i');});
+
+      /* Phase 1 — chaos: random flicker 1.4s */
+      var chaos = setInterval(function() {
+        nodes.forEach(function(nd) {
+          var r = Math.random();
+          var ring=nd.querySelector('.ring'),dot=nd.querySelector('.dot'),halo=nd.querySelector('.halo');
+          if(ring){ring.style.transition='none';ring.style.stroke=r>0.5?'#E8634A':'rgba(255,255,255,0.15)';}
+          if(dot){dot.style.transition='none';dot.style.opacity=r>0.55?'1':'0';}
+          if(halo){halo.style.transition='none';halo.style.opacity=r>0.7?'0.5':'0';}
+        });
+        edges.forEach(function(edge){edge.style.transition='none';edge.style.strokeDashoffset=Math.random()>0.5?'0':'100';});
+      }, 110);
+
       setTimeout(function() {
-        var dot=rosNode.querySelector('.dot'),halo=rosNode.querySelector('.halo');
-        if(dot){dot.style.animation='rs-pulse 0.55s ease';}
-        if(halo){halo.style.opacity='0.8';setTimeout(function(){halo.style.opacity='0.4';},300);}
-        setTimeout(function(){ff=false;},1200);
-      }, 30+5*T+80);
+        clearInterval(chaos);
+
+        /* snap all to dim */
+        nodes.forEach(function(g) {
+          var ring=g.querySelector('.ring'),dot=g.querySelector('.dot'),halo=g.querySelector('.halo'),labs=g.querySelectorAll('.nlab');
+          if(ring){ring.style.transition='none';ring.style.stroke='rgba(255,255,255,0.15)';}
+          if(halo){halo.style.transition='none';halo.style.opacity='0';}
+          if(dot){dot.style.transition='none';dot.style.opacity='0';dot.style.animation='none';}
+          labs.forEach(function(l){l.style.transition='none';l.style.fill='rgba(255,255,255,0.35)';});
+        });
+        edges.forEach(function(edge){edge.style.transition='none';edge.style.strokeDashoffset='100';});
+
+        /* Phase 2 — order: clean sequential light-up */
+        var T = 170;
+        nodes.forEach(function(nd) {
+          setTimeout(function() {
+            var ring=nd.querySelector('.ring'),dot=nd.querySelector('.dot'),halo=nd.querySelector('.halo'),labs=nd.querySelectorAll('.nlab');
+            if(ring){ring.style.transition='stroke 0.28s';ring.style.stroke='#E8634A';}
+            if(halo){halo.style.transition='opacity 0.28s';halo.style.opacity='0.4';}
+            if(dot){dot.style.transition='opacity 0.22s';dot.style.opacity='1';}
+            labs.forEach(function(l){l.style.transition='fill 0.22s';l.style.fill='#fff';});
+          }, 60+(+nd.getAttribute('data-i'))*T);
+        });
+        edges.forEach(function(edge){
+          var ei=+edge.getAttribute('data-i');
+          setTimeout(function(){edge.style.transition='stroke-dashoffset 0.32s ease';edge.style.strokeDashoffset='0';},60+(ei<4?ei*T+60:5*T));
+        });
+
+        /* Phase 3 — rOS mega-pulse */
+        setTimeout(function() {
+          var dot=rosNode.querySelector('.dot'),halo=rosNode.querySelector('.halo');
+          if(halo){halo.style.transition='opacity 0.15s';halo.style.opacity='1';}
+          if(dot){dot.style.animation='rs-pulse 0.75s ease';}
+          setTimeout(function(){if(halo)halo.style.opacity='0.4';setTimeout(function(){running=false;},900);},700);
+        }, 60+5*T+140);
+      }, 1400);
     });
   })();
 
