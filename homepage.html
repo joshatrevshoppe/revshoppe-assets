@@ -542,11 +542,11 @@ body { margin: 0 !important; padding: 0 !important; background: #15141C; }
           </g>
           <g font-family="IBM Plex Mono, monospace" font-size="10" letter-spacing="0.08em" fill="rgba(255,255,255,0.7)" text-anchor="middle">
             <circle cx="470" cy="116" r="8" fill="#100F16"/><circle cx="470" cy="116" r="4.5" fill="#E8634A"/>
-            <text x="470" y="100">CENTER OF EXC.</text>
+            <text x="470" y="92">CENTER OF<tspan x="470" dy="13">EXCELLENCE</tspan></text>
             <circle cx="585" cy="116" r="8" fill="#100F16"/><circle cx="585" cy="116" r="4.5" fill="#E8634A"/>
-            <text x="585" y="100">RHYTHM OF REV.</text>
+            <text x="585" y="92">RHYTHM OF<tspan x="585" dy="13">REVENUE</tspan></text>
             <circle cx="700" cy="116" r="8" fill="#100F16"/><circle cx="700" cy="116" r="4.5" fill="#E8634A"/>
-            <text x="700" y="100">WF GOVERNANCE</text>
+            <text x="700" y="92">WORKFLOW<tspan x="700" dy="13">GOVERNANCE</tspan></text>
           </g>
           <!-- GTM Infrastructure left -->
           <text x="120" y="170" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" letter-spacing="0.14em" fill="rgba(255,255,255,0.45)">GTM INFRASTRUCTURE</text>
@@ -632,7 +632,6 @@ body { margin: 0 !important; padding: 0 !important; background: #15141C; }
         <div data-reveal style="background:#fff; border:1px solid rgba(26,24,32,0.1); border-left:3px solid #E8634A; border-radius:10px; padding:28px 26px; box-shadow:0 1px 2px rgba(0,0,0,.04),0 8px 22px rgba(0,0,0,.05);">
           <div style="font-family:var(--f-display); font-weight:500; font-size:clamp(48px,5vw,64px); line-height:0.85; letter-spacing:-0.03em; color:#1A1820;">+61%</div>
           <div style="font-family:var(--f-body); font-size:14.5px; color:#4B4956; margin-top:16px; line-height:1.5;">SQLs from the same headcount</div>
-          <div style="font-family:var(--f-mono); font-size:9.5px; letter-spacing:0.1em; text-transform:uppercase; color:#9b988f; margin-top:16px;">PLG infrastructure · mid-market</div>
         </div>
       </div>
 
@@ -994,6 +993,98 @@ body { margin: 0 !important; padding: 0 !important; background: #15141C; }
       nav.style.transform = y > foldBottom ? 'translateY(-100%)' : 'translateY(0)';
     }
     window.addEventListener('scroll', handleNavScroll, { passive: true });
+  })();
+
+  /* ── Stat triple-click easter egg ───────────────────── */
+  (function() {
+    var seqs = {
+      '$900K': ['$1.1M','$1.4M','$1.8M','$2.3M','$2.9M'],
+      '70%':   ['74%','79%','85%','91%','97%'],
+      '4.5×': ['5.8×','7.2×','9.1×','11.2×','13.8×'],
+      '?':     ['?!','∞','?!','∅','∞']
+    };
+    var style = document.createElement('style');
+    style.textContent = '[data-bignum]{cursor:pointer}';
+    document.head.appendChild(style);
+    var state = {};
+    document.addEventListener('click', function(e) {
+      var el = e.target.closest ? e.target.closest('[data-bignum]') : null;
+      if (!el) return;
+      var key = el.getAttribute('data-seq') || el.textContent.trim();
+      if (!state[key]) state[key] = { n: 0, t: null, on: false };
+      var s = state[key];
+      if (s.on) return;
+      s.n++;
+      clearTimeout(s.t);
+      if (s.n < 3) { s.t = setTimeout(function() { s.n = 0; }, 600); return; }
+      s.n = 0; s.on = true;
+      var seq = seqs[key];
+      if (!seq) { s.on = false; return; }
+      var orig = el.textContent.trim();
+      var i = 0;
+      var iv = setInterval(function() {
+        if (i < seq.length) { el.textContent = seq[i++]; }
+        else {
+          clearInterval(iv);
+          el.textContent = 'CRITICAL';
+          el.style.color = '#fff';
+          setTimeout(function() { el.textContent = orig; el.style.color = '#E8634A'; s.on = false; }, 700);
+        }
+      }, 100);
+    });
+  })();
+
+  /* ── rOS node fast-forward easter egg ───────────────── */
+  (function() {
+    var ff = false;
+    document.addEventListener('click', function(e) {
+      var target = e.target;
+      var rosNode = null;
+      while (target && target !== document) {
+        if (target.classList && target.classList.contains('loop-node') && target.getAttribute('data-i') === '4') {
+          rosNode = target; break;
+        }
+        target = target.parentNode;
+      }
+      if (!rosNode) return;
+      if (ff) return;
+      var stage = document.getElementById('loop-stage');
+      if (!stage) return;
+      ff = true;
+      var nodes = Array.from(stage.querySelectorAll('.loop-node')).sort(function(a,b){return +a.getAttribute('data-i') - +b.getAttribute('data-i');});
+      var edges = Array.from(stage.querySelectorAll('.loop-edge')).sort(function(a,b){return +a.getAttribute('data-i') - +b.getAttribute('data-i');});
+      nodes.forEach(function(g) {
+        var ring=g.querySelector('.ring'),dot=g.querySelector('.dot'),halo=g.querySelector('.halo'),labs=g.querySelectorAll('.nlab');
+        if(ring){ring.style.transition='none';ring.style.stroke='rgba(255,255,255,0.3)';}
+        if(halo){halo.style.transition='none';halo.style.opacity='0';}
+        if(dot){dot.style.transition='none';dot.style.opacity='0';dot.style.animation='none';}
+        labs.forEach(function(l){l.style.transition='none';l.style.fill='rgba(255,255,255,0.4)';});
+      });
+      edges.forEach(function(edge){edge.style.transition='none';edge.style.strokeDashoffset='100';});
+      var T = 55;
+      nodes.forEach(function(n) {
+        setTimeout(function() {
+          var ring=n.querySelector('.ring'),dot=n.querySelector('.dot'),halo=n.querySelector('.halo'),labs=n.querySelectorAll('.nlab');
+          if(ring){ring.style.transition='stroke 0.1s';ring.style.stroke='#E8634A';}
+          if(halo){halo.style.transition='opacity 0.12s';halo.style.opacity='0.4';}
+          if(dot){dot.style.transition='opacity 0.1s';dot.style.opacity='1';}
+          labs.forEach(function(l){l.style.transition='fill 0.1s';l.style.fill='#fff';});
+        }, 30 + (+n.getAttribute('data-i')) * T);
+      });
+      edges.forEach(function(edge) {
+        var i = +edge.getAttribute('data-i');
+        setTimeout(function(){edge.style.transition='stroke-dashoffset 0.15s ease';edge.style.strokeDashoffset='0';}, 30+(i<4?i*T+30:5*T));
+      });
+      setTimeout(function() {
+        var dot=rosNode.querySelector('.dot'),halo=rosNode.querySelector('.halo');
+        if(dot){dot.style.animation='rs-pulse 0.55s ease';}
+        if(halo){halo.style.opacity='0.8';setTimeout(function(){halo.style.opacity='0.4';},300);}
+        setTimeout(function(){ff=false;},1200);
+      }, 30+5*T+80);
+    });
+    var style = document.createElement('style');
+    style.textContent = '.loop-node[data-i="4"]{cursor:pointer}';
+    document.head.appendChild(style);
   })();
 
 </script>
