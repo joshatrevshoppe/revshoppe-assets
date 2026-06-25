@@ -71,6 +71,10 @@ body { margin: 0 !important; padding: 0 !important; background: #15141C; }
   transform: translateY(0);
 }
 
+/* ── Easter egg — no cursor hints ───────────────── */
+.rs-home [data-bignum] { cursor: default; user-select: none; }
+.rs-home #loop-stage text { cursor: default; }
+
 /* ── Responsive ──────────────────────────────────────── */
 @media (max-width: 900px) {
   .rs-home [data-sec]       { padding: 88px 24px !important; }
