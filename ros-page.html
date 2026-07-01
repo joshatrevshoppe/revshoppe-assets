@@ -143,32 +143,17 @@
   border:1px solid var(--hl); padding:4px 10px; border-radius:3px;
 }
 
-/* Sec 06: Cadence */
-.rs-ros .ros-cadence-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:14px; margin-top:56px; }
-.rs-ros .ros-cadence-card {
-  background:#fff; border:1px solid var(--hl); border-radius:10px;
-  padding:36px 40px;
-  box-shadow:0 1px 2px rgba(0,0,0,0.04), 0 8px 22px rgba(0,0,0,0.05);
-}
-.rs-ros .ros-cadence-label {
-  font-family:var(--f-mono); font-size:10px; letter-spacing:0.18em;
-  text-transform:uppercase; color:var(--coral); margin-bottom:12px;
-}
-.rs-ros .ros-cadence-name {
-  font-family:var(--f-display); font-weight:500; font-size:20px;
-  letter-spacing:-0.01em; color:var(--ink); margin-bottom:20px;
-}
-.rs-ros .ros-cadence-items { list-style:none; display:flex; flex-direction:column; gap:12px; }
-.rs-ros .ros-cadence-item {
-  font-family:var(--f-body); font-size:14px; line-height:1.68;
-  font-weight:300; color:var(--gray); padding-left:16px; position:relative;
-}
-.rs-ros .ros-cadence-item::before {
-  content:""; position:absolute; left:0; top:8px;
-  width:5px; height:5px; border-radius:50%; background:var(--coral);
-}
-.rs-ros .ros-cadence-full { grid-column:1/-1; }
-.rs-ros .ros-cadence-2col { display:grid; grid-template-columns:repeat(2,1fr); gap:12px 48px; }
+/* Sec 06: Manifest */
+.rs-ros .ros-manifest { margin-top:56px; border:1px solid var(--hl); border-radius:10px; overflow:hidden; background:#fff; box-shadow:0 1px 2px rgba(0,0,0,0.04), 0 8px 22px rgba(0,0,0,0.05); }
+.rs-ros .ros-manifest-head { display:grid; grid-template-columns:160px 1fr; padding:12px 28px; border-bottom:1px solid var(--hl); background:rgba(26,24,32,0.04); }
+.rs-ros .ros-manifest-col { font-family:var(--f-mono); font-size:9px; letter-spacing:0.2em; text-transform:uppercase; color:rgba(26,24,32,0.35); }
+.rs-ros .ros-manifest-block { display:grid; grid-template-columns:160px 1fr; border-bottom:1px solid var(--hl); }
+.rs-ros .ros-manifest-block:last-child { border-bottom:none; }
+.rs-ros .ros-manifest-freq { padding:26px 28px; border-right:1px solid var(--hl); font-family:var(--f-mono); font-size:11px; letter-spacing:0.18em; text-transform:uppercase; color:var(--coral); }
+.rs-ros .ros-manifest-tasks { padding:0; }
+.rs-ros .ros-manifest-task { display:flex; gap:14px; align-items:flex-start; padding:18px 28px; border-bottom:1px solid var(--hl); font-family:var(--f-mono); font-size:12px; line-height:1.65; color:var(--gray); }
+.rs-ros .ros-manifest-task:last-child { border-bottom:none; }
+.rs-ros .ros-manifest-task::before { content:"→"; color:var(--coral); flex-shrink:0; font-size:11px; margin-top:2px; }
 
 /* Responsive */
 @media (max-width:900px) {
@@ -181,8 +166,11 @@
   .rs-ros .ros-pillar-grid       { grid-template-columns:1fr !important; }
   .rs-ros .ros-comp              { grid-template-columns:1fr !important; gap:16px !important; padding:28px 24px !important; }
   .rs-ros .ros-comp-num          { font-size:40px !important; }
-  .rs-ros .ros-cadence-grid      { grid-template-columns:1fr !important; }
-  .rs-ros .ros-cadence-2col      { grid-template-columns:1fr !important; }
+  .rs-ros .ros-manifest-head     { grid-template-columns:1fr !important; }
+  .rs-ros .ros-manifest-head .ros-manifest-col:last-child { display:none; }
+  .rs-ros .ros-manifest-block    { grid-template-columns:1fr !important; }
+  .rs-ros .ros-manifest-freq     { border-right:none !important; border-bottom:1px solid var(--hl) !important; padding:16px 20px !important; }
+  .rs-ros .ros-manifest-task     { padding:14px 20px !important; }
 }
 </style>
 </head>
@@ -293,9 +281,9 @@
 <!-- 04 THREE MECHANISMS -->
 <section data-sec style="position:relative; background:#FAFAF9; padding:130px 56px;">
   <div style="max-width:1180px; margin:0 auto;">
-    <div data-rv style="font-family:var(--f-mono); font-size:12px; letter-spacing:0.24em; text-transform:uppercase; color:#E8634A; margin-bottom:24px;">How rOS Works</div>
-    <h2 data-rv style="font-family:var(--f-display); font-weight:500; font-size:clamp(26px,3vw,46px); line-height:0.98; letter-spacing:-0.022em; color:#1A1820; max-width:22ch; margin:0 0 24px;">Not a check-in. A set of functions, each owning a different failure mode.</h2>
-    <p data-rv style="font-family:var(--f-body); font-size:17px; line-height:1.72; font-weight:300; color:#4B4956; max-width:62ch; margin:0 0 8px;">Most GTM engagements end at delivery with well-built workflows and no mechanism to keep them current. Reps who aren't trained on what was built execute around it. Workflows that aren't reviewed regularly run on stale assumptions. Systems without active ownership drift the moment something in the environment changes. rOS runs three mechanisms in parallel, each owning a different part of that problem.</p>
+    <div data-rv style="font-family:var(--f-mono); font-size:12px; letter-spacing:0.24em; text-transform:uppercase; color:#E8634A; margin-bottom:24px;">The Mechanisms</div>
+    <h2 data-rv style="font-family:var(--f-display); font-weight:500; font-size:clamp(26px,3vw,46px); line-height:0.98; letter-spacing:-0.022em; color:#1A1820; max-width:22ch; margin:0 0 24px;">Leave the rOS ungoverned and it decays. Three mechanisms prevent that.</h2>
+    <p data-rv style="font-family:var(--f-body); font-size:17px; line-height:1.72; font-weight:300; color:#4B4956; max-width:62ch; margin:0 0 8px;">rOS isn't self-maintaining. The infrastructure degrades as the market moves. Workflows drift as buying behavior shifts. The system that ran cleanly in Q1 runs on stale assumptions by Q3 if nobody's watching. Three mechanisms keep that from happening — each one owning a specific failure mode.</p>
 
     <div class="ros-comp-grid">
       <div class="ros-comp" data-rv>
@@ -424,41 +412,41 @@
     <h2 data-rv style="font-family:var(--f-display); font-weight:500; font-size:clamp(26px,3vw,46px); line-height:0.98; letter-spacing:-0.022em; color:#1A1820; max-width:22ch; margin:0 0 24px;">What governance actually looks like, quarter by quarter.</h2>
     <p data-rv style="font-family:var(--f-body); font-size:17px; line-height:1.72; font-weight:300; color:#4B4956; max-width:62ch; margin:0 0 8px;">Not partnership language. Not "we'll be available if you need us." The following is what rOS covers — the specific functions RevShoppe owns, on a defined cadence, so the commercial motion doesn't have to depend on someone noticing a problem before it reaches the pipeline.</p>
 
-    <div class="ros-cadence-grid">
-      <div class="ros-cadence-card" data-rv>
-        <div class="ros-cadence-label">Cadence</div>
-        <div class="ros-cadence-name">Weekly</div>
-        <ul class="ros-cadence-items">
-          <li class="ros-cadence-item">Workflow performance review — which workflows are firing, what's converting, where the drop-off is and what it's pointing to</li>
-          <li class="ros-cadence-item">Signal source health check — are the triggers accurate, are the weights still calibrated to current buying behavior</li>
-          <li class="ros-cadence-item">Rep feedback capture — what the execution layer is surfacing that the data layer hasn't caught yet</li>
-        </ul>
+    <div class="ros-manifest" data-rv>
+      <div class="ros-manifest-head">
+        <span class="ros-manifest-col">Cadence</span>
+        <span class="ros-manifest-col">Function</span>
       </div>
-      <div class="ros-cadence-card" data-rv data-rv-d1>
-        <div class="ros-cadence-label">Cadence</div>
-        <div class="ros-cadence-name">Monthly</div>
-        <ul class="ros-cadence-items">
-          <li class="ros-cadence-item">Context audit — ICP profiles, battle cards, and signal definitions reviewed against current market reality</li>
-          <li class="ros-cadence-item">Workflow optimization — sequence design, prompt architecture, and routing logic updated based on the month's performance data</li>
-          <li class="ros-cadence-item">New hire integration — any rep or manager who joined in the last thirty days brought into the system correctly</li>
-        </ul>
+      <div class="ros-manifest-block">
+        <div class="ros-manifest-freq">Weekly</div>
+        <div class="ros-manifest-tasks">
+          <div class="ros-manifest-task">Workflow performance review — which workflows are firing, what's converting, where the drop-off is and what it's pointing to</div>
+          <div class="ros-manifest-task">Signal source health check — are the triggers accurate, are the weights still calibrated to current buying behavior</div>
+          <div class="ros-manifest-task">Rep feedback capture — what the execution layer is surfacing that the data layer hasn't caught yet</div>
+        </div>
       </div>
-      <div class="ros-cadence-card" data-rv data-rv-d1>
-        <div class="ros-cadence-label">Cadence</div>
-        <div class="ros-cadence-name">Quarterly</div>
-        <ul class="ros-cadence-items">
-          <li class="ros-cadence-item">Full pillar review — all four pillars assessed against current state, prioritized remediation list built</li>
-          <li class="ros-cadence-item">Workflow roadmap — which new workflows to scope next, based on Diagnosis signals and where the commercial motion is expanding</li>
-          <li class="ros-cadence-item">Performance readout — what the system produced, what changed in the quarter, what Q+1 looks like</li>
-        </ul>
+      <div class="ros-manifest-block">
+        <div class="ros-manifest-freq">Monthly</div>
+        <div class="ros-manifest-tasks">
+          <div class="ros-manifest-task">Context audit — ICP profiles, battle cards, and signal definitions reviewed against current market reality</div>
+          <div class="ros-manifest-task">Workflow optimization — sequence design, prompt architecture, and routing logic updated based on the month's performance data</div>
+          <div class="ros-manifest-task">New hire integration — any rep or manager who joined in the last thirty days brought into the system correctly</div>
+        </div>
       </div>
-      <div class="ros-cadence-card ros-cadence-full" data-rv data-rv-d2>
-        <div class="ros-cadence-label">Always On</div>
-        <div class="ros-cadence-name">Continuously</div>
-        <ul class="ros-cadence-items ros-cadence-2col">
-          <li class="ros-cadence-item">Workflow Governance — no change touches a live workflow without RevShoppe in the loop</li>
-          <li class="ros-cadence-item">Technology monitoring — platform changes tracked so configuration drift gets caught before it affects pipeline</li>
-        </ul>
+      <div class="ros-manifest-block">
+        <div class="ros-manifest-freq">Quarterly</div>
+        <div class="ros-manifest-tasks">
+          <div class="ros-manifest-task">Full pillar review — all four pillars assessed against current state, prioritized remediation list built</div>
+          <div class="ros-manifest-task">Workflow roadmap — which new workflows to scope next, based on Diagnosis signals and where the commercial motion is expanding</div>
+          <div class="ros-manifest-task">Performance readout — what the system produced, what changed in the quarter, what Q+1 looks like</div>
+        </div>
+      </div>
+      <div class="ros-manifest-block">
+        <div class="ros-manifest-freq">Always On</div>
+        <div class="ros-manifest-tasks">
+          <div class="ros-manifest-task">Workflow Governance — no change touches a live workflow without RevShoppe in the loop</div>
+          <div class="ros-manifest-task">Technology monitoring — platform changes tracked so configuration drift gets caught before it affects pipeline</div>
+        </div>
       </div>
     </div>
   </div>
@@ -479,7 +467,7 @@
   <div style="max-width:1180px; margin:0 auto; position:relative; z-index:2;">
     <div data-rv style="font-family:var(--f-mono); font-size:12px; letter-spacing:0.24em; text-transform:uppercase; color:#E8634A; margin-bottom:24px;">Solutions &middot; Revenue Operating System</div>
     <h2 data-rv style="font-family:var(--f-display); font-weight:500; font-size:clamp(34px,4vw,60px); line-height:0.94; letter-spacing:-0.025em; color:#fff; max-width:16ch; margin:0 0 28px;">Where it lands and stays.</h2>
-    <p data-rv style="font-family:var(--f-body); font-size:clamp(16px,1.5vw,20px); line-height:1.65; font-weight:300; color:rgba(255,255,255,0.55); max-width:50ch; margin:0 0 48px;">The homepage says RevShoppe doesn't hand it back. rOS is what that guarantee looks like in practice. A governed operating system running continuously behind every workflow, catching decay in the pillars before it reaches the motion and drift in the motion before it reaches the pipeline. If your GTM Workflows are live and you're thinking about what ownership looks like after the build, the answer is that the build doesn't end.</p>
+    <p data-rv style="font-family:var(--f-body); font-size:clamp(16px,1.5vw,20px); line-height:1.65; font-weight:300; color:rgba(255,255,255,0.55); max-width:50ch; margin:0 0 48px;">An ungoverned GTM system decays. Context goes stale. Data ages. The team turns over. Platforms drift. rOS is the operating system that catches all of it — running continuously behind every workflow, catching decay in the pillars before it reaches the motion and drift in the motion before it reaches the pipeline. The build doesn't end.</p>
     <a data-rv href="https://www.revshoppe.com/contact" class="ros-btn ros-btn-coral ros-btn-lg">Book a Call</a>
   </div>
 </section>
