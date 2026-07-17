@@ -81,6 +81,8 @@ body{font-family:var(--f-body);background:#fff;color:var(--dark);-webkit-font-sm
 .rp-cta-h2{font-family:var(--f-display);font-weight:500;font-size:clamp(30px,4vw,56px);line-height:0.95;letter-spacing:-0.025em;color:#fff;max-width:18ch;margin:0 auto 20px;}
 .rp-cta-sub{font-size:17px;line-height:1.65;color:rgba(255,255,255,0.5);max-width:52ch;margin:0 auto 36px;}
 
+.rp-chart-band{margin:40px -48px 56px;background:var(--dark);padding:48px;overflow-x:auto;}
+
 @media(max-width:900px){
   .rp-hero{padding:90px 24px 100px;}
   .rp-hero-grid{grid-template-columns:1fr;}
@@ -91,6 +93,7 @@ body{font-family:var(--f-body);background:#fff;color:var(--dark);-webkit-font-sm
   .rp-stats{grid-template-columns:1fr;gap:0;}
   .rp-cta-sec{padding:80px 24px;}
   .rp-wrap{padding:0 24px;}
+  .rp-chart-band{margin:32px -24px 40px;padding:32px 24px;}
 }
 </style>
 </head>
@@ -125,7 +128,7 @@ body{font-family:var(--f-body);background:#fff;color:var(--dark);-webkit-font-sm
   <div class="rp-wrap">
     <div class="rp-sec-label">What the forecast gap actually reflects</div>
     <h2 class="rp-h2">The commit-to-close gap is rarely a Clari problem.</h2>
-    <div style="overflow-x:auto;margin:32px 0 48px;border-radius:10px;overflow:hidden;box-shadow:0 8px 40px -8px rgba(26,24,32,0.22), 0 0 0 1px rgba(26,24,32,0.08);"><svg viewBox="0 0 900 480" width="100%" style="display:block;max-width:900px;" xmlns="http://www.w3.org/2000/svg">
+    <div class="rp-chart-band"><svg viewBox="0 0 900 480" width="100%" style="display:block;max-width:900px;" xmlns="http://www.w3.org/2000/svg">
   <rect width="900" height="480" fill="#1A1820"></rect>
   <line x1="70" y1="380" x2="770" y2="380" stroke="rgba(255,255,255,0.08)" stroke-width="1"></line>
     <text x="55" y="384" text-anchor="end" font-family="'IBM Plex Mono', 'SF Mono', Menlo, monospace" font-size="11" fill="rgba(255,255,255,0.4)">$80M</text>
