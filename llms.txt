@@ -23,6 +23,7 @@
 
 - [Outreach Partner](https://www.revshoppe.com/partners/outreach): RevShoppe builds, governs, and optimizes Outreach deployments inside AI-native GTM Workflows for enterprise revenue teams.
 - [Salesloft Partner](https://www.revshoppe.com/partners/salesloft): RevShoppe builds, governs, and optimizes Salesloft deployments inside AI-native GTM Workflows for enterprise revenue teams.
+- [Gong Partner](https://www.revshoppe.com/partners/gong): RevShoppe wires Gong conversation intelligence into the GTM Infrastructure Context Layer, translating call data into workflow inputs that improve rep behavior over time.
 - [Clari Partner](https://www.revshoppe.com/partners/clari): RevShoppe implements and governs Clari within GTM Infrastructure to improve forecast accuracy and pipeline visibility.
 - Anthropic Solutions Partner (Applied): RevShoppe is an Anthropic solutions partner. Claude-powered workflows are the primary AI deployment vehicle.
 
