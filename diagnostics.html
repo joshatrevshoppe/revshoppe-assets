@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="rs-page" content="diagnostics">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GTM Decay Diagnostics — RevShoppe</title>
+<link rel="preload" href="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/67dea6a57df5c619dba13468_RocGroteskWide-Medium.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/67dea6a54f0aa4e3e2f1f6e8_RocGroteskWide-Light.woff2" as="font" type="font/woff2" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+@font-face {
+  font-family: "RocWideMedium";
+  src: url("https://cdn.prod.website-files.com/61f825b46abaae2807007e90/67dea6a57df5c619dba13468_RocGroteskWide-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "RocWideLight";
+  src: url("https://cdn.prod.website-files.com/61f825b46abaae2807007e90/67dea6a54f0aa4e3e2f1f6e8_RocGroteskWide-Light.woff2") format("woff2");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg-light:     #FAFAF9;
+  --bg-dark:      #26242F;
+  --accent:       #E8634A;
+  --accent-hover: #F0745C;
+  --headline:     #111111;
+  --body:         #8F95A0;
+}
+
+.diag-wrap { -webkit-font-smoothing: antialiased; }
+
+.sec-dark {
+  background-color: #26242F;
+  background-image: radial-gradient(circle, rgba(255,255,255,0.045) 1px, transparent 1.2px);
+  background-size: 22px 22px;
+}
+.sec-light { background: #FAFAF9; }
+
+/* ── LAYOUT ── */
+.section { padding: 96px 48px; }
+.section-inner { max-width: 1080px; margin: 0 auto; }
+
+/* ── TYPE ── */
+.eyebrow {
+  display: inline-block;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 28px;
+}
+.sec-label {
+  display: block;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 20px;
+}
+.sec-h2 {
+  font-family: "RocWideMedium", sans-serif;
+  font-size: clamp(28px, 3.8vw, 48px);
+  line-height: 1.08;
+  letter-spacing: -1.5px;
+  color: var(--headline);
+  margin-bottom: 16px;
+}
+.sec-h2-white { color: #fff; }
+.sec-sub {
+  font-family: "Montserrat", sans-serif;
+  font-size: 16px;
+  color: var(--body);
+  line-height: 1.8;
+  max-width: 600px;
+  letter-spacing: -0.3px;
+}
+.sec-sub-white { color: rgba(255,255,255,0.45); }
+
+/* ── HERO ── */
+.hero {
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  padding: 80px 48px 72px;
+  position: relative; z-index: 0;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -120px; left: 50%;
+  transform: translateX(-50%);
+  width: 800px; height: 800px;
+  background: radial-gradient(circle, rgba(232,99,74,0.08) 0%, transparent 70%);
+  pointer-events: none; z-index: 0;
+}
+.hero-inner { max-width: 1080px; margin: 0 auto; position: relative; z-index: 1; width: 100%; }
+.hero-layout { display: flex; gap: 64px; align-items: center; }
+.hero-copy { flex: 1; min-width: 0; }
+.hero h1 {
+  font-family: "RocWideMedium", sans-serif;
+  font-size: clamp(36px, 4.2vw, 60px);
+  line-height: 1.04;
+  letter-spacing: -2px;
+  color: #fff;
+  margin-bottom: 24px;
+}
+.hero-lead {
+  font-family: "RocWideLight", sans-serif;
+  font-size: 17px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.62);
+  line-height: 1.6;
+  max-width: 560px;
+}
+
+/* ── HERO FORM CARD ── */
+.hero-form-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 10px;
+  padding: 32px;
+  flex-shrink: 0;
+  width: 340px;
+}
+.hero-form-card .form-eyebrow {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 16px;
+  display: block;
+}
+.hero-form-card .form-headline {
+  font-family: "RocWideMedium", sans-serif;
+  font-weight: 500;
+  font-size: 22px;
+  letter-spacing: -0.01em;
+  color: #fff;
+  line-height: 1.18;
+  margin-bottom: 22px;
+}
+.hero-form-card .rs-field {
+  display: block;
+  width: 100%;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 6px;
+  padding: 14px 16px;
+  color: #fff;
+  font-family: "Montserrat", sans-serif;
+  font-size: 14px;
+  margin-bottom: 12px;
+  box-sizing: border-box;
+  transition: border-color 0.2s;
+}
+.hero-form-card .rs-field::placeholder { color: rgba(255,255,255,0.32); }
+.hero-form-card .rs-field:focus { outline: none; border-color: var(--accent); }
+.hero-form-card .btn-form {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  padding: 15px 26px;
+  border-radius: 4px;
+  background: var(--accent);
+  color: #fff;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  transition: background 0.18s, transform 0.18s;
+}
+.hero-form-card .btn-form:hover { background: var(--accent-hover); transform: translateY(-2px); }
+.hero-form-card .form-footer {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.28);
+  text-align: center;
+  margin-top: 14px;
+}
+
+/* ── SERIES LABEL ── */
+.series-rule {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  border-bottom: 1px solid rgba(26,24,32,0.10);
+  padding-bottom: 22px;
+  margin-bottom: 48px;
+}
+.series-rule-label {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  flex: none;
+}
+.series-rule-text {
+  font-family: "Montserrat", sans-serif;
+  font-size: 14px;
+  color: var(--body);
+  line-height: 1.6;
+}
+
+/* ── CARD GRID ── */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+  gap: 14px;
+}
+
+/* Live card */
+.diag-card {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: 10px;
+  padding: 30px 28px 26px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 6px 18px rgba(0,0,0,0.09), 0 18px 40px rgba(0,0,0,0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.diag-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05), 0 8px 24px rgba(0,0,0,0.08), 0 20px 40px rgba(0,0,0,0.08);
+}
+.card-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 16px;
+}
+.card-stage {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.card-tag {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--body);
+}
+.diag-card h3 {
+  font-family: "RocWideMedium", sans-serif;
+  font-size: 20px;
+  letter-spacing: -0.5px;
+  color: var(--headline);
+  margin-bottom: 10px;
+  line-height: 1.2;
+}
+.diag-card p {
+  font-family: "Montserrat", sans-serif;
+  font-size: 14px;
+  color: var(--body);
+  line-height: 1.7;
+  flex: 1;
+  margin-bottom: 24px;
+  letter-spacing: -0.2px;
+}
+.btn-primary {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border-radius: 3px;
+  background: var(--accent);
+  color: #fff;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: background 0.15s;
+  box-shadow: 0 2px 8px rgba(232,99,74,0.35), 0 4px 20px rgba(232,99,74,0.25);
+}
+.btn-primary:hover { background: var(--accent-hover); }
+
+/* Coming soon card */
+.diag-card-soon {
+  display: flex;
+  flex-direction: column;
+  border: 1px dashed rgba(26,24,32,0.15);
+  border-radius: 10px;
+  padding: 30px 28px 26px;
+}
+.diag-card-soon .card-stage { color: rgba(26,24,32,0.28); }
+.soon-badge {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: rgba(232,99,74,0.08);
+  border: 1px solid rgba(232,99,74,0.18);
+  border-radius: 2px;
+  padding: 3px 8px;
+}
+.diag-card-soon h3 {
+  font-family: "RocWideMedium", sans-serif;
+  font-size: 18px;
+  letter-spacing: -0.5px;
+  color: rgba(26,24,32,0.35);
+  margin-bottom: 8px;
+  line-height: 1.2;
+  margin-top: 16px;
+}
+.diag-card-soon p {
+  font-family: "Montserrat", sans-serif;
+  font-size: 13px;
+  color: rgba(26,24,32,0.28);
+  line-height: 1.65;
+  letter-spacing: -0.2px;
+}
+
+/* ── CTA ── */
+.cta-inner {
+  text-align: center;
+  max-width: 1080px;
+  margin: 0 auto;
+}
+.cta-inner h2 {
+  font-family: "RocWideMedium", sans-serif;
+  font-size: clamp(28px, 3.5vw, 48px);
+  line-height: 1.08;
+  letter-spacing: -1.5px;
+  color: #fff;
+  margin-bottom: 32px;
+}
+.btn-primary-lg {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 36px;
+  border-radius: 3px;
+  background: var(--accent);
+  color: #fff;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background 0.15s;
+  box-shadow: 0 2px 8px rgba(232,99,74,0.35), 0 4px 20px rgba(232,99,74,0.25);
+}
+.btn-primary-lg:hover { background: var(--accent-hover); }
+
+@media (max-width: 900px) {
+  .hero-layout { flex-direction: column; }
+  .hero-form-card { width: 100% !important; }
+}
+@media (max-width: 640px) {
+  .section { padding: 64px 24px; }
+  .hero { padding: 72px 24px 64px; }
+}
+</style>
+</head>
+<body>
+<div class="diag-wrap">
+
+  <!-- Hero -->
+  <div class="sec-dark">
+    <div class="hero">
+      <div class="hero-inner">
+        <div class="hero-layout">
+          <div class="hero-copy">
+            <div class="eyebrow">Free Diagnostic Tools</div>
+            <h1>GTM Decay Diagnostics</h1>
+            <p class="hero-lead">Resources to diagnose your funnel. GTM Decay is the slow erosion of revenue execution — signals go stale, coverage ratios inflate, handoffs leak. These scorecards find it before your forecast does.</p>
+          </div>
+          <div class="hero-form-card">
+            <span class="form-eyebrow">Book a Call</span>
+            <div class="form-headline">See something in your numbers?</div>
+            <form id="diag-hero-form">
+              <input class="rs-field" type="email" name="email" placeholder="Work email" required>
+              <button type="submit" class="btn-form">Talk to RevShoppe</button>
+            </form>
+            <div class="form-footer">We'll be in touch within one business day.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scorecards -->
+  <div class="sec-light">
+    <div class="section">
+      <div class="section-inner">
+
+        <div class="series-rule">
+          <span class="series-rule-label">The Series</span>
+          <span class="series-rule-text">Each diagnostic covers one stage of GTM Decay. Healthy / Warning / Decaying thresholds for every question.</span>
+        </div>
+
+        <div class="card-grid">
+
+          <!-- 01 Signal Audit -->
+          <div class="diag-card">
+            <div class="card-meta">
+              <span class="card-stage">01 · Signal Layer</span>
+              <span class="card-tag">10 Questions</span>
+            </div>
+            <h3>Signal Audit</h3>
+            <p>GTM Decay starts in the signal layer. These are the questions most revenue orgs have never asked.</p>
+            <a class="btn-primary" href="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/6a581dd6a417be4a80743868_RevShoppe%20Signal%20Audit.pdf" target="_blank">Download →</a>
+          </div>
+
+          <!-- 02 Pipeline Reality Check -->
+          <div class="diag-card">
+            <div class="card-meta">
+              <span class="card-stage">02 · Pipeline</span>
+              <span class="card-tag">Scored Thresholds</span>
+            </div>
+            <h3>Pipeline Reality Check</h3>
+            <p>GTM Decay hides in coverage ratios. Here's how to find out if yours is real.</p>
+            <a class="btn-primary" href="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/6a581dd6782cd15bbfa3d7a3_RevShoppe%20Pipeline%20Reality%20Check.pdf" target="_blank">Download →</a>
+          </div>
+
+          <!-- 03 Handoff Leak Audit -->
+          <div class="diag-card">
+            <div class="card-meta">
+              <span class="card-stage">03 · Handoff</span>
+              <span class="card-tag">Scored Thresholds</span>
+            </div>
+            <h3>Handoff Leak Audit</h3>
+            <p>GTM Decay doesn't always start in the pipeline. Sometimes it starts the moment the SDR hits "book."</p>
+            <a class="btn-primary" href="https://cdn.prod.website-files.com/61f825b46abaae2807007e90/6a581dd61a7a37d2d42bba49_RevShoppe%20Handoff%20Leak%20Audit.pdf" target="_blank">Download →</a>
+          </div>
+
+          <!-- 04 Rep Time Audit -->
+          <div class="diag-card-soon">
+            <div class="card-meta">
+              <span class="card-stage">04</span>
+              <span class="soon-badge">Coming Soon</span>
+            </div>
+            <h3>Rep Time Audit</h3>
+            <p>GTM Decay turns your reps into relationship managers. These tell you if it's already happened.</p>
+          </div>
+
+          <!-- 05 Stack ROI Audit -->
+          <div class="diag-card-soon">
+            <div class="card-meta">
+              <span class="card-stage">05</span>
+              <span class="soon-badge">Coming Soon</span>
+            </div>
+            <h3>Stack ROI Audit</h3>
+            <p>The stack grew every time something broke. The thing that broke never got fixed.</p>
+          </div>
+
+          <!-- 06 Ramp Program Audit -->
+          <div class="diag-card-soon">
+            <div class="card-meta">
+              <span class="card-stage">06</span>
+              <span class="soon-badge">Coming Soon</span>
+            </div>
+            <h3>Ramp Program Audit</h3>
+            <p>GTM Decay doesn't wait for new reps to get comfortable. It's baked into everything they inherit.</p>
+          </div>
+
+          <!-- 07 Governance Check -->
+          <div class="diag-card-soon">
+            <div class="card-meta">
+              <span class="card-stage">07</span>
+              <span class="soon-badge">Coming Soon</span>
+            </div>
+            <h3>Governance Check</h3>
+            <p>GTM Decay doesn't care how good the work was. It lives in what didn't get adopted after.</p>
+          </div>
+
+          <!-- 08 AI Readiness Check -->
+          <div class="diag-card-soon">
+            <div class="card-meta">
+              <span class="card-stage">08</span>
+              <span class="soon-badge">Coming Soon</span>
+            </div>
+            <h3>AI Readiness Check</h3>
+            <p>AI doesn't create GTM Decay. It stops absorbing it.</p>
+          </div>
+
+          <!-- 09 Revenue Retention Audit -->
+          <div class="diag-card-soon">
+            <div class="card-meta">
+              <span class="card-stage">09</span>
+              <span class="soon-badge">Coming Soon</span>
+            </div>
+            <h3>Revenue Retention Audit</h3>
+            <p>GTM Decay ends in post-sale. The causes almost never start there.</p>
+          </div>
+
+          <!-- 10 GTM Decay Diagnostic -->
+          <div class="diag-card-soon">
+            <div class="card-meta">
+              <span class="card-stage">10</span>
+              <span class="soon-badge">Coming Soon</span>
+            </div>
+            <h3>GTM Decay Diagnostic</h3>
+            <p>The full chain. All nine stages. Score your entire funnel in one pass.</p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="sec-dark">
+    <div class="section">
+      <div class="cta-inner">
+        <h2>Suspect you have Decay?</h2>
+        <a class="btn-primary-lg" href="/contact">Talk to RevShoppe →</a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+(function(){
+  function bindForm(){
+    var form = document.getElementById('diag-hero-form');
+    if(!form){ requestAnimationFrame(bindForm); return; }
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      var email = form.querySelector('input[type="email"]').value;
+      var ctx = { pageUri: window.location.href, pageName: 'GTM Decay Diagnostics' };
+      var hutk = (document.cookie.match(/hubspotutk=([^;]+)/) || [])[1];
+      if(hutk) ctx.hutk = hutk;
+      fetch('https://api.hsforms.com/submissions/v3/integration/submit/5046646/b17af1ad-180f-4b22-a3fd-97a321b8d6c3', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ fields: [{ name: 'email', value: email }], context: ctx })
+      }).then(function(res){
+        var card = document.querySelector('.hero-form-card');
+        if(res.ok){
+          if(card) card.innerHTML = '<p style="font-family:\'IBM Plex Mono\',monospace;font-size:13px;line-height:1.75;color:rgba(255,255,255,0.8);">Got it. We\'ll be in touch within one business day.</p>';
+        } else {
+          window.location.href = '/contact' + (email ? '?email=' + encodeURIComponent(email) : '');
+        }
+      }).catch(function(){
+        window.location.href = '/contact' + (email ? '?email=' + encodeURIComponent(email) : '');
+      });
+    });
+  }
+  bindForm();
+})();
+</script>
+
+</body>
+</html>
