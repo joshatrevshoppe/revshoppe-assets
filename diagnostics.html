@@ -4,67 +4,63 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>GTM Decay Diagnostics — RevShoppe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-  @font-face {
-    font-family: 'Roc Grotesk Wide';
-    src: url('https://cdn.prod.website-files.com/61f825b46abaae2807007e90/roc-grotesk-wide.woff2') format('woff2');
-    font-weight: 300 900;
-  }
-
-  .diag-wrap * { box-sizing: border-box; }
+  .diag-wrap *, .diag-wrap *::before, .diag-wrap *::after { box-sizing: border-box; }
 
   .diag-wrap {
-    font-family: 'Roc Grotesk Wide', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    --f-display: "RocWideMedium", "Archivo", sans-serif;
+    --f-body:    "Montserrat", sans-serif;
+    --f-mono:    "IBM Plex Mono", monospace;
+    --coral:     #E8634A;
+    --dark:      #15141C;
     background: #FAFAF9;
   }
 
   /* Hero */
   .diag-hero {
-    background-color: #26242F;
-    background-image: linear-gradient(rgba(255,255,255,0.034) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.034) 1px, transparent 1px);
-    background-size: 40px 40px;
-    border-top: 1px solid rgba(255,255,255,0.08);
-    border-bottom: 1px solid rgba(255,255,255,0.08);
-    box-shadow: 0 8px 32px rgba(0,0,0,0.35), 0 2px 8px rgba(0,0,0,0.20), 0 -8px 32px rgba(0,0,0,0.35), 0 -2px 8px rgba(0,0,0,0.20);
-    padding: 104px 48px 96px;
-    position: relative;
-    z-index: 2;
+    background: #15141C;
+    padding: 100px 56px 96px;
   }
-  .diag-hero-inner { max-width: 1200px; margin: 0 auto; text-align: left; }
+  .diag-hero-inner { max-width: 1080px; margin: 0 auto; }
+  .diag-eyebrow {
+    display: block;
+    font-family: var(--f-mono);
+    font-size: 11px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--coral);
+    margin-bottom: 24px;
+  }
   .diag-hero h1 {
-    font-family: 'Roc Grotesk Wide', sans-serif;
-    font-size: clamp(44px, 4.2vw, 64px);
-    font-weight: 700;
-    letter-spacing: -0.012em;
-    color: #FAFAF9;
-    margin: 0;
-    line-height: 1.05;
-    max-width: 820px;
-    text-align: left;
+    font-family: var(--f-display);
+    font-weight: 500;
+    font-size: clamp(34px, 4vw, 60px);
+    line-height: 0.94;
+    letter-spacing: -0.025em;
+    color: #fff;
+    margin: 0 0 28px;
+    max-width: 16ch;
   }
   .diag-hero p {
-    font-size: 16px;
+    font-family: var(--f-body);
+    font-size: clamp(16px, 1.5vw, 20px);
     font-weight: 300;
-    color: rgba(255,255,255,0.62);
-    line-height: 1.6;
-    margin: 20px 0 0;
-    max-width: 640px;
-    text-align: left;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.65;
+    margin: 0;
+    max-width: 50ch;
   }
 
   /* Grid section */
-  .diag-grid-section {
-    background-color: #FAFAF9;
-    border-top: 1px solid rgba(255,255,255,0.95);
-    border-bottom: 1px solid rgba(0,0,0,0.06);
-    box-shadow: 0 4px 20px rgba(0,0,0,0.10), 0 1px 4px rgba(0,0,0,0.06), 0 -4px 16px rgba(0,0,0,0.08);
-    position: relative;
-    z-index: 1;
-  }
+  .diag-grid-section { background: #FAFAF9; }
   .diag-grid-inner {
-    max-width: 1200px;
+    max-width: 1080px;
     margin: 0 auto;
-    padding: 96px 48px 120px;
+    padding: 96px 56px 120px;
   }
 
   .diag-series-label {
@@ -76,15 +72,16 @@
     margin-bottom: 44px;
   }
   .diag-series-label span {
-    font-size: 11px;
+    font-family: var(--f-mono);
+    font-size: 10px;
     letter-spacing: 0.24em;
     text-transform: uppercase;
-    color: #E8634A;
+    color: var(--coral);
     flex: none;
-    font-weight: 500;
   }
   .diag-series-label p {
-    font-size: 14.5px;
+    font-family: var(--f-body);
+    font-size: 14px;
     color: #4B4956;
     margin: 0;
     line-height: 1.55;
@@ -117,31 +114,33 @@
     align-items: baseline;
   }
   .diag-card-stage {
-    font-size: 11px;
+    font-family: var(--f-mono);
+    font-size: 10px;
     letter-spacing: 0.16em;
-    color: #E8634A;
-    font-weight: 500;
+    color: var(--coral);
     text-transform: uppercase;
   }
   .diag-card-tag {
+    font-family: var(--f-mono);
     font-size: 9px;
     letter-spacing: 0.14em;
     text-transform: uppercase;
     color: #4B4956;
-    font-weight: 500;
   }
   .diag-card h3 {
-    font-size: 22px;
-    font-weight: 700;
-    letter-spacing: -0.01em;
+    font-family: var(--f-display);
+    font-size: 21px;
+    font-weight: 500;
+    letter-spacing: -0.02em;
     color: #1A1820;
     margin: 16px 0 0;
     line-height: 1.15;
   }
   .diag-card p {
-    font-size: 14.5px;
+    font-family: var(--f-body);
+    font-size: 14px;
     color: #4B4956;
-    line-height: 1.55;
+    line-height: 1.65;
     margin: 10px 0 24px;
     flex: 1;
   }
@@ -150,18 +149,18 @@
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background: #E8634A;
-    color: #FAFAF9;
-    font-size: 12px;
-    letter-spacing: 0.18em;
+    background: var(--coral);
+    color: #fff;
+    font-family: var(--f-mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
-    padding: 12px 20px;
-    border-radius: 6px;
-    transition: background 0.15s ease;
+    padding: 13px 22px;
+    border-radius: 4px;
+    transition: background 0.15s ease, transform 0.15s ease;
     text-decoration: none;
-    font-weight: 500;
   }
-  .diag-card a:hover { background: #d9543c; color: #FAFAF9; }
+  .diag-card a:hover { background: #F0745C; transform: translateY(-2px); }
 
   /* Coming soon cards */
   .diag-card-soon {
@@ -174,84 +173,87 @@
   }
   .diag-card-soon .diag-card-stage { color: rgba(26,24,32,0.35); }
   .diag-card-soon .diag-soon-badge {
+    font-family: var(--f-mono);
     font-size: 9px;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: #E8634A;
+    color: var(--coral);
     background: rgba(232,99,74,0.08);
     border: 1px solid rgba(232,99,74,0.18);
     border-radius: 3px;
     padding: 3px 8px;
-    font-weight: 500;
   }
   .diag-card-soon h3 {
-    font-size: 20px;
-    font-weight: 700;
-    letter-spacing: -0.01em;
+    font-family: var(--f-display);
+    font-size: 19px;
+    font-weight: 500;
+    letter-spacing: -0.02em;
     color: rgba(26,24,32,0.4);
     margin: 16px 0 0;
     line-height: 1.15;
   }
   .diag-card-soon p {
+    font-family: var(--f-body);
     font-size: 13px;
     color: rgba(26,24,32,0.35);
-    line-height: 1.5;
+    line-height: 1.6;
     margin: 8px 0 0;
     flex: 1;
   }
 
   /* CTA */
-  .diag-cta {
-    background-color: #26242F;
-    background-image: linear-gradient(rgba(255,255,255,0.034) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.034) 1px, transparent 1px);
-    background-size: 40px 40px;
-    border-top: 1px solid rgba(255,255,255,0.08);
-    border-bottom: 1px solid rgba(255,255,255,0.08);
-    box-shadow: 0 8px 32px rgba(0,0,0,0.35), 0 2px 8px rgba(0,0,0,0.20), 0 -8px 32px rgba(0,0,0,0.35), 0 -2px 8px rgba(0,0,0,0.20);
-    position: relative;
-    z-index: 2;
-    width: 100%;
-  }
+  .diag-cta { background: #15141C; }
   .diag-cta-inner {
-    max-width: 760px;
+    max-width: 820px;
     margin: 0 auto;
-    padding: 80px 48px;
+    padding: 120px 56px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     text-align: center;
-    gap: 28px;
+    gap: 32px;
   }
-  .diag-cta p {
-    font-size: 32px;
-    font-weight: 700;
-    color: #FAFAF9;
-    line-height: 1.2;
+  .diag-cta-label {
+    font-family: var(--f-mono);
+    font-size: 11px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: rgba(232,99,74,0.8);
+  }
+  .diag-cta h2 {
+    font-family: var(--f-display);
+    font-weight: 500;
+    font-size: clamp(34px, 4vw, 56px);
+    line-height: 0.94;
+    letter-spacing: -0.025em;
+    color: #fff;
     margin: 0;
-    letter-spacing: -0.01em;
   }
   .diag-cta a {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background: #E8634A;
-    color: #FAFAF9;
-    font-size: 12px;
-    letter-spacing: 0.18em;
+    background: var(--coral);
+    color: #fff;
+    font-family: var(--f-mono);
+    font-size: 13px;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
-    padding: 14px 24px;
-    border-radius: 6px;
-    transition: background 0.15s ease;
+    padding: 18px 36px;
+    border-radius: 4px;
+    transition: background 0.15s ease, transform 0.15s ease;
     text-decoration: none;
-    font-weight: 500;
+    box-shadow: 0 24px 50px -22px rgba(232,99,74,0.8);
   }
-  .diag-cta a:hover { background: #d9543c; }
+  .diag-cta a:hover { background: #F0745C; transform: translateY(-2px); }
 
-  @media (max-width: 640px) {
-    .diag-hero { padding: 72px 24px 64px; }
+  @media (max-width: 768px) {
+    .diag-hero { padding: 80px 32px 72px; }
     .diag-grid-inner { padding: 64px 24px 80px; }
-    .diag-cta-inner { padding: 64px 24px; }
+    .diag-cta-inner { padding: 80px 24px; }
+  }
+  @media (max-width: 480px) {
+    .diag-hero { padding: 72px 20px 64px; }
   }
 </style>
 </head>
@@ -261,6 +263,7 @@
   <!-- Hero -->
   <div class="diag-hero">
     <div class="diag-hero-inner">
+      <span class="diag-eyebrow">Diagnostics</span>
       <h1>GTM Decay Diagnostics</h1>
       <p>Pipeline isn't lying to you. It's showing you exactly what happens when signal criteria haven't been updated in 18 months, SDRs are hitting quota on meetings that won't convert, and reps are carrying 26 active opportunities with 90 minutes each to work them. Each scorecard covers one stage. Healthy / Warning / Decaying thresholds on every question. Download whichever one is closest to where you feel the friction.</p>
     </div>
@@ -388,7 +391,8 @@
   <!-- CTA -->
   <div class="diag-cta">
     <div class="diag-cta-inner">
-      <p>Suspect you have Decay?</p>
+      <span class="diag-cta-label">GTM Decay</span>
+      <h2>Suspect you have Decay?</h2>
       <a href="/contact">Talk to RevShoppe →</a>
     </div>
   </div>
