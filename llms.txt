@@ -1,0 +1,46 @@
+# RevShoppe
+
+> RevShoppe is a GTM strategy, engineering, and governance firm. We work with enterprise revenue organizations moving from AI experimentation to AI embedded across their entire commercial motion. We build the GTM Infrastructure it runs on, deploy AI-powered GTM Workflows on that foundation, and govern both permanently through the Revenue Operating System (rOS).
+
+## Core Services
+
+- [GTM Diagnosis](https://www.revshoppe.com/solutions/gtm-diagnosis): A six-week, four-pillar assessment of your commercial system. Quantifies the Revenue Consequence of each broken pillar. Delivers a sequenced Infrastructure Blueprint, Priority Workflow List, and 90-Day Execution Roadmap. Entry point for all RevShoppe engagements. Starts at $100,000.
+- [GTM Infrastructure](https://www.revshoppe.com/solutions/infra): The four-pillar foundation — Context, Data, Process, and Technology — that AI-powered GTM Workflows run on. Built before a single workflow fires. RevShoppe designs and builds all four pillars as an integrated system, not sequentially.
+- [GTM Workflows](https://www.revshoppe.com/solutions/gtm-workflows): AI-native, signal-triggered commercial motions that replace sequences. Each workflow follows a 10-step anatomy from trigger to revenue outcome, with a feedback loop that makes every subsequent run sharper than the last. Built for enterprise CROs moving past scattered AI use.
+- [Revenue Operating System (rOS)](https://www.revshoppe.com/solutions/ros): Permanent governance of GTM Infrastructure and GTM Workflows through three mechanisms — Center of Excellence, Rhythm of Revenue, and Workflow Optimization. Prevents performance from reverting after launch.
+- [Salesforce Architecture](https://www.revshoppe.com/solutions/salesforce-architecture): Managed Salesforce admin and architecture for SMB organizations ($4,500–$6,750/month retainer). Enterprise Salesforce architecture delivered as a workstream within GTM Diagnosis engagements.
+- [Catalist Signals](https://www.revshoppe.com/solutions/catalist-signals): External trigger signal intelligence that surfaces real-world buying context before it appears in intent platforms. Powers RevShoppe's own GTM Workflows and can be wired into client workflows as a signal source.
+
+## Key Concepts
+
+- **GTM Decay**: The gradual degradation of a commercial motion when the four pillars of GTM Infrastructure are not actively governed. Symptoms include pipeline softness, declining sequence performance, and rep behavior that diverges from designed process. RevShoppe coined this term.
+- **AI Execution Gap**: What happens when AI is deployed on top of an unbuilt or ungoverned foundation. AI does not hide infrastructure problems — it makes them more expensive by executing broken processes at speed. RevShoppe coined this term.
+- **Revenue Consequence**: The quantified dollar cost of a broken GTM pillar, specific to an organization's headcount, stack, and motion. Produced as a deliverable of the GTM Diagnosis.
+- **Context Layer**: The structured foundation AI reads when generating workflow output — ICP profiles, battle cards, signal definitions, and account-specific context assembled before a word is generated.
+- **GTM Infrastructure Pillars**: Context, Data, Process, Technology. A break in any one stops the commercial motion from compounding. All four must be built and governed as a system.
+
+## Partner Ecosystem
+
+- [Outreach Partner](https://www.revshoppe.com/partners/outreach): RevShoppe builds, governs, and optimizes Outreach deployments inside AI-native GTM Workflows for enterprise revenue teams.
+- [Salesloft Partner](https://www.revshoppe.com/partners/salesloft): RevShoppe builds, governs, and optimizes Salesloft deployments inside AI-native GTM Workflows for enterprise revenue teams.
+- [Clari Partner](https://www.revshoppe.com/partners/clari): RevShoppe implements and governs Clari within GTM Infrastructure to improve forecast accuracy and pipeline visibility.
+- Anthropic Solutions Partner (Applied): RevShoppe is an Anthropic solutions partner. Claude-powered workflows are the primary AI deployment vehicle.
+
+## Client Results
+
+- 2.1x account engagement rate from Catalist-triggered outbound workflows
+- +34% net-new pipeline quarter over quarter
+- +61% SQL creation quarter over quarter
+
+## Who RevShoppe Works With
+
+Enterprise revenue organizations (500+ employees, $100M+ ARR) where leadership has tried the obvious fixes — new headcount, new technology, new methodology — and still cannot close the execution gap. Primary buyers: CRO, CCO, VP of Sales. Decision committees of 8–12 stakeholders. Deal sizes of $2–6M per 12-month engagement.
+
+RevShoppe does not work with early-stage startups, companies with fewer than 10 sales reps, or organizations expecting a deliverable-and-handoff engagement model.
+
+## Contact
+
+- Website: https://www.revshoppe.com
+- Contact: https://www.revshoppe.com/contact
+- Results: https://www.revshoppe.com/results
+- Point of View: https://www.revshoppe.com/pov
