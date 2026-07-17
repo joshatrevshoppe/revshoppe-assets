@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="rs-page" content="salesloft-partner">
+<title>Salesloft Consulting Partner — GTM Workflows | RevShoppe</title>
+<style>
+:root {
+  --f-display: "RocWideMedium", "Archivo", sans-serif;
+  --f-body:    "Montserrat", sans-serif;
+  --f-mono:    "IBM Plex Mono", monospace;
+  --dark:  #1A1820;
+  --coral: #E8634A;
+  --warm:  #F1EDE6;
+  --light: #FAFAF9;
+  --text:  #4B4956;
+  --bdr:   rgba(26,24,32,0.10);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:var(--f-body);background:#fff;color:var(--dark);-webkit-font-smoothing:antialiased;}
+.rp-wrap{max-width:1180px;margin:0 auto;padding:0 48px;}
+.rs-connector{display:flex;justify-content:center;}
+.rs-cta{display:inline-flex;align-items:center;justify-content:center;font-family:var(--f-mono);font-size:12px;letter-spacing:0.14em;text-transform:uppercase;text-decoration:none;background:var(--coral);color:#fff;border-radius:4px;padding:18px 32px;transition:opacity .15s;}
+.rs-cta:hover{opacity:.85;}
+
+.rp-hero{background:var(--dark);padding:120px 48px 130px;}
+.rp-hero-grid{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:1fr 360px;gap:80px;align-items:start;}
+.rp-eyebrow{font-family:var(--f-mono);font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:var(--coral);margin-bottom:28px;}
+.rp-h1{font-family:var(--f-display);font-weight:500;font-size:clamp(32px,4vw,58px);line-height:0.96;letter-spacing:-0.025em;color:#fff;margin-bottom:28px;max-width:20ch;}
+.rp-lead{font-size:clamp(15px,1.4vw,18px);line-height:1.7;color:rgba(255,255,255,0.55);max-width:54ch;margin-bottom:36px;}
+.rp-hero-aside{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.10);border-radius:10px;padding:32px;}
+.rp-aside-label{font-family:var(--f-mono);font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--coral);margin-bottom:14px;}
+.rp-aside-title{font-family:var(--f-display);font-weight:500;font-size:18px;letter-spacing:-0.01em;color:#fff;line-height:1.2;margin-bottom:12px;}
+.rp-aside-body{font-size:13px;line-height:1.7;color:rgba(255,255,255,0.48);margin-bottom:24px;}
+.rp-aside input{width:100%;font-family:var(--f-body);font-size:13px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.15);border-radius:4px;color:#fff;padding:13px 16px;margin-bottom:10px;outline:none;}
+.rp-aside input::placeholder{color:rgba(255,255,255,0.32);}
+.rp-aside .rs-cta{width:100%;}
+.rp-aside-fine{font-family:var(--f-mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.24);text-align:center;margin-top:12px;}
+
+.rp-sec{padding:110px 48px;}
+.rp-sec-light{background:var(--light);}
+.rp-sec-warm{background:var(--warm);}
+.rp-sec-dark{background:var(--dark);}
+.rp-sec-white{background:#fff;}
+.rp-sec-label{font-family:var(--f-mono);font-size:10px;letter-spacing:0.24em;text-transform:uppercase;color:var(--coral);margin-bottom:20px;}
+.rp-h2{font-family:var(--f-display);font-weight:500;font-size:clamp(26px,3vw,46px);line-height:0.98;letter-spacing:-0.022em;color:var(--dark);max-width:22ch;margin-bottom:14px;}
+.rp-h2-white{color:#fff;}
+.rp-body{font-size:17px;line-height:1.72;color:var(--text);max-width:62ch;margin-bottom:52px;}
+.rp-body-white{color:rgba(255,255,255,0.58);}
+
+.rp-grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+.rp-grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:40px;align-items:start;}
+.rp-card{background:#fff;border:1px solid var(--bdr);border-left:3px solid var(--coral);border-radius:8px;padding:28px 24px;}
+.rp-card-warm{background:var(--warm);border-left:3px solid rgba(26,24,32,0.2);}
+.rp-card-num{font-family:var(--f-mono);font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--coral);margin-bottom:12px;}
+.rp-card-name{font-family:var(--f-display);font-weight:500;font-size:18px;letter-spacing:-0.01em;color:var(--dark);margin-bottom:10px;}
+.rp-card-body{font-size:13px;line-height:1.7;color:var(--text);}
+
+.rp-pillar-row{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+.rp-pillar-diagram{display:flex;flex-direction:column;gap:10px;}
+.rp-pillar-item{display:flex;align-items:center;gap:16px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.09);border-radius:6px;padding:16px 20px;}
+.rp-pillar-item.active{background:rgba(232,99,74,0.12);border-color:rgba(232,99,74,0.4);}
+.rp-pillar-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.2);flex-shrink:0;}
+.rp-pillar-item.active .rp-pillar-dot{background:var(--coral);}
+.rp-pillar-name{font-family:var(--f-display);font-weight:500;font-size:15px;letter-spacing:-0.01em;color:rgba(255,255,255,0.5);}
+.rp-pillar-item.active .rp-pillar-name{color:#fff;}
+.rp-pillar-tag{font-family:var(--f-mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--coral);margin-left:auto;}
+
+.rp-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,0.08);border-radius:8px;overflow:hidden;margin-top:52px;}
+.rp-stat{padding:32px;background:var(--dark);}
+.rp-stat-num{font-family:var(--f-display);font-weight:500;font-size:clamp(44px,5vw,68px);line-height:0.85;letter-spacing:-0.03em;color:#fff;margin-bottom:12px;}
+.rp-stat-label{font-size:13px;line-height:1.55;color:rgba(255,255,255,0.48);}
+
+.rp-faq{border:1px solid var(--bdr);border-radius:8px;overflow:hidden;margin-top:52px;}
+.rp-faq-item{padding:24px 28px;border-bottom:1px solid var(--bdr);background:#fff;}
+.rp-faq-item:last-child{border-bottom:none;}
+.rp-faq-q{font-family:var(--f-display);font-weight:500;font-size:17px;letter-spacing:-0.01em;color:var(--dark);margin-bottom:8px;}
+.rp-faq-a{font-size:14px;line-height:1.72;color:var(--text);}
+
+.rp-cta-sec{background:var(--dark);padding:120px 48px;text-align:center;}
+.rp-cta-h2{font-family:var(--f-display);font-weight:500;font-size:clamp(30px,4vw,56px);line-height:0.95;letter-spacing:-0.025em;color:#fff;max-width:18ch;margin:0 auto 20px;}
+.rp-cta-sub{font-size:17px;line-height:1.65;color:rgba(255,255,255,0.5);max-width:52ch;margin:0 auto 36px;}
+
+@media(max-width:900px){
+  .rp-hero{padding:90px 24px 100px;}
+  .rp-hero-grid{grid-template-columns:1fr;}
+  .rp-hero-aside{display:none;}
+  .rp-sec{padding:80px 24px;}
+  .rp-grid-3{grid-template-columns:1fr;}
+  .rp-grid-2{grid-template-columns:1fr;gap:40px;}
+  .rp-pillar-row{grid-template-columns:1fr;gap:40px;}
+  .rp-stats{grid-template-columns:1fr;gap:0;}
+  .rp-cta-sec{padding:80px 24px;}
+  .rp-wrap{padding:0 24px;}
+}
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ═══════════════════════════════════════════════════════ -->
+<section class="rp-hero">
+  <div class="rp-hero-grid">
+    <div>
+      <div class="rp-eyebrow">Partners · Salesloft</div>
+      <h1 class="rp-h1">Cadences run. Pipelines don't compound. The gap is the infrastructure.</h1>
+      <p class="rp-lead">Salesloft is one of the most capable sales execution platforms on the market. What determines what it produces is the GTM Infrastructure underneath it — the context it draws from, the data it relies on, the process that governs how reps interact with it. RevShoppe builds that infrastructure and deploys the AI-powered GTM Workflows that run through it.</p>
+      <a href="https://www.revshoppe.com/contact" class="rs-cta" style="box-shadow:0 20px 44px -16px rgba(232,99,74,0.55);">Book a Discovery Call</a>
+    </div>
+    <div class="rp-hero-aside">
+      <div class="rp-aside-label">Start Here</div>
+      <div class="rp-aside-title">Get a GTM Diagnosis for your Salesloft deployment.</div>
+      <p class="rp-aside-body">We assess your Salesloft configuration against the four GTM Infrastructure pillars and quantify what the gaps are costing you.</p>
+      <form id="rp-salesloft-form">
+        <input type="email" name="email" placeholder="Work email" required>
+        <button type="submit" class="rs-cta">Request a Diagnosis</button>
+      </form>
+      <div class="rp-aside-fine">We respond within one business day.</div>
+    </div>
+  </div>
+</section>
+
+<div class="rs-connector"><svg width="14" height="72"><line x1="7" y1="0" x2="7" y2="36" stroke="rgba(26,24,32,0.12)" stroke-width="1.5" stroke-dasharray="2 9" stroke-linecap="round"/><line x1="7" y1="36" x2="7" y2="72" stroke="#E8634A" stroke-width="1.6" stroke-linecap="round"/><circle cx="7" cy="36" r="3.4" fill="#E8634A"/></svg></div>
+
+<!-- ══ THE GAP ════════════════════════════════════════════════════ -->
+<section class="rp-sec rp-sec-light">
+  <div class="rp-wrap">
+    <div class="rp-sec-label">Why it breaks</div>
+    <h2 class="rp-h2">Salesloft executes the cadence. It does not define who it's targeting or why.</h2>
+    <p class="rp-body">Salesloft handles cadence execution, meeting booking, call logging, and rep task management. What it cannot do is define the ICP criteria that determine which accounts are worth a cadence, verify that the underlying data is clean enough to act on, or design the process that governs whether a rep actually uses the platform the way it was built. Those three things — Context, Data, Process — are infrastructure problems. They sit outside Salesloft. And when they are unbuilt, Salesloft runs the same broken motion at scale.</p>
+    <div class="rp-grid-2">
+      <div class="rp-card rp-card-warm">
+        <div class="rp-card-num">What most firms deliver</div>
+        <div class="rp-card-name" style="color:#4B4956;">Salesloft configuration</div>
+        <div class="rp-card-body">Cadences built. Dialer configured. Reporting activated. Reps certified on the tool. The platform launches. Adoption is inconsistent. Cadence performance flatlines. The motion doesn't compound — because what feeds Salesloft was never built.</div>
+      </div>
+      <div class="rp-card">
+        <div class="rp-card-num">What RevShoppe delivers</div>
+        <div class="rp-card-name">Salesloft inside a GTM Workflow</div>
+        <div class="rp-card-body">ICP defined. Data clean. Handoff process documented. Salesloft configured as the execution layer of a signal-triggered, AI-powered workflow — so every cadence that fires starts from the right account, at the right moment, with the right message.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="rs-connector"><svg width="14" height="72"><line x1="7" y1="0" x2="7" y2="36" stroke="rgba(26,24,32,0.12)" stroke-width="1.5" stroke-dasharray="2 9" stroke-linecap="round"/><line x1="7" y1="36" x2="7" y2="72" stroke="#E8634A" stroke-width="1.6" stroke-linecap="round"/><circle cx="7" cy="36" r="3.4" fill="#E8634A"/></svg></div>
+
+<!-- ══ SERVICES ════════════════════════════════════════════════════ -->
+<section class="rp-sec rp-sec-white">
+  <div class="rp-wrap">
+    <div class="rp-sec-label">What RevShoppe does with Salesloft</div>
+    <h2 class="rp-h2">Six ways we work inside your Salesloft environment.</h2>
+    <p class="rp-body">From first deployment to ongoing governance — these are the engagements RevShoppe runs for organizations using Salesloft as part of their commercial motion.</p>
+    <div class="rp-grid-3">
+      <div class="rp-card">
+        <div class="rp-card-num">01</div>
+        <div class="rp-card-name">Implementation</div>
+        <div class="rp-card-body">First-time Salesloft deployment built for your specific GTM motion. Cadence architecture, team structure, admin governance, CRM field mapping, and dialer configuration — built to your playbook, not a default template.</div>
+      </div>
+      <div class="rp-card">
+        <div class="rp-card-num">02</div>
+        <div class="rp-card-name">Reimplementation</div>
+        <div class="rp-card-body">When the original deployment did not take. Cadences that nobody uses. Data that does not sync. Reps working around Salesloft instead of through it. RevShoppe diagnoses what broke, rebuilds the foundation, and redeployes the motion correctly.</div>
+      </div>
+      <div class="rp-card">
+        <div class="rp-card-num">03</div>
+        <div class="rp-card-name">Migration</div>
+        <div class="rp-card-body">Moving from Outreach, Apollo, or another SEP to Salesloft. Cadence migration, historical data integrity, team onboarding, and day-one workflow continuity — so the transition does not cost you a quarter of pipeline.</div>
+      </div>
+      <div class="rp-card">
+        <div class="rp-card-num">04</div>
+        <div class="rp-card-name">GTM Workflows on Salesloft</div>
+        <div class="rp-card-body">Signal-triggered GTM Workflows with Salesloft as the execution layer. A buying signal fires, context assembles, Claude generates the message, a rep reviews, Salesloft sends. Every outcome feeds back so the next run is sharper.</div>
+      </div>
+      <div class="rp-card">
+        <div class="rp-card-num">05</div>
+        <div class="rp-card-name">Enablement</div>
+        <div class="rp-card-body">Rep certification, manager QA protocol, and new-hire onboarding built around how your Salesloft environment is actually configured — not a generic walkthrough. What your best reps do in Salesloft, documented and repeatable.</div>
+      </div>
+      <div class="rp-card">
+        <div class="rp-card-num">06</div>
+        <div class="rp-card-name">Governance</div>
+        <div class="rp-card-body">Ongoing Salesloft governance as part of the Revenue Operating System. Cadence audits, admin hygiene, performance baselines per workflow, and quarterly reviews that catch drift before it hits the pipeline.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="rs-connector"><svg width="14" height="72"><line x1="7" y1="0" x2="7" y2="36" stroke="rgba(26,24,32,0.12)" stroke-width="1.5" stroke-dasharray="2 9" stroke-linecap="round"/><line x1="7" y1="36" x2="7" y2="72" stroke="#E8634A" stroke-width="1.6" stroke-linecap="round"/><circle cx="7" cy="36" r="3.4" fill="#E8634A"/></svg></div>
+
+<!-- ══ INFRASTRUCTURE ══════════════════════════════════════════════ -->
+<section class="rp-sec rp-sec-dark">
+  <div class="rp-wrap">
+    <div class="rp-pillar-row">
+      <div>
+        <div class="rp-sec-label">GTM Infrastructure</div>
+        <h2 class="rp-h2 rp-h2-white">Salesloft is one of four pillars. The other three determine what it produces.</h2>
+        <p class="rp-body rp-body-white">The Technology pillar is where Salesloft lives. But the Technology pillar is the last in the sequence, not the first. Context determines who the cadence targets and what the AI writes. Data determines whether the trigger fires on a real buying signal or a stale record. Process determines whether the rep acts or routes around the system. RevShoppe builds all four pillars as a system — then deploys Salesloft as the execution layer on top of them.</p>
+        <a href="https://www.revshoppe.com/solutions/infra" class="rs-cta">See GTM Infrastructure</a>
+      </div>
+      <div class="rp-pillar-diagram">
+        <div class="rp-pillar-item">
+          <div class="rp-pillar-dot"></div>
+          <div class="rp-pillar-name">01 · Context</div>
+        </div>
+        <div class="rp-pillar-item">
+          <div class="rp-pillar-dot"></div>
+          <div class="rp-pillar-name">02 · Data</div>
+        </div>
+        <div class="rp-pillar-item">
+          <div class="rp-pillar-dot"></div>
+          <div class="rp-pillar-name">03 · Process</div>
+        </div>
+        <div class="rp-pillar-item active">
+          <div class="rp-pillar-dot"></div>
+          <div class="rp-pillar-name">04 · Technology</div>
+          <div class="rp-pillar-tag">Salesloft lives here</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="rs-connector"><svg width="14" height="72"><line x1="7" y1="0" x2="7" y2="36" stroke="rgba(26,24,32,0.12)" stroke-width="1.5" stroke-dasharray="2 9" stroke-linecap="round"/><line x1="7" y1="36" x2="7" y2="72" stroke="#E8634A" stroke-width="1.6" stroke-linecap="round"/><circle cx="7" cy="36" r="3.4" fill="#E8634A"/></svg></div>
+
+<!-- ══ RESULTS ═════════════════════════════════════════════════════ -->
+<section class="rp-sec rp-sec-warm">
+  <div class="rp-wrap">
+    <div class="rp-sec-label">Client outcomes</div>
+    <h2 class="rp-h2">What changes when Salesloft runs on the right foundation.</h2>
+    <p class="rp-body">These results come from organizations where RevShoppe built the GTM Infrastructure first, then deployed GTM Workflows with Salesloft as the execution layer.</p>
+    <div class="rp-stats">
+      <div class="rp-stat">
+        <div class="rp-stat-num">2.1×</div>
+        <div class="rp-stat-label">Account engagement rate from signal-triggered outbound workflows</div>
+      </div>
+      <div class="rp-stat">
+        <div class="rp-stat-num">+34%</div>
+        <div class="rp-stat-label">Net-new pipeline quarter over quarter after workflow deployment</div>
+      </div>
+      <div class="rp-stat">
+        <div class="rp-stat-num">+61%</div>
+        <div class="rp-stat-label">SQL creation quarter over quarter with governed Salesloft workflows</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="rs-connector"><svg width="14" height="72"><line x1="7" y1="0" x2="7" y2="36" stroke="rgba(26,24,32,0.12)" stroke-width="1.5" stroke-dasharray="2 9" stroke-linecap="round"/><line x1="7" y1="36" x2="7" y2="72" stroke="#E8634A" stroke-width="1.6" stroke-linecap="round"/><circle cx="7" cy="36" r="3.4" fill="#E8634A"/></svg></div>
+
+<!-- ══ FAQ ══════════════════════════════════════════════════════════ -->
+<section class="rp-sec rp-sec-white">
+  <div class="rp-wrap">
+    <div class="rp-sec-label">Common questions</div>
+    <h2 class="rp-h2">What organizations ask before they engage.</h2>
+    <div class="rp-faq">
+      <div class="rp-faq-item">
+        <div class="rp-faq-q">We have Salesloft running but cadence performance has plateaued. Where do we start?</div>
+        <div class="rp-faq-a">With a GTM Diagnosis. RevShoppe assesses your Salesloft environment against the four GTM Infrastructure pillars — Context, Data, Process, Technology — and identifies which pillar is breaking the motion. In most cases, the platform is configured correctly. The gaps are in the three pillars that feed it. The Diagnosis quantifies what those gaps cost and blueprints what to build first.</div>
+      </div>
+      <div class="rp-faq-item">
+        <div class="rp-faq-q">How does RevShoppe build GTM Workflows with Salesloft?</div>
+        <div class="rp-faq-a">A signal fires — an account shows a trigger event (funding round, leadership change, tech stack change, intent spike). Context assembles: company news, CRM history, ICP fit score, competitive positioning. Claude reads that context and generates a cadence step. A rep reviews and approves. Salesloft sends it. The outcome (meeting booked, no response, disqualified) feeds back into the context layer so every subsequent run is more precise. Salesloft is the delivery layer. RevShoppe architects the workflow that drives it.</div>
+      </div>
+      <div class="rp-faq-item">
+        <div class="rp-faq-q">Do you manage migrations from Outreach to Salesloft?</div>
+        <div class="rp-faq-a">Yes. RevShoppe manages full migrations including cadence translation, CRM data integrity during cutover, team onboarding, and day-one workflow continuity. We also run a GTM Diagnosis in parallel with the migration so the new Salesloft environment is built on the right infrastructure — not a direct copy of what was not working in Outreach.</div>
+      </div>
+      <div class="rp-faq-item">
+        <div class="rp-faq-q">How does ongoing governance work after the initial build?</div>
+        <div class="rp-faq-a">Governance is delivered through the Revenue Operating System (rOS) — RevShoppe's permanent engagement model. It includes a Center of Excellence (internal team capability), a Rhythm of Revenue (regular operating cadence), and ongoing Workflow Optimization. Salesloft governance sits inside the Technology pillar of rOS: cadence audits, admin hygiene, new workflow deployments, and quarterly performance reviews.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="rs-connector"><svg width="14" height="72"><line x1="7" y1="0" x2="7" y2="36" stroke="rgba(26,24,32,0.12)" stroke-width="1.5" stroke-dasharray="2 9" stroke-linecap="round"/><line x1="7" y1="36" x2="7" y2="72" stroke="#E8634A" stroke-width="1.6" stroke-linecap="round"/><circle cx="7" cy="36" r="3.4" fill="#E8634A"/></svg></div>
+
+<!-- ══ CTA ══════════════════════════════════════════════════════════ -->
+<section class="rp-cta-sec">
+  <div class="rp-sec-label" style="color:var(--coral);">Start here</div>
+  <h2 class="rp-cta-h2">Build the infrastructure your Salesloft deployment has been running without.</h2>
+  <p class="rp-cta-sub">The GTM Diagnosis assesses your Salesloft environment against the four infrastructure pillars, quantifies what the gaps are costing you, and blueprints what to build first.</p>
+  <a href="https://www.revshoppe.com/solutions/gtm-diagnosis" class="rs-cta" style="box-shadow:0 24px 50px -20px rgba(232,99,74,0.7);">Start with a GTM Diagnosis</a>
+</section>
+
+<script>
+(function(){
+  var form=document.getElementById('rp-salesloft-form');
+  if(!form) return;
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    var email=form.querySelector('input[name="email"]').value;
+    var ctx={pageUri:window.location.href,pageName:'Salesloft Partner Page'};
+    fetch('https://api.hsforms.com/submissions/v3/integration/submit/5046646/fec27ad0-206b-45e2-8bcc-12c1db7e269f',{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({fields:[{name:'email',value:email}],context:ctx})
+    }).then(function(){window.location.href='https://www.revshoppe.com/contact';}).catch(function(){window.location.href='https://www.revshoppe.com/contact';});
+  });
+})();
+</script>
+</body>
+</html>
